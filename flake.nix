@@ -72,5 +72,7 @@
             buildInputs = with pkgs; [ direnv git just nixpkgs-fmt ];
           };
         };
+
+        formatter = pkgs.nixpkgs-fmt;
       }));
 }
