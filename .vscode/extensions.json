@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "arrterian.nix-env-selector",
+        "jnoortheen.nix-ide",
+        "kokakiwi.vscode-just",
+        "mkhl.direnv",
+    ]
+}

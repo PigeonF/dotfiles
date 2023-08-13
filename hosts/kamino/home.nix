@@ -4,6 +4,7 @@
     ../../modules/shell/git
     ../../modules/shell/zsh
     ../../modules/shell/starship
+    ../../modules/shell/nix
   ];
 
   home = {
