@@ -1,10 +1,11 @@
 { inputs, pkgs, ... }:
 {
   imports = [
+    ../../modules/shell/atuin
     ../../modules/shell/git
-    ../../modules/shell/zsh
-    ../../modules/shell/starship
     ../../modules/shell/nix
+    ../../modules/shell/starship
+    ../../modules/shell/zsh
   ];
 
   home = {

@@ -1,0 +1,5 @@
+history_filter = [
+  "^ls",
+  "^cd",
+  "^exit"
+]

@@ -4,6 +4,7 @@
         "jnoortheen.nix-ide",
         "kokakiwi.vscode-just",
         "mkhl.direnv",
-        "github.vscode-github-actions"
+        "github.vscode-github-actions",
+        "tamasfe.even-better-toml"
     ]
 }
