@@ -11,9 +11,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, flake-utils, ... }:
     {
       darwinConfigurations."kamino" =
         let
@@ -62,8 +63,14 @@
               }
             ];
           };
-
-      # Expose the package set, including overlays, for convenience.
-      darwinPackages = self.darwinConfigurations."kamino".pkgs;
-    };
+    } // (flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = nixpkgs.legacyPackages.${system};
+      in
+      {
+        devShells = {
+          default = pkgs.mkShell {
+            buildInputs = with pkgs; [ direnv git just nixpkgs-fmt ];
+          };
+        };
+      }));
 }
