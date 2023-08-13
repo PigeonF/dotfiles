@@ -22,36 +22,13 @@
         in
         nix-darwin.lib.darwinSystem
           {
-            specialArgs = { inherit inputs; };
+            specialArgs = { inherit inputs; user = user; };
 
             modules = [
               ./hosts/kamino
 
               ({ pkgs, ... }: {
                 nixpkgs.hostPlatform = "aarch64-darwin";
-
-                users.users.${user} = {
-                  home = "/Users/${user}";
-                  shell = pkgs.zsh;
-                };
-
-                system = {
-                  configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
-                  stateVersion = 4;
-
-                  keyboard = {
-                    enableKeyMapping = true;
-                    remapCapsLockToControl = true;
-                  };
-                };
-
-                nix = {
-                  package = pkgs.nixFlakes;
-                  settings = {
-                    allowed-users = [ user ];
-                    experimental-features = [ "nix-command" "flakes" ];
-                  };
-                };
               })
 
               home-manager.darwinModules.home-manager
