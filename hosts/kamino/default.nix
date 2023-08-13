@@ -32,8 +32,12 @@
       autoUpdate = true;
       upgrade = true;
     };
+    brews = [
+      "act"
+    ];
     casks = [
       "1password"
+      "docker"
       "visual-studio-code"
     ];
   };
