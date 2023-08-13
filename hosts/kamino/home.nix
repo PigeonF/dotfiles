@@ -1,5 +1,9 @@
 { inputs, pkgs, ... }:
 {
+  imports = [
+    ../../modules/shell/git
+  ];
+
   home = {
     stateVersion = "23.05";
 
