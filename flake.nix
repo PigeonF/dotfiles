@@ -41,15 +41,38 @@
             ];
           };
     } // (flake-utils.lib.eachDefaultSystem (system:
-      let pkgs = nixpkgs.legacyPackages.${system};
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        check = import ./nix/check.nix { inherit pkgs; };
       in
       {
         devShells = {
           default = pkgs.mkShell {
-            buildInputs = with pkgs; [ direnv git just nixpkgs-fmt ];
+            buildInputs = with pkgs; [
+              direnv
+              git
+              just
+              nixpkgs-fmt
+              check.check-nixpkgs-fmt
+              check.check-editorconfig
+            ];
           };
         };
 
         formatter = pkgs.nixpkgs-fmt;
+
+        checks =
+          {
+            check-nixpkgs-fmt = pkgs.runCommand "check-nixpkgs-fmt" { buildInputs = [ check.check-nixpkgs-fmt ]; } ''
+              cd ${./.}
+              check-nixpkgs-fmt
+              touch $out
+            '';
+            check-editorconfig = pkgs.runCommand "check-editorconfig" { buildInputs = [ check.check-editorconfig ]; } ''
+              cd ${./.}
+              check-editorconfig
+              touch $out
+            '';
+          };
       }));
 }
