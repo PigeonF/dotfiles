@@ -1,0 +1,22 @@
+name: Build and test flake outputs
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  nix:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install nix
+        uses: cachix/install-nix-action@v22
+        with:
+          extra_nix_config: |
+            keep-going = true
+            show-trace = true
+
+      - name: Check flake
+        run: nix flake check
