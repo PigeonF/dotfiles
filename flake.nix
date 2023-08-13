@@ -37,6 +37,11 @@
                 system = {
                   configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
                   stateVersion = 4;
+
+                  keyboard = {
+                    enableKeyMapping = true;
+                    remapCapsLockToControl = true;
+                  };
                 };
 
                 nix = {
