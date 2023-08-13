@@ -28,6 +28,7 @@
 
               ({ pkgs, ... }: {
                 nixpkgs.hostPlatform = "aarch64-darwin";
+
                 users.users.${user} = {
                   home = "/Users/${user}";
                   shell = pkgs.zsh;
@@ -51,6 +52,8 @@
               {
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
+                home-manager.extraSpecialArgs = { inherit inputs; };
+                home-manager.users.${user} = import ./hosts/kamino/home.nix;
               }
             ];
           };
