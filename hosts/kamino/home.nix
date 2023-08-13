@@ -9,6 +9,7 @@
     ../../modules/shell/git
     ../../modules/shell/nix
     ../../modules/shell/starship
+    ../../modules/shell/zoxide
     ../../modules/shell/zsh
   ];
 
