@@ -2,6 +2,7 @@
 {
   imports = [
     ../../modules/shell/atuin
+    ../../modules/shell/bat
     ../../modules/shell/direnv
     ../../modules/shell/erdtree
     ../../modules/shell/ghq
