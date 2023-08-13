@@ -4,6 +4,7 @@
     ../../modules/shell/atuin
     ../../modules/shell/direnv
     ../../modules/shell/erdtree
+    ../../modules/shell/ghq
     ../../modules/shell/git
     ../../modules/shell/nix
     ../../modules/shell/starship
