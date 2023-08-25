@@ -40,6 +40,17 @@
               }
             ];
           };
+
+
+      homeConfigurations = {
+        "pigeon@devbox" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./hosts/devbox
+          ];
+        };
+      };
     } // (flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
