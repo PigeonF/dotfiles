@@ -42,6 +42,8 @@ Vagrant.configure("2") do |config|
         zypper install -y docker docker-buildx docker-compose docker-zsh-completion
         systemctl enable --now docker
         usermod -a -G docker developer
+
+        zypper install -y nftables iptables-backend-nft
       SHELL
     end
   end
