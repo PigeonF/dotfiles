@@ -37,6 +37,11 @@ Vagrant.configure("2") do |config|
         bash <(curl -L https://nixos.org/nix/install) --daemon
         echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
         systemctl restart nix-daemon
+
+        # Would prefer podman, but some important tools (e.g. devcontainer) do not work with podman yet...
+        zypper install -y docker docker-buildx docker-compose docker-zsh-completion
+        systemctl enable --now docker
+        usermod -a -G docker pigeon
       SHELL
     end
   end
