@@ -16,10 +16,10 @@ Vagrant.configure("2") do |config|
       zypper install -y curl
       curl -sL https://github.com/PigeonF.keys -o ~/.ssh/authorized_keys
 
-      useradd pigeon --comment "Developer" --password root
-      passwd -u pigeon
-      sudo -u pigeon bash -c 'mkdir -p ~/.ssh && curl -sL https://github.com/PigeonF.keys -o ~/.ssh/authorized_keys'
-      echo "pigeon ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/pigeon
+      useradd developer --comment "Developer" --password root
+      passwd -u developer
+      sudo -u developer bash -c 'mkdir -p ~/.ssh && curl -sL https://github.com/PigeonF.keys -o ~/.ssh/authorized_keys'
+      echo "developer ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/developer
     SHELL
     shell.reboot = true
   end
@@ -31,8 +31,8 @@ Vagrant.configure("2") do |config|
       shell.privileged = true
       shell.inline = <<-SHELL
         zypper install -y git zsh
-        sudo -u pigeon bash -c 'mkdir -p ~/git/github.com/PigeonF && git clone git@github.com:PigeonF/dotfiles.git ~/git/github.com/PigeonF/dotfiles'
-        sudo chsh -s /usr/bin/zsh pigeon
+        sudo -u developer bash -c 'mkdir -p ~/git/github.com/PigeonF && git clone git@github.com:PigeonF/dotfiles.git ~/git/github.com/PigeonF/dotfiles'
+        sudo chsh -s /usr/bin/zsh developer
 
         bash <(curl -L https://nixos.org/nix/install) --daemon
         echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
@@ -41,7 +41,7 @@ Vagrant.configure("2") do |config|
         # Would prefer podman, but some important tools (e.g. devcontainer) do not work with podman yet...
         zypper install -y docker docker-buildx docker-compose docker-zsh-completion
         systemctl enable --now docker
-        usermod -a -G docker pigeon
+        usermod -a -G docker developer
       SHELL
     end
   end

@@ -16,12 +16,12 @@
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, flake-utils, ... }:
     let
-      username = "pigeon";
+      user = "pigeon";
       stateVersion = "23.05";
 
       mkDarwin = host: system: nix-darwin.lib.darwinSystem
         {
-          specialArgs = { inherit inputs; user = username; };
+          specialArgs = { inherit inputs user; };
 
           modules = [
             host
@@ -35,12 +35,12 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.extraSpecialArgs = { inherit inputs stateVersion; };
-              home-manager.users.${username} = import (host + /home.nix);
+              home-manager.users.${user} = import (host + /home.nix);
             }
           ];
         };
 
-      mkHome = module: system: home-manager.lib.homeManagerConfiguration {
+      mkHome = module: system: { username ? user }: home-manager.lib.homeManagerConfiguration {
         pkgs = import nixpkgs {
           inherit system;
         };
@@ -93,6 +93,6 @@
       })) //
     {
       darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
-      homeConfigurations."pigeon@devbox" = mkHome ./hosts/devbox "x86_64-linux";
+      homeConfigurations."developer@devbox" = mkHome ./hosts/devbox "x86_64-linux" { username = "developer"; };
     };
 }

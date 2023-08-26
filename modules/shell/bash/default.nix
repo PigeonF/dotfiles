@@ -3,9 +3,7 @@
   programs.bash = {
     enable = true;
 
-    dotDir = ".config/zsh";
-
-    historyFile  = "${config.xdg.cacheHome}/bash_history.txt";
+    historyFile = "${config.xdg.cacheHome}/bash_history.txt";
     historyIgnore = [
       "ls"
       "exit"
