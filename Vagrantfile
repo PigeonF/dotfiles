@@ -25,6 +25,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "devbox" do |config|
+    config.vm.hostname = "devbox"
+
     config.vm.provision "shell" do |shell|
       shell.privileged = true
       shell.inline = <<-SHELL

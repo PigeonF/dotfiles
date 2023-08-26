@@ -15,43 +15,49 @@
   };
 
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, flake-utils, ... }:
-    {
-      darwinConfigurations."kamino" =
-        let
-          user = "pigeon";
-        in
-        nix-darwin.lib.darwinSystem
-          {
-            specialArgs = { inherit inputs; user = user; };
+    let
+      username = "pigeon";
+      stateVersion = "23.05";
 
-            modules = [
-              ./hosts/kamino
+      mkDarwin = host: system: nix-darwin.lib.darwinSystem
+        {
+          specialArgs = { inherit inputs; user = username; };
 
-              ({ pkgs, ... }: {
-                nixpkgs.hostPlatform = "aarch64-darwin";
-              })
-
-              home-manager.darwinModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.extraSpecialArgs = { inherit inputs; };
-                home-manager.users.${user} = import ./hosts/kamino/home.nix;
-              }
-            ];
-          };
-
-
-      homeConfigurations = {
-        "pigeon@devbox" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
           modules = [
-            ./hosts/devbox
+            host
+
+            ({ ... }: {
+              nixpkgs.hostPlatform = system;
+            })
+
+            home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = { inherit inputs stateVersion; };
+              home-manager.users.${username} = import (host + /home.nix);
+            }
           ];
         };
+
+      mkHome = module: system: home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          inherit system;
+        };
+        modules = [
+          module
+          {
+            home = {
+              inherit username stateVersion;
+              homeDirectory = "/home/${username}";
+            };
+
+            programs.home-manager.enable = true;
+          }
+        ];
       };
-    } // (flake-utils.lib.eachDefaultSystem (system:
+    in
+    (flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
         check = import ./nix/check.nix { inherit pkgs; };
@@ -63,7 +69,6 @@
               direnv
               git
               just
-              nixpkgs-fmt
               check.check-nixpkgs-fmt
               check.check-editorconfig
             ];
@@ -85,5 +90,9 @@
               touch $out
             '';
           };
-      }));
+      })) //
+    {
+      darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
+      homeConfigurations."pigeon@devbox" = mkHome ./hosts/devbox "x86_64-linux";
+    };
 }

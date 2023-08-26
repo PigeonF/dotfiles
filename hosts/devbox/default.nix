@@ -14,11 +14,6 @@
   ];
 
   home = {
-    stateVersion = "23.05";
-
-    username = "pigeon";
-    homeDirectory = "/home/pigeon/";
-
     packages = with pkgs; [
       vim
       just

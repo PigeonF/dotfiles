@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, pkgs, stateVersion, ... }:
 {
   imports = [
     ../../modules/shell/atuin
@@ -14,7 +14,7 @@
   ];
 
   home = {
-    stateVersion = "23.05";
+    inherit stateVersion;
 
     packages = with pkgs; [
       vim
