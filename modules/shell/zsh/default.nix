@@ -22,6 +22,12 @@ in
       fda = "fd --no-ignore --hidden";
       rga = "rg --no-ignore --hidden";
     };
+
+    initExtra = ''
+      bindkey -e
+      bindkey '^[[1;5C' emacs-forward-word
+      bindkey '^[[1;5D' emacs-backward-word
+    '';
   };
 
   home = {
