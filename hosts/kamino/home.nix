@@ -17,8 +17,9 @@
     inherit stateVersion;
 
     packages = with pkgs; [
-      vim
       just
+      rustup
+      vim
     ];
 
     shellAliases = {
