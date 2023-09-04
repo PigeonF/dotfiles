@@ -38,6 +38,7 @@
     casks = [
       "1password"
       "docker"
+      "spotify"
       "visual-studio-code"
     ];
   };
