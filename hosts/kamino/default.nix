@@ -37,6 +37,7 @@
     ];
     casks = [
       "1password"
+      "alacritty"
       "docker"
       "spotify"
       "visual-studio-code"

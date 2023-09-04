@@ -7,6 +7,7 @@
     ../../modules/shell/erdtree
     ../../modules/shell/ghq
     ../../modules/shell/git
+    ../../modules/shell/helix
     ../../modules/shell/nix
     ../../modules/shell/starship
     ../../modules/shell/zoxide
