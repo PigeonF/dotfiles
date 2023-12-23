@@ -16,7 +16,7 @@ in
     '';
 
     shellAliases = {
-      ls = "exa";
+      ls = "eza";
       la = "ls -la";
 
       fda = "fd --no-ignore --hidden";
@@ -32,7 +32,7 @@ in
 
   home = {
     packages = with pkgs; [
-      exa
+      eza
       fd
       ripgrep
     ];
