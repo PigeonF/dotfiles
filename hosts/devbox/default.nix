@@ -16,8 +16,9 @@
 
   home = {
     packages = with pkgs; [
-      vim
+      act
       just
+      vim
     ];
 
     shellAliases = {
