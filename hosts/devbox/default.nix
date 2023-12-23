@@ -17,7 +17,12 @@
   home = {
     packages = with pkgs; [
       act
+      gdb
       just
+      lldb
+      rr
+      rustup
+      valgrind
       vim
     ];
 
