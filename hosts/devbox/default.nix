@@ -26,7 +26,10 @@
       vim
     ];
 
+    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
+
     shellAliases = {
+      c = "cargo";
       g = "git";
     };
   };
