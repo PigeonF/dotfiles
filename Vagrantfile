@@ -4,6 +4,7 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   config.vm.network "private_network", ip: "192.168.50.2", virtualbox__intnet: "devnet"
+  config.vm.disk :disk, primary: true, size: "128GB"
   config.vm.provider "virtualbox" do |v|
     v.memory = 8192
     v.cpus = 6
