@@ -45,6 +45,7 @@ Vagrant.configure("2") do |config|
         usermod -a -G docker developer
 
         zypper install -y nftables iptables-backend-nft
+        zypper install -t pattern devel_basis
       SHELL
     end
   end
