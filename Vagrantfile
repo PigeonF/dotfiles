@@ -4,11 +4,12 @@ Vagrant.configure("2") do |config|
   config.ssh.forward_agent = true
 
   config.vm.network "private_network", ip: "192.168.50.2", virtualbox__intnet: "devnet"
-  config.vm.disk :disk, primary: true, size: "256GB"
   config.vm.provider "virtualbox" do |v|
+    v.name = "Devbox"
     v.memory = 8192
     v.cpus = 6
   end
+  config.vm.disk :disk, primary: true, size: "512GB"
 
   config.vm.provision "shell" do |shell|
     shell.privileged = true
