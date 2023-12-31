@@ -39,6 +39,7 @@ Vagrant.configure("2") do |config|
         sudo -u developer bash -c 'mkdir -p ~/.ssh && curl -sL https://github.com/PigeonF.keys -o ~/.ssh/authorized_keys'
         echo "developer ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/developer
         chsh -s /usr/bin/zsh developer
+        echo "source ${ZDOTDIR:-$HOME}/.zshenv || true" >> /etc/zprofile
       SHELL
     end
 
