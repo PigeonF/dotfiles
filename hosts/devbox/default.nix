@@ -20,6 +20,7 @@
       gdb
       just
       lldb
+      nodejs
       rr
       rustup
       valgrind
