@@ -27,6 +27,10 @@ in
       bindkey -e
       bindkey '^[[1;5C' emacs-forward-word
       bindkey '^[[1;5D' emacs-backward-word
+
+      # Workaround for non NixOS systems that re-set PATH in /etc/zprofile
+      # https://github.com/nix-community/home-manager/issues/2991#issuecomment-1141980642
+      __HM_SESS_VARS_SOURCED= source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
     '';
   };
 
