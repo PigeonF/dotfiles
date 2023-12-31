@@ -27,6 +27,9 @@
     ];
 
     sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
+    sessionVariables = {
+      JUST_UNSTABLE = "1";
+    };
 
     shellAliases = {
       c = "cargo";
