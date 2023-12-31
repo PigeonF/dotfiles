@@ -4,7 +4,7 @@ set -eu
 set -o pipefail
 
 # Change to repository root
-cd "$(dirname "$(realpath -- "${BASH_SOURCE[0]}")")/../";
+cd "$(dirname "$(realpath -- "${BASH_SOURCE[0]}")")/../"
 source scripts/common.bash
 
 if ! command -v nix 1>/dev/null; then
