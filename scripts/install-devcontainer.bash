@@ -13,4 +13,4 @@ fi
 
 mkdir -p ~/.local/state/nix/profiles
 
-nix run home-manager/release-23.05 -- switch --flake .#developer@devbox
+nix run home-manager/release-23.11 -- switch --flake .#developer@devbox
