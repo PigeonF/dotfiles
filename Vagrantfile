@@ -48,6 +48,7 @@ Vagrant.configure("2") do |config|
         bash <(curl -L https://nixos.org/nix/install) --daemon
         echo "experimental-features = nix-command flakes" >> /etc/nix/nix.conf
         systemctl restart nix-daemon
+        echo 'export PATH="$PATH:$HOME/.nix-profile/bin"' >> /etc/zshenv
       SHELL
     end
 
