@@ -74,22 +74,6 @@
             ];
           };
         };
-
-        formatter = pkgs.nixpkgs-fmt;
-
-        checks =
-          {
-            check-nixpkgs-fmt = pkgs.runCommand "check-nixpkgs-fmt" { buildInputs = [ check.check-nixpkgs-fmt ]; } ''
-              cd ${./.}
-              check-nixpkgs-fmt
-              touch $out
-            '';
-            check-editorconfig = pkgs.runCommand "check-editorconfig" { buildInputs = [ check.check-editorconfig ]; } ''
-              cd ${./.}
-              check-editorconfig
-              touch $out
-            '';
-          };
       })) //
     {
       darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
