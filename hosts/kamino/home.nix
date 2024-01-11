@@ -14,6 +14,10 @@
     ../../modules/shell/zsh
   ];
 
+  manual.html.enable = false;
+  manual.manpages.enable = false;
+  manual.json.enable = false;
+
   home = {
     inherit stateVersion;
 
