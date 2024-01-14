@@ -126,3 +126,7 @@
 
 [stgit "edit"]
     verbose = true
+
+[stgit "alias"]
+    l = series -d
+    list = series -d
