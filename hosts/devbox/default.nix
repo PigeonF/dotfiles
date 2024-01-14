@@ -16,18 +16,19 @@
 
   home = {
     packages = with pkgs; [
-      act
       gdb
+      glab
+      hub
       just
       lldb
-      nodejs
+      npm
       rr
       rustup
       valgrind
       vim
     ];
 
-    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
+    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.npm/bin" ];
     sessionVariables = {
       JUST_UNSTABLE = "1";
     };
