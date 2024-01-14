@@ -123,3 +123,6 @@
     commit-style = raw
     file-style = omit
     hunk-header-style = file line-number syntax
+
+[stgit "edit"]
+    verbose = true

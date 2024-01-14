@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }: {
+{pkgs, ...}: {
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;
@@ -12,6 +12,7 @@
       delta
       git-branchless
       meld
+      stgit
       uutils-coreutils
     ];
 
