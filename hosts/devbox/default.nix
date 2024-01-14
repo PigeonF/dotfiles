@@ -30,11 +30,11 @@
 
     file.".npmrc" = {
       text = ''
-        prefix = $HOME/.npm
+        prefix = ''${HOME}/.npm-packages
       '';
     };
 
-    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.npm/bin" ];
+    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.npm-packages/bin" ];
     sessionVariables = {
       JUST_UNSTABLE = "1";
     };
