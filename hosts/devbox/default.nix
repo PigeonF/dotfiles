@@ -21,12 +21,18 @@
       hub
       just
       lldb
-      npm
+      nodejs
       rr
       rustup
       valgrind
       vim
     ];
+
+    file.".npmrc" = {
+      text = ''
+        prefix = $HOME/.npm
+      '';
+    };
 
     sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.npm/bin" ];
     sessionVariables = {
