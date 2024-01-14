@@ -66,6 +66,10 @@ Vagrant.configure("2") do |config|
 
         zypper install -y nftables iptables-backend-nft
         zypper install -y -t pattern devel_basis
+
+        curl -L "https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX10.9.sdk.tar.xz" | tar -J -x -C /opt
+        curl -L "https://github.com/phracker/MacOSX-SDKs/releases/download/11.3/MacOSX11.3.sdk.tar.xz" | tar -J -x -C /opt
+        echo "export SDKROOT=/opt/MacOSX11.3.sdk" > /etc/profile.d/sdkroot.sh
       SHELL
     end
   end
