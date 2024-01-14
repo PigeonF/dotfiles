@@ -10,7 +10,9 @@
   home = {
     packages = with pkgs; [
       delta
+      git-absorb
       git-branchless
+      git-revise
       meld
       stgit
       uutils-coreutils

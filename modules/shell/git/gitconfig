@@ -130,3 +130,9 @@
 [stgit "alias"]
     l = series -d
     list = series -d
+
+[branchless "core"]
+    mainBranch = "main"
+
+[branchless "next"]
+    interactive = true
