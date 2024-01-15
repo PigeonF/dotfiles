@@ -16,10 +16,13 @@
 
   home = {
     packages = with pkgs; [
+      flux
       gdb
       glab
       hub
       just
+      kind
+      kubectl
       lldb
       nodejs
       rr
