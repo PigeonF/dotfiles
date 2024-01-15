@@ -1,5 +1,8 @@
-{ inputs, pkgs, ... }:
 {
+  inputs,
+  pkgs,
+  ...
+}: {
   imports = [
     ../../modules/shell/atuin
     ../../modules/shell/bash
@@ -16,7 +19,7 @@
 
   home = {
     packages = with pkgs; [
-      flux
+      fluxcd
       gdb
       glab
       hub
@@ -37,7 +40,7 @@
       '';
     };
 
-    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.npm-packages/bin" ];
+    sessionPath = ["$HOME/.local/bin" "$HOME/.cargo/bin" "$HOME/.npm-packages/bin"];
     sessionVariables = {
       JUST_UNSTABLE = "1";
     };
