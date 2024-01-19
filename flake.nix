@@ -85,28 +85,27 @@
       darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
       homeConfigurations."developer@devbox" = mkHome ./hosts/devbox "x86_64-linux" {username = "developer";};
       nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
-        specialArgs = {inherit inputs;};
         system = "x86_64-linux";
         modules = [
           ./hosts/nixbox/configuration.nix
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
-            imports = [
-              (import "${home-manager}/nixos")
-            ];
+          # ({
+          #   config,
+          #   pkgs,
+          #   ...
+          # }: {
+          #   imports = [
+          #     (import "${home-manager}/nixos")
+          #   ];
 
-            system.stateVersion = stateVersion;
+          #   system.stateVersion = stateVersion;
 
-            users.users.developer.isNormalUser = true;
-            home-manager.users.developer =
-              import ./hosts/devbox {inherit pkgs;}
-              // {
-                home.stateVersion = stateVersion;
-              };
-          })
+          #   users.users.developer.isNormalUser = true;
+          #   home-manager.users.developer =
+          #     import ./hosts/devbox {inherit pkgs;}
+          #     // {
+          #       home.stateVersion = stateVersion;
+          #     };
+          # })
         ];
       };
     };
