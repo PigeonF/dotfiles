@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgsStable.url = "github:NixOS/nixpkgs/nixos-23.11";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -17,7 +18,7 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, flake-utils, ... }:
     let
       user = "pigeon";
-      stateVersion = "23.05";
+      stateVersion = "23.11";
 
       mkDarwin = host: system: nix-darwin.lib.darwinSystem
         {
@@ -78,5 +79,9 @@
     {
       darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
       homeConfigurations."developer@devbox" = mkHome ./hosts/devbox "x86_64-linux" { username = "developer"; };
+      nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [./hosts/nixbox/configuration.nix];
+      };
     };
 }
