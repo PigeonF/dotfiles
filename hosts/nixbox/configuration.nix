@@ -16,6 +16,8 @@
   # your boot until you press *.
   boot.initrd.checkJournalingFS = false;
 
+  programs.nix-ld.enable = true;
+
   # Services to enable:
 
   # Enable the OpenSSH daemon.
