@@ -15,7 +15,7 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager, flake-utils, ... }:
+  outputs = inputs@{ self, nix-darwin, nixpkgs, nixpkgsStable, home-manager, flake-utils, ... }:
     let
       user = "pigeon";
       stateVersion = "23.11";
@@ -79,9 +79,17 @@
     {
       darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
       homeConfigurations."developer@devbox" = mkHome ./hosts/devbox "x86_64-linux" { username = "developer"; };
-      nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.nixbox = nixpkgsStable.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [./hosts/nixbox/configuration.nix];
+        modules = [./hosts/nixbox/configuration.nix ({config, pkgs, ...}: {
+          imports = [
+            (import "${home-manager}/nixos")
+          ];
+          users.users.developer.isNormalUser = true;
+          home-manager.users.developer = import ./hosts/devbox {
+            home.stateVersion = "24.05";
+          };
+        })];
       };
     };
 }
