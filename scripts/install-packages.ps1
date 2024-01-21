@@ -47,7 +47,7 @@ function Install-Packages-Scoop([Config]$config) {
     # General
     scoop install git-lfs uutils-coreutils
     scoop install zstd
-    scoop install bat erdtree fd fzf just mdcat ripgrep topgrade
+    scoop install bat erdtree fd fzf just mdcat ripgrep topgrade eza
     scoop install JetBrainsMono-NF
     cargo binstall -y cargo-update
 
