@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  stateVersion,
+  ...
+}: {
   imports = [
     ../../../modules/shell/atuin
     ../../../modules/shell/bat
@@ -13,7 +17,15 @@
     ../../../modules/shell/zsh
   ];
 
+  manual = {
+    html.enable = false;
+    manpages.enable = false;
+    json.enable = false;
+  };
+
   home = {
+    inherit stateVersion;
+
     packages = with pkgs; [
       just
       rustup

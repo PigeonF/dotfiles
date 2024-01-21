@@ -1,4 +1,8 @@
-{pkgs, ...}: {
+{
+  pkgs,
+  stateVersion,
+  ...
+}: {
   imports = [
     ../../../modules/shell/atuin
     ../../../modules/shell/bash
@@ -14,6 +18,8 @@
   ];
 
   home = {
+    inherit stateVersion;
+
     packages = with pkgs; [
       fluxcd
       gdb
