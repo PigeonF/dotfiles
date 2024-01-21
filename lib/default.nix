@@ -11,70 +11,83 @@ in rec {
   mkNixOsConfiguration = name: {
     system,
     config,
+    stateVersion ? "24.05",
+    home ? null,
   }:
     lib.nameValuePair name (lib.nixosSystem {
       inherit system;
       specialArgs = {inherit name inputs;};
-      modules = [
-        ({
-          name,
-          inputs,
-          ...
-        }: {
-          networking.hostName = name;
-          nixpkgs = {pkgs = inputs.nixpkgs.legacyPackages.${system};};
-        })
-        (import config)
-      ];
+      modules = let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+        [
+          ({
+            name,
+            inputs,
+            ...
+          }: {
+            networking.hostName = name;
+            system = {
+              inherit stateVersion;
+            };
+            nixpkgs = {inherit pkgs;};
+          })
+          (import config)
+        ]
+        ++ (
+          if home != null
+          then [
+            inputs.home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit inputs pkgs stateVersion;};
+            }
+            home
+          ]
+          else []
+        );
     });
 
   mkDarwinConfigurations = lib.mapAttrs' mkDarwinConfiguration;
   mkDarwinConfiguration = name: {
     system,
     config,
+    stateVersion ? "24.05",
+    home ? null,
   }:
     lib.nameValuePair name (inputs.nix-darwin.lib.darwinSystem {
       inherit system;
 
       specialArgs = {inherit name inputs;};
-      modules = [
-        ({
-          name,
-          inputs,
-          ...
-        }: {
-          networking.hostName = name;
-          nixpkgs = {
-            pkgs = inputs.nixpkgs.legacyPackages.${system};
-          };
-        })
-        (import config)
-      ];
-    });
-
-  mkHomeConfigurations = lib.mapAttrs' mkHomeConfiguration;
-  mkHomeConfiguration = name: {
-    system,
-    home,
-    username ? name,
-    stateVersion ? "24.05",
-  }:
-    lib.nameValuePair name (inputs.home-manager.lib.homeManagerConfiguration {
-      pkgs = inputs.nixpkgs.legacyPackages.${system};
-      modules = [
-        ({pkgs, ...}: {
-          home = {
-            inherit username stateVersion;
-
-            homeDirectory =
-              if pkgs.stdenv.isDarwin
-              then "/Users/${username}"
-              else "/home/${username}";
-          };
-
-          programs.home-manager.enable = true;
-        })
-        (import home)
-      ];
+      modules = let
+        pkgs = inputs.nixpkgs.legacyPackages.${system};
+      in
+        [
+          ({
+            name,
+            inputs,
+            ...
+          }: {
+            networking.hostName = name;
+            nixpkgs = {
+              inherit pkgs;
+            };
+          })
+          (import config)
+        ]
+        ++ (
+          if home != null
+          then [
+            inputs.home-manager.darwinModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.extraSpecialArgs = {inherit inputs pkgs stateVersion;};
+            }
+            home
+          ]
+          else []
+        );
     });
 }

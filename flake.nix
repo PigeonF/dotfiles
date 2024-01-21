@@ -16,21 +16,13 @@
   outputs = {self, ...} @ inputs: let
     lib = import ./lib {inherit inputs;};
   in rec {
-    homeConfigurations = lib.mkHomeConfigurations {
-      developer = {
-        system = "x86_64-linux";
-        home = ./hosts/devbox;
-      };
-      pigeon = {
-        system = "aarch64-darwin";
-        home = ./hosts/kamino/home.nix;
-      };
-    };
-
     nixosConfigurations = lib.mkNixOsConfigurations {
       nixbox = {
         system = "x86_64-linux";
         config = ./hosts/nixbox/configuration.nix;
+        home = {
+          home-manager.users.developer = import ./hosts/devbox;
+        };
       };
     };
 
@@ -38,6 +30,9 @@
       kamino = {
         system = "aarch64-darwin";
         config = ./hosts/kamino;
+        home = {
+          home-manager.users.pigeon = import ./hosts/kamino/home.nix;
+        };
       };
     };
 
