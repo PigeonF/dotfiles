@@ -1,0 +1,19 @@
+[misc]
+assume_yes = true
+ignore_failures = ["git_repos", "containers", "vagrant"]
+cleanup = true
+
+[git]
+repos = [
+    "~/git/github.com/PigeonF/*",
+    "~/git/gitlab.com/PigeonF/*",
+    "~/git/bitbucket.org/PigeonF/*",
+    "~/git/gitlab.kitware.com/PigeonF/*",
+    "~/git/codeberg.org/PigeonF/*",
+    "D:/git/github.com/PigeonF/*",
+    "D:/git/gitlab.com/PigeonF/*",
+    "D:/git/bitbucket.org/PigeonF/*",
+    "D:/git/gitlab.kitware.com/PigeonF/*",
+    "D:/git/codeberg.org/PigeonF/*",
+]
+pull_arguments = "--rebase --autostash"

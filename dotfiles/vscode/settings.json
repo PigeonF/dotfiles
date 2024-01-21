@@ -1,0 +1,69 @@
+{
+    // cspell:words Sysnative windir
+    // cspell:words Cartograph Consolas dprint Nushell stylua
+    // cspell:words cheshirekow jnoortheen JohnnyMorganz
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
+    },
+    "[json][jsonc]": {
+        "editor.defaultFormatter": "dprint.dprint"
+    },
+    "[markdown]": {
+        "editor.defaultFormatter": "dprint.dprint"
+    },
+    "[nix]": {
+        "editor.defaultFormatter": "jnoortheen.nix-ide"
+    },
+    "editor.fontFamily": "Cartograph CF, Consolas, 'Courier New', monospace",
+    "editor.rulers": [
+        80,
+        120,
+        100
+    ],
+    "terminal.integrated.commandsToSkipShell": [
+        "-workbench.action.quickOpen"
+    ],
+    "terminal.integrated.defaultProfile.windows": "NuShell",
+    "terminal.integrated.profiles.windows": {
+        "Command Prompt": {
+            "args": [],
+            "icon": "terminal-cmd",
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ]
+        },
+        "JavaScript Debug Terminal": null,
+        "Nushell": null,
+        "NuShell": {
+            "path": [
+                "${env:SCOOP}\\shims\\nu.exe"
+            ]
+        },
+        "PowerShell": {
+            "icon": "terminal-powershell",
+            "source": "PowerShell"
+        }
+    },
+    "workbench.colorTheme": "GitHub Dark Dimmed",
+    "extensions.ignoreRecommendations": true,
+    "redhat.telemetry.enabled": false,
+    "editor.formatOnSave": true,
+    "remote.SSH.remotePlatform": {
+        "Hesperidium": "linux"
+    },
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "CMakePresets.json",
+                "CMakeUserPresets.json"
+            ],
+            "url": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json"
+        }
+    ],
+    "cmake.languageSupport.enableFileAPI": true,
+    "[cmake]": {
+        "editor.defaultFormatter": "cheshirekow.cmake-format"
+    },
+    "workbench.sideBar.location": "right"
+}
