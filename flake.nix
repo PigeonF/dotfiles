@@ -19,7 +19,7 @@
     nixosConfigurations = lib.mkNixOsConfigurations {
       nixbox = {
         system = "x86_64-linux";
-        config = ./hosts/nixbox/configuration.nix;
+        config = ./hosts/nixbox;
         home = {
           home-manager.users.developer = import ./hosts/devbox;
         };

@@ -26,9 +26,16 @@ in rec {
             inputs,
             ...
           }: {
-            networking.hostName = name;
             system = {
               inherit stateVersion;
+              configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+            };
+            networking.hostName = name;
+            nix = {
+              package = pkgs.nixFlakes;
+              settings = {
+                experimental-features = ["nix-command" "flakes"];
+              };
             };
             nixpkgs = {inherit pkgs;};
           })
@@ -53,7 +60,8 @@ in rec {
   mkDarwinConfiguration = name: {
     system,
     config,
-    stateVersion ? "24.05",
+    stateVersion ? 4,
+    hmStateVersion ? "24.05",
     home ? null,
   }:
     lib.nameValuePair name (inputs.nix-darwin.lib.darwinSystem {
@@ -69,7 +77,17 @@ in rec {
             inputs,
             ...
           }: {
+            system = {
+              inherit stateVersion;
+              configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+            };
             networking.hostName = name;
+            nix = {
+              package = pkgs.nixFlakes;
+              settings = {
+                experimental-features = ["nix-command" "flakes"];
+              };
+            };
             nixpkgs = {
               inherit pkgs;
             };
@@ -83,7 +101,10 @@ in rec {
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {inherit inputs pkgs stateVersion;};
+              home-manager.extraSpecialArgs = {
+                inherit inputs pkgs;
+                stateVersion = hmStateVersion;
+              };
             }
             home
           ]
