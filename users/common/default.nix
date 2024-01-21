@@ -4,18 +4,18 @@
   ...
 }: {
   imports = [
-    ../../modules/shell/atuin
-    ../../modules/shell/bat
-    ../../modules/shell/direnv
-    ../../modules/shell/erdtree
-    ../../modules/shell/ghq
-    ../../modules/shell/git
-    ../../modules/shell/helix
-    ../../modules/shell/just
-    ../../modules/shell/nix
-    ../../modules/shell/starship
-    ../../modules/shell/zoxide
-    ../../modules/shell/zsh
+    ../../dotfiles/atuin
+    ../../dotfiles/bat
+    ../../dotfiles/direnv
+    ../../dotfiles/erdtree
+    ../../dotfiles/ghq
+    ../../dotfiles/git
+    ../../dotfiles/helix
+    ../../dotfiles/just
+    ../../dotfiles/nix
+    ../../dotfiles/starship
+    ../../dotfiles/zoxide
+    ../../dotfiles/zsh
   ];
 
   manual = {
