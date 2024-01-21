@@ -28,6 +28,8 @@
     inherit stateVersion;
 
     packages = with pkgs; [
+      alejandra
+      nil
       glab
       hub
       lldb

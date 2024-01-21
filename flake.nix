@@ -15,7 +15,7 @@
 
   outputs = {self, ...} @ inputs: let
     lib = import ./lib {inherit inputs;};
-  in rec {
+  in {
     nixosConfigurations = lib.mkNixOsConfigurations {
       nixbox = {
         system = "x86_64-linux";

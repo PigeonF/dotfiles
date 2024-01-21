@@ -5,6 +5,7 @@
 }: {
   imports = [
     ../../../users/common
+    ../../../modules/shell/bash
   ];
 
   home = {
