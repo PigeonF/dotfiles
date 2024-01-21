@@ -1,4 +1,9 @@
-{ pkgs, inputs, user, ... }: {
+{
+  pkgs,
+  inputs,
+  user,
+  ...
+}: {
   imports = [
     ./services.nix
   ];
@@ -21,8 +26,8 @@
   nix = {
     package = pkgs.nixFlakes;
     settings = {
-      allowed-users = [ user ];
-      experimental-features = [ "nix-command" "flakes" ];
+      allowed-users = [user];
+      experimental-features = ["nix-command" "flakes"];
     };
   };
 

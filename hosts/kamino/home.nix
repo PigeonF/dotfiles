@@ -1,5 +1,9 @@
-{ inputs, pkgs, stateVersion, ... }:
 {
+  inputs,
+  pkgs,
+  stateVersion,
+  ...
+}: {
   imports = [
     ../../modules/shell/atuin
     ../../modules/shell/bat

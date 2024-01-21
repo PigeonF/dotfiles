@@ -1,9 +1,12 @@
-{ pkgs, config, lib, ... }:
-with lib;
-let
-  inherit (pkgs) stdenv;
-in
 {
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+with lib; let
+  inherit (pkgs) stdenv;
+in {
   programs.zsh = {
     enable = true;
 

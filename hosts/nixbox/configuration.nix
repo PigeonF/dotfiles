@@ -15,7 +15,7 @@
   # remove the fsck that runs at startup. It will always fail to run, stopping
   # your boot until you press *.
   boot.initrd.checkJournalingFS = false;
-
+  nix.settings.experimental-features = ["nix-command" "flakes"];
   programs.nix-ld.enable = true;
 
   # Services to enable:

@@ -1,3 +1,35 @@
 {
-    "nix.enableLanguageServer": true
+    "[json][jsonc][markdown][toml]": {
+        "editor.defaultFormatter": "dprint.dprint",
+    },
+    "[nix]": {
+        "editor.defaultFormatter": "jnoortheen.nix-ide",
+    },
+    "files.associations": {
+        ".vscode/*.json": "jsonc",
+        "*.just": "just",
+        "dep5": "debian-copyright",
+    },
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nil",
+    "nix.serverSettings": {
+        "nil": {
+            "formatting": {
+                "command": [
+                    "alejandra"
+                ],
+            },
+        },
+    },
+    "yaml.schemas": {
+        "https://squidfunk.github.io/mkdocs-material/schema.json": "mkdocs.yml",
+    },
+    "yaml.customTags": [
+        "!ENV scalar",
+        "!ENV sequence",
+        "!relative scalar",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.to_svg",
+        "tag:yaml.org,2002:python/name:material.extensions.emoji.twemoji",
+        "tag:yaml.org,2002:python/name:pymdownx.superfences.fence_code_format",
+    ],
 }

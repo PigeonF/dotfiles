@@ -1,5 +1,5 @@
 {
-  description = "Example Darwin system flake";
+  description = "PigeonF's configuration files";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -11,99 +11,41 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = inputs @ {
-    self,
-    nix-darwin,
-    nixpkgs,
-    home-manager,
-    flake-utils,
-    ...
-  }: let
-    user = "pigeon";
-    stateVersion = "24.05";
-
-    mkDarwin = host: system:
-      nix-darwin.lib.darwinSystem
-      {
-        specialArgs = {inherit inputs user;};
-
-        modules = [
-          host
-
-          ({...}: {
-            nixpkgs.hostPlatform = system;
-          })
-
-          home-manager.darwinModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = {inherit inputs stateVersion;};
-            home-manager.users.${user} = import (host + /home.nix);
-          }
-        ];
-      };
-
-    mkHome = module: system: {username ? user}:
-      home-manager.lib.homeManagerConfiguration {
-        pkgs = import nixpkgs {
-          inherit system;
-        };
-        modules = [
-          module
-          {
-            home = {
-              inherit username stateVersion;
-              homeDirectory = "/home/${username}";
-            };
-
-            programs.home-manager.enable = true;
-          }
-        ];
-      };
-  in
-    (flake-utils.lib.eachDefaultSystem (system: let
-      pkgs = nixpkgs.legacyPackages.${system};
-      check = import ./nix/check.nix {inherit pkgs;};
-    in {
-      devShells = {
-        default = pkgs.mkShell {
-          buildInputs = with pkgs; [
-            direnv
-            git
-            just
-            check.check-nixpkgs-fmt
-            check.check-editorconfig
-          ];
-        };
-      };
-    }))
-    // {
-      darwinConfigurations."kamino" = mkDarwin ./hosts/kamino "aarch64-darwin";
-      homeConfigurations."developer@devbox" = mkHome ./hosts/devbox "x86_64-linux" {username = "developer";};
-      nixosConfigurations.nixbox = nixpkgs.lib.nixosSystem {
+  outputs = {self, ...} @ inputs: let
+    lib = import ./lib {inherit inputs;};
+  in rec {
+    homeConfigurations = lib.mkHomeConfigurations {
+      developer = {
         system = "x86_64-linux";
-        modules = [
-          ./hosts/nixbox/configuration.nix
-          ({
-            config,
-            pkgs,
-            ...
-          }: {
-            imports = [
-              (import "${home-manager}/nixos")
-            ];
-
-            home-manager.users.developer =
-              import ./hosts/devbox {inherit pkgs;}
-              // {
-                home.stateVersion = stateVersion;
-              };
-          })
-        ];
+        home = ./hosts/devbox;
+      };
+      pigeon = {
+        system = "aarch64-darwin";
+        home = ./hosts/kamino/home.nix;
       };
     };
+
+    nixosConfigurations = lib.mkNixOsConfigurations {
+      nixbox = {
+        system = "x86_64-linux";
+        config = ./hosts/nixbox/configuration.nix;
+      };
+    };
+
+    darwinConfigurations = lib.mkDarwinConfigurations {
+      kamino = {
+        system = "aarch64-darwin";
+        config = ./hosts/kamino;
+      };
+    };
+
+    devShells = lib.forEachSystem (pkgs: {
+      default = pkgs.mkShell {
+        name = "dotfiles";
+        buildInputs = with pkgs; [alejandra nil];
+      };
+    });
+  };
 }
