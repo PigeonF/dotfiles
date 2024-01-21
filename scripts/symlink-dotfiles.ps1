@@ -42,7 +42,7 @@ function HandleSymlink([string]$path, [string]$target) {
 }
 
 function Main() {
-    $Root = (Get-Item $PSScriptRoot).Parent.Parent.FullName
+    $Root = (Get-Item $PSScriptRoot).Parent.FullName
     $DotfilesDir = Join-Path $Root dotfiles
 
     $XdgConfigHome = $env:XDG_CONFIG_HOME
