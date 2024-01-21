@@ -21,7 +21,7 @@
         system = "x86_64-linux";
         config = ./hosts/nixbox;
         home = {
-          home-manager.users.developer = import ./hosts/devbox;
+          home-manager.users.developer = import ./hosts/nixbox/users/developer.nix;
         };
       };
     };
@@ -31,7 +31,7 @@
         system = "aarch64-darwin";
         config = ./hosts/kamino;
         home = {
-          home-manager.users.pigeon = import ./hosts/kamino/home.nix;
+          home-manager.users.pigeon = import ./hosts/kamino/users/pigeon.nix;
         };
       };
     };
