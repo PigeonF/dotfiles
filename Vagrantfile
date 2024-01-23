@@ -15,9 +15,15 @@ def nixos(cfg, name)
     shell.inline = <<-SHELL
       # We do not need them, since we use flake based dotfiles.
       rm -f /etc/nixos/*.nix
-
-      nixos-rebuild build --verbose --print-build-logs --show-trace --refresh --flake github:PigeonF/dotfiles?ref=main##{name}
     SHELL
+  end
+
+  # Directly running the switch in a shell provision hangs indefinitely.
+  cfg.trigger.after :provisioner_run, type: :hook do |trigger|
+    trigger.info = "Installing OS configuration"
+    trigger.run = {
+      inline: "vagrant ssh #{name} -- sudo nixos-rebuild switch --verbose --print-build-logs --show-trace --refresh --flake github:PigeonF/dotfiles?ref=main##{name}"
+    }
   end
 end
 
