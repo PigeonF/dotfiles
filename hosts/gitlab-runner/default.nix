@@ -11,10 +11,8 @@
   sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
 
   networking = {
-    firewall = {
-      enable = true;
-      nftables.enable = true;
-    };
+    nftables.enable = true;
+    firewall.enable = true;
   };
 
   systemd.coredump.enable = false;
