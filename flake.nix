@@ -42,5 +42,7 @@
         buildInputs = with pkgs; [alejandra nil];
       };
     });
+
+    formatter = lib.forEachSystem (pkgs: pkgs.alejandra);
   };
 }
