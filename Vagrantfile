@@ -44,8 +44,9 @@ Vagrant.configure("2") do |config|
     SHELL
   end
 
-  config.vm.define "nixbox" do |nixbox|
-    nixbox.vm.hostname = "nixbox"
+  config.vm.define "nixbox", primary: true do |nixbox|
+    nixbox.vm.hostname = "nixbox.local"
+    nixbox.vm.network "private_network", ip: "192.168.50.3", virtualbox__intnet: "devnet", hostname: true
     nixbox.vm.provider "virtualbox" do |v|
       v.name = "Nix Box"
       v.memory = 8192
@@ -56,7 +57,8 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "gitlab-runner" do |gitlab_runner|
-    gitlab_runner.vm.hostname = "gitlab-runner"
+    gitlab_runner.vm.hostname = "gitlab-runner.local"
+    gitlab_runner.vm.network "private_network", ip: "192.168.50.127", virtualbox__intnet: "devnet", hostname: true
     gitlab_runner.vm.provider "virtualbox" do |v|
       v.name = "GitLab Runner"
       v.memory = 4096
@@ -64,7 +66,7 @@ Vagrant.configure("2") do |config|
     end
     disksize(gitlab_runner, "128GB")
 
-    config.vm.provision "shell" do |shell|
+    gitlab_runner.vm.provision "shell" do |shell|
       shell.privileged = true
       shell.inline = <<-SHELL
         mkdir -p /var/lib/sops-nix
@@ -73,7 +75,7 @@ Vagrant.configure("2") do |config|
       SHELL
     end
 
-    nixos(gitlab_runner, "gitlab-runner")
+    # nixos(gitlab_runner, "gitlab-runner")
 
     gitlab_runner.trigger.after :provisioner_run, type: :hook do |trigger|
       trigger.warn = "You might have to register gitlab-runner manually using `vagrant ssh gitlab-runner`"

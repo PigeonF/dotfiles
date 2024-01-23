@@ -25,7 +25,7 @@
               inherit stateVersion;
               configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
             };
-            networking.hostName = name;
+            networking.hostName = "${name}.local";
             nix = {
               package = pkgs.nixFlakes;
               settings = {
