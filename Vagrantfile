@@ -16,7 +16,7 @@ def nixos(config, name)
       # We do not need them, since we use flake based dotfiles.
       rm -f /etc/nixos/*.nix
 
-      nixos-rebuild switch --flake github:PigeonF/dotfiles?ref=main##{name}
+      nixos-rebuild switch --refresh --flake github:PigeonF/dotfiles?ref=main##{name}
     SHELL
   end
 end
