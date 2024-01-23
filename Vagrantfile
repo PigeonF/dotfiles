@@ -50,7 +50,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 6
     end
     disksize(nixbox, "256GB")
-    # nixos(nixbox, "nixbox")
+    nixos(nixbox, "nixbox")
   end
 
   config.vm.define "gitlab-runner" do |gitlab_runner|
@@ -61,6 +61,6 @@ Vagrant.configure("2") do |config|
       v.cpus = 4
     end
     disksize(gitlab_runner, "128GB")
-    nixos(gitlab_runner, "gitlab_runner")
+    nixos(gitlab_runner, "gitlab-runner")
   end
 end
