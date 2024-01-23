@@ -37,7 +37,7 @@
 
     startScript = pkgs.writeShellScriptBin "gitlab-runner-start" ''
       export CONFIG_FILE=${configPath}
-      exec ${pkgs.gitlab-runner} run --working-directory $HOME
+      exec ${pkgs.gitlab-runner}/bin/gitlab-runner run --working-directory $HOME
     '';
   in {
     description = "Gitlab Runner";
