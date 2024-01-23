@@ -51,7 +51,7 @@
       default = pkgs.mkShell {
         name = "dotfiles";
         buildInputs = builtins.attrValues {
-          inherit (pkgs) age alejandra deadnix nil sops statix;
+          inherit (pkgs) age alejandra deadnix just nil sops statix;
         };
       };
     });
