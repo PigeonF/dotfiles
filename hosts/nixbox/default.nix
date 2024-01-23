@@ -22,7 +22,7 @@ _: {
   networking.interfaces = {
     enp0s8.ipv4.addresses = [
       {
-        address = "192.168.50.1";
+        address = "192.168.50.2";
         prefixLength = 24;
       }
     ];

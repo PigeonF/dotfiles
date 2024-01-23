@@ -1,6 +1,6 @@
-def disksize(config, size)
-  config.vm.disk :disk, primary: true, size: size
-  config.vm.provision "shell" do |shell|
+def disksize(cfg, size)
+  cfg.vm.disk :disk, primary: true, size: size
+  cfg.vm.provision "shell" do |shell|
     shell.privileged = true
     shell.inline = <<-SHELL
       nix-shell -p cloud-utils --run 'growpart /dev/sda 1'
@@ -9,8 +9,8 @@ def disksize(config, size)
   end
 end
 
-def nixos(config, name)
-  config.vm.provision "shell" do |shell|
+def nixos(cfg, name)
+  cfg.vm.provision "shell" do |shell|
     shell.privileged = true
     shell.inline = <<-SHELL
       # We do not need them, since we use flake based dotfiles.
@@ -46,7 +46,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "nixbox", primary: true do |nixbox|
     nixbox.vm.hostname = "nixbox.local"
-    nixbox.vm.network "private_network", ip: "192.168.50.1", virtualbox__intnet: "devnet", hostname: true
+    nixbox.vm.network "private_network", ip: "192.168.50.2", virtualbox__intnet: "devnet", hostname: true
     nixbox.vm.provider "virtualbox" do |v|
       v.name = "Nix Box"
       v.memory = 8192
@@ -58,7 +58,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "gitlab-runner" do |gitlab_runner|
     gitlab_runner.vm.hostname = "gitlab-runner.local"
-    gitlab_runner.vm.network "private_network", ip: "192.168.50.2", virtualbox__intnet: "devnet", hostname: true
+    gitlab_runner.vm.network "private_network", ip: "192.168.50.3", virtualbox__intnet: "devnet", hostname: true
     gitlab_runner.vm.provider "virtualbox" do |v|
       v.name = "GitLab Runner"
       v.memory = 4096
