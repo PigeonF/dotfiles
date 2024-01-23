@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
   virtualisation.docker.enable = true;
 
@@ -11,7 +10,9 @@
   # This means the config is not really declarative, but thats how it is.
   services.gitlab-runner = {
     enable = true;
-    configFile = (pkgs.formats.toml{}).generate;
+    configFile = pkgs.writeText "config.template.toml" ''
+
+    '';
   };
 
   services.cron = {

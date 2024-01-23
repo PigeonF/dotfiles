@@ -1,14 +1,17 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
+    <nixpkgs/nixos/modules/profiles/hardened.nix>
     ./hardware-configuration.nix
     ./bootloader.nix
     ./vagrant.nix
     ./services
   ];
+
+  networking.firewall.enable = true;
+  networking.firewall.allowedTCPPorts = [22];
+  networking.firewall.allowedUDPPorts = [];
+
+  systemd.coredump.enable = false;
 
   # For VS Code server
   programs.nix-ld.enable = true;
