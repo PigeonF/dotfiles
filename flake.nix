@@ -39,7 +39,9 @@
     devShells = lib.forEachSystem (pkgs: {
       default = pkgs.mkShell {
         name = "dotfiles";
-        buildInputs = with pkgs; [alejandra nil];
+        buildInputs = builtins.attrValues {
+          inherit (pkgs) alejandra nil;
+        };
       };
     });
 
