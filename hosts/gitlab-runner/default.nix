@@ -10,12 +10,12 @@
   # Inserted via Vagrant
   sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
 
-  # networking = {
-  #   firewall = {
-  #     enable = true;
-  #     nftables.enable = true;
-  #   };
-  # };
+  networking = {
+    firewall = {
+      enable = true;
+      nftables.enable = true;
+    };
+  };
 
   systemd.coredump.enable = false;
 
