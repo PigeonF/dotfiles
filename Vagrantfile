@@ -9,6 +9,14 @@ def disksize(cfg, size)
   end
 end
 
+def ready(cfg)
+  cfg.vm.provision "shell" do |shell|
+    shell.inline = <<-SHELL
+      touch /tmp/provision
+    SHELL
+  end
+end
+
 def nixos(cfg, name)
   cfg.vm.provision "shell" do |shell|
     shell.privileged = true
@@ -22,7 +30,7 @@ def nixos(cfg, name)
   cfg.trigger.after :provisioner_run, type: :hook do |trigger|
     trigger.info = "Installing OS configuration"
     trigger.run = {
-      inline: "vagrant ssh #{name} -- sudo nixos-rebuild switch --verbose --print-build-logs --show-trace --refresh --flake github:PigeonF/dotfiles?ref=main##{name}"
+      inline: "vagrant ssh #{name} -- bash -c 'test -r /tmp/provision && sudo nixos-rebuild switch --verbose --print-build-logs --show-trace --refresh --flake github:PigeonF/dotfiles?ref=main##{name} || true'"
     }
   end
 end
@@ -60,6 +68,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 6
     end
     disksize(nixbox, "256GB")
+    ready(nixbox)
     nixos(nixbox, "nixbox")
   end
 
@@ -72,8 +81,6 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 4
     end
-    disksize(gitlab_runner, "128GB")
-
     gitlab_runner.vm.provision "shell" do |shell|
       shell.privileged = true
       shell.inline = <<-SHELL
@@ -83,6 +90,8 @@ Vagrant.configure("2") do |config|
       SHELL
     end
 
+    disksize(gitlab_runner, "128GB")
+    ready(gitlab_runner)
     nixos(gitlab_runner, "gitlab-runner")
 
     gitlab_runner.trigger.after :provisioner_run, type: :hook do |trigger|
