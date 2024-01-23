@@ -23,6 +23,19 @@
     %wheel ALL=(ALL) NOPASSWD: ALL, SETENV: ALL
   '';
 
+  networking.interfaces = {
+    enp0s8.ipv4.addresses = [
+      {
+        address = "192.168.50.3";
+        prefixLength = 24;
+      }
+    ];
+  };
+
+  users.mutableUsers = false;
+  # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
+  users.users.root = {hashedPassword = "!";};
+
   users.groups.developer = {
     name = "developer";
     members = ["developer"];
