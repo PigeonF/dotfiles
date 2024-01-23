@@ -70,7 +70,7 @@
     "workbench.settings.applyToAllProfiles": [
         
     ],
-    "window.zoomLevel": 2,
     "gitlab.aiAssistedCodeSuggestions.enabled": false,
     "gitlab.duoChat.enabled": false,
+    "window.zoomLevel": 1,
 }
