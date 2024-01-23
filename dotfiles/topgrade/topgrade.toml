@@ -1,6 +1,6 @@
 [misc]
 assume_yes = true
-ignore_failures = ["git_repos", "containers", "vagrant"]
+ignore_failures = ["git_repos", "containers", "vagrant", "system"]
 cleanup = true
 
 [git]
@@ -16,4 +16,3 @@ repos = [
     "D:/git/gitlab.kitware.com/PigeonF/*",
     "D:/git/codeberg.org/PigeonF/*",
 ]
-pull_arguments = "--rebase --autostash"

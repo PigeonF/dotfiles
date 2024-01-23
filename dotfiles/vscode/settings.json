@@ -65,5 +65,9 @@
     "[cmake]": {
         "editor.defaultFormatter": "cheshirekow.cmake-format"
     },
-    "workbench.sideBar.location": "right"
+    "workbench.sideBar.location": "right",
+    "workbench.settings.applyToAllProfiles": [
+        
+    ],
+    "window.zoomLevel": 2,
 }
