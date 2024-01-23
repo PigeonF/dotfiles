@@ -50,7 +50,8 @@
     "redhat.telemetry.enabled": false,
     "editor.formatOnSave": true,
     "remote.SSH.remotePlatform": {
-        "Hesperidium": "linux"
+        "Hesperidium": "linux",
+        "nixbox": "linux"
     },
     "json.schemas": [
         {
@@ -70,4 +71,6 @@
         
     ],
     "window.zoomLevel": 2,
+    "gitlab.aiAssistedCodeSuggestions.enabled": false,
+    "gitlab.duoChat.enabled": false,
 }
