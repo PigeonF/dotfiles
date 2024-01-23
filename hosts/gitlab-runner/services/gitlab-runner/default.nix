@@ -42,8 +42,8 @@
   in {
     description = "Gitlab Runner";
     documentation = ["https://docs.gitlab.com/runner/"];
-    after = ["network.target" "docker.service" "sops-nix.service"];
-    requires = ["docker.service" "sops-nix.service"];
+    after = ["network.target" "docker.service"];
+    requires = ["docker.service"];
     wantedBy = ["multi-user.target"];
     environment = {
       HOME = "/var/lib/gitlab-runner";
