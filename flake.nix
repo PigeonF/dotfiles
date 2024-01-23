@@ -24,6 +24,10 @@
           home-manager.users.developer = import ./hosts/nixbox/users/developer.nix;
         };
       };
+      gitlab-runner = {
+        system = "x86_64-linux";
+        config = ./hosts/gitlab-runner;
+      };
     };
 
     darwinConfigurations = lib.mkDarwinConfigurations {
