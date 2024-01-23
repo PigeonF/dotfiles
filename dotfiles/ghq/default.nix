@@ -1,7 +1,7 @@
 {pkgs, ...}: {
-  home.packages = with pkgs; [
-    ghq
-  ];
+  home.packages = builtins.attrValues {
+    inherit (pkgs) ghq;
+  };
 
   home.sessionVariables = {
     GHQ_ROOT = "$HOME/git";

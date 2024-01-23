@@ -23,10 +23,13 @@
   };
 
   home = {
-    packages = with pkgs; [
-      eza
-      fd
-      ripgrep
-    ];
+    packages = builtins.attrValues {
+      inherit
+        (pkgs)
+        eza
+        fd
+        ripgrep
+        ;
+    };
   };
 }

@@ -27,14 +27,17 @@
   home = {
     inherit stateVersion;
 
-    packages = with pkgs; [
-      alejandra
-      nil
-      glab
-      hub
-      lldb
-      rustup
-    ];
+    packages = builtins.attrValues {
+      inherit
+        (pkgs)
+        alejandra
+        nil
+        glab
+        hub
+        lldb
+        rustup
+        ;
+    };
 
     shellAliases = {
       g = "git";

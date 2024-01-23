@@ -1,20 +1,19 @@
-{
-  pkgs,
-  stateVersion,
-  ...
-}: {
+{pkgs, ...}: {
   imports = [
     ../../../users/common
     ../../../dotfiles/bash
   ];
 
   home = {
-    packages = with pkgs; [
-      gdb
-      nodejs
-      rr
-      valgrind
-    ];
+    packages = builtins.attrValues {
+      inherit
+        (pkgs)
+        gdb
+        nodejs
+        rr
+        valgrind
+        ;
+    };
 
     file.".npmrc" = {
       text = ''

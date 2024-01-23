@@ -3,10 +3,7 @@
   config,
   lib,
   ...
-}:
-with lib; let
-  inherit (pkgs) stdenv;
-in {
+}: {
   programs.zsh = {
     enable = true;
 
@@ -14,7 +11,7 @@ in {
 
     history.path = "${config.xdg.cacheHome}/zsh_history.txt";
 
-    profileExtra = optionalString stdenv.isDarwin ''
+    profileExtra = lib.optionalString pkgs.stdenv.isDarwin ''
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
 
@@ -40,10 +37,13 @@ in {
   };
 
   home = {
-    packages = with pkgs; [
-      eza
-      fd
-      ripgrep
-    ];
+    packages = builtins.attrValues {
+      inherit
+        (pkgs)
+        eza
+        fd
+        ripgrep
+        ;
+    };
   };
 }

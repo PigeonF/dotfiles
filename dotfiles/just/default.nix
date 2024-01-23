@@ -1,8 +1,8 @@
 {pkgs, ...}: {
   home = {
-    packages = with pkgs; [
-      just
-    ];
+    packages = builtins.attrValues {
+      inherit (pkgs) just;
+    };
 
     sessionVariables = {
       JUST_UNSTABLE = "1";
