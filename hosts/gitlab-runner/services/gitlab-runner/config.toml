@@ -1,0 +1,21 @@
+concurrent = 10
+check_interval = 0
+shutdown_timeout = 0
+
+[session_server]
+session_timeout = 1800
+
+[[runners]]
+name = "Default"
+url = "https://gitlab.com"
+token = "@GLR_AUTHENTICATION_TOKEN@"
+executor = "docker"
+
+[runners.cache]
+MaxUploadedArchiveSize = 0
+
+[runners.docker]
+tls_verify = true
+image = "busybox"
+privileged = true
+volumes = ["/certs/client", "/cache", "/builds"]

@@ -22,6 +22,8 @@ def nixos(config, name)
 end
 
 Vagrant.configure("2") do |config|
+  config.vagrant.plugins = ["vagrant-secret"]
+
   config.vm.box = "nixbox/nixos"
   config.vm.box_url = "https://app.vagrantup.com/nixbox/boxes/nixos"
   config.vm.box_version = "23.11"
@@ -61,6 +63,16 @@ Vagrant.configure("2") do |config|
       v.cpus = 4
     end
     disksize(gitlab_runner, "128GB")
+
+    config.vm.provision "shell" do |shell|
+      shell.privileged = true
+      shell.inline = <<-SHELL
+        mkdir -p /var/lib/sops-nix
+        echo "#{Secret.gitlab_runner_sops}" > /var/lib/sops-nix/keys.txt
+        chown root:root /var/lib/sops-nix/keys.txt
+      SHELL
+    end
+
     nixos(gitlab_runner, "gitlab-runner")
 
     gitlab_runner.trigger.after :provisioner_run, type: :hook do |trigger|

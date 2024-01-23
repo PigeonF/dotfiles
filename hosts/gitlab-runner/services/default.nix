@@ -1,7 +1,7 @@
 {...}: {
   imports = [
     ./openssh.nix
-    ./gitlab-runner.nix
+    ./gitlab-runner
   ];
 
   services.dbus.enable = true;

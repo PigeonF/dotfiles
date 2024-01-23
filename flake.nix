@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -10,6 +11,11 @@
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
   };
 
@@ -27,6 +33,7 @@
       gitlab-runner = {
         system = "x86_64-linux";
         config = ./hosts/gitlab-runner;
+        extraModules = [inputs.sops-nix.nixosModules.sops];
       };
     };
 
@@ -44,7 +51,7 @@
       default = pkgs.mkShell {
         name = "dotfiles";
         buildInputs = builtins.attrValues {
-          inherit (pkgs) alejandra deadnix nil statix;
+          inherit (pkgs) age alejandra deadnix nil sops statix;
         };
       };
     });

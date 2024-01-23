@@ -4,9 +4,10 @@
     system,
     config,
     name,
-    stateVersion ? "24.05",
-    hmStateVersion ? "24.05",
-    home ? null,
+    stateVersion,
+    hmStateVersion,
+    home,
+    extraModules,
   }:
     fn {
       inherit system;
@@ -35,6 +36,7 @@
           })
           (import config)
         ]
+        ++ extraModules
         ++ (
           if home != null
           then [
@@ -67,9 +69,10 @@ in rec {
     config,
     stateVersion ? "24.05",
     home ? null,
+    extraModules ? [],
   }:
     lib.nameValuePair name (mkOsConfiguration lib.nixosSystem {
-      inherit system config stateVersion home name;
+      inherit system config stateVersion home name extraModules;
       hmStateVersion = stateVersion;
     });
 
@@ -80,8 +83,9 @@ in rec {
     stateVersion ? 4,
     hmStateVersion ? "24.05",
     home ? null,
+    extraModules ? [],
   }:
     lib.nameValuePair name (mkOsConfiguration inputs.nix-darwin.lib.darwinSystem {
-      inherit system config stateVersion hmStateVersion home name;
+      inherit system config stateVersion hmStateVersion home name extraModules;
     });
 }

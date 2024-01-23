@@ -7,6 +7,9 @@
     ./services
   ];
 
+  # Inserted via Vagrant
+  sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
+
   networking = {
     firewall = {
       enable = true;
@@ -40,6 +43,5 @@
   };
 
   users.mutableUsers = false;
-  # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
   users.users.root = {hashedPassword = "!";};
 }
