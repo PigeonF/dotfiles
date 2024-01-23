@@ -40,11 +40,13 @@
       default = pkgs.mkShell {
         name = "dotfiles";
         buildInputs = builtins.attrValues {
-          inherit (pkgs) alejandra nil;
+          inherit (pkgs) alejandra deadnix nil statix;
         };
       };
     });
 
     formatter = lib.forEachSystem (pkgs: pkgs.alejandra);
+
+    checks = lib.forEachSystem (pkgs: import ./checks {inherit self pkgs;});
   };
 }

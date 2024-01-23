@@ -1,4 +1,4 @@
-{...}: {
+_: {
   services.openssh.enable = true;
   # For vagrant key
   services.openssh.extraConfig = ''

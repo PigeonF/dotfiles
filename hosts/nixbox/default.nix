@@ -1,8 +1,4 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: {
+_: {
   imports = [
     ./hardware-configuration.nix
     ./bootloader.nix
@@ -32,27 +28,29 @@
     ];
   };
 
-  users.mutableUsers = false;
-  # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
-  users.users.root = {hashedPassword = "!";};
+  users = {
+    mutableUsers = false;
+    # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
+    users.root = {hashedPassword = "!";};
 
-  users.groups.developer = {
-    name = "developer";
-    members = ["developer"];
-  };
+    groups.developer = {
+      name = "developer";
+      members = ["developer"];
+    };
 
-  users.users.developer = {
-    description = "Developer";
-    name = "developer";
-    group = "developer";
-    extraGroups = ["users" "wheel"];
-    password = "developer";
-    home = "/home/developer";
-    createHome = true;
-    useDefaultShell = true;
-    openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
-    ];
-    isNormalUser = true;
+    users.developer = {
+      description = "Developer";
+      name = "developer";
+      group = "developer";
+      extraGroups = ["users" "wheel"];
+      password = "developer";
+      home = "/home/developer";
+      createHome = true;
+      useDefaultShell = true;
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
+      ];
+      isNormalUser = true;
+    };
   };
 }

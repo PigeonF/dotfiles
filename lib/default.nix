@@ -40,11 +40,13 @@
           then [
             inputs.home-manager.nixosModules.home-manager
             {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = {
-                inherit inputs pkgs;
-                stateVersion = hmStateVersion;
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs pkgs;
+                  stateVersion = hmStateVersion;
+                };
               };
             }
             home
@@ -66,7 +68,7 @@ in rec {
     stateVersion ? "24.05",
     home ? null,
   }:
-    lib.nameValuePair name (mkOsConfiguration (lib.nixosSystem) {
+    lib.nameValuePair name (mkOsConfiguration lib.nixosSystem {
       inherit system config stateVersion home name;
       hmStateVersion = stateVersion;
     });
@@ -79,7 +81,7 @@ in rec {
     hmStateVersion ? "24.05",
     home ? null,
   }:
-    lib.nameValuePair name (mkOsConfiguration (inputs.nix-darwin.lib.darwinSystem) {
+    lib.nameValuePair name (mkOsConfiguration inputs.nix-darwin.lib.darwinSystem {
       inherit system config stateVersion hmStateVersion home name;
     });
 }
