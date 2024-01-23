@@ -9,7 +9,7 @@
     name = "vagrant";
     group = "vagrant";
     extraGroups = ["users" "wheel" "vboxsf"];
-    password = "vagrant";
+    hashedPassword = "!";
     home = "/home/vagrant";
     createHome = true;
     useDefaultShell = true;

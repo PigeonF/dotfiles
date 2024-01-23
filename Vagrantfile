@@ -62,5 +62,9 @@ Vagrant.configure("2") do |config|
     end
     disksize(gitlab_runner, "128GB")
     nixos(gitlab_runner, "gitlab-runner")
+
+    gitlab_runner.trigger.after :provisioner_run, type: :hook do |trigger|
+      trigger.warn = "You might have to register gitlab-runner manually using `vagrant ssh gitlab-runner`"
+    end
   end
 end

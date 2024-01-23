@@ -15,6 +15,11 @@
     '';
   };
 
+  # Make sure folder gets created or gitlab-runner service will fail
+  systemd.tmpfiles.rules = [
+    "d /var/lib/gitlab-runner/.gitlab-runner 1777 root root"
+  ];
+
   services.cron = {
     enable = true;
     systemCronJobs = [
