@@ -24,14 +24,17 @@
   boot.initrd.checkJournalingFS = false;
 
   # Required by vagrant
-  environment.systemPackages = with pkgs; [
-    findutils
-    gnumake
-    iputils
-    jq
-    nettools
-    netcat
-    nfs-utils
-    rsync
-  ];
+  environment.systemPackages = builtins.attrValues {
+    inherit
+      (pkgs)
+      findutils
+      gnumake
+      iputils
+      jq
+      nettools
+      netcat
+      nfs-utils
+      rsync
+      ;
+  };
 }
