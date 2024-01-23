@@ -1,15 +1,19 @@
-_: {
+{inputs, ...}: {
   imports = [
-    <nixpkgs/nixos/modules/profiles/hardened.nix>
+    "${inputs.nixpkgs}/nixos/modules/profiles/hardened.nix"
     ./hardware-configuration.nix
     ./bootloader.nix
     ./vagrant.nix
     ./services
   ];
 
-  networking.firewall.enable = true;
-  networking.firewall.allowedTCPPorts = [22];
-  networking.firewall.allowedUDPPorts = [];
+  networking = {
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [22];
+      allowedUDPPorts = [];
+    };
+  };
 
   systemd.coredump.enable = false;
 
