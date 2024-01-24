@@ -6,6 +6,14 @@ _: {
     ./services
   ];
 
+  virtualisation = {
+    podman = {
+      enable = true;
+      dockerCompat = true;
+      defaultNetwork.settings.dns_enabled = true;
+    };
+  };
+
   # For VS Code server
   programs.nix-ld.enable = true;
 
