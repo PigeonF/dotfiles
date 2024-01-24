@@ -28,7 +28,6 @@ def nixos(cfg, name)
   cfg.trigger.after :provisioner_run, type: :hook do |trigger|
     trigger.info = "Checking if nixos-rebuild needs switch"
     trigger.run = {
-      # inline: "vagrant ssh #{name} -- bash -c 'test -f /tmp/provision && sudo nixos-rebuild switch --flake github:PigeonF/dotfiles?ref=main##{name} || echo Waiting to nixos-rebuild switch'"
       inline: "vagrant ssh #{name} -- bash /tmp/nixos-rebuild-switch.bash"
     }
   end
