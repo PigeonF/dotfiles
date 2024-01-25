@@ -24,7 +24,7 @@ fi
 post_build_script = """
 if [[ -r /etc/nix/nix.conf ]]; then
     for result in result*; do
-        nix --extra-experimental-features nix-command copy --from unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt --no-check-sigs "$(realpath "$result")"
+        nix --extra-experimental-features nix-command copy --store local --from unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt --no-check-sigs "$(realpath "$result")"
     done
 fi
 """
