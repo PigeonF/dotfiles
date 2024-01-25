@@ -13,7 +13,12 @@
       inherit system;
       specialArgs = {inherit name inputs;};
       modules = let
-        pkgs = inputs.nixpkgs.legacyPackages.${system};
+        pkgs = import inputs.nixpkgs {
+          inherit system;
+          overlays = [
+            inputs.self.outputs.overlays.additions
+          ];
+        };
       in
         [
           ({
@@ -61,6 +66,9 @@ in rec {
     lib.genAttrs ["x86_64-linux" "aarch64-darwin"] (system:
       lambda (import inputs.nixpkgs {
         inherit system;
+        overlays = [
+          inputs.self.outputs.overlays.additions
+        ];
       }));
 
   mkNixOsConfigurations = lib.mapAttrs' mkNixOsConfiguration;

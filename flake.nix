@@ -22,6 +22,8 @@
   outputs = {self, ...} @ inputs: let
     lib = import ./lib {inherit inputs;};
   in {
+    overlays = import ./overlays {inherit inputs;};
+
     nixosConfigurations = lib.mkNixOsConfigurations {
       nixbox = {
         system = "x86_64-linux";

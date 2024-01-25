@@ -31,6 +31,7 @@
       inherit
         (pkgs)
         alejandra
+        committed
         dprint
         glab
         hub
