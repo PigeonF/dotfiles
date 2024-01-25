@@ -21,13 +21,6 @@ if [[ -r /etc/nix/nix.conf ]]; then
     echo "store = unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt" >>/etc/nix/nix.conf
 fi
 """
-post_build_script = """
-if [[ -r /etc/nix/nix.conf ]]; then
-    for result in result*; do
-        nix --extra-experimental-features nix-command copy --store local --from unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt --no-check-sigs "$(realpath "$result")"
-    done
-fi
-"""
 
 [runners.docker]
 cache_dir = "/cache"
