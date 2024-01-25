@@ -9,13 +9,20 @@ token = "@GLR_AUTHENTICATION_TOKEN@"
 executor = "docker"
 cache_dir = "/cache"
 output_limit = 8192
+environment = ["FF_NETWORK_PER_BUILD=1"]
 pre_build_script = """
 if [[ -r /etc/nix/nix.conf ]]; then
     nix-env -iA nixpkgs.bashInteractive
     echo "store = unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt" >>/etc/nix/nix.conf
 fi
 """
-environment = ["FF_NETWORK_PER_BUILD=1"]
+post_build_script = """
+if [[ -r /etc/nix/nix.conf ]]; then
+    for result in result*; do
+        nix --extra-experimental-features nix-command copy --from unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt --no-check-sigs "$(realpath "$result")"
+    done
+fi
+"""
 
 [runners.docker]
 cache_dir = "/cache"
