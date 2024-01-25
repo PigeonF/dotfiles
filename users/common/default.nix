@@ -31,11 +31,13 @@
       inherit
         (pkgs)
         alejandra
-        nil
+        dprint
         glab
         hub
         lldb
+        nil
         rustup
+        shfmt
         ;
     };
 
