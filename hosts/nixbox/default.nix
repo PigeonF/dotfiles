@@ -53,7 +53,7 @@ _: {
       description = "Developer";
       name = "developer";
       group = "developer";
-      extraGroups = ["users" "wheel"];
+      extraGroups = ["users" "wheel" "docker"];
       password = "developer";
       home = "/home/developer";
       createHome = true;
