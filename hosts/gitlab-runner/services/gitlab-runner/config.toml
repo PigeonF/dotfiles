@@ -15,6 +15,7 @@ if [[ -r /etc/nix/nix.conf ]]; then
     echo "store = unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt" >>/etc/nix/nix.conf
 fi
 """
+environment = ["FF_NETWORK_PER_BUILD=1"]
 
 [runners.docker]
 cache_dir = "/cache"
