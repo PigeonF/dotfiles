@@ -15,4 +15,9 @@ cache_dir = "/cache"
 tls_verify = true
 image = "busybox"
 privileged = true
-volumes = ["/certs/client", "/cache", "/builds"]
+volumes = ["/certs/client", "/cache", "/builds", "/nix:/mnt/nix:ro"]
+post_get_sources_script = """
+if [[ -r /etc/nix/nix.conf ]]; then
+    echo "store = unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt" >>/etc/nix/nix.conf
+fi
+"""
