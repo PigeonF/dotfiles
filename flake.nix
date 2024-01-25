@@ -36,6 +36,9 @@
         system = "x86_64-linux";
         config = ./hosts/gitlab-runner;
         extraModules = [inputs.sops-nix.nixosModules.sops];
+        home = {
+          home-manager.users.vagrant = import ./hosts/gitlab-runner/users/vagrant.nix;
+        };
       };
     };
 

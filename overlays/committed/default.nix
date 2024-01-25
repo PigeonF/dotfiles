@@ -25,7 +25,7 @@ rustPlatform.buildRustPackage rec {
         (lib.licenses)
         asl20
         # or
-
+        
         mit
         ;
     };
