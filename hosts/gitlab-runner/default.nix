@@ -38,4 +38,7 @@
 
   users.mutableUsers = false;
   users.users.root = {hashedPassword = "!";};
+
+  nix.gc.automatic = true;
+  nix.optimise.automatic = true;
 }
