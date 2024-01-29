@@ -16,6 +16,7 @@ environment = [
     # "DOCKER_TLS_VERIFY=1",
 ]
 pre_build_script = """
+: Runner specific cache setup
 if [[ -r /etc/nix/nix.conf ]]; then
     # nix-env -iA nixpkgs.bashInteractive
     echo "store = unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt" >>/etc/nix/nix.conf
