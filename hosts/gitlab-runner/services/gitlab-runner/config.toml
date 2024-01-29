@@ -11,9 +11,9 @@ cache_dir = "/cache"
 output_limit = 8192
 environment = [
     "FF_NETWORK_PER_BUILD=1",
-    "DOCKER_TLS_CERTDIR=/certs",
-    "DOCKER_CERT_PATH=/certs/client",
-    "DOCKER_TLS_VERIFY=1",
+    # "DOCKER_TLS_CERTDIR=/certs",
+    # "DOCKER_CERT_PATH=/certs/client",
+    # "DOCKER_TLS_VERIFY=1",
 ]
 pre_build_script = """
 if [[ -r /etc/nix/nix.conf ]]; then
