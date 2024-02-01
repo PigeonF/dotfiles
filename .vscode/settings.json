@@ -10,6 +10,7 @@
         "*.just": "just",
         "dep5": "debian-copyright",
     },
+    "nix.formatterPath": "alejandra",
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nil",
     "nix.serverSettings": {

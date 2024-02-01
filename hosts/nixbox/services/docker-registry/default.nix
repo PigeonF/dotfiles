@@ -15,8 +15,9 @@
     format = "binary";
     restartUnits = ["nginx.service"];
     mode = "0440";
+
     owner = config.services.nginx.user;
-    group = config.services.nginx.group;
+    inherit (config.services.nginx) group;
   };
 
   security.pki.certificateFiles = [./minica.pem];
