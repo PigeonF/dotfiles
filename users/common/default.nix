@@ -47,7 +47,8 @@
       text = ''
         ---
         global:
-          CI_REGISTRY: "127.0.0.1:5000"
+          CI_REGISTRY_USER: "nobody"
+          CI_REGISTRY_PASSWORD: "nobody"
       '';
     };
 
