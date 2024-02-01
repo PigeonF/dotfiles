@@ -31,12 +31,11 @@
 
     virtualHosts."local-registry.gitlab.com" = {
       forceSSL = true;
-      # minica --domains 'local-registry.gitlab.com'
+      # nix run nixpkgs#minica -- --domains local-registry.gitlab.com -ip-addresses 172.17.0.1
       sslCertificate = ./local-registry.gitlab.com/cert.pem;
       sslCertificateKey = "/run/secrets/dockerRegistry/certificateKey";
 
       listenAddresses = [
-        "127.0.0.1"
         # docker0 ip address
         "172.17.0.1"
       ];
@@ -46,6 +45,6 @@
   };
 
   networking.extraHosts = ''
-    127.0.0.1 local-registry.gitlab.com
+    172.17.0.1 local-registry.gitlab.com
   '';
 }
