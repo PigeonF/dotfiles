@@ -32,12 +32,19 @@
             };
             networking.hostName = name;
             nix = {
-              package = pkgs.nixFlakes;
-              settings = {
-                experimental-features = ["nix-command" "flakes"];
-              };
+              package = pkgs.nix;
+              settings.experimental-features = ["nix-command" "flakes"];
+              registry.nixpkgs.flake = inputs.nixpkgs;
+
+              nixPath = [
+                "nixpkgs=/etc/nixpkgs/channels/nixpkgs"
+                "/nix/var/nix/profiles/per-user/root/channels"
+              ];
             };
-            nixpkgs = {inherit pkgs;};
+
+            systemd.tmpfiles.rules = [
+              "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}"
+            ];
           })
           (import config)
         ]

@@ -12,15 +12,8 @@
         nodejs
         rr
         valgrind
+        gitlab-ci-local
         ;
     };
-
-    file.".npmrc" = {
-      text = ''
-        prefix = ''${HOME}/.npm-packages
-      '';
-    };
-
-    sessionPath = ["$HOME/.npm-packages/bin"];
   };
 }
