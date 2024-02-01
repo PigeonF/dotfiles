@@ -29,6 +29,9 @@
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
 
+    # https://stackoverflow.com/a/40593944
+    clientMaxBodySize = "0";
+
     virtualHosts."local-registry.gitlab.com" = {
       forceSSL = true;
       # nix run nixpkgs#minica -- --domains local-registry.gitlab.com -ip-addresses 172.17.0.1
