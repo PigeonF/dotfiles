@@ -61,6 +61,11 @@
       };
     });
 
+    packages = lib.forEachSystem (pkgs: {
+      committed = pkgs.callPackage ./overlays/committed {};
+      gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local {};
+    });
+
     formatter = lib.forEachSystem (pkgs: pkgs.alejandra);
 
     checks = lib.forEachSystem (pkgs: import ./checks {inherit self pkgs;});

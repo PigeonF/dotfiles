@@ -12,7 +12,6 @@
         nodejs
         rr
         valgrind
-        gitlab-ci-local
         ;
     };
   };

@@ -33,6 +33,7 @@
         alejandra
         committed
         dprint
+        gitlab-ci-local
         glab
         hub
         lldb
@@ -40,6 +41,14 @@
         rustup
         shfmt
         ;
+    };
+
+    file.".gitlab-ci-local/variables.yml" = {
+      text = ''
+        ---
+        global:
+          CI_REGISTRY: "127.0.0.1:5000"
+      '';
     };
 
     shellAliases = {

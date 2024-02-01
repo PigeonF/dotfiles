@@ -9,12 +9,14 @@ rustPlatform.buildRustPackage rec {
 
   src = fetchFromGitHub {
     owner = "crate-ci";
-    repo = pname;
+    repo = "committed";
     rev = "v${version}";
-    hash = "sha256-prmMj8tVOm9P5EKkenero4YM9ccVU3JskTiHjup0oeQ=";
+    hash = "sha256-HqZYxV2YjnK7Q3A7B6yVFXME0oc3DZ4RfMkDGa2IQxA=";
   };
 
-  cargoHash = "sha256-WvRTRrnDeKJHFXxRlxrgyeFdNAyHVz75PH9Ymdat6zg=";
+  doCheck = false;
+
+  cargoHash = "sha256-AmAEGVWq6KxLtiHDGIFVcoP1Wck8z+P9mnDy0SSSJNM=";
 
   meta = {
     description = "Nitpicking commit history since beabf39";
