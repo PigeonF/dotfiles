@@ -17,6 +17,8 @@
     virtualHosts."local-registry.gitlab.com" = {
       listenAddresses = [
         "127.0.0.1"
+        # docker0 ip address
+        "172.17.0.1"
         "[::1]"
       ];
 
