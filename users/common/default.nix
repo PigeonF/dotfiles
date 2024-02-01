@@ -58,5 +58,8 @@
     };
 
     sessionPath = ["$HOME/.local/bin" "$HOME/.cargo/bin"];
+    sessionVariables = {
+      GCL_EXTRA_HOST = "local-registry.gitlab.com:host-gateway";
+    };
   };
 }
