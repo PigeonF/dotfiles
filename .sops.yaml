@@ -1,9 +1,14 @@
 ---
 keys:
   - &gitlab_runner age177xv2pujf3r9ly6jy9du03alf0w6lwqea9gqc2tw8uzvgjx0jpyqq4r8tx
+  - &nixbox age177xv2pujf3r9ly6jy9du03alf0w6lwqea9gqc2tw8uzvgjx0jpyqq4r8tx
 
 creation_rules:
-  - path_regex: hosts/gitlab-runner/.*secrets\.env$
+  - path_regex: hosts/gitlab-runner/.*\.age$
     key_groups:
       - age:
-        - *gitlab_runner
+          - *gitlab_runner
+  - path_regex: hosts/nixbox/.*\.age$
+    key_groups:
+      - age:
+          - *nixbox

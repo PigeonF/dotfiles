@@ -13,7 +13,7 @@
   virtualisation.docker.enable = true;
 
   sops.secrets."gitlab-runner/environment" = {
-    sopsFile = ./secrets.env;
+    sopsFile = ./secrets.env.age;
     format = "dotenv";
     restartUnits = ["gitlab-runner.service"];
   };

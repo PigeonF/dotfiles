@@ -1,7 +1,7 @@
 _: {
   imports = [
     ./openssh.nix
-    ./docker-registry.nix
+    ./docker-registry
   ];
 
   services.dbus.enable = true;

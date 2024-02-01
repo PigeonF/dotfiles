@@ -28,6 +28,7 @@
       nixbox = {
         system = "x86_64-linux";
         config = ./hosts/nixbox;
+        extraModules = [inputs.sops-nix.nixosModules.sops];
         home = {
           home-manager.users.developer = import ./hosts/nixbox/users/developer.nix;
         };

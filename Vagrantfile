@@ -68,6 +68,17 @@ Vagrant.configure("2") do |config|
       v.memory = 8192
       v.cpus = 6
     end
+    nixbox.vm.provision "Setting up SOPS secrets", type: "shell" do |shell|
+      shell.privileged = true
+      shell.inline = <<-SHELL
+        mkdir -p /var/lib/sops-nix
+        echo "#{Secret.nixbox_sops}" > /var/lib/sops-nix/keys.txt
+
+        chown -R root:root /var/lib/sops-nix/
+        chmod 0600 /var/lib/sops-nix/keys.txt
+      SHELL
+    end
+
     disksize(nixbox, "256GB")
     nixos(nixbox, "nixbox")
   end
@@ -86,7 +97,9 @@ Vagrant.configure("2") do |config|
       shell.inline = <<-SHELL
         mkdir -p /var/lib/sops-nix
         echo "#{Secret.gitlab_runner_sops}" > /var/lib/sops-nix/keys.txt
-        chown root:root /var/lib/sops-nix/keys.txt
+
+        chown -R root:root /var/lib/sops-nix/
+        chmod 0600 /var/lib/sops-nix/keys.txt
       SHELL
     end
 

@@ -6,6 +6,9 @@ _: {
     ./services
   ];
 
+  # Inserted via Vagrant
+  sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
+
   networking.firewall.trustedInterfaces = ["docker0"];
 
   virtualisation = {
