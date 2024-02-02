@@ -12,7 +12,6 @@
         "editor.defaultFormatter": "dprint.dprint"
     },
     "[nix]": {
-        "editor.defaultFormatter": "jnoortheen.nix-ide"
     },
     "editor.fontFamily": "Cartograph CF, Consolas, 'Courier New', monospace",
     "editor.rulers": [
@@ -51,7 +50,8 @@
     "editor.formatOnSave": true,
     "remote.SSH.remotePlatform": {
         "Hesperidium": "linux",
-        "nixbox": "linux"
+        "nixbox": "linux",
+        "gitlab-runner": "linux"
     },
     "json.schemas": [
         {
@@ -73,4 +73,8 @@
     "gitlab.aiAssistedCodeSuggestions.enabled": false,
     "gitlab.duoChat.enabled": false,
     "window.zoomLevel": 1,
+    "files.associations": {
+        "*.just": "just"
+    },
+    "yaml.customTags": [ "!reference sequence" ]
 }
