@@ -1,4 +1,4 @@
-{stateVersion, ...}: {
+{ stateVersion, ... }: {
   imports = [
     ../../../dotfiles/git
     ../../../dotfiles/just

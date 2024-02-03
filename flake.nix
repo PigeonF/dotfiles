@@ -19,56 +19,58 @@
     };
   };
 
-  outputs = {self, ...} @ inputs: let
-    lib = import ./lib {inherit inputs;};
-  in {
-    overlays = import ./overlays {inherit inputs;};
+  outputs = { self, ... } @ inputs:
+    let
+      lib = import ./lib { inherit inputs; };
+    in
+    {
+      overlays = import ./overlays { inherit inputs; };
 
-    nixosConfigurations = lib.mkNixOsConfigurations {
-      nixbox = {
-        system = "x86_64-linux";
-        config = ./hosts/nixbox;
-        extraModules = [inputs.sops-nix.nixosModules.sops];
-        home = {
-          home-manager.users.developer = import ./hosts/nixbox/users/developer.nix;
+      nixosConfigurations = lib.mkNixOsConfigurations {
+        nixbox = {
+          system = "x86_64-linux";
+          config = ./hosts/nixbox;
+          extraModules = [ inputs.sops-nix.nixosModules.sops ];
+          home = {
+            home-manager.users.developer = import ./hosts/nixbox/users/developer.nix;
+          };
+        };
+        gitlab-runner = {
+          system = "x86_64-linux";
+          config = ./hosts/gitlab-runner;
+          extraModules = [ inputs.sops-nix.nixosModules.sops ];
+          home = {
+            home-manager.users.vagrant = import ./hosts/gitlab-runner/users/vagrant.nix;
+          };
         };
       };
-      gitlab-runner = {
-        system = "x86_64-linux";
-        config = ./hosts/gitlab-runner;
-        extraModules = [inputs.sops-nix.nixosModules.sops];
-        home = {
-          home-manager.users.vagrant = import ./hosts/gitlab-runner/users/vagrant.nix;
+
+      darwinConfigurations = lib.mkDarwinConfigurations {
+        kamino = {
+          system = "aarch64-darwin";
+          config = ./hosts/kamino;
+          home = {
+            home-manager.users.pigeon = import ./hosts/kamino/users/pigeon.nix;
+          };
         };
       };
+
+      devShells = lib.forEachSystem (pkgs: {
+        default = pkgs.mkShell {
+          name = "dotfiles";
+          buildInputs = builtins.attrValues {
+            inherit (pkgs) age nixpkgs-fmt deadnix just nil sops statix;
+          };
+        };
+      });
+
+      packages = lib.forEachSystem (pkgs: {
+        committed = pkgs.callPackage ./overlays/committed { };
+        gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
+      });
+
+      formatter = lib.forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+
+      checks = lib.forEachSystem (pkgs: import ./checks { inherit self pkgs; });
     };
-
-    darwinConfigurations = lib.mkDarwinConfigurations {
-      kamino = {
-        system = "aarch64-darwin";
-        config = ./hosts/kamino;
-        home = {
-          home-manager.users.pigeon = import ./hosts/kamino/users/pigeon.nix;
-        };
-      };
-    };
-
-    devShells = lib.forEachSystem (pkgs: {
-      default = pkgs.mkShell {
-        name = "dotfiles";
-        buildInputs = builtins.attrValues {
-          inherit (pkgs) age alejandra deadnix just nil sops statix;
-        };
-      };
-    });
-
-    packages = lib.forEachSystem (pkgs: {
-      committed = pkgs.callPackage ./overlays/committed {};
-      gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local {};
-    });
-
-    formatter = lib.forEachSystem (pkgs: pkgs.alejandra);
-
-    checks = lib.forEachSystem (pkgs: import ./checks {inherit self pkgs;});
-  };
 }

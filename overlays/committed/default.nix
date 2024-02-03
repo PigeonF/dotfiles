@@ -1,7 +1,7 @@
-{
-  lib,
-  rustPlatform,
-  fetchFromGitHub,
+{ lib
+, rustPlatform
+, fetchFromGitHub
+,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "committed";
@@ -27,7 +27,7 @@ rustPlatform.buildRustPackage rec {
         (lib.licenses)
         asl20
         # or
-        
+
         mit
         ;
     };

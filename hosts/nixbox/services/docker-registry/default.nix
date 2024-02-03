@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   services.dockerRegistry = {
     enable = true;
@@ -13,14 +12,14 @@
   sops.secrets."dockerRegistry/certificateKey" = {
     sopsFile = ./local-registry.gitlab.com/key.pem.age;
     format = "binary";
-    restartUnits = ["nginx.service"];
+    restartUnits = [ "nginx.service" ];
     mode = "0440";
 
     owner = config.services.nginx.user;
     inherit (config.services.nginx) group;
   };
 
-  security.pki.certificateFiles = [./minica.pem];
+  security.pki.certificateFiles = [ ./minica.pem ];
 
   services.nginx = {
     enable = true;

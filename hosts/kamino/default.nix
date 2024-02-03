@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   imports = [
     ./services
   ];
@@ -18,7 +18,7 @@
     };
   };
 
-  nix.settings.trusted-users = ["pigeon"];
+  nix.settings.trusted-users = [ "pigeon" ];
 
   homebrew = {
     enable = true;

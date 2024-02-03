@@ -1,14 +1,14 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   users.groups.vagrant = {
     name = "vagrant";
-    members = ["vagrant"];
+    members = [ "vagrant" ];
   };
 
   users.users.vagrant = {
     description = "Vagrant User";
     name = "vagrant";
     group = "vagrant";
-    extraGroups = ["users" "wheel" "vboxsf"];
+    extraGroups = [ "users" "wheel" "vboxsf" ];
     hashedPassword = "!";
     home = "/home/vagrant";
     createHome = true;

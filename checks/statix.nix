@@ -1,9 +1,9 @@
-{
-  runCommand,
-  statix,
-  self,
+{ runCommand
+, statix
+, self
+,
 }:
-runCommand "check-statix" {} ''
+runCommand "check-statix" { } ''
   cd ${self}
   ${statix}/bin/statix check | tee $out
 ''

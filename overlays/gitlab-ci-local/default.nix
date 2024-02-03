@@ -1,9 +1,9 @@
-{
-  lib,
-  buildNpmPackage,
-  fetchFromGitHub,
-  git,
-  typescript,
+{ lib
+, buildNpmPackage
+, fetchFromGitHub
+, git
+, typescript
+,
 }:
 buildNpmPackage rec {
   pname = "gitlab-ci-local";
@@ -23,7 +23,7 @@ buildNpmPackage rec {
     typescript
   ];
 
-  npmFlags = builtins.toString ["--ignore-scripts"];
+  npmFlags = builtins.toString [ "--ignore-scripts" ];
 
   buildPhase = ''
     runHook preBuild

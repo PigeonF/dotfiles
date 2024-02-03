@@ -1,7 +1,6 @@
-{
-  pkgs,
-  stateVersion,
-  ...
+{ pkgs
+, stateVersion
+, ...
 }: {
   imports = [
     ../../dotfiles/atuin
@@ -31,7 +30,6 @@
     packages = builtins.attrValues {
       inherit
         (pkgs)
-        alejandra
         committed
         dprint
         gitlab-ci-local
@@ -39,6 +37,7 @@
         hub
         lldb
         nil
+        nixpkgs-fmt
         rustup
         shfmt
         ;
@@ -58,7 +57,7 @@
       c = "cargo";
     };
 
-    sessionPath = ["$HOME/.local/bin" "$HOME/.cargo/bin"];
+    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
     sessionVariables = {
       GCL_EXTRA_HOST = "local-registry.gitlab.com:host-gateway";
       GCL_VOLUME = "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro";

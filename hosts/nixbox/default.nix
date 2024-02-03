@@ -9,7 +9,7 @@ _: {
   # Inserted via Vagrant
   sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
 
-  networking.firewall.trustedInterfaces = ["docker0"];
+  networking.firewall.trustedInterfaces = [ "docker0" ];
 
   virtualisation = {
     docker = {
@@ -47,18 +47,18 @@ _: {
   users = {
     mutableUsers = false;
     # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
-    users.root = {hashedPassword = "!";};
+    users.root = { hashedPassword = "!"; };
 
     groups.developer = {
       name = "developer";
-      members = ["developer"];
+      members = [ "developer" ];
     };
 
     users.developer = {
       description = "Developer";
       name = "developer";
       group = "developer";
-      extraGroups = ["users" "wheel" "docker"];
+      extraGroups = [ "users" "wheel" "docker" ];
       password = "developer";
       home = "/home/developer";
       createHome = true;
