@@ -15,6 +15,7 @@
     ../../dotfiles/nix
     ../../dotfiles/starship
     ../../dotfiles/zoxide
+    ../../dotfiles/zellij
     ../../dotfiles/zsh
   ];
 
