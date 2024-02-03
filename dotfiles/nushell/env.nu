@@ -74,5 +74,6 @@ if not ($env.STARSHIP_CONFIG_FILE | path exists) {
 
 if not ($env.ZOXIDE_CONFIG_FILE | path exists) {
     mkdir ($env.ZOXIDE_CONFIG_FILE | path dirname)
-    zoxide init nushell | save --force $env.ZOXIDE_CONFIG_FILE
+    # https://github.com/ajeetdsouza/zoxide/pull/663
+    zoxide init nushell | str replace "-- $rest" "-- ...$rest" | save --force $env.ZOXIDE_CONFIG_FILE
 }
