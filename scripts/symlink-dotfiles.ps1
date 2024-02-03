@@ -73,6 +73,11 @@ function Main() {
     $AtuinDirTarget = Join-Path $XdgConfigHome atuin
     HandleSymlink (Join-Path $AtuinDirTarget "config.toml") (Join-Path $AtuinDirSource "atuin.toml")
 
+    # Helix
+    $HelixDirSource = Join-Path $DotfilesDir helix
+    $HelixDirTarget = Join-Path $env:SCOOP "persist\helix"
+    HandleSymlink (Join-Path $HelixDirTarget "config.toml") (Join-Path $HelixDirSource "config.toml")
+
     # Topgrade
     $TopgradeDirSource = Join-Path $DotfilesDir topgrade
     $TopgradeDirTarget = $env:APPDATA
