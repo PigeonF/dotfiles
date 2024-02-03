@@ -1,1 +1,10 @@
 theme = "catppuccin_mocha"
+
+[editor]
+line-number = "relative"
+
+[editor.indent-guides]
+render = true
+
+[editor.lsp]
+display-messages = true

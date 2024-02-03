@@ -2,7 +2,7 @@
   programs.zellij = {
     enable = true;
     enableBashIntegration = true;
-    config = {
+    settings = {
       theme = "catppuccin-mocha";
     };
   };
