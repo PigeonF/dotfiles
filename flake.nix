@@ -19,7 +19,8 @@
     };
   };
 
-  outputs = { self, ... } @ inputs:
+  outputs =
+    { self, ... }@inputs:
     let
       lib = import ./lib { inherit inputs; };
     in
@@ -55,21 +56,33 @@
         };
       };
 
-      devShells = lib.forEachSystem (pkgs: {
-        default = pkgs.mkShell {
-          name = "dotfiles";
-          buildInputs = builtins.attrValues {
-            inherit (pkgs) age nixpkgs-fmt deadnix just nil sops statix;
+      devShells = lib.forEachSystem (
+        pkgs: {
+          default = pkgs.mkShell {
+            name = "dotfiles";
+            buildInputs = builtins.attrValues {
+              inherit (pkgs)
+                age
+                deadnix
+                just
+                nil
+                nixfmt-rfc-style
+                sops
+                statix
+                ;
+            };
           };
-        };
-      });
+        }
+      );
 
-      packages = lib.forEachSystem (pkgs: {
-        committed = pkgs.callPackage ./overlays/committed { };
-        gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
-      });
+      packages = lib.forEachSystem (
+        pkgs: {
+          committed = pkgs.callPackage ./overlays/committed { };
+          gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
+        }
+      );
 
-      formatter = lib.forEachSystem (pkgs: pkgs.nixpkgs-fmt);
+      formatter = lib.forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
 
       checks = lib.forEachSystem (pkgs: import ./checks { inherit self pkgs; });
     };

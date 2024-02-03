@@ -1,7 +1,5 @@
-{ pkgs
-, config
-, ...
-}: {
+{ pkgs, config, ... }:
+{
   programs.bash = {
     enable = true;
 
@@ -21,13 +19,6 @@
   };
 
   home = {
-    packages = builtins.attrValues {
-      inherit
-        (pkgs)
-        eza
-        fd
-        ripgrep
-        ;
-    };
+    packages = builtins.attrValues { inherit (pkgs) eza fd ripgrep; };
   };
 }

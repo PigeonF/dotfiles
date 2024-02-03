@@ -1,6 +1,7 @@
-{ lib
-, rustPlatform
-, fetchFromGitHub
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
 }:
 rustPlatform.buildRustPackage rec {
   pname = "committed";
@@ -22,8 +23,7 @@ rustPlatform.buildRustPackage rec {
     homepage = "https://github.com/crate-ci/committed";
     changelog = "https://github.com/crate-ci/committed/blob/${src.rev}/CHANGELOG.md";
     license = builtins.attrValues {
-      inherit
-        (lib.licenses)
+      inherit (lib.licenses)
         asl20
         # or
 

@@ -1,6 +1,7 @@
-{ runCommand
-, statix
-, self
+{
+  runCommand,
+  statix,
+  self,
 }:
 runCommand "check-statix" { } ''
   cd ${self}

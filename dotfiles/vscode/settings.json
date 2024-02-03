@@ -5,13 +5,22 @@
     "[lua]": {
         "editor.defaultFormatter": "JohnnyMorganz.stylua"
     },
-    "[json][jsonc]": {
-        "editor.defaultFormatter": "dprint.dprint"
-    },
-    "[markdown]": {
+    "[json][jsonc][markdown][toml]": {
         "editor.defaultFormatter": "dprint.dprint"
     },
     "[nix]": {
+        "editor.defaultFormatter": "jnoortheen.nix-ide"
+    },
+    "nix.enableLanguageServer": true,
+    "nix.serverPath": "nil",
+    "nix.serverSettings": {
+        "nil": {
+            "formatting": {
+                "command": [
+                    "nixfmt"
+                ]
+            }
+        }
     },
     "editor.fontFamily": "Cartograph CF, Consolas, 'Courier New', monospace",
     "editor.rulers": [
@@ -66,13 +75,15 @@
     },
     "workbench.sideBar.location": "right",
     "workbench.settings.applyToAllProfiles": [
-        
+
     ],
     "gitlab.aiAssistedCodeSuggestions.enabled": false,
     "gitlab.duoChat.enabled": false,
     "window.zoomLevel": 1,
     "files.associations": {
-        "*.just": "just"
+        ".vscode/*.json": "jsonc",
+        "*.just": "just",
+        "dep5": "debian-copyright"
     },
     "yaml.customTags": [ "!reference sequence" ]
 }

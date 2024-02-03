@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;
@@ -9,8 +10,7 @@
 
   home = {
     packages = builtins.attrValues {
-      inherit
-        (pkgs)
+      inherit (pkgs)
         delta
         git-absorb
         git-branchless

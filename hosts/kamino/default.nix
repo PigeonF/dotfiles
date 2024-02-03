@@ -1,7 +1,6 @@
-{ pkgs, ... }: {
-  imports = [
-    ./services
-  ];
+{ pkgs, ... }:
+{
+  imports = [ ./services ];
 
   # Specified here to change the login shell.
   users.users = {
@@ -26,9 +25,7 @@
       autoUpdate = true;
       upgrade = true;
     };
-    brews = [
-      "act"
-    ];
+    brews = [ "act" ];
     casks = [
       "1password"
       "alacritty"

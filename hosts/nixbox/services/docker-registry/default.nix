@@ -1,7 +1,5 @@
-{ config
-, pkgs
-, ...
-}: {
+{ config, pkgs, ... }:
+{
   services.dockerRegistry = {
     enable = true;
     package = pkgs.gitlab-container-registry;

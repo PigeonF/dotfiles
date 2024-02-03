@@ -4,10 +4,8 @@
 # we write our own version of the gitlab-runner module.
 #
 # Based on https://github.com/NixOS/nixpkgs/blob/f435abd55e8d95d299c525d23216b3907d803660/nixos/modules/services/continuous-integration/gitlab-runner.nix
-{ pkgs
-, config
-, ...
-}: {
+{ pkgs, config, ... }:
+{
   boot.kernel.sysctl."net.ipv4.ip_forward" = true;
   virtualisation.docker.enable = true;
 
@@ -43,7 +41,10 @@
     {
       description = "Gitlab Runner";
       documentation = [ "https://docs.gitlab.com/runner/" ];
-      after = [ "network.target" "docker.service" ];
+      after = [
+        "network.target"
+        "docker.service"
+      ];
       requires = [ "docker.service" ];
       wantedBy = [ "multi-user.target" ];
       environment = {
@@ -69,7 +70,10 @@
 
     serviceConfig.Type = "oneshot";
 
-    path = [ config.virtualisation.docker.package pkgs.gawk ];
+    path = [
+      config.virtualisation.docker.package
+      pkgs.gawk
+    ];
 
     script = ''
       ${pkgs.gitlab-runner}/bin/clear-docker-cache

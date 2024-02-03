@@ -47,7 +47,9 @@ _: {
   users = {
     mutableUsers = false;
     # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
-    users.root = { hashedPassword = "!"; };
+    users.root = {
+      hashedPassword = "!";
+    };
 
     groups.developer = {
       name = "developer";
@@ -58,7 +60,11 @@ _: {
       description = "Developer";
       name = "developer";
       group = "developer";
-      extraGroups = [ "users" "wheel" "docker" ];
+      extraGroups = [
+        "users"
+        "wheel"
+        "docker"
+      ];
       password = "developer";
       home = "/home/developer";
       createHome = true;

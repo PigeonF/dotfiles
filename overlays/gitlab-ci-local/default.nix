@@ -1,8 +1,9 @@
-{ lib
-, buildNpmPackage
-, fetchFromGitHub
-, git
-, typescript
+{
+  lib,
+  buildNpmPackage,
+  fetchFromGitHub,
+  git,
+  typescript,
 }:
 buildNpmPackage rec {
   pname = "gitlab-ci-local";

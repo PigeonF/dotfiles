@@ -1,7 +1,5 @@
-{ pkgs
-, stateVersion
-, ...
-}: {
+{ pkgs, stateVersion, ... }:
+{
   imports = [
     ../../dotfiles/atuin
     ../../dotfiles/bat
@@ -28,8 +26,7 @@
     inherit stateVersion;
 
     packages = builtins.attrValues {
-      inherit
-        (pkgs)
+      inherit (pkgs)
         committed
         dprint
         gitlab-ci-local
@@ -37,7 +34,7 @@
         hub
         lldb
         nil
-        nixpkgs-fmt
+        nixfmt-rfc-style
         rustup
         shfmt
         ;
@@ -57,7 +54,10 @@
       c = "cargo";
     };
 
-    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
+    sessionPath = [
+      "$HOME/.local/bin"
+      "$HOME/.cargo/bin"
+    ];
     sessionVariables = {
       GCL_EXTRA_HOST = "local-registry.gitlab.com:host-gateway";
       GCL_VOLUME = "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro";
