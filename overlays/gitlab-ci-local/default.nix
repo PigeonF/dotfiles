@@ -3,7 +3,6 @@
 , fetchFromGitHub
 , git
 , typescript
-,
 }:
 buildNpmPackage rec {
   pname = "gitlab-ci-local";
