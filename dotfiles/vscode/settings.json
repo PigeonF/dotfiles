@@ -15,8 +15,6 @@
     },
     "editor.fontFamily": "Cartograph CF, Consolas, 'Courier New', monospace",
     "editor.rulers": [
-        80,
-        120,
         100
     ],
     "terminal.integrated.commandsToSkipShell": [
