@@ -1,4 +1,8 @@
 { config, pkgs, ... }:
+let
+  # TODO(PigeonF): Find out if we can resolve docker0 using nix
+  docker0IpAddress = "172.17.0.1";
+in
 {
   services.dockerRegistry = {
     enable = true;
@@ -36,16 +40,13 @@
       sslCertificate = ./local-registry.gitlab.com/cert.pem;
       sslCertificateKey = "/run/secrets/dockerRegistry/certificateKey";
 
-      listenAddresses = [
-        # docker0 ip address
-        "172.17.0.1"
-      ];
+      listenAddresses = [ docker0IpAddress ];
 
       locations."/".proxyPass = "http://${config.services.dockerRegistry.listenAddress}:${toString config.services.dockerRegistry.port}";
     };
   };
 
   networking.extraHosts = ''
-    172.17.0.1 local-registry.gitlab.com
+    ${docker0IpAddress} local-registry.gitlab.com
   '';
 }

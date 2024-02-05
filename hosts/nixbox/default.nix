@@ -47,16 +47,21 @@
     '';
   };
 
-  networking.firewall.trustedInterfaces = [ "docker0" ];
+  networking = {
+    firewall.enable = false;
+    interfaces = {
+      enp0s8.ipv4.addresses = [
+        {
+          address = "192.168.50.2";
+          prefixLength = 24;
+        }
+      ];
+    };
+  };
 
   virtualisation = {
     docker = {
       enable = true;
-    };
-
-    podman = {
-      enable = true;
-      defaultNetwork.settings.dns_enabled = true;
     };
   };
 
@@ -72,15 +77,6 @@
     root   ALL=(ALL) SETENV: ALL
     %wheel ALL=(ALL) NOPASSWD: ALL, SETENV: ALL
   '';
-
-  networking.interfaces = {
-    enp0s8.ipv4.addresses = [
-      {
-        address = "192.168.50.2";
-        prefixLength = 24;
-      }
-    ];
-  };
 
   users = {
     mutableUsers = false;
