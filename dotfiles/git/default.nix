@@ -14,6 +14,7 @@
         delta
         git-absorb
         git-branchless
+        git-gone
         git-revise
         meld
         stgit
