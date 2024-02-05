@@ -46,6 +46,7 @@
         global:
           CI_REGISTRY_USER: "nobody"
           CI_REGISTRY_PASSWORD: "nobody"
+          CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
       '';
     };
 
