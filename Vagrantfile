@@ -61,7 +61,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "nixbox", primary: true do |nixbox|
     nixbox.vm.hostname = "nixbox"
-    nixbox.vm.network "private_network", ip: "192.168.50.2", virtualbox__intnet: "devnet", hostname: true
     nixbox.vm.network :forwarded_port, guest: 22, host: 2200, id: "ssh"
     nixbox.vm.provider "virtualbox" do |v|
       v.name = "Nix Box"
@@ -85,7 +84,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "gitlab-runner" do |gitlab_runner|
     gitlab_runner.vm.hostname = "gitlab-runner"
-    gitlab_runner.vm.network "private_network", ip: "192.168.50.3", virtualbox__intnet: "devnet", hostname: true
     gitlab_runner.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
     gitlab_runner.vm.provider "virtualbox" do |v|
       v.name = "GitLab Runner"
