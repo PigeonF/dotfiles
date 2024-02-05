@@ -36,6 +36,7 @@
         nixfmt-rfc-style
         rustup
         shfmt
+        sops
         ;
     };
 
