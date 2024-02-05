@@ -16,9 +16,12 @@
         ;
     };
 
-    sessionVariables = {
-      GCL_EXTRA_HOST = "local-registry.gitlab.com:host-gateway";
-      GCL_VOLUME = "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro";
+    file.".gitlab-ci-local/.env" = {
+      text = ''
+        PRIVILEGED=true
+        EXTRA_HOST="local-registry.gitlab.com:host-gateway"
+        VOLUME="certs:/certs/client /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro"
+      '';
     };
   };
 }

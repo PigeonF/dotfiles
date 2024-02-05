@@ -37,6 +37,16 @@
     };
   };
 
+  # Required to fix permissions of gitlab-ci-local folder
+  #
+  # https://github.com/Mic92/sops-nix/issues/381
+  system.activationScripts = {
+    gitlab-ci-local-folder.text = ''
+      mkdir -p "${config.users.users.developer.home}/.gitlab-ci-local/"
+      chown "${config.users.users.developer.name}:${config.users.users.developer.group}" "${config.users.users.developer.home}/.gitlab-ci-local/"
+    '';
+  };
+
   networking.firewall.trustedInterfaces = [ "docker0" ];
 
   virtualisation = {
