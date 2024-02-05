@@ -15,7 +15,7 @@
     secrets = {
       "GCL_CI_JOB_TOKEN" = { };
       "GCL_PROJ_1_PATH" = { };
-      "GCL_PROJ_1_ID" = { };
+      "GCL_PROJ_1_CI_PROJECT_ID" = { };
       "GCL_PROJ_1_CI_API_TOKEN" = { };
     };
 
@@ -33,7 +33,7 @@
 
         project:
           ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
-            CI_PROJECT_ID: ${config.sops.placeholder."GCL_PROJ_1_ID"}
+            CI_PROJECT_ID: ${config.sops.placeholder."GCL_PROJ_1_CI_PROJECT_ID"}
             CI_API_TOKEN: ${config.sops.placeholder."GCL_PROJ_1_CI_API_TOKEN"}
       '';
     };
