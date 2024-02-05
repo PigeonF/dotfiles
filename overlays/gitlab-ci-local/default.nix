@@ -16,7 +16,10 @@ buildNpmPackage rec {
     hash = "sha256-CW2IkXGUohFtYZB3eNi0cl8rUWW/gIyUQPYxaextAfk=";
   };
 
-  patches = [ ./extra-hosts-in-services.patch ];
+  patches = [
+    ./extra-hosts-in-services.patch
+    ./lowercase-ci-registry-image.patch
+  ];
 
   npmDepsHash = "sha256-4nfu8Au/Uk2oTSKbuv8QlvfLs0EgDlEgtBl/Nxv07oY=";
 
