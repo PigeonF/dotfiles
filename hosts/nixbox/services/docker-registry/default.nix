@@ -35,12 +35,23 @@ in
     clientMaxBodySize = "0";
 
     virtualHosts."local-registry.gitlab.com" = {
+      default = true;
       forceSSL = true;
       # nix run nixpkgs#minica -- --domains local-registry.gitlab.com -ip-addresses 172.17.0.1
       sslCertificate = ./local-registry.gitlab.com/cert.pem;
       sslCertificateKey = "/run/secrets/dockerRegistry/certificateKey";
 
-      listenAddresses = [ docker0IpAddress ];
+      listen = [
+        {
+          addr = docker0IpAddress;
+          port = 443;
+          ssl = true;
+        }
+        {
+          addr = docker0IpAddress;
+          port = 80;
+        }
+      ];
 
       locations."/".proxyPass = "http://${config.services.dockerRegistry.listenAddress}:${toString config.services.dockerRegistry.port}";
     };
