@@ -12,10 +12,12 @@
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     defaultSopsFile = ./secrets.yaml;
 
-    secrets."GCL_CI_JOB_TOKEN" = { };
-    secrets."GCL_PROJ_1_PATH" = { };
-    secrets."GCL_PROJ_1_CI_DEPLOY_PASSWORD" = { };
-    secrets."GCL_PROJ_1_CI_DEPLOY_USER" = { };
+    secrets = {
+      "GCL_CI_JOB_TOKEN" = { };
+      "GCL_PROJ_1_PATH" = { };
+      "GCL_PROJ_1_CI_DEPLOY_PASSWORD" = { };
+      "GCL_PROJ_1_CI_DEPLOY_USER" = { };
+    };
 
     templates."gitlab-ci-local/variables.yml" = {
       owner = config.users.users.developer.name;

@@ -28,12 +28,12 @@
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = lib.mkNixOsConfigurations {
-        nixbox = rec {
+        nixbox = {
           system = "x86_64-linux";
           config = ./hosts/nixbox;
           extraModules = [ inputs.sops-nix.nixosModules.sops ];
           home = {
-            home-manager.users.developer = (import ./hosts/nixbox/users/developer) config;
+            home-manager.users.developer = import ./hosts/nixbox/users/developer;
           };
         };
         gitlab-runner = {
