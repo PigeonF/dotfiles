@@ -15,8 +15,7 @@
     secrets = {
       "GCL_CI_JOB_TOKEN" = { };
       "GCL_PROJ_1_PATH" = { };
-      "GCL_PROJ_1_CI_DEPLOY_PASSWORD" = { };
-      "GCL_PROJ_1_CI_DEPLOY_USER" = { };
+      "GCL_PROJ_1_CI_API_TOKEN" = { };
     };
 
     templates."gitlab-ci-local/variables.yml" = {
@@ -33,8 +32,7 @@
 
         project:
           ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
-            CI_DEPLOY_PASSWORD: ${config.sops.placeholder."GCL_PROJ_1_CI_DEPLOY_PASSWORD"}
-            CI_DEPLOY_USER: ${config.sops.placeholder."GCL_PROJ_1_CI_DEPLOY_USER"}
+            CI_API_TOKEN: ${config.sops.placeholder."GCL_PROJ_1_CI_API_TOKEN"}
       '';
     };
   };
