@@ -1,4 +1,5 @@
-_: {
+{ config, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ./bootloader.nix
@@ -6,8 +7,27 @@ _: {
     ./services
   ];
 
-  # Inserted via Vagrant
-  sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
+  sops = {
+    # Inserted via Vagrant
+    age.keyFile = "/var/lib/sops-nix/keys.txt";
+    defaultSopsFile = ./secrets.yaml;
+
+    secrets."CI_JOB_TOKEN" = { };
+
+    templates."gitlab-ci-local/variables.yml" = {
+      owner = config.users.users.developer.name;
+      path = "${config.users.users.developer.home}/.gitlab-ci-local/variables.yml";
+
+      content = ''
+        ---
+        global:
+          CI_REGISTRY_USER: "nobody"
+          CI_REGISTRY_PASSWORD: "nobody"
+          CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
+          CI_JOB_TOKEN = "${config.sops.placeholder.CI_JOB_TOKEN}"
+      '';
+    };
+  };
 
   networking.firewall.trustedInterfaces = [ "docker0" ];
 

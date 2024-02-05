@@ -11,6 +11,7 @@ let
       hmStateVersion,
       home,
       extraModules,
+      sharedHomeManagerModules,
     }:
     fn {
       inherit system;
@@ -65,6 +66,7 @@ let
                     inherit inputs pkgs;
                     stateVersion = hmStateVersion;
                   };
+                  sharedModules = sharedHomeManagerModules;
                 };
               }
               home
@@ -101,6 +103,7 @@ rec {
       stateVersion ? "24.05",
       home ? null,
       extraModules ? [ ],
+      sharedHomeManagerModules ? [ ],
     }:
     lib.nameValuePair name (
       mkOsConfiguration lib.nixosSystem {
@@ -111,6 +114,7 @@ rec {
           home
           name
           extraModules
+          sharedHomeManagerModules
           ;
         hmStateVersion = stateVersion;
       }
@@ -126,6 +130,7 @@ rec {
       hmStateVersion ? "24.05",
       home ? null,
       extraModules ? [ ],
+      sharedHomeManagerModules ? [ ],
     }:
     lib.nameValuePair name (
       mkOsConfiguration inputs.nix-darwin.lib.darwinSystem {
@@ -137,6 +142,7 @@ rec {
           home
           name
           extraModules
+          sharedHomeManagerModules
           ;
       }
     );

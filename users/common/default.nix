@@ -29,7 +29,6 @@
       inherit (pkgs)
         committed
         dprint
-        gitlab-ci-local
         glab
         hub
         lldb
@@ -38,16 +37,6 @@
         rustup
         shfmt
         ;
-    };
-
-    file.".gitlab-ci-local/variables.yml" = {
-      text = ''
-        ---
-        global:
-          CI_REGISTRY_USER: "nobody"
-          CI_REGISTRY_PASSWORD: "nobody"
-          CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
-      '';
     };
 
     shellAliases = {
@@ -59,9 +48,5 @@
       "$HOME/.local/bin"
       "$HOME/.cargo/bin"
     ];
-    sessionVariables = {
-      GCL_EXTRA_HOST = "local-registry.gitlab.com:host-gateway";
-      GCL_VOLUME = "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro";
-    };
   };
 }
