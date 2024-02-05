@@ -12,7 +12,10 @@
     age.keyFile = "/var/lib/sops-nix/keys.txt";
     defaultSopsFile = ./secrets.yaml;
 
-    secrets."CI_JOB_TOKEN" = { };
+    secrets."GCL_CI_JOB_TOKEN" = { };
+    secrets."GCL_PROJ_1_PATH" = { };
+    secrets."GCL_PROJ_1_CI_DEPLOY_PASSWORD" = { };
+    secrets."GCL_PROJ_1_CI_DEPLOY_USER" = { };
 
     templates."gitlab-ci-local/variables.yml" = {
       owner = config.users.users.developer.name;
@@ -21,10 +24,15 @@
       content = ''
         ---
         global:
-          CI_REGISTRY_USER: "nobody"
-          CI_REGISTRY_PASSWORD: "nobody"
+          CI_REGISTRY_USER: nobody
+          CI_REGISTRY_PASSWORD: nobody
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
-          CI_JOB_TOKEN = "${config.sops.placeholder.CI_JOB_TOKEN}"
+          CI_JOB_TOKEN: ${config.sops.placeholder."GCL_CI_JOB_TOKEN"}
+
+        project:
+          ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
+            CI_DEPLOY_PASSWORD: ${config.sops.placeholder."GCL_PROJ_1_CI_DEPLOY_PASSWORD"}
+            CI_DEPLOY_USER: ${config.sops.placeholder."GCL_PROJ_1_CI_DEPLOY_USER"}
       '';
     };
   };
