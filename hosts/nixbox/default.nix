@@ -54,6 +54,15 @@
   virtualisation = {
     docker = {
       enable = true;
+      daemon.settings = {
+        bip = "10.17.0.0/16";
+        default-address-pools = [
+          {
+            base = "10.18.0.0/16";
+            size = 24;
+          }
+        ];
+      };
     };
   };
 
