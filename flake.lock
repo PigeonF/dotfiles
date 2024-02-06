@@ -56,6 +56,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-networking": {
+      "locked": {
+        "lastModified": 1696097775,
+        "narHash": "sha256-wO8vGqf+TCKU7wjSspng2PXj9R/InMwf+tUK4mtR38o=",
+        "owner": "djacu",
+        "repo": "nixpkgs",
+        "rev": "adb22cf69f2ae001ed2b685cda4ab767db6b9445",
+        "type": "github"
+      },
+      "original": {
+        "owner": "djacu",
+        "ref": "add-networking-lib",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1705957679,
@@ -92,6 +108,7 @@
         "home-manager": "home-manager",
         "nix-darwin": "nix-darwin",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-networking": "nixpkgs-networking",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "sops-nix": "sops-nix"

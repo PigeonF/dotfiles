@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    # https://github.com/NixOS/nixpkgs/pull/258250
+    nixpkgs-networking.url = "github:djacu/nixpkgs/add-networking-lib";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";

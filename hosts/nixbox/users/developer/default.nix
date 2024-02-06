@@ -1,10 +1,5 @@
 systemConfig:
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 {
   imports = [
     ../../../../users/common

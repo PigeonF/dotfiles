@@ -1,7 +1,11 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 let
-  # TODO(PigeonF): Wait for https://github.com/NixOS/nixpkgs/pull/258250 to land
-  docker0IpAddress = "10.117.0.1";
+  inherit (inputs.nixpkgs-networking.lib) ipv4;
 in
 {
   sops.secrets."dockerRegistry/certificateKey" = {
@@ -14,23 +18,27 @@ in
     inherit (config.users.users.docker-registry) group;
   };
 
-  services.dockerRegistry = {
-    enable = true;
-    package = pkgs.gitlab-container-registry;
-    enableDelete = true;
-    enableGarbageCollect = true;
-    listenAddress = docker0IpAddress;
+  services.dockerRegistry =
+    let
+      docker0 = ipv4.cidrToFirstUsableIp config.virtualisation.docker.daemon.settings.bip;
+    in
+    {
+      enable = true;
+      package = pkgs.gitlab-container-registry;
+      enableDelete = true;
+      enableGarbageCollect = true;
+      listenAddress = ipv4.prettyIp docker0;
 
-    extraConfig = {
-      http = {
-        tls = {
-          # nix run nixpkgs#minica -- -ip-addresses 10.117.0.1
-          certificate = ./local-registry.gitlab.com/cert.pem;
-          key = "/run/secrets/dockerRegistry/certificateKey";
+      extraConfig = {
+        http = {
+          tls = {
+            # nix run nixpkgs#minica -- -ip-addresses 10.117.0.1
+            certificate = ./local-registry.gitlab.com/cert.pem;
+            key = "/run/secrets/dockerRegistry/certificateKey";
+          };
         };
       };
     };
-  };
 
   environment.etc = {
     "docker/certs.d/${config.nixbox.registryHost}/ca.crt" = {
