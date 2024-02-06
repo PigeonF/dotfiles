@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
   # TODO(PigeonF): Find out if we can resolve docker0 using nix
-  docker0IpAddress = "172.17.0.1";
+  docker0IpAddress = "10.117.0.1";
 in
 {
   services.dockerRegistry = {
@@ -37,7 +37,7 @@ in
     virtualHosts."local-registry.gitlab.com" = {
       default = true;
       forceSSL = true;
-      # nix run nixpkgs#minica -- --domains local-registry.gitlab.com -ip-addresses 172.17.0.1
+      # nix run nixpkgs#minica -- --domains local-registry.gitlab.com -ip-addresses 10.117.0.1
       sslCertificate = ./local-registry.gitlab.com/cert.pem;
       sslCertificateKey = "/run/secrets/dockerRegistry/certificateKey";
 
