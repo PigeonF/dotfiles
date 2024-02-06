@@ -5,6 +5,7 @@
     ./bootloader.nix
     ./vagrant.nix
     ./services
+    ./variables.nix
   ];
 
   sops = {
@@ -25,6 +26,7 @@
       content = ''
         ---
         global:
+          CI_REGISTRY: ${config.nixbox.registryHost}
           CI_REGISTRY_USER: nobody
           CI_REGISTRY_PASSWORD: nobody
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io

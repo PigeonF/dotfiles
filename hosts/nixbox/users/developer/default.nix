@@ -1,4 +1,10 @@
-{ pkgs, ... }:
+systemConfig:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ../../../../users/common
@@ -17,11 +23,18 @@
     };
 
     file.".gitlab-ci-local/.env" = {
-      text = ''
-        PRIVILEGED=true
-        EXTRA_HOST="local-registry.gitlab.com:host-gateway"
-        VOLUME="certs:/certs/client /etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro"
-      '';
+      text =
+        let
+          volumes = lib.strings.concatStringsSep " " [
+            "certs:/certs/client"
+            "/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml:ro"
+            "/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt:/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt:ro"
+          ];
+        in
+        ''
+          PRIVILEGED=true
+          VOLUME="${volumes}"
+        '';
     };
   };
 }
