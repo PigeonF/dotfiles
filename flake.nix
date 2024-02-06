@@ -35,11 +35,9 @@
           system = "x86_64-linux";
           config = ./hosts/nixbox;
           extraModules = [ inputs.sops-nix.nixosModules.sops ];
-          home =
-            { config, ... }:
-            {
-              home-manager.users.developer = (import ./hosts/nixbox/users/developer) config;
-            };
+          home = {
+            home-manager.users.developer = import ./hosts/nixbox/users/developer;
+          };
         };
         gitlab-runner = {
           system = "x86_64-linux";

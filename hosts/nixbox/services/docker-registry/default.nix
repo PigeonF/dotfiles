@@ -40,10 +40,16 @@ in
       };
     };
 
+  system.activationScripts = {
+    # Because we mount the whole certs.d folder, we cannot have smylinks inside it, which means we
+    # cannot use `environment.etc` to create the file.
+    docker-registry-certs-d.text = ''
+      mkdir -p /etc/docker/certs.d/${config.nixbox.registryHost}/
+      cp -Lf ${./minica.pem} /etc/docker/certs.d/${config.nixbox.registryHost}/ca.crt
+    '';
+  };
+
   environment.etc = {
-    "docker/certs.d/${config.nixbox.registryHost}/ca.crt" = {
-      source = ./minica.pem;
-    };
     "buildkit/buildkitd.toml" = {
       text = ''
         [registry."${config.nixbox.registryHost}"]

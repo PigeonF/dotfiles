@@ -1,4 +1,3 @@
-systemConfig:
 { pkgs, lib, ... }:
 {
   imports = [
@@ -23,7 +22,7 @@ systemConfig:
           volumes = lib.strings.concatStringsSep " " [
             "certs:/certs/client"
             "/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml:ro"
-            "/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt:/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt:ro"
+            "/etc/docker/certs.d/:/etc/docker/certs.d/:ro"
           ];
         in
         ''
