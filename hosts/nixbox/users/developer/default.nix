@@ -1,4 +1,10 @@
-{ pkgs, lib, ... }:
+systemConfig:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   imports = [
     ../../../../users/common
@@ -16,19 +22,26 @@
         ;
     };
 
+    file.".docker/buildx/buildkitd.default.toml" = {
+      text = ''
+        [registry."${systemConfig.nixbox.registryHost}"]
+          ca=["/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt"]
+      '';
+    };
+
     file.".gitlab-ci-local/.env" = {
       text =
         let
+          home = config.home.homeDirectory;
           volumes = lib.strings.concatStringsSep " " [
             "certs:/certs/client"
-            "/etc/buildkit/buildkitd.default.toml:/etc/buildkit/buildkitd.default.toml:ro"
+            "${home}/.docker/buildx/buildkitd.default.toml:/root/.docker/buildx/buildkitd.default.toml:ro"
             "/etc/docker/certs.d/:/etc/docker/certs.d/:ro"
           ];
         in
         ''
           PRIVILEGED=true
           VOLUME="${volumes}"
-          VARIABLE=BUILDX_CONFIG=/etc/buildkit
         '';
     };
   };

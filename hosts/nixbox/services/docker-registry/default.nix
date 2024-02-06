@@ -48,14 +48,4 @@ in
       cp -Lf ${./minica.pem} /etc/docker/certs.d/${config.nixbox.registryHost}/ca.crt
     '';
   };
-
-  environment.sessionVariables.BUILDX_CONFIG = "/etc/buildkit";
-  environment.etc = {
-    "buildkit/buildkitd.default.toml" = {
-      text = ''
-        [registry."${config.nixbox.registryHost}"]
-          ca=["/etc/docker/certs.d/${config.nixbox.registryHost}/ca.crt"]
-      '';
-    };
-  };
 }
