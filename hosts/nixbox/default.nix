@@ -55,10 +55,10 @@
     docker = {
       enable = true;
       daemon.settings = {
-        bip = "10.17.0.0/16";
+        bip = "10.117.0.1/16";
         default-address-pools = [
           {
-            base = "10.18.0.0/16";
+            base = "10.118.0.0/16";
             size = 24;
           }
         ];

@@ -34,6 +34,7 @@ let
                 configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
               };
               networking.hostName = name;
+              time.timeZone = "Europe/Berlin";
               nix = {
                 package = pkgs.nix;
                 daemonCPUSchedPolicy = "idle";
