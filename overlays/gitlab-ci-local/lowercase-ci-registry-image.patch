@@ -1,13 +1,5 @@
-commit 51542a6a4ce6f394d45551af6a7db9be4e79540b
-Author: pigeon <fnoegip@gmail.com>
-Date:   Fri Feb 2 20:51:09 2024 +0100
-
-    Lowercase `CI_REGISTRY_IMAGE` (#1085)
-
-    Container image names have to be lowercased to be accepted by a registry. GitLab does this for `CI_REGISTRY_IMAGE` by default.
-
 diff --git a/src/job.ts b/src/job.ts
-index b207d9a9d05d0142..1a9c345e61cbd0b9 100644
+index 1a9c345e..2ffc2100 100644
 --- a/src/job.ts
 +++ b/src/job.ts
 @@ -164,7 +164,7 @@ export class Job {
@@ -15,7 +7,85 @@ index b207d9a9d05d0142..1a9c345e61cbd0b9 100644
          predefinedVariables["CI_NODE_TOTAL"] = `${opt.nodesTotal}`;
          predefinedVariables["CI_REGISTRY"] = `local-registry.${this.gitData.remote.host}`;
 -        predefinedVariables["CI_REGISTRY_IMAGE"] = `$CI_REGISTRY/${this._variables["CI_PROJECT_PATH"]}`;
-+        predefinedVariables["CI_REGISTRY_IMAGE"] = `$CI_REGISTRY/${this._variables["CI_PROJECT_PATH"]}`.toLowerCase();
++        predefinedVariables["CI_REGISTRY_IMAGE"] = `$CI_REGISTRY/${this._variables["CI_PROJECT_PATH"].toLowerCase()}`;
 
          // Find environment matched variables
          if (this.environment) {
+diff --git a/tests/test-cases/predefined-variables/.gitlab-ci.yml b/tests/test-cases/predefined-variables/.gitlab-ci.yml
+index 80a47a42..47dea408 100644
+--- a/tests/test-cases/predefined-variables/.gitlab-ci.yml
++++ b/tests/test-cases/predefined-variables/.gitlab-ci.yml
+@@ -6,6 +6,7 @@ test-job:
+     - echo ${CI_PROJECT_NAMESPACE}
+     - echo ${CI_PROJECT_DIR}
+     - echo ${CI_DEFAULT_BRANCH}
++    - echo ${CI_REGISTRY_IMAGE}
+
+ test-job-commit-short-length:
+   script:
+diff --git a/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts b/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts
+index 97176443..507cfe17 100644
+--- a/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts
++++ b/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts
+@@ -8,7 +8,7 @@ test("predefined-variables <test-job>", async () => {
+     const writeStreams = new WriteStreamsMock();
+     const spyGitRemote = {
+         cmdArgs: ["git", "remote", "-v"],
+-        returnValue: {stdout: "origin\tgit@gitlab.com:gcl/predefined-variables.git (fetch)\norigin\tgit@gitlab.com:gcl/predefined-variables.git (push)\n"},
++        returnValue: {stdout: "origin\tgit@gitlab.com:GCL/predefined-variables.git (fetch)\norigin\tgit@gitlab.com:GCL/predefined-variables.git (push)\n"},
+     };
+     initSpawnSpy([...WhenStatics.all, spyGitRemote]);
+     await handler({
+@@ -18,10 +18,11 @@ test("predefined-variables <test-job>", async () => {
+
+     const expected = [
+         chalk`{blueBright test-job                    } {greenBright >} predefined-variables`,
+-        chalk`{blueBright test-job                    } {greenBright >} gcl-predefined-variables`,
+-        chalk`{blueBright test-job                    } {greenBright >} gcl`,
++        chalk`{blueBright test-job                    } {greenBright >} GCL-predefined-variables`,
++        chalk`{blueBright test-job                    } {greenBright >} GCL`,
+         chalk`{blueBright test-job                    } {greenBright >} ${process.cwd()}/tests/test-cases/predefined-variables`,
+         chalk`{blueBright test-job                    } {greenBright >} main`,
++        chalk`{blueBright test-job                    } {greenBright >} local-registry.gitlab.com/gcl/predefined-variables`,
+     ];
+     expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining(expected));
+ });
+diff --git a/src/predefined-variables.ts b/src/predefined-variables.ts
+index 741afc22..d0a5da7c 100644
+--- a/src/predefined-variables.ts
++++ b/src/predefined-variables.ts
+@@ -17,7 +17,7 @@ export function init ({gitData, argv}: PredefinedVariablesOpts): {[name: string]
+         CI_PROJECT_NAME: gitData.remote.project,
+         CI_PROJECT_TITLE: `${camelCase(gitData.remote.project)}`,
+         CI_PROJECT_PATH: `${gitData.remote.group}/${gitData.remote.project}`,
+-        CI_PROJECT_PATH_SLUG: `${gitData.remote.group.replace(/\//g, "-")}-${gitData.remote.project}`,
++        CI_PROJECT_PATH_SLUG: `${gitData.remote.group.replace(/\//g, "-")}-${gitData.remote.project}`.toLowerCase(),
+         CI_PROJECT_NAMESPACE: `${gitData.remote.group}`,
+         CI_PROJECT_VISIBILITY: "internal",
+         CI_PROJECT_ID: "1217",
+diff --git a/tests/test-cases/predefined-variables/.gitlab-ci.yml b/tests/test-cases/predefined-variables/.gitlab-ci.yml
+index 47dea408..f33bea86 100644
+--- a/tests/test-cases/predefined-variables/.gitlab-ci.yml
++++ b/tests/test-cases/predefined-variables/.gitlab-ci.yml
+@@ -2,6 +2,7 @@
+ test-job:
+   script:
+     - echo ${CI_PROJECT_NAME}
++    - echo ${CI_PROJECT_PATH}
+     - echo ${CI_PROJECT_PATH_SLUG}
+     - echo ${CI_PROJECT_NAMESPACE}
+     - echo ${CI_PROJECT_DIR}
+diff --git a/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts b/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts
+index 507cfe17..a6ad713d 100644
+--- a/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts
++++ b/tests/test-cases/predefined-variables/integration.predefined-variables.test.ts
+@@ -18,7 +18,8 @@ test("predefined-variables <test-job>", async () => {
+
+     const expected = [
+         chalk`{blueBright test-job                    } {greenBright >} predefined-variables`,
+-        chalk`{blueBright test-job                    } {greenBright >} GCL-predefined-variables`,
++        chalk`{blueBright test-job                    } {greenBright >} GCL/predefined-variables`,
++        chalk`{blueBright test-job                    } {greenBright >} gcl-predefined-variables`,
+         chalk`{blueBright test-job                    } {greenBright >} GCL`,
+         chalk`{blueBright test-job                    } {greenBright >} ${process.cwd()}/tests/test-cases/predefined-variables`,
+         chalk`{blueBright test-job                    } {greenBright >} main`,
