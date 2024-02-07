@@ -15,6 +15,8 @@
 
     secrets = {
       "DOCKER_HUB_PAT" = { };
+      "GITHUB_COM_TOKEN" = { };
+      "RENOVATE_TOKEN" = { };
       "GCL_CI_JOB_TOKEN" = { };
       "GCL_PROJ_1_PATH" = { };
       "GCL_PROJ_1_CI_PROJECT_ID" = { };
@@ -40,6 +42,9 @@
         project:
           ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
             CI_PROJECT_ID: ${config.sops.placeholder."GCL_PROJ_1_CI_PROJECT_ID"}
+          gitlab.com/PigeonF/renovate-bot-runner:
+            RENOVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
+            GITHUB_COM_TOKEN: ${config.sops.placeholder."GITHUB_COM_TOKEN"}
       '';
     };
   };
