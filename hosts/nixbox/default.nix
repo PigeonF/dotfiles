@@ -14,6 +14,7 @@
     defaultSopsFile = ./secrets.yaml;
 
     secrets = {
+      "DOCKER_HUB_PAT" = { };
       "GCL_CI_JOB_TOKEN" = { };
       "GCL_PROJ_1_PATH" = { };
       "GCL_PROJ_1_CI_PROJECT_ID" = { };
@@ -27,11 +28,12 @@
         ---
         global:
           CI_REGISTRY: ${config.nixbox.registryHost}
-          CI_DEPENDENCY_PROXY_SERVER: 127.0.0.1:5000
+          CI_DEPENDENCY_PROXY_SERVER: docker.io
+          # Default registry has no credential requirements, but we want a non-empty string
           CI_REGISTRY_USER: nobody
           CI_REGISTRY_PASSWORD: nobody
-          CI_DEPENDENCY_PROXY_USER: nobody
-          CI_DEPENDENCY_PROXY_PASSWORD: nobody
+          CI_DEPENDENCY_PROXY_USER: pigeonf
+          CI_DEPENDENCY_PROXY_PASSWORD: ${config.sops.placeholder."DOCKER_HUB_PAT"}
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
           CI_JOB_TOKEN: ${config.sops.placeholder."GCL_CI_JOB_TOKEN"}
 
