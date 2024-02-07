@@ -41,9 +41,13 @@ systemConfig:
         in
         ''
           PRIVILEGED=true
-          ARTIFACTS_TO_SOURCE=false
           VOLUME="${volumes}"
         '';
+    };
+
+    sessionVariables = {
+      # Cannot set using the .gitlab-ci-local/.env file
+      GCL_ARTIFACTS_TO_SOURCE = "false";
     };
   };
 }
