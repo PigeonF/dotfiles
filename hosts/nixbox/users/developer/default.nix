@@ -41,7 +41,7 @@ systemConfig:
         in
         ''
           PRIVILEGED=true
-          NO_ARTIFACTS_TO_SOURCE=true
+          ARTIFACTS_TO_SOURCE=false
           VOLUME="${volumes}"
         '';
     };
