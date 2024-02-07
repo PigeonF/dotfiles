@@ -1,6 +1,6 @@
 [core]
     autocrlf = false
-    editor = hx
+    editor = code --wait
     pager = delta
     abbrev = 16
     symlinks = true
