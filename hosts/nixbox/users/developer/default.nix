@@ -38,10 +38,14 @@ systemConfig:
             "${home}/.gitlab-ci-local/buildkitd.default.toml:/etc/buildkit/buildkitd.toml:ro"
             "/etc/docker/certs.d/:/etc/docker/certs.d/:ro"
           ];
+          variables = lib.strings.concatStringsSep " " [
+            "SSL_CERT_FILE=/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt"
+          ];
         in
         ''
           PRIVILEGED=true
           VOLUME="${volumes}"
+          VARIABLE="${variables}"
         '';
     };
 
