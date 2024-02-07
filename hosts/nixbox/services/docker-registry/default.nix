@@ -45,7 +45,8 @@ in
     # cannot use `environment.etc` to create the file.
     docker-registry-certs-d.text = ''
       mkdir -p /etc/docker/certs.d/${config.nixbox.registryHost}/
-      cp -Lf ${./minica.pem} /etc/docker/certs.d/${config.nixbox.registryHost}/ca.crt
+      rm -f /etc/docker/certs.d/${config.nixbox.registryHost}/ca.crt
+      cp -L ${./minica.pem} /etc/docker/certs.d/${config.nixbox.registryHost}/ca.crt
     '';
   };
 }

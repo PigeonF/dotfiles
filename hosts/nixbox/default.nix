@@ -27,8 +27,11 @@
         ---
         global:
           CI_REGISTRY: ${config.nixbox.registryHost}
+          CI_DEPENDENCY_PROXY_SERVER: 127.0.0.1:5000
           CI_REGISTRY_USER: nobody
           CI_REGISTRY_PASSWORD: nobody
+          CI_DEPENDENCY_PROXY_USER: nobody
+          CI_DEPENDENCY_PROXY_PASSWORD: nobody
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
           CI_JOB_TOKEN: ${config.sops.placeholder."GCL_CI_JOB_TOKEN"}
 

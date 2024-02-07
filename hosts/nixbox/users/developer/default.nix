@@ -35,7 +35,7 @@ systemConfig:
           home = config.home.homeDirectory;
           volumes = lib.strings.concatStringsSep " " [
             "certs:/certs/client"
-            "${home}/.docker/buildx/buildkitd.default.toml:/root/.docker/buildx/buildkitd.default.toml:ro"
+            "${home}/.docker/buildx/buildkitd.default.toml:/etc/buildkit/buildkitd.toml:ro"
             "/etc/docker/certs.d/:/etc/docker/certs.d/:ro"
           ];
         in
