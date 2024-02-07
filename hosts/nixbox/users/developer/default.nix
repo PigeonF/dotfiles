@@ -22,7 +22,7 @@ systemConfig:
         ;
     };
 
-    file.".docker/buildx/buildkitd.default.toml" = {
+    file.".gitlab-ci-local/buildkitd.default.toml" = {
       text = ''
         [registry."${systemConfig.nixbox.registryHost}"]
           ca=["/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt"]
@@ -35,7 +35,7 @@ systemConfig:
           home = config.home.homeDirectory;
           volumes = lib.strings.concatStringsSep " " [
             "certs:/certs/client"
-            "${home}/.docker/buildx/buildkitd.default.toml:/etc/buildkit/buildkitd.toml:ro"
+            "${home}/.gitlab-ci-local/buildkitd.default.toml:/etc/buildkit/buildkitd.toml:ro"
             "/etc/docker/certs.d/:/etc/docker/certs.d/:ro"
           ];
         in
