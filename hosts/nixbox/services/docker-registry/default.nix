@@ -40,6 +40,12 @@ in
       };
     };
 
+  # Since we bind to docker0 address, make sure it is available first.
+  systemd.services.docker-registry.after = [
+    "network.target"
+    "docker.service"
+  ];
+
   system.activationScripts = {
     # Because we mount the whole certs.d folder, we cannot have smylinks inside it, which means we
     # cannot use `environment.etc` to create the file.
