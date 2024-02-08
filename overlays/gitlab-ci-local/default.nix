@@ -19,6 +19,7 @@ buildNpmPackage rec {
   patches = [
     ./extra-hosts-in-services.patch
     ./lowercase-ci-registry-image.patch
+    ./dotenv-services.patch
   ];
 
   npmDepsHash = "sha256-4nfu8Au/Uk2oTSKbuv8QlvfLs0EgDlEgtBl/Nxv07oY=";
