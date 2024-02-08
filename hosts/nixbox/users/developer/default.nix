@@ -29,6 +29,13 @@ systemConfig:
       '';
     };
 
+    file.".gitlab-ci-local/ca-bundle.crt" = {
+      text =
+        (builtins.readFile "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt")
+        + "\n"
+        + (builtins.readFile ../../services/docker-registry/minica.pem);
+    };
+
     file.".gitlab-ci-local/.env" = {
       text =
         let
@@ -36,11 +43,10 @@ systemConfig:
           volumes = lib.strings.concatStringsSep " " [
             "certs:/certs/client"
             "${home}/.gitlab-ci-local/buildkitd.default.toml:/etc/buildkit/buildkitd.toml:ro"
+            "${home}/.gitlab-ci-local/ca-bundle.crt:/etc/ssl/certs/nixbox-bundle.crt:ro"
             "/etc/docker/certs.d/:/etc/docker/certs.d/:ro"
           ];
-          variables = lib.strings.concatStringsSep " " [
-            "SSL_CERT_FILE=/etc/docker/certs.d/${systemConfig.nixbox.registryHost}/ca.crt"
-          ];
+          variables = lib.strings.concatStringsSep " " [ "SSL_CERT_FILE=/etc/ssl/certs/nixbox-bundle.crt" ];
         in
         ''
           PRIVILEGED=true
