@@ -1,4 +1,4 @@
-{ runCommand, nixfmt-rfc-style, self, }:
+{ runCommand, nixfmt, self, }:
 runCommand "check-nixfmt" { } ''
-  ${nixfmt-rfc-style}/bin/nixfmt --check ${self} | tee $out
+  ${nixfmt}/bin/nixfmt --check ${self} | tee $out
 ''
