@@ -74,9 +74,7 @@
         "editor.defaultFormatter": "cheshirekow.cmake-format"
     },
     "workbench.sideBar.location": "right",
-    "workbench.settings.applyToAllProfiles": [
-
-    ],
+    "workbench.settings.applyToAllProfiles": [],
     "gitlab.aiAssistedCodeSuggestions.enabled": false,
     "gitlab.duoChat.enabled": false,
     "window.zoomLevel": 1,
