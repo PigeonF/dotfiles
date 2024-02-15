@@ -1,9 +1,5 @@
-{ ... }:
-{
-  imports = [
-    ./openssh.nix
-    ./gitlab-runner
-  ];
+{ ... }: {
+  imports = [ ./openssh.nix ./gitlab-runner ];
 
   services = {
     dbus.enable = true;

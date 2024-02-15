@@ -1,5 +1,4 @@
-{ inputs, ... }:
-{
+{ inputs, ... }: {
   imports = [
     "${inputs.nixpkgs}/nixos/modules/profiles/hardened.nix"
     ./hardware-configuration.nix
@@ -29,9 +28,7 @@
   '';
 
   users.mutableUsers = false;
-  users.users.root = {
-    hashedPassword = "!";
-  };
+  users.users.root = { hashedPassword = "!"; };
 
   nix.gc.automatic = true;
   nix.optimise.automatic = true;

@@ -1,11 +1,5 @@
-{ stateVersion, ... }:
-{
-  imports = [
-    ../../../dotfiles/git
-    ../../../dotfiles/just
-  ];
+{ stateVersion, ... }: {
+  imports = [ ../../../dotfiles/git ../../../dotfiles/just ];
 
-  home = {
-    inherit stateVersion;
-  };
+  home = { inherit stateVersion; };
 }

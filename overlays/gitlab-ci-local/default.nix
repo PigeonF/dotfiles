@@ -1,10 +1,4 @@
-{
-  lib,
-  buildNpmPackage,
-  fetchFromGitHub,
-  git,
-  typescript,
-}:
+{ lib, buildNpmPackage, fetchFromGitHub, git, typescript, }:
 buildNpmPackage rec {
   pname = "gitlab-ci-local";
   version = "4.46.0";
@@ -24,10 +18,7 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-4nfu8Au/Uk2oTSKbuv8QlvfLs0EgDlEgtBl/Nxv07oY=";
 
-  nativeBuildInputs = [
-    git
-    typescript
-  ];
+  nativeBuildInputs = [ git typescript ];
 
   npmFlags = builtins.toString [ "--ignore-scripts" ];
 

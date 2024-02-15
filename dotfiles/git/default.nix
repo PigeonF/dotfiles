@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.git = {
     package = pkgs.gitAndTools.gitFull;
     enable = true;
@@ -11,15 +10,8 @@
   home = {
     packages = builtins.attrValues {
       inherit (pkgs)
-        delta
-        git-absorb
-        git-branchless
-        git-gone
-        git-revise
-        meld
-        stgit
-        uutils-coreutils
-        ;
+        delta git-absorb git-branchless git-gone git-revise meld stgit
+        uutils-coreutils;
     };
 
     file.".ssh/allowed_signers".source = ./allowed_signers;

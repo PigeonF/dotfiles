@@ -22,12 +22,9 @@
     };
   };
 
-  outputs =
-    { self, ... }@inputs:
-    let
-      lib = import ./lib { inherit inputs; };
-    in
-    {
+  outputs = { self, ... }@inputs:
+    let lib = import ./lib { inherit inputs; };
+    in {
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = lib.mkNixOsConfigurations {
@@ -35,18 +32,18 @@
           system = "x86_64-linux";
           config = ./hosts/nixbox;
           extraModules = [ inputs.sops-nix.nixosModules.sops ];
-          home =
-            { config, ... }:
-            {
-              home-manager.users.developer = (import ./hosts/nixbox/users/developer) config;
-            };
+          home = { config, ... }: {
+            home-manager.users.developer =
+              (import ./hosts/nixbox/users/developer) config;
+          };
         };
         gitlab-runner = {
           system = "x86_64-linux";
           config = ./hosts/gitlab-runner;
           extraModules = [ inputs.sops-nix.nixosModules.sops ];
           home = {
-            home-manager.users.vagrant = import ./hosts/gitlab-runner/users/vagrant.nix;
+            home-manager.users.vagrant =
+              import ./hosts/gitlab-runner/users/vagrant.nix;
           };
         };
       };
@@ -61,33 +58,21 @@
         };
       };
 
-      devShells = lib.forEachSystem (
-        pkgs: {
-          default = pkgs.mkShell {
-            name = "dotfiles";
-            buildInputs = builtins.attrValues {
-              inherit (pkgs)
-                age
-                deadnix
-                just
-                nil
-                nixfmt-rfc-style
-                sops
-                statix
-                ;
-            };
+      devShells = lib.forEachSystem (pkgs: {
+        default = pkgs.mkShell {
+          name = "dotfiles";
+          buildInputs = builtins.attrValues {
+            inherit (pkgs) age deadnix just nil nixfmt sops statix;
           };
-        }
-      );
+        };
+      });
 
-      packages = lib.forEachSystem (
-        pkgs: {
-          committed = pkgs.callPackage ./overlays/committed { };
-          gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
-        }
-      );
+      packages = lib.forEachSystem (pkgs: {
+        committed = pkgs.callPackage ./overlays/committed { };
+        gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
+      });
 
-      formatter = lib.forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
+      formatter = lib.forEachSystem (pkgs: pkgs.nixfmt);
 
       checks = lib.forEachSystem (pkgs: import ./checks { inherit self pkgs; });
     };
