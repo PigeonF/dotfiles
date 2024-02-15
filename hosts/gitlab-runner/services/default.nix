@@ -7,4 +7,5 @@
 
   services.dbus.enable = true;
   services.timesyncd.enable = true;
+  services.logrotate.checkConfig = false;
 }
