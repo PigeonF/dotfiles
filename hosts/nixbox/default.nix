@@ -45,6 +45,7 @@
           gitlab.com/PigeonF/renovate-bot-runner:
             RENOVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
             GITHUB_COM_TOKEN: ${config.sops.placeholder."GITHUB_COM_TOKEN"}
+            PRIVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
       '';
     };
   };
