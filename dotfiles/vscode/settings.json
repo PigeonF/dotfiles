@@ -83,7 +83,13 @@
     "files.associations": {
         ".vscode/*.json": "jsonc",
         "*.just": "just",
-        "dep5": "debian-copyright"
+        "dep5": "debian-copyright",
+        "*.json5": "jsonc"
     },
-    "yaml.customTags": [ "!reference sequence" ]
+    "yaml.customTags": [
+        "!reference sequence"
+    ],
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }
 }
