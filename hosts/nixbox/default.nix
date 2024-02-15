@@ -20,6 +20,7 @@
       "GCL_CI_JOB_TOKEN" = { };
       "GCL_PROJ_1_PATH" = { };
       "GCL_PROJ_1_CI_PROJECT_ID" = { };
+      "RENOVATE_BOT_RUNNER_PROJECT_ID" = { };
     };
 
     templates."gitlab-ci-local/variables.yml" = {
@@ -46,6 +47,7 @@
             RENOVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
             GITHUB_COM_TOKEN: ${config.sops.placeholder."GITHUB_COM_TOKEN"}
             PRIVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
+            CI_PROJECT_ID: ${config.sops.placeholder."RENOVATE_BOT_RUNNER_PROJECT_ID"}
       '';
     };
   };
