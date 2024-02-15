@@ -5,7 +5,9 @@
     ./gitlab-runner
   ];
 
-  services.dbus.enable = true;
-  services.timesyncd.enable = true;
-  services.logrotate.checkConfig = false;
+  services = {
+    dbus.enable = true;
+    timesyncd.enable = true;
+    logrotate.checkConfig = false;
+  };
 }
