@@ -17,7 +17,6 @@
       "DOCKER_HUB_PAT" = { };
       "GITHUB_COM_TOKEN" = { };
       "RENOVATE_TOKEN" = { };
-      "GCL_CI_JOB_TOKEN" = { };
       "GCL_PROJ_1_PATH" = { };
       "GCL_PROJ_1_CI_PROJECT_ID" = { };
       "RENOVATE_BOT_RUNNER_PROJECT_ID" = { };
@@ -38,7 +37,6 @@
           CI_DEPENDENCY_PROXY_USER: pigeonf
           CI_DEPENDENCY_PROXY_PASSWORD: ${config.sops.placeholder."DOCKER_HUB_PAT"}
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
-          CI_JOB_TOKEN: ${config.sops.placeholder."GCL_CI_JOB_TOKEN"}
 
         project:
           ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
