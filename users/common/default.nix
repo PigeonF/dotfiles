@@ -33,6 +33,8 @@
     packages = builtins.attrValues {
       inherit (pkgs)
         committed
+        crane
+        dive
         dprint
         glab
         hub
@@ -41,6 +43,7 @@
         nixfmt-rfc-style
         rustup
         shfmt
+        skopeo
         sops
         ;
     };
