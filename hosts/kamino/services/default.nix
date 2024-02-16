@@ -1,1 +1,5 @@
-_: { services = { nix-daemon.enable = true; }; }
+_: {
+  services = {
+    nix-daemon.enable = true;
+  };
+}

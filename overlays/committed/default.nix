@@ -1,4 +1,8 @@
-{ lib, rustPlatform, fetchFromGitHub, }:
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+}:
 rustPlatform.buildRustPackage rec {
   pname = "committed";
   version = "1.0.20";
@@ -17,14 +21,14 @@ rustPlatform.buildRustPackage rec {
   meta = {
     description = "Nitpicking commit history since beabf39";
     homepage = "https://github.com/crate-ci/committed";
-    changelog =
-      "https://github.com/crate-ci/committed/blob/${src.rev}/CHANGELOG.md";
+    changelog = "https://github.com/crate-ci/committed/blob/${src.rev}/CHANGELOG.md";
     license = builtins.attrValues {
       inherit (lib.licenses)
         asl20
         # or
 
-        mit;
+        mit
+        ;
     };
   };
 }

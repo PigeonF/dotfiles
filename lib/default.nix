@@ -1,99 +1,165 @@
 { inputs }:
 let
   inherit (inputs.nixpkgs) lib;
-  mkOsConfiguration = fn:
-    { system, config, name, stateVersion, hmStateVersion, home, extraModules
-    , sharedHomeManagerModules, }:
+  mkOsConfiguration =
+    fn:
+    {
+      system,
+      config,
+      name,
+      stateVersion,
+      hmStateVersion,
+      home,
+      extraModules,
+      sharedHomeManagerModules,
+    }:
     fn {
       inherit system;
-      specialArgs = { inherit name inputs; };
-      modules = let
-        pkgs = import inputs.nixpkgs {
-          inherit system;
-          overlays = [ inputs.self.outputs.overlays.additions ];
-        };
-      in [
-        ({ name, inputs, ... }: {
-          system = {
-            inherit stateVersion;
-            configurationRevision =
-              inputs.self.rev or inputs.self.dirtyRev or null;
+      specialArgs = {
+        inherit name inputs;
+      };
+      modules =
+        let
+          pkgs = import inputs.nixpkgs {
+            inherit system;
+            overlays = [ inputs.self.outputs.overlays.additions ];
           };
-          networking.hostName = name;
-          time.timeZone = "Europe/Berlin";
-          nix = {
-            package = pkgs.nix;
-            daemonCPUSchedPolicy = "idle";
-            daemonIOSchedPriority = 3;
+        in
+        [
+          (
+            { name, inputs, ... }:
+            {
+              system = {
+                inherit stateVersion;
+                configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+              };
+              networking.hostName = name;
+              time.timeZone = "Europe/Berlin";
+              nix = {
+                package = pkgs.nix;
+                daemonCPUSchedPolicy = "idle";
+                daemonIOSchedPriority = 3;
 
-            settings = {
-              experimental-features = [ "nix-command" "flakes" ];
-              auto-optimise-store = true;
-              substituters = [
-                "https://cache.nixos.org/"
-                "https://cachix.cachix.org"
-                "https://nix-community.cachix.org"
-              ];
-              trusted-public-keys = [
-                "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
-                "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-              ];
-            };
-            registry.nixpkgs.flake = inputs.nixpkgs;
+                settings = {
+                  experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
+                  auto-optimise-store = true;
+                  substituters = [
+                    "https://cache.nixos.org/"
+                    "https://cachix.cachix.org"
+                    "https://nix-community.cachix.org"
+                  ];
+                  trusted-public-keys = [
+                    "cachix.cachix.org-1:eWNHQldwUO7G2VkjpnjDbWwy4KQ/HNxht7H4SSoMckM="
+                    "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+                  ];
+                };
+                registry.nixpkgs.flake = inputs.nixpkgs;
 
-            nixPath = [
-              "nixpkgs=/etc/nixpkgs/channels/nixpkgs"
-              "/nix/var/nix/profiles/per-user/root/channels"
-            ];
-          };
+                nixPath = [
+                  "nixpkgs=/etc/nixpkgs/channels/nixpkgs"
+                  "/nix/var/nix/profiles/per-user/root/channels"
+                ];
+              };
 
-          systemd.tmpfiles.rules = [
-            "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}"
-          ];
-        })
-        (import config)
-      ] ++ extraModules ++ (if home != null then [
-        inputs.home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {
-              inherit inputs pkgs;
-              stateVersion = hmStateVersion;
-            };
-            sharedModules = sharedHomeManagerModules;
-          };
-        }
-        home
-      ] else
-        [ ]);
+              systemd.tmpfiles.rules = [ "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}" ];
+            }
+          )
+          (import config)
+        ]
+        ++ extraModules
+        ++ (
+          if home != null then
+            [
+              inputs.home-manager.nixosModules.home-manager
+              {
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = {
+                    inherit inputs pkgs;
+                    stateVersion = hmStateVersion;
+                  };
+                  sharedModules = sharedHomeManagerModules;
+                };
+              }
+              home
+            ]
+          else
+            [ ]
+        );
     };
-in rec {
-  forEachSystem = lambda:
-    lib.genAttrs [ "x86_64-linux" "aarch64-darwin" ] (system:
-      lambda (import inputs.nixpkgs {
-        inherit system;
-        overlays = [ inputs.self.outputs.overlays.additions ];
-      }));
+in
+rec {
+  forEachSystem =
+    lambda:
+    lib.genAttrs
+      [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ]
+      (
+        system:
+        lambda (
+          import inputs.nixpkgs {
+            inherit system;
+            overlays = [ inputs.self.outputs.overlays.additions ];
+          }
+        )
+      );
 
   mkNixOsConfigurations = lib.mapAttrs' mkNixOsConfiguration;
-  mkNixOsConfiguration = name:
-    { system, config, stateVersion ? "24.05", home ? null, extraModules ? [ ]
-    , sharedHomeManagerModules ? [ ], }:
-    lib.nameValuePair name (mkOsConfiguration lib.nixosSystem {
-      inherit system config stateVersion home name extraModules
-        sharedHomeManagerModules;
-      hmStateVersion = stateVersion;
-    });
+  mkNixOsConfiguration =
+    name:
+    {
+      system,
+      config,
+      stateVersion ? "24.05",
+      home ? null,
+      extraModules ? [ ],
+      sharedHomeManagerModules ? [ ],
+    }:
+    lib.nameValuePair name (
+      mkOsConfiguration lib.nixosSystem {
+        inherit
+          system
+          config
+          stateVersion
+          home
+          name
+          extraModules
+          sharedHomeManagerModules
+          ;
+        hmStateVersion = stateVersion;
+      }
+    );
 
   mkDarwinConfigurations = lib.mapAttrs' mkDarwinConfiguration;
-  mkDarwinConfiguration = name:
-    { system, config, stateVersion ? 4, hmStateVersion ? "24.05", home ? null
-    , extraModules ? [ ], sharedHomeManagerModules ? [ ], }:
-    lib.nameValuePair name
-    (mkOsConfiguration inputs.nix-darwin.lib.darwinSystem {
-      inherit system config stateVersion hmStateVersion home name extraModules
-        sharedHomeManagerModules;
-    });
+  mkDarwinConfiguration =
+    name:
+    {
+      system,
+      config,
+      stateVersion ? 4,
+      hmStateVersion ? "24.05",
+      home ? null,
+      extraModules ? [ ],
+      sharedHomeManagerModules ? [ ],
+    }:
+    lib.nameValuePair name (
+      mkOsConfiguration inputs.nix-darwin.lib.darwinSystem {
+        inherit
+          system
+          config
+          stateVersion
+          hmStateVersion
+          home
+          name
+          extraModules
+          sharedHomeManagerModules
+          ;
+      }
+    );
 }

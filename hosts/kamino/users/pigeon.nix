@@ -1,1 +1,4 @@
-{ ... }: { imports = [ ../../../users/common ]; }
+{ ... }:
+{
+  imports = [ ../../../users/common ];
+}

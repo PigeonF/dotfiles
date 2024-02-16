@@ -1,4 +1,5 @@
-{ config, ... }: {
+{ config, ... }:
+{
   imports = [
     ./hardware-configuration.nix
     ./bootloader.nix
@@ -23,8 +24,7 @@
 
     templates."gitlab-ci-local/variables.yml" = {
       owner = config.users.users.developer.name;
-      path =
-        "${config.users.users.developer.home}/.gitlab-ci-local/variables.yml";
+      path = "${config.users.users.developer.home}/.gitlab-ci-local/variables.yml";
 
       content = ''
         ---
@@ -35,9 +35,7 @@
           CI_REGISTRY_USER: nobody
           CI_REGISTRY_PASSWORD: nobody
           CI_DEPENDENCY_PROXY_USER: pigeonf
-          CI_DEPENDENCY_PROXY_PASSWORD: ${
-            config.sops.placeholder."DOCKER_HUB_PAT"
-          }
+          CI_DEPENDENCY_PROXY_PASSWORD: ${config.sops.placeholder."DOCKER_HUB_PAT"}
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
 
         project:
@@ -47,9 +45,7 @@
             RENOVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
             GITHUB_COM_TOKEN: ${config.sops.placeholder."GITHUB_COM_TOKEN"}
             PRIVATE_TOKEN: ${config.sops.placeholder."RENOVATE_TOKEN"}
-            CI_PROJECT_ID: ${
-              config.sops.placeholder."RENOVATE_BOT_RUNNER_PROJECT_ID"
-            }
+            CI_PROJECT_ID: ${config.sops.placeholder."RENOVATE_BOT_RUNNER_PROJECT_ID"}
       '';
     };
   };
@@ -64,17 +60,21 @@
     '';
   };
 
-  networking = { firewall.enable = false; };
+  networking = {
+    firewall.enable = false;
+  };
 
   virtualisation = {
     docker = {
       enable = true;
       daemon.settings = {
         bip = "10.117.0.1/16";
-        default-address-pools = [{
-          base = "10.118.0.0/16";
-          size = 24;
-        }];
+        default-address-pools = [
+          {
+            base = "10.118.0.0/16";
+            size = 24;
+          }
+        ];
       };
     };
   };
@@ -95,7 +95,9 @@
   users = {
     mutableUsers = false;
     # https://discourse.nixos.org/t/how-to-disable-root-user-account-in-configuration-nix/13235
-    users.root = { hashedPassword = "!"; };
+    users.root = {
+      hashedPassword = "!";
+    };
 
     groups.developer = {
       name = "developer";
@@ -106,7 +108,11 @@
       description = "Developer";
       name = "developer";
       group = "developer";
-      extraGroups = [ "users" "wheel" "docker" ];
+      extraGroups = [
+        "users"
+        "wheel"
+        "docker"
+      ];
       password = "developer";
       home = "/home/developer";
       createHome = true;

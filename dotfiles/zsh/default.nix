@@ -1,4 +1,10 @@
-{ pkgs, config, lib, ... }: {
+{
+  pkgs,
+  config,
+  lib,
+  ...
+}:
+{
   programs.zsh = {
     enable = true;
 
@@ -31,5 +37,7 @@
     '';
   };
 
-  home = { packages = builtins.attrValues { inherit (pkgs) eza fd ripgrep; }; };
+  home = {
+    packages = builtins.attrValues { inherit (pkgs) eza fd ripgrep; };
+  };
 }

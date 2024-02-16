@@ -1,4 +1,10 @@
-{ inputs, pkgs, stateVersion, ... }: {
+{
+  inputs,
+  pkgs,
+  stateVersion,
+  ...
+}:
+{
   imports = [
     ../../dotfiles/atuin
     ../../dotfiles/bat
@@ -26,8 +32,20 @@
 
     packages = builtins.attrValues {
       inherit (pkgs)
-        committed crane dive dprint glab hub lldb nil nixfmt rustup shfmt skopeo
-        sops;
+        committed
+        crane
+        dive
+        dprint
+        glab
+        hub
+        lldb
+        nil
+        nixfmt-rfc-style
+        rustup
+        shfmt
+        skopeo
+        sops
+        ;
     };
 
     shellAliases = {
@@ -35,7 +53,10 @@
       c = "cargo";
     };
 
-    sessionPath = [ "$HOME/.local/bin" "$HOME/.cargo/bin" ];
+    sessionPath = [
+      "$HOME/.local/bin"
+      "$HOME/.cargo/bin"
+    ];
   };
 
   xdg.configFile."nixpkgs/config.nix" = {

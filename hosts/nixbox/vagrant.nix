@@ -1,4 +1,5 @@
-{ pkgs, ... }: {
+{ pkgs, ... }:
+{
   users.groups.vagrant = {
     name = "vagrant";
     members = [ "vagrant" ];
@@ -8,7 +9,11 @@
     description = "Vagrant User";
     name = "vagrant";
     group = "vagrant";
-    extraGroups = [ "users" "wheel" "vboxsf" ];
+    extraGroups = [
+      "users"
+      "wheel"
+      "vboxsf"
+    ];
     hashedPassword = "!";
     home = "/home/vagrant";
     createHome = true;
@@ -25,6 +30,15 @@
 
   # Required by vagrant
   environment.systemPackages = builtins.attrValues {
-    inherit (pkgs) findutils gnumake iputils jq nettools netcat nfs-utils rsync;
+    inherit (pkgs)
+      findutils
+      gnumake
+      iputils
+      jq
+      nettools
+      netcat
+      nfs-utils
+      rsync
+      ;
   };
 }
