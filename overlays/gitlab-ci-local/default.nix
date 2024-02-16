@@ -7,22 +7,18 @@
 }:
 buildNpmPackage rec {
   pname = "gitlab-ci-local";
-  version = "4.46.0";
+  version = "4.46.1";
 
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
     rev = "${version}";
-    hash = "sha256-CW2IkXGUohFtYZB3eNi0cl8rUWW/gIyUQPYxaextAfk=";
+    hash = "sha256-0NUmsbuzs004w9ETj4e4nO+sDvYHQh9SwJoRc3+r+j8=";
   };
 
-  patches = [
-    ./extra-hosts-in-services.patch
-    ./lowercase-ci-registry-image.patch
-    ./dotenv-services.patch
-  ];
+  patches = [ ./dotenv-services.patch ];
 
-  npmDepsHash = "sha256-4nfu8Au/Uk2oTSKbuv8QlvfLs0EgDlEgtBl/Nxv07oY=";
+  npmDepsHash = "sha256-zCBNUKmLluVCDoPHuKy9KMKCGL8FqopFhKq7QCAUe4U=";
 
   nativeBuildInputs = [
     git
