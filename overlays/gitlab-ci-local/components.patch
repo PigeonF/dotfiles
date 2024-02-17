@@ -43,7 +43,7 @@ index dfa3a2f4b8706546..9c0c62a4b5789897 100644
              } else {
                  throw new AssertionError({message: `Didn't understand include ${JSON.stringify(value)}`});
 diff --git a/src/parser.ts b/src/parser.ts
-index d41c5caac132ebe8..09c9afea4f629e25 100644
+index d41c5caac132ebe8..e6b81689233cf02a 100644
 --- a/src/parser.ts
 +++ b/src/parser.ts
 @@ -187,14 +187,33 @@ export class Parser {
@@ -73,9 +73,9 @@ index d41c5caac132ebe8..09c9afea4f629e25 100644
 +        const inputSpec: {[key: string]: null | {[key: string]: string | boolean | number}} = preamble["spec"]["inputs"];
 +        for (const input in inputSpec) {
 +            const config = inputSpec[input] || {};
-+            const value = config["default"] || inputs[input] || null;
++            const value = inputs[input] || config["default"] || null;
 +            assert(value !== null, `Missing value for ${input} in ${filePath}`);
-+            document = document.replace(`$[[ inputs.${input} ]]`, value.toString());
++            document = document.replaceAll(`$[[ inputs.${input} ]]`, value.toString());
 +        }
 +
 +        const fileSplit = document.split(/\r?\n/g);
@@ -84,7 +84,7 @@ index d41c5caac132ebe8..09c9afea4f629e25 100644
          let interactiveMatch = null;
 diff --git a/tests/test-cases/include-local-inputs/.gitlab-ci.yml b/tests/test-cases/include-local-inputs/.gitlab-ci.yml
 new file mode 100644
-index 0000000000000000..41192656d2fefffb
+index 0000000000000000..813e7e1a31f355dc
 --- /dev/null
 +++ b/tests/test-cases/include-local-inputs/.gitlab-ci.yml
 @@ -0,0 +1,9 @@
@@ -95,14 +95,14 @@ index 0000000000000000..41192656d2fefffb
 +  - local: template.yml
 +    inputs:
 +      name: hello-gcl
-+      greeting: "GCL!"
++      greeting: GCL
 +  - local: template-with-defaults.yml
 diff --git a/tests/test-cases/include-local-inputs/integration.include-local-inputs.test.ts b/tests/test-cases/include-local-inputs/integration.include-local-inputs.test.ts
 new file mode 100644
-index 0000000000000000..b1ff47eaec734cec
+index 0000000000000000..c1df93adba947fbf
 --- /dev/null
 +++ b/tests/test-cases/include-local-inputs/integration.include-local-inputs.test.ts
-@@ -0,0 +1,54 @@
+@@ -0,0 +1,56 @@
 +import { WriteStreamsMock } from "../../../src/write-streams";
 +import { handler } from "../../../src/handler";
 +import chalk from "chalk";
@@ -123,6 +123,7 @@ index 0000000000000000..b1ff47eaec734cec
 +
 +    const expected = [
 +        chalk`{blueBright hello-world          } {greenBright >} Hello, World`,
++        chalk`{blueBright hello-world          } {greenBright >} How are you World?`,
 +    ];
 +
 +    expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining(expected));
@@ -137,7 +138,8 @@ index 0000000000000000..b1ff47eaec734cec
 +    }, writeStreams);
 +
 +    const expected = [
-+        chalk`{blueBright hello-gcl          } {greenBright >} Hello, GCL`,
++        chalk`{blueBright hello-gcl            } {greenBright >} Hello, GCL`,
++        chalk`{blueBright hello-gcl            } {greenBright >} How are you GCL?`,
 +    ];
 +
 +    expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining(expected));
@@ -159,10 +161,10 @@ index 0000000000000000..b1ff47eaec734cec
 +});
 diff --git a/tests/test-cases/include-local-inputs/template-with-defaults.yml b/tests/test-cases/include-local-inputs/template-with-defaults.yml
 new file mode 100644
-index 0000000000000000..4b7cabdfbf59a582
+index 0000000000000000..fd288af6f0240d85
 --- /dev/null
 +++ b/tests/test-cases/include-local-inputs/template-with-defaults.yml
-@@ -0,0 +1,10 @@
+@@ -0,0 +1,9 @@
 +spec:
 +  inputs:
 +    name:
@@ -170,12 +172,11 @@ index 0000000000000000..4b7cabdfbf59a582
 +---
 +"$[[ inputs.name ]]":
 +  stage: build
-+  image: busybox:latest
 +  script:
 +    - echo "Hello, World"
 diff --git a/tests/test-cases/include-local-inputs/template.yml b/tests/test-cases/include-local-inputs/template.yml
 new file mode 100644
-index 0000000000000000..4ffe2126d42bb206
+index 0000000000000000..e2cfd3c04a10460f
 --- /dev/null
 +++ b/tests/test-cases/include-local-inputs/template.yml
 @@ -0,0 +1,11 @@
@@ -187,6 +188,6 @@ index 0000000000000000..4ffe2126d42bb206
 +---
 +"$[[ inputs.name ]]":
 +  stage: build
-+  image: busybox:latest
 +  script:
 +    - echo "Hello, $[[ inputs.greeting ]]"
++    - echo "How are you $[[ inputs.greeting ]]?"
