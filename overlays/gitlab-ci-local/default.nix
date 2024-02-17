@@ -16,7 +16,10 @@ buildNpmPackage rec {
     hash = "sha256-0NUmsbuzs004w9ETj4e4nO+sDvYHQh9SwJoRc3+r+j8=";
   };
 
-  patches = [ ./dotenv-services.patch ];
+  patches = [
+    ./components.patch
+    ./dotenv-services.patch
+  ];
 
   npmDepsHash = "sha256-zCBNUKmLluVCDoPHuKy9KMKCGL8FqopFhKq7QCAUe4U=";
 
