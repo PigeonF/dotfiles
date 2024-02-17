@@ -38,6 +38,7 @@
           CI_DEPENDENCY_PROXY_USER: pigeonf
           CI_DEPENDENCY_PROXY_PASSWORD: ${config.sops.placeholder."DOCKER_HUB_PAT"}
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
+          CI_PIPELINE_SOURCE: merge_request_event
 
         project:
           ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
