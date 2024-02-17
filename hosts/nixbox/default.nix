@@ -15,11 +15,12 @@
 
     secrets = {
       "DOCKER_HUB_PAT" = { };
-      "GITHUB_COM_TOKEN" = { };
-      "RENOVATE_TOKEN" = { };
-      "GCL_PROJ_1_PATH" = { };
       "GCL_PROJ_1_CI_PROJECT_ID" = { };
+      "GCL_PROJ_1_PATH" = { };
+      "GITHUB_COM_TOKEN" = { };
+      "GITLAB_COM_PAT" = { };
       "RENOVATE_BOT_RUNNER_PROJECT_ID" = { };
+      "RENOVATE_TOKEN" = { };
     };
 
     templates."gitlab-ci-local/variables.yml" = {
@@ -32,8 +33,8 @@
           CI_REGISTRY: ${config.nixbox.registryHost}
           CI_DEPENDENCY_PROXY_SERVER: docker.io
           # Default registry has no credential requirements, but we want a non-empty string
-          CI_REGISTRY_USER: nobody
-          CI_REGISTRY_PASSWORD: nobody
+          CI_REGISTRY_USER: pigeonf
+          CI_REGISTRY_PASSWORD: ${config.sops.placeholder."GITLAB_COM_PAT"}
           CI_DEPENDENCY_PROXY_USER: pigeonf
           CI_DEPENDENCY_PROXY_PASSWORD: ${config.sops.placeholder."DOCKER_HUB_PAT"}
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
