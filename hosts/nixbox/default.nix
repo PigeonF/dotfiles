@@ -32,7 +32,6 @@
         global:
           CI_REGISTRY: ${config.nixbox.registryHost}
           CI_DEPENDENCY_PROXY_SERVER: docker.io
-          # Default registry has no credential requirements, but we want a non-empty string
           CI_REGISTRY_USER: pigeonf
           CI_REGISTRY_PASSWORD: ${config.sops.placeholder."GITLAB_COM_PAT"}
           CI_DEPENDENCY_PROXY_USER: pigeonf
