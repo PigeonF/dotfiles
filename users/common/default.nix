@@ -34,6 +34,7 @@
       inherit (pkgs)
         committed
         crane
+        diffoscopeMinimal
         dive
         dprint
         glab
