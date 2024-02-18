@@ -41,6 +41,8 @@ let
                 daemonIOSchedPriority = 3;
 
                 settings = {
+                  sandbox = true;
+
                   experimental-features = [
                     "nix-command"
                     "flakes"
