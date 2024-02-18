@@ -82,7 +82,8 @@
         ".vscode/*.json": "jsonc",
         "*.just": "just",
         "dep5": "debian-copyright",
-        "*.json5": "jsonc"
+        "*.json5": "jsonc",
+        "COMMIT_EDITMSG-*": "git-commit",
     },
     "yaml.customTags": [
         "!reference sequence"
@@ -120,5 +121,8 @@
         "**/Thumbs.db": true,
         "**/.direnv": true,
         "**/.gitlab-ci-local": true
+    },
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
     }
 }
