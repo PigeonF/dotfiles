@@ -16,6 +16,7 @@
         git-branchless
         git-gone
         git-revise
+        git-stack
         meld
         stgit
         uutils-coreutils
