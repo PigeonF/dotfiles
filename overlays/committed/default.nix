@@ -16,9 +16,9 @@ rustPlatform.buildRustPackage rec {
     hash = "sha256-HqZYxV2YjnK7Q3A7B6yVFXME0oc3DZ4RfMkDGa2IQxA=";
   };
 
-  buildInputs = lib.optionals stdenv.isDarwin builtins.attrValues {
-    inherit (darwin.apple_sdk.frameworks) Security;
-  };
+  buildInputs = lib.optionals stdenv.isDarwin (
+    builtins.attrValues { inherit (darwin.apple_sdk.frameworks) Security; }
+  );
 
   doCheck = false;
 

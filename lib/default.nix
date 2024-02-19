@@ -132,7 +132,7 @@ rec {
           (
             { ... }:
             {
-              nix.settings = {
+              nix = {
                 daemonCPUSchedPolicy = "idle";
                 daemonIOSchedPriority = 3;
               };
