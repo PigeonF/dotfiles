@@ -4,14 +4,15 @@ let
   mkOsConfiguration =
     fn:
     {
-      system,
       config,
-      name,
-      stateVersion,
-      hmStateVersion,
-      home,
       extraModules,
+      hmStateVersion,
+      home-manager,
+      home,
+      name,
       sharedHomeManagerModules,
+      stateVersion,
+      system,
     }:
     fn {
       inherit system;
@@ -65,8 +66,6 @@ let
                   "/nix/var/nix/profiles/per-user/root/channels"
                 ];
               };
-
-              systemd.tmpfiles.rules = [ "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}" ];
             }
           )
           (import config)
@@ -75,7 +74,7 @@ let
         ++ (
           if home != null then
             [
-              inputs.home-manager.nixosModules.home-manager
+              home-manager
               {
                 home-manager = {
                   useGlobalPkgs = true;
@@ -125,15 +124,24 @@ rec {
     }:
     lib.nameValuePair name (
       mkOsConfiguration lib.nixosSystem {
+        inherit (inputs.home-manager.nixosModules) home-manager;
         inherit
           system
           config
           stateVersion
           home
           name
-          extraModules
           sharedHomeManagerModules
           ;
+
+        extraModules = extraModules ++ [
+          (
+            { ... }:
+            {
+              systemd.tmpfiles.rules = [ "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}" ];
+            }
+          )
+        ];
         hmStateVersion = stateVersion;
       }
     );
@@ -162,6 +170,8 @@ rec {
           extraModules
           sharedHomeManagerModules
           ;
+
+        inherit (inputs.home-manager.darwinModules) home-manager;
       }
     );
 }
