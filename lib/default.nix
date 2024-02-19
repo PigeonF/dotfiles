@@ -37,17 +37,11 @@ let
               networking.hostName = name;
               time.timeZone = "Europe/Berlin";
               nix = {
-                package = pkgs.nix;
-                daemonCPUSchedPolicy = "idle";
-                daemonIOSchedPriority = 3;
+                package = pkgs.nixFlakes;
 
                 settings = {
                   sandbox = true;
 
-                  experimental-features = [
-                    "nix-command"
-                    "flakes"
-                  ];
                   auto-optimise-store = true;
                   substituters = [
                     "https://cache.nixos.org/"
@@ -138,6 +132,10 @@ rec {
           (
             { ... }:
             {
+              nix.settings = {
+                daemonCPUSchedPolicy = "idle";
+                daemonIOSchedPriority = 3;
+              };
               systemd.tmpfiles.rules = [ "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}" ];
             }
           )

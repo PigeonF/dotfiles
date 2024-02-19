@@ -30,6 +30,7 @@
       "1password"
       "alacritty"
       "docker"
+      "dropbox"
       "spotify"
       "visual-studio-code"
     ];
