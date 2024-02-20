@@ -37,12 +37,13 @@ let
               networking.hostName = name;
               time.timeZone = "Europe/Berlin";
               nix = {
-                package = pkgs.nixFlakes;
-
                 settings = {
                   sandbox = true;
 
-                  experimental-features = [ "nix-command" ];
+                  experimental-features = [
+                    "nix-command"
+                    "flakes"
+                  ];
                   auto-optimise-store = true;
                   substituters = [
                     "https://cache.nixos.org/"
