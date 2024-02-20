@@ -42,6 +42,7 @@ let
                 settings = {
                   sandbox = true;
 
+                  experimental-features = [ "nix-command" ];
                   auto-optimise-store = true;
                   substituters = [
                     "https://cache.nixos.org/"
