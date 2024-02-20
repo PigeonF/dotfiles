@@ -25,6 +25,7 @@
     fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
     ignore = update-index --skip-worktree
     l = lr
+    ls = lrs
     lg = lrg
     lr = log --pretty=pretty --abbrev-commit --date=relative
     lrg = lr --graph
