@@ -38,7 +38,7 @@
         dive
         dprint
         glab
-        hub
+        gh
         lldb
         nil
         nixfmt-rfc-style
