@@ -131,16 +131,13 @@ rec {
           ;
 
         extraModules = extraModules ++ [
-          (
-            { ... }:
-            {
-              nix = {
-                daemonCPUSchedPolicy = "idle";
-                daemonIOSchedPriority = 3;
-              };
-              systemd.tmpfiles.rules = [ "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}" ];
-            }
-          )
+          (_: {
+            nix = {
+              daemonCPUSchedPolicy = "idle";
+              daemonIOSchedPriority = 3;
+            };
+            systemd.tmpfiles.rules = [ "L+ /etc/nixpkgs/channels/nixpkgs     - - - - ${inputs.nixpkgs}" ];
+          })
         ];
         hmStateVersion = stateVersion;
       }
