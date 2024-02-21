@@ -51,7 +51,6 @@
             "source": "PowerShell"
         }
     },
-    "workbench.colorTheme": "GitHub Dark Dimmed",
     "extensions.ignoreRecommendations": true,
     "redhat.telemetry.enabled": false,
     "editor.formatOnSave": true,
@@ -125,5 +124,6 @@
     },
     "[json]": {
         "editor.defaultFormatter": "vscode.json-language-features"
-    }
+    },
+    "workbench.colorTheme": "Gruvbox Dark Medium"
 }
