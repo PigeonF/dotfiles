@@ -87,22 +87,20 @@ def has-binary? [binary: string]: nothing -> bool {
     not (which $binary | is-empty)
 }
 
-def ensure-command-completion [command: string, ...args: string]: nothing -> nothing {
+def ensure-command-completion [
+    command: string,
+    --shell: string,
+    ...args: string
+]: nothing -> nothing {
     let cache = $env.NU_SCRIPTS_CACHE | path join $"($command).nu"
     if not ($cache | path exists) {
         if (has-binary? $command) {
-            ^$command init ...$args nu | save --force $cache
+            let shell = $shell | default "nu"
+            ^$command init ...$args $shell | save --force $cache
         }
     }
 }
 
 ensure-command-completion atuin "--disable-up-arrow"
 ensure-command-completion starship
-
-let zoxide_cache = $env.NU_SCRIPTS_CACHE | path join "zoxide.nu"
-if not ($zoxide_cache | path exists) {
-    if (has-binary? zoxide) {
-        # https://github.com/ajeetdsouza/zoxide/pull/663
-        zoxide init nushell | str replace "-- $rest" "-- ...$rest" | save --force $zoxide_cache
-    }
-}
+ensure-command-completion zoxide --shell nushell
