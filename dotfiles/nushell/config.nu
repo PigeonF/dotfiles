@@ -1,34 +1,6 @@
-# These are downloaded in env.nu
-source default_config.nu
-
-let pre_prompt = if ($nu.os-info).family == "unix" {
-    { ||
-        let direnv = (direnv export json | from json)
-        let direnv = if ($direnv | length) == 1 { $direnv } else { {} }
-        $direnv | load-env
-    }
-} else {
-    { ||
-        null
-    }
-}
-
-let hooks = {
-    pre_prompt: [$pre_prompt]
-    pre_execution: [{||
-        null  # replace with source code to run before the repl input is run
-    }]
-    env_change: {
-        PWD: [{|before, after|
-        null  # replace with source code to run if the PWD environment is different since the last repl input
-        }]
-    }
-    display_output: {||
-        if (term size).columns >= 100 { table -e } else { table }
-    }
-    command_not_found: {||
-        null  # replace with source code to return an error message when a command is not found
-    }
+# Downloaded in env.nu
+if ($env.NU_SCRIPTS_CACHE | path join "default_config.nu" | path exists) {
+    source default_config.nu
 }
 
 let custom_config = {
@@ -37,13 +9,20 @@ let custom_config = {
     # https://github.com/wez/wezterm/issues/2779
     # https://github.com/nushell/nushell/issues/6214
     shell_integration: false
-    hooks: $hooks
 }
 
 $env.config = ($env.config | merge $custom_config)
 
 # These are written in env.nu
 # Load them last, since they might modify $env.config
-source atuin.nu
-source starship.nu
-source zoxide.nu
+if ($env.NU_SCRIPTS_CACHE | path join "atuin.nu" | path exists) {
+    source atuin.nu
+}
+
+if ($env.NU_SCRIPTS_CACHE | path join "starship.nu" | path exists) {
+    source starship.nu
+}
+
+if ($env.NU_SCRIPTS_CACHE | path join "zoxide.nu" | path exists) {
+    source zoxide.nu
+}

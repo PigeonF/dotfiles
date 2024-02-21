@@ -15,9 +15,10 @@
     ../../dotfiles/helix
     ../../dotfiles/just
     ../../dotfiles/nix
+    ../../dotfiles/nushell
     ../../dotfiles/starship
-    ../../dotfiles/zoxide
     ../../dotfiles/zellij
+    ../../dotfiles/zoxide
     ../../dotfiles/zsh
   ];
 
@@ -56,8 +57,22 @@
 
     sessionPath = [
       "$HOME/.local/bin"
-      "$HOME/.cargo/bin"
+      "$CARGO_HOME/bin"
     ];
+
+    sessionVariables = rec {
+      XDG_CACHE_HOME = "$HOME/.cache";
+      XDG_CONFIG_HOME = "$HOME/.config";
+      XDG_DATA_HOME = "$HOME/.local/share";
+      XDG_STATE_HOME = "$HOME/.local/state";
+
+      CARGO_HOME = "${XDG_DATA_HOME}/cargo";
+      DOCKER_CONFIG = "${XDG_DATA_HOME}/docker";
+      GOPATH = "${XDG_DATA_HOME}/go";
+      RUSTUP_HOME = "${XDG_DATA_HOME}/rustup";
+
+      HISTFILE = "${XDG_STATE_HOME}/bash_history.txt";
+    };
   };
 
   xdg.configFile."nixpkgs/config.nix" = {

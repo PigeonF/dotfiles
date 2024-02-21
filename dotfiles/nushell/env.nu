@@ -1,79 +1,98 @@
-$env.ENV_CONVERSIONS = {
-    "PATH": {
+export-env {
+    let esep_path_converter = {
         from_string: { |s| $s | split row (char esep) | path expand -n }
         to_string: { |v| $v | path expand -n | str join (char esep) }
     }
-    "Path": {
-        from_string: { |s| $s | split row (char esep) | path expand -n }
-        to_string: { |v| $v | path expand -n | str join (char esep) }
+
+    load-env {
+        ENV_CONVERSIONS: {
+            "PATH": $esep_path_converter
+            "Path": $esep_path_converter
+        }
     }
 }
 
-$env.NU_CACHED_SCRIPTS_DIR = ($env.XDG_CACHE_HOME? | default ($nu.home-path | path join ".cache") | path join 'nushell' 'scripts')
+export-env { load-env {
+    XDG_CACHE_HOME: ($env.XDG_CACHE_HOME? | default ($nu.home-path | path join ".cache"))
+    XDG_CONFIG_HOME: ($env.XDG_CONFIG_HOME? | default ($nu.home-path | path join ".config"))
+    XDG_DATA_HOME: ($env.XDG_DATA_HOME? | default ($nu.home-path | path join ".local" "share"))
+    XDG_STATE_HOME: ($env.XDG_STATE_HOME? | default ($nu.home-path | path join ".local" "state"))
+} }
+
+def with-env-defaults [defaults: record] nothing -> record {
+    $defaults
+    | transpose key value
+    | reduce -f [] {|it, acc|
+    let value = if ($it.key in $env) { $env | get $it.key } else { $it.value }
+        $acc | append [[key value]; [$it.key $value]]
+    }
+    | transpose -i -r -d
+}
+
+export-env { load-env (with-env-defaults {
+    CARGO_HOME: ($env.XDG_DATA_HOME | path join "cargo")
+    DOCKER_CONFIG: ($env.XDG_DATA_HOME | path join "docker")
+    GOPATH: ($env.XDG_DATA_HOME | path join "go")
+    NU_SCRIPTS_CACHE: ($env.XDG_CACHE_HOME | path join "nushell" "scripts")
+    NUPM_CACHE: ($env.XDG_CACHE_HOME | path join "nupm")
+    NUPM_HOME: ($env.XDG_DATA_HOME | path join "nupm")
+    RUSTUP_HOME: ($env.XDG_DATA_HOME | path join "rustup")
+}) }
+
 $env.NU_LIB_DIRS = [
-    $env.NU_CACHED_SCRIPTS_DIR
-    ($nu.config-path | path dirname | path join 'scripts')
+    ($env.NUPM_HOME | path join "modules")
+    ($env.NU_SCRIPTS_CACHE)
 ]
 
 $env.NU_PLUGIN_DIRS = [
-    ($nu.config-path | path dirname | path join 'plugins')
+    ($env.CARGO_HOME | path join "bin")
+    ($env.NUPM_HOME | path join "plugins/bin")
 ]
 
-$env.DEFAULT_CONFIG_FILE = ($env.NU_CACHED_SCRIPTS_DIR | path join "default_config.nu")
-$env.ATUIN_CONFIG_FILE = ($env.NU_CACHED_SCRIPTS_DIR | path join "atuin.nu")
-$env.STARSHIP_CONFIG_FILE = ($env.NU_CACHED_SCRIPTS_DIR | path join "starship.nu")
-$env.ZOXIDE_CONFIG_FILE = ($env.NU_CACHED_SCRIPTS_DIR | path join "zoxide.nu")
+use std ["path add"]
 
-def "pigeonf dotfiles now" [] {
-    date now | format date "%Y-%m-%dT%H:%M:%S%.3f"
+path add /nix/var/nix/profiles/default/bin
+path add ($env.CARGO_HOME | path join "bin")
+path add ($env.GOPATH | path join "bin")
+path add ($env.NUPM_HOME | path join "scripts")
+path add ($env.XDG_STATE_HOME | path join "nix/profile/bin")
+path add ($env.HOME | path join ".local" "bin")
+$env.PATH = ($env.PATH | uniq)
+
+$env.SHELL = $nu.current-exe
+
+if not ($env.NU_SCRIPTS_CACHE | path exists) {
+    mkdir $env.NU_SCRIPTS_CACHE
 }
 
-def "pigeonf dotfiles download nu" [local: path, remote: string] {
+let default_config = $env.NU_SCRIPTS_CACHE | path join "default_config.nu"
+if not ($default_config | path exists) {
     let version = (nu --version)
-    let remote = (
-        $"https://raw.githubusercontent.com/nushell/nushell/($version)/($remote)"
-    )
+    let file = "crates/nu-utils/src/sample_config/default_config.nu"
+    let remote = $"https://raw.githubusercontent.com/nushell/nushell/($version)/($file)"
+    http get $remote | save --force $default_config
+}
 
-    let local = ($local | path expand)
-    mkdir ($local | path dirname)
+def has-binary? [binary: string]: nothing -> bool {
+    not (which $binary | is-empty)
+}
 
-    if ($local | path exists) {
-        let new = (http get $remote)
-        let old = (open $local)
-
-        if $old != $new {
-            $new | save --force $local
-            print --stderr $"(ansi white)INF|(pigeonf dotfiles now)|Updated ($local)(ansi reset)"
-        } else {
-            print --stderr $"(ansi white)INF|(pigeonf dotfiles now)|No changes in ($local)(ansi reset)"
+def ensure-command-completion [command: string, ...args: string]: nothing -> nothing {
+    let cache = $env.NU_SCRIPTS_CACHE | path join $"($command).nu"
+    if not ($cache | path exists) {
+        if (has-binary? $command) {
+            ^$command init ...$args nu | save --force $cache
         }
-    } else {
-        http get $remote | save --force $local
-        print --stderr $"(ansi white)INF|(pigeonf dotfiles now)|Downloaded ($local)(ansi reset)"
     }
 }
 
-export def "config update default" [ --help (-h) ] {
-    pigeonf dotfiles download nu $env.DEFAULT_CONFIG_FILE "crates/nu-utils/src/sample_config/default_config.nu"
-}
+ensure-command-completion atuin "--disable-up-arrow"
+ensure-command-completion starship
 
-if not ($env.DEFAULT_CONFIG_FILE | path exists) {
-    print --stderr $"(ansi yellow)WRN|(pigeonf dotfiles now)|($env.DEFAULT_CONFIG_FILE) does not exist(ansi reset)"
-    config update default
-}
-
-if not ($env.ATUIN_CONFIG_FILE | path exists) {
-    mkdir ($env.ATUIN_CONFIG_FILE | path dirname)
-    atuin init --disable-up-arrow nu | save --force $env.ATUIN_CONFIG_FILE
-}
-
-if not ($env.STARSHIP_CONFIG_FILE | path exists) {
-    mkdir ($env.STARSHIP_CONFIG_FILE | path dirname)
-    starship init nu | save --force $env.STARSHIP_CONFIG_FILE
-}
-
-if not ($env.ZOXIDE_CONFIG_FILE | path exists) {
-    mkdir ($env.ZOXIDE_CONFIG_FILE | path dirname)
-    # https://github.com/ajeetdsouza/zoxide/pull/663
-    zoxide init nushell | str replace "-- $rest" "-- ...$rest" | save --force $env.ZOXIDE_CONFIG_FILE
+let zoxide_cache = $env.NU_SCRIPTS_CACHE | path join "zoxide.nu"
+if not ($zoxide_cache | path exists) {
+    if (has-binary? zoxide) {
+        # https://github.com/ajeetdsouza/zoxide/pull/663
+        zoxide init nushell | str replace "-- $rest" "-- ...$rest" | save --force $zoxide_cache
+    }
 }

@@ -39,6 +39,7 @@ let
               nix = {
                 settings = {
                   sandbox = true;
+                  use-xdg-base-directories = true;
 
                   experimental-features = [
                     "nix-command"
