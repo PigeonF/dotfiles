@@ -1,7 +1,5 @@
 # Downloaded in env.nu
-if ($env.NU_SCRIPTS_CACHE | path join "default_config.nu" | path exists) {
-    source default_config.nu
-}
+source default_config.nu
 
 let custom_config = {
     show_banner: false
@@ -15,14 +13,6 @@ $env.config = ($env.config | merge $custom_config)
 
 # These are written in env.nu
 # Load them last, since they might modify $env.config
-if ($env.NU_SCRIPTS_CACHE | path join "atuin.nu" | path exists) {
-    source atuin.nu
-}
-
-if ($env.NU_SCRIPTS_CACHE | path join "starship.nu" | path exists) {
-    source starship.nu
-}
-
-if ($env.NU_SCRIPTS_CACHE | path join "zoxide.nu" | path exists) {
-    source zoxide.nu
-}
+source atuin.nu
+source starship.nu
+source zoxide.nu

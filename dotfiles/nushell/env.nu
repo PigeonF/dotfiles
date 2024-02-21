@@ -35,6 +35,7 @@ export-env { load-env (with-env-defaults {
     DOCKER_CONFIG: ($env.XDG_DATA_HOME | path join "docker")
     GOPATH: ($env.XDG_DATA_HOME | path join "go")
     NU_SCRIPTS_CACHE: ($env.XDG_CACHE_HOME | path join "nushell" "scripts")
+    NU_SCRIPTS_CACHE_FALLBACK: ($env.XDG_CACHE_HOME | path join "nushell" "scripts" "fallbacks")
     NUPM_CACHE: ($env.XDG_CACHE_HOME | path join "nupm")
     NUPM_HOME: ($env.XDG_DATA_HOME | path join "nupm")
     RUSTUP_HOME: ($env.XDG_DATA_HOME | path join "rustup")
@@ -43,6 +44,7 @@ export-env { load-env (with-env-defaults {
 $env.NU_LIB_DIRS = [
     ($env.NUPM_HOME | path join "modules")
     ($env.NU_SCRIPTS_CACHE)
+    ($env.NU_SCRIPTS_CACHE_FALLBACK)
 ]
 
 $env.NU_PLUGIN_DIRS = [
@@ -75,6 +77,10 @@ if not ($env.NU_SCRIPTS_CACHE | path exists) {
     mkdir $env.NU_SCRIPTS_CACHE
 }
 
+if not ($env.NU_SCRIPTS_CACHE_FALLBACK | path exists) {
+    mkdir $env.NU_SCRIPTS_CACHE_FALLBACK
+}
+
 let default_config = $env.NU_SCRIPTS_CACHE | path join "default_config.nu"
 if not ($default_config | path exists) {
     let version = (nu --version)
@@ -97,6 +103,9 @@ def ensure-command-completion [
         if (has-binary? $command) {
             let shell = $shell | default "nu"
             ^$command init ...$args $shell | save --force $cache
+        } else {
+            # Make sure the `source` in config.nu does not fail
+            echo "" | save --force ($env.NU_SCRIPTS_CACHE_FALLBACK | path join $"($command).nu")
         }
     }
 }
