@@ -20,7 +20,6 @@ function Test-Drives([Config]$config) {
     if (!(Test-Path $config.developmentDrive)) {
         throw [System.IO.FileNotFoundException] "No drive $($config.developmentDrive) found for development!"
     }
-
 }
 
 function Test-Winget() {
@@ -50,9 +49,6 @@ function Install-Base-Dependencies([Config] $config) {
     $null = New-item -Path $config.developmentDrive -Name $programDir -ItemType "directory" -Force
     $null = New-item -Path $config.developmentDrive -Name "bin" -ItemType "directory" -Force
 
-    # First, upgrade to ensure we have the latest version of winget.
-    winget upgrade --all
-
     winget install -e --id Microsoft.PowerShell
 
     # TODO(PigeonF): It seems there is currently no way to change the install destination
@@ -75,43 +71,53 @@ function Install-Base-Dependencies([Config] $config) {
     [Environment]::SetEnvironmentVariable("GIT_SSH", $env:GIT_SSH, [System.EnvironmentVariableTarget]::User)
 }
 
+function Add-EnvPath([string] $path) {
+    $persistedPaths = [Environment]::GetEnvironmentVariable('Path', [System.EnvironmentVariableTarget]::User) -split ';'
+    if ($persistedPaths -notcontains $path) {
+        # Filter out empty lines with Where-Object
+        $persistedPaths = $persistedPaths + $path | Where-Object { $_ }
+        [Environment]::SetEnvironmentVariable('Path', $persistedPaths -join ';', [System.EnvironmentVariableTarget]::User)
+    }
+
+    $envPaths = $env:Path -split ';'
+    if ($envPaths -notcontains $path) {
+        $envPaths = $envPaths + $path | Where-Object { $_ }
+        $env:Path = $envPaths -join ';'
+    }
+}
+
+function Initialize-Env([string]$variable, [string]$value) {
+    if ($null -eq [Environment]::GetEnvironmentVariable($variable, [System.EnvironmentVariableTarget]::User)) {
+        [Environment]::SetEnvironmentVariable($variable, $value, [System.EnvironmentVariableTarget]::User)
+    }
+    if (!(Test-Path "env:$variable")) {
+        New-Item env:$variable -Value "$value" -Force | Out-Null
+    }
+}
+
 function Set-Environment([Config]$config) {
-    $xdgConfigHome = Join-Path $config.developmentDrive config
-    $env:XDG_CONFIG_HOME = $xdgConfigHome
-    [Environment]::SetEnvironmentVariable("XDG_CONFIG_HOME", $env:XDG_CONFIG_HOME, [System.EnvironmentVariableTarget]::User)
+    Initialize-Env "XDG_CONFIG_HOME" (Join-Path $config.developmentDrive "config")
+    Initialize-Env "XDG_CACHE_HOME" (Join-Path $config.developmentDrive "cache")
+    Initialize-Env "XDG_DATA_HOME" (Join-Path $config.developmentDrive "share")
+    Initialize-Env "XDG_STATE_HOME" (Join-Path $config.developmentDrive "state")
+    Initialize-Env "XDG_BIN_HOME" (Join-Path $config.developmentDrive "bin")
+    Initialize-Env "STARSHIP_CONFIG" (Join-Path $env:XDG_CONFIG_HOME "starship.toml")
 
-    $xdgCacheHome = Join-Path $config.developmentDrive cache
-    $env:XDG_CACHE_HOME = $xdgCacheHome
-    [Environment]::SetEnvironmentVariable("XDG_CACHE_HOME", $env:XDG_CACHE_HOME, [System.EnvironmentVariableTarget]::User)
-
-    $xdgDataHome = Join-Path $config.developmentDrive share
-    $env:XDG_DATA_HOME = $xdgDataHome
-    [Environment]::SetEnvironmentVariable("XDG_DATA_HOME", $env:XDG_DATA_HOME, [System.EnvironmentVariableTarget]::User)
-
-    $xdgStateHome = Join-Path $config.developmentDrive state
-    $env:XDG_STATE_HOME = $xdgStateHome
-    [Environment]::SetEnvironmentVariable("XDG_STATE_HOME", $env:XDG_STATE_HOME, [System.EnvironmentVariableTarget]::User)
-
-    $env:STARSHIP_CONFIG = Join-Path $env:XDG_CONFIG_HOME "starship.toml"
-    [Environment]::SetEnvironmentVariable("STARSHIP_CONFIG", $env:STARSHIP_CONFIG, [System.EnvironmentVariableTarget]::User)
-
-    $env:XDG_BIN_HOME = Join-Path (Join-Path $config.developmentDrive 'bin')
-    [Environment]::SetEnvironmentVariable("XDG_BIN_HOME", $env:XDG_BIN_HOME, [System.EnvironmentVariableTarget]::User)
-
-    $env:Path = $env:Path + ';' + $env:XDG_BIN_HOME
-    [Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::User)
+    Add-EnvPath($env:XDG_BIN_HOME)
 }
 
 function Update-Git-Repository([Config]$config) {
     $gitDir = "git\github.com\PigeonF\"
     $null = New-item -Path $config.developmentDrive -Name $gitDir -ItemType "directory" -Force
     $gitDir = Join-Path $config.developmentDrive $gitDir
-    git clone git@github.com:PigeonF/dotfiles.git (Join-Path $gitDir "dotfiles")
+    if (!(Test-Path (Join-Path $gitDir "dotfiles"))) {
+        git clone git@github.com:PigeonF/dotfiles.git (Join-Path $gitDir "dotfiles")
+    }
 }
 
 function Main([Config]$config) {
-    Check-Drives $config
-    Check-Winget
+    Test-Drives $config
+    Test-Winget
 
     Install-Base-Dependencies $config
     Set-Environment $config
