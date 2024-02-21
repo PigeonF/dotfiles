@@ -94,6 +94,7 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
+        "*": "$(capture).license",
         "*.c": "$(capture).h",
         "*.cc": "$(capture).hpp, $(capture).h",
         "*.cpp": "$(capture).hpp, $(capture).h",
