@@ -95,7 +95,10 @@ function Set-Environment([Config]$config) {
     $env:STARSHIP_CONFIG = Join-Path $env:XDG_CONFIG_HOME "starship.toml"
     [Environment]::SetEnvironmentVariable("STARSHIP_CONFIG", $env:STARSHIP_CONFIG, [System.EnvironmentVariableTarget]::User)
 
-    $env:Path = $env:Path + ';' + (Join-Path $config.developmentDrive 'bin')
+    $env:XDG_BIN_HOME = Join-Path (Join-Path $config.developmentDrive 'bin')
+    [Environment]::SetEnvironmentVariable("XDG_BIN_HOME", $env:XDG_BIN_HOME, [System.EnvironmentVariableTarget]::User)
+
+    $env:Path = $env:Path + ';' + $env:XDG_BIN_HOME
     [Environment]::SetEnvironmentVariable("Path", $env:Path, [System.EnvironmentVariableTarget]::User)
 }
 

@@ -12,13 +12,6 @@ export-env {
     }
 }
 
-export-env { load-env {
-    XDG_CACHE_HOME: ($env.XDG_CACHE_HOME? | default ($nu.home-path | path join ".cache"))
-    XDG_CONFIG_HOME: ($env.XDG_CONFIG_HOME? | default ($nu.home-path | path join ".config"))
-    XDG_DATA_HOME: ($env.XDG_DATA_HOME? | default ($nu.home-path | path join ".local" "share"))
-    XDG_STATE_HOME: ($env.XDG_STATE_HOME? | default ($nu.home-path | path join ".local" "state"))
-} }
-
 def with-env-defaults [defaults: record] nothing -> record {
     $defaults
     | transpose key value
@@ -28,6 +21,14 @@ def with-env-defaults [defaults: record] nothing -> record {
     }
     | transpose -i -r -d
 }
+
+export-env { load-env (with-env-defaults {
+    XDG_CACHE_HOME: ($nu.home-path | path join ".cache")
+    XDG_CONFIG_HOME: ($nu.home-path | path join ".config")
+    XDG_DATA_HOME: ($nu.home-path | path join ".local" "share")
+    XDG_STATE_HOME: ($nu.home-path | path join ".local" "state")
+    XDG_BIN_HOME: ($nu.home-path | path join ".local" "bin")
+}) }
 
 export-env { load-env (with-env-defaults {
     CARGO_HOME: ($env.XDG_DATA_HOME | path join "cargo")
@@ -56,7 +57,7 @@ path add ($env.CARGO_HOME | path join "bin")
 path add ($env.GOPATH | path join "bin")
 path add ($env.NUPM_HOME | path join "scripts")
 path add ($env.XDG_STATE_HOME | path join "nix/profile/bin")
-path add ($env.HOME | path join ".local" "bin")
+path add $env.XDG_BIN_HOME
 $env.PATH = ($env.PATH | uniq)
 
 $env.SHELL = $nu.current-exe
