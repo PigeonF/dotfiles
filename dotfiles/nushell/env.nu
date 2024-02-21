@@ -50,6 +50,10 @@ $env.NU_PLUGIN_DIRS = [
     ($env.NUPM_HOME | path join "plugins/bin")
 ]
 
+def is-windows? []: nothing -> bool {
+    ($nu.os-info | get family) == "windows"
+}
+
 use std ["path add"]
 
 path add /nix/var/nix/profiles/default/bin
@@ -58,7 +62,12 @@ path add ($env.GOPATH | path join "bin")
 path add ($env.NUPM_HOME | path join "scripts")
 path add ($env.XDG_STATE_HOME | path join "nix/profile/bin")
 path add $env.XDG_BIN_HOME
-$env.PATH = ($env.PATH | uniq)
+
+if (is-windows?) {
+    $env.Path = ($env.Path | uniq)
+} else {
+    $env.PATH = ($env.PATH | uniq)
+}
 
 $env.SHELL = $nu.current-exe
 
