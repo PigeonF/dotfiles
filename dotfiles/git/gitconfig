@@ -135,5 +135,9 @@
 [branchless "core"]
     mainBranch = "main"
 
+[branchless "test"]
+    strategy = worktree
+    jobs = 0
+
 [branchless "next"]
     interactive = true
