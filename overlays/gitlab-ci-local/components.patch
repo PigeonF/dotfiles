@@ -4,7 +4,7 @@ index dfa3a2f4b8706546..9c0c62a4b5789897 100644
 +++ b/src/parser-includes.ts
 @@ -61,6 +61,8 @@ export class ParserIncludes {
          await Promise.all(promises);
-
+ 
          for (const value of include) {
 +            const inputs = value["inputs"] || {};
 +
@@ -25,7 +25,7 @@ index dfa3a2f4b8706546..9c0c62a4b5789897 100644
                  for (const fileValue of Array.isArray(value["file"]) ? value["file"] : [value["file"]]) {
 -                    const fileDoc = await Parser.loadYaml(`${cwd}/${stateDir}/includes/${gitData.remote.host}/${value["project"]}/${value["ref"] || "HEAD"}/${fileValue}`);
 +                    const fileDoc = await Parser.loadYaml(`${cwd}/${stateDir}/includes/${gitData.remote.host}/${value["project"]}/${value["ref"] || "HEAD"}/${fileValue}`, inputs);
-
+ 
                      // Expand local includes inside a "project"-like include
                      fileDoc["include"] = this.expandInclude(fileDoc["include"], opts.variables);
 @@ -95,11 +97,11 @@ export class ParserIncludes {
@@ -43,30 +43,38 @@ index dfa3a2f4b8706546..9c0c62a4b5789897 100644
              } else {
                  throw new AssertionError({message: `Didn't understand include ${JSON.stringify(value)}`});
 diff --git a/src/parser.ts b/src/parser.ts
-index d41c5caac132ebe8..e6b81689233cf02a 100644
+index d41c5caac132ebe8..4e48fe0395c52a6c 100644
 --- a/src/parser.ts
 +++ b/src/parser.ts
-@@ -187,14 +187,33 @@ export class Parser {
+@@ -187,14 +187,41 @@ export class Parser {
          });
      }
-
+ 
 -    static async loadYaml (filePath: string): Promise<any> {
-+    static async loadYaml (filePath: string, inputs: {[key: string] : boolean | string | number} = {}): Promise<any> {
++    static async loadYaml (filePath: string, inputs: {[key: string]: boolean | string | number} = {}): Promise<any> {
          const ymlPath = `${filePath}`;
          if (!fs.existsSync(ymlPath)) {
              return {};
          }
-
+ 
++        const referenceType = new yaml.Type("!reference", {
++            kind: "sequence",
++            construct: function (data) {
++                return {referenceData: data};
++            },
++        });
++        const schema = yaml.DEFAULT_SCHEMA.extend([referenceType]);
          const fileContent = await fs.readFile(`${filePath}`, "utf8");
 -        const fileSplit = fileContent.split(/\r?\n/g);
 +        const documents = fileContent.split(/(?:\r?\n|^)---\r?\n/g);
++        const firstYaml = yaml.load(documents[0], {schema}) || {};
 +        // If file begins with `---`, we have one empty document that we disregard
-+        if (documents[0].length == 0) {
++        if (Object.keys(firstYaml).length === 0) {
 +            documents.splice(0, 1);
 +        }
-+        assert(documents.length <= 2, `GitLab CI file can at most have 2 documents`);
++        assert(documents.length <= 2, "GitLab CI file can at most have 2 documents");
 +
-+        const preamble: any = documents.length == 1 ? {"spec": { "inputs": {}}} : yaml.load(documents[0]);
++        const preamble: any = documents.length == 1 ? {"spec": {"inputs": {}}} : yaml.load(documents[0]);
 +        let document = documents[documents.length == 1 ? 0 : 1];
 +        assert(preamble["spec"] && preamble["spec"]["inputs"],
 +            "Multi-document GitLab CI file requires spec:inputs in the first document");
@@ -80,14 +88,32 @@ index d41c5caac132ebe8..e6b81689233cf02a 100644
 +
 +        const fileSplit = document.split(/\r?\n/g);
          const fileSplitClone = fileSplit.slice();
-
+ 
          let interactiveMatch = null;
+@@ -234,13 +261,6 @@ export class Parser {
+             index++;
+         }
+ 
+-        const referenceType = new yaml.Type("!reference", {
+-            kind: "sequence",
+-            construct: function (data) {
+-                return {referenceData: data};
+-            },
+-        });
+-        const schema = yaml.DEFAULT_SCHEMA.extend([referenceType]);
+         return yaml.load(fileSplitClone.join("\n"), {schema}) || {};
+     }
+ 
 diff --git a/tests/test-cases/include-local-inputs/.gitlab-ci.yml b/tests/test-cases/include-local-inputs/.gitlab-ci.yml
 new file mode 100644
-index 0000000000000000..813e7e1a31f355dc
+index 0000000000000000..e3d7bf78aa33c9df
 --- /dev/null
 +++ b/tests/test-cases/include-local-inputs/.gitlab-ci.yml
-@@ -0,0 +1,9 @@
+@@ -0,0 +1,13 @@
++# Some comments
++
++# Some more comments
++---
 +include:
 +  - local: template.yml
 +    inputs:
@@ -99,15 +125,15 @@ index 0000000000000000..813e7e1a31f355dc
 +  - local: template-with-defaults.yml
 diff --git a/tests/test-cases/include-local-inputs/integration.include-local-inputs.test.ts b/tests/test-cases/include-local-inputs/integration.include-local-inputs.test.ts
 new file mode 100644
-index 0000000000000000..c1df93adba947fbf
+index 0000000000000000..799ab0b279f33f83
 --- /dev/null
 +++ b/tests/test-cases/include-local-inputs/integration.include-local-inputs.test.ts
 @@ -0,0 +1,56 @@
-+import { WriteStreamsMock } from "../../../src/write-streams";
-+import { handler } from "../../../src/handler";
++import {WriteStreamsMock} from "../../../src/write-streams";
++import {handler} from "../../../src/handler";
 +import chalk from "chalk";
-+import { initSpawnSpy } from "../../mocks/utils.mock";
-+import { WhenStatics } from "../../mocks/when-statics";
++import {initSpawnSpy} from "../../mocks/utils.mock";
++import {WhenStatics} from "../../mocks/when-statics";
 +
 +beforeAll(() => {
 +    initSpawnSpy(WhenStatics.all);
