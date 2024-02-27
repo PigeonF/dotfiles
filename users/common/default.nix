@@ -43,6 +43,7 @@
         lldb
         nil
         nixfmt-rfc-style
+        regctl
         rustup
         shfmt
         skopeo
