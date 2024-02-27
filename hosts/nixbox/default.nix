@@ -125,4 +125,9 @@
       isNormalUser = true;
     };
   };
+
+  nix.settings.trusted-users = [
+    "root"
+    "developer"
+  ];
 }

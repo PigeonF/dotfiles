@@ -17,7 +17,10 @@
     };
   };
 
-  nix.settings.trusted-users = [ "pigeon" ];
+  nix.settings.trusted-users = [
+    "root"
+    "pigeon"
+  ];
 
   homebrew = {
     enable = true;
