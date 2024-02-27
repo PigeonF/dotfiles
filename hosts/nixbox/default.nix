@@ -21,6 +21,7 @@
       "GITLAB_COM_PAT" = { };
       "RENOVATE_BOT_RUNNER_PROJECT_ID" = { };
       "RENOVATE_TOKEN" = { };
+      "CACHIX_AUTH_TOKEN" = { };
     };
 
     templates."gitlab-ci-local/variables.yml" = {
@@ -39,6 +40,7 @@
           CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
           CI_PIPELINE_SOURCE: merge_request_event
           CI_MERGE_REQUEST_TARGET_BRANCH_NAME: main
+          CACHIX_AUTH_TOKEN: ${config.sops.placeholder."CACHIX_AUTH_TOKEN"}
 
         project:
           ${config.sops.placeholder."GCL_PROJ_1_PATH"}:
