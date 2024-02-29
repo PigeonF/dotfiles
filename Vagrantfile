@@ -5,7 +5,7 @@ def virtualbox(cfg, name:, memory:, cpus:, kvm: true)
     v.cpus = cpus
 
     if kvm
-      v.customize ["modifyvm", :id, "--paravirtprovider", "kvm", "--nested-hw-virt", "on"]
+      v.customize ["modifyvm", :id, "--paravirtprovider", "kvm"]
     end
   end
 end
@@ -71,6 +71,9 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision "Setup SSH", type: "shell" do |shell|
     shell.inline = <<-SHELL
+      # We need to create this file now, because the trigger will run every time
+      touch /tmp/nixos-rebuild-switch.bash
+
       if ! type git &> /dev/null; then
         nix-env -iA nixos.git
       fi
@@ -100,7 +103,7 @@ Vagrant.configure("2") do |config|
     gitlab_runner.vm.hostname = "gitlab-runner"
     gitlab_runner.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
 
-    virtualbox(gitlab_runner, name: "GitLab Runner", memory: 4096, cpus: 2)
+    virtualbox(gitlab_runner, name: "GitLab Runner", memory: 8192, cpus: 4)
     sops(gitlab_runner, Secret.gitlab_runner_sops)
     disksize(gitlab_runner, "128GB")
     nixos(gitlab_runner, "gitlab-runner")
