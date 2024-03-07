@@ -41,8 +41,9 @@
         diffoscopeMinimal
         dive
         dprint
-        glab
         gh
+        gitlab-ci-local
+        glab
         lldb
         nil
         nixfmt-rfc-style
