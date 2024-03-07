@@ -79,6 +79,8 @@
       RUSTUP_HOME = "${XDG_DATA_HOME}/rustup";
 
       HISTFILE = "${XDG_STATE_HOME}/bash_history.txt";
+
+      GCL_ARTIFACTS_TO_SOURCE = "false";
     };
   };
 
