@@ -7,6 +7,7 @@
 {
   imports = [
     ../../dotfiles/atuin
+    ../../dotfiles/bash
     ../../dotfiles/bat
     ../../dotfiles/direnv
     ../../dotfiles/erdtree
@@ -27,6 +28,8 @@
     manpages.enable = false;
     json.enable = false;
   };
+
+  programs.home-manager.enable = true;
 
   home = {
     inherit stateVersion;
