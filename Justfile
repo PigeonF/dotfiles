@@ -18,5 +18,5 @@ build:
 switch:
   {{if os() == "linux" { "sudo nixos"  } else { "darwin"  } }}-rebuild switch --verbose --print-build-logs --show-trace --flake .
 
-hm:
-  home-manager switch --verbose --print-build-logs --show-trace --flake .
+hm TARGET="":
+  home-manager switch --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
