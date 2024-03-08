@@ -57,7 +57,8 @@
     "remote.SSH.remotePlatform": {
         "Hesperidium": "linux",
         "nixbox": "linux",
-        "gitlab-runner": "linux"
+        "gitlab-runner": "linux",
+        "geonosis": "linux"
     },
     "json.schemas": [
         {
