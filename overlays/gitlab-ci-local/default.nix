@@ -8,21 +8,18 @@
 buildNpmPackage rec {
   pname = "gitlab-ci-local";
   # Includes components implementation
-  version = "0e3602b530bbad48c96006f589022095ae6b58a6"; # "4.46.1";
+  version = "c5524204d56101dbab8ed8db3c70f5dd72891dab"; # "4.46.1";
 
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
     rev = "${version}";
-    hash = "sha256-qtXCYv3M2HxG8LzCEw4mUOWgEmdivo4O8mhKBSaJN80=";
+    hash = "sha256-gjVwbXlgF96nNxSoBn/kBUOdNZwQxLQwWXDMotpqfnI=";
   };
 
-  patches = [
-    ./dotenv-services.patch
-    ./include-multiple.patch
-  ];
+  patches = [ ./dotenv-services.patch ];
 
-  npmDepsHash = "sha256-49pGubOt5XZq4cYXAtmthkDjiH/mQz707PCSrO7SKnU=";
+  npmDepsHash = "sha256-55riOAlUeJjv/BRCVb1K+GS3haVRYXGUc7KpaSRboJg=";
 
   nativeBuildInputs = [
     git
