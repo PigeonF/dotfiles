@@ -8,6 +8,9 @@
     ./variables.nix
   ];
 
+  system.stateVersion = "24.05";
+  networking.hostName = "nixbox";
+
   sops = {
     # Inserted via Vagrant
     age.keyFile = "/var/lib/sops-nix/keys.txt";

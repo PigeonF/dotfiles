@@ -1,4 +1,4 @@
-{ inputs, ... }:
+{ config, inputs, ... }:
 {
   imports = [
     "${inputs.nixpkgs}/nixos/modules/profiles/hardened.nix"
@@ -7,6 +7,9 @@
     ./vagrant.nix
     ./services
   ];
+
+  system.stateVersion = "24.05";
+  networking.hostName = "gitlab-runner";
 
   # Inserted via Vagrant
   sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
@@ -35,4 +38,6 @@
 
   nix.gc.automatic = true;
   nix.optimise.automatic = true;
+
+  home-manager.users.vagrant = import ./users/vagrant.nix { inherit (config.system) stateVersion; };
 }

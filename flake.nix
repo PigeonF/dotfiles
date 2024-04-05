@@ -39,12 +39,18 @@
   };
 
   outputs =
-    inputs@{ self, flake-parts, ... }:
+    inputs:
     let
       lib = import ./lib { inherit inputs; };
     in
-    flake-parts.lib.mkFlake { inherit inputs; } {
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
+
+      imports = [
+        ./modules/flake-parts/nixbox.nix
+        ./modules/flake-parts/gitlab-runner.nix
+      ];
+
       flake = {
         overlays = import ./overlays inputs;
       };
@@ -52,7 +58,7 @@
       perSystem =
         { inputs', pkgs, ... }:
         {
-          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend self.overlays.additions;
+          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.additions;
 
           formatter = pkgs.nixfmt-rfc-style;
 
@@ -79,27 +85,6 @@
         };
     }
     // {
-      nixosConfigurations = lib.mkNixOsConfigurations {
-        nixbox = {
-          system = "x86_64-linux";
-          config = ./hosts/nixbox;
-          extraModules = [ inputs.sops-nix.nixosModules.sops ];
-          home =
-            { config, ... }:
-            {
-              home-manager.users.developer = (import ./hosts/nixbox/users/developer) config;
-            };
-        };
-        gitlab-runner = {
-          system = "x86_64-linux";
-          config = ./hosts/gitlab-runner;
-          extraModules = [ inputs.sops-nix.nixosModules.sops ];
-          home = {
-            home-manager.users.vagrant = import ./hosts/gitlab-runner/users/vagrant.nix;
-          };
-        };
-      };
-
       darwinConfigurations = lib.mkDarwinConfigurations {
         kamino = {
           system = "aarch64-darwin";
@@ -135,6 +120,12 @@
           geonosis = configurations.x86_64-linux.pigeon;
         };
 
-      checks = lib.forEachSystem (pkgs: import ./checks { inherit self pkgs; });
+      checks = lib.forEachSystem (
+        pkgs:
+        import ./checks {
+          inherit (inputs) self;
+          inherit pkgs;
+        }
+      );
     };
 }
