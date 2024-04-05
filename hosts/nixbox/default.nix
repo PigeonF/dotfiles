@@ -135,4 +135,9 @@
     "root"
     "developer"
   ];
+
+  home-manager.users.developer = import ./users/developer {
+    inherit (config.system) stateVersion;
+    inherit (config.nixbox) registryHost;
+  };
 }

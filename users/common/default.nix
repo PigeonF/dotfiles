@@ -1,9 +1,4 @@
-{
-  inputs,
-  pkgs,
-  stateVersion,
-  ...
-}:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../../dotfiles/atuin
@@ -32,17 +27,15 @@
   programs.home-manager.enable = true;
 
   home = {
-    inherit stateVersion;
-
     packages = builtins.attrValues {
       inherit (pkgs)
-        committed
+        # committed
         crane
         diffoscopeMinimal
         dive
         dprint
         gh
-        gitlab-ci-local
+        # gitlab-ci-local
         glab
         lldb
         nil
