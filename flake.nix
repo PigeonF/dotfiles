@@ -1,6 +1,17 @@
 {
   description = "PigeonF's configuration files";
 
+  nixConfig = {
+    substituters = [
+      "https://cache.nixos.org"
+      "https://pigeonf.cachix.org"
+    ];
+    trusted-public-keys = [
+      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
+      "pigeonf.cachix.org-1:YS6DrTg749PUeiYFojsT6CbwQnvPMnjtB3crKckdNvw="
+    ];
+  };
+
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     # https://github.com/NixOS/nixpkgs/pull/258250
