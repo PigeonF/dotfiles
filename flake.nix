@@ -43,10 +43,13 @@
     let
       lib = import ./lib { inherit inputs; };
     in
-    flake-parts.lib.mkFlake { inherit inputs; } { systems = import inputs.systems; }
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = import inputs.systems;
+      flake = {
+        overlays = import ./overlays inputs;
+      };
+    }
     // {
-      overlays = import ./overlays { inherit inputs; };
-
       nixosConfigurations = lib.mkNixOsConfigurations {
         nixbox = {
           system = "x86_64-linux";
