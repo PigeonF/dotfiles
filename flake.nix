@@ -55,6 +55,10 @@
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend self.overlays.additions;
 
           formatter = pkgs.nixfmt-rfc-style;
+
+          packages = {
+            inherit (pkgs) committed gitlab-ci-local;
+          };
         };
     }
     // {
@@ -130,11 +134,6 @@
         {
           geonosis = configurations.x86_64-linux.pigeon;
         };
-
-      packages = lib.forEachSystem (pkgs: {
-        committed = pkgs.callPackage ./overlays/committed { };
-        gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
-      });
 
       checks = lib.forEachSystem (pkgs: import ./checks { inherit self pkgs; });
     };
