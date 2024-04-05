@@ -48,6 +48,14 @@
       flake = {
         overlays = import ./overlays inputs;
       };
+
+      perSystem =
+        { inputs', pkgs, ... }:
+        {
+          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend self.overlays.additions;
+
+          formatter = pkgs.nixfmt-rfc-style;
+        };
     }
     // {
       nixosConfigurations = lib.mkNixOsConfigurations {
@@ -127,8 +135,6 @@
         committed = pkgs.callPackage ./overlays/committed { };
         gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
       });
-
-      formatter = lib.forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
 
       checks = lib.forEachSystem (pkgs: import ./checks { inherit self pkgs; });
     };
