@@ -58,7 +58,7 @@ function Main() {
 
     # Nushell
     $NuDirSource = Join-Path $DotfilesDir nushell
-    $NuDirTarget = Join-Path $env:APPDATA nushell
+    $NuDirTarget = Join-Path $XdgConfigHome nushell
     HandleSymlink (Join-Path $NuDirTarget "config.nu") (Join-Path $NuDirSource "config.nu")
     HandleSymlink (Join-Path $NuDirTarget "env.nu") (Join-Path $NuDirSource "env.nu")
     HandleSymlink (Join-Path $NuDirTarget "login.nu") (Join-Path $NuDirSource "login.nu")
