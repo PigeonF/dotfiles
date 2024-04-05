@@ -31,14 +31,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.nixpkgs-stable.follows = "nixpkgs-stable";
     };
+    systems.url = "github:nix-systems/default";
+    flake-parts = {
+      url = "github:hercules-ci/flake-parts";
+      inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { self, ... }@inputs:
+    inputs@{ self, flake-parts, ... }:
     let
       lib = import ./lib { inherit inputs; };
     in
-    {
+    flake-parts.lib.mkFlake { inherit inputs; } { systems = import inputs.systems; }
+    // {
       overlays = import ./overlays { inherit inputs; };
 
       nixosConfigurations = lib.mkNixOsConfigurations {
