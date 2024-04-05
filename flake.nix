@@ -59,6 +59,23 @@
           packages = {
             inherit (pkgs) committed gitlab-ci-local;
           };
+
+          devShells = {
+            default = pkgs.mkShell {
+              name = "pigeonf-dotfiles";
+              buildInputs = builtins.attrValues {
+                inherit (pkgs)
+                  age
+                  deadnix
+                  just
+                  nil
+                  nixfmt-rfc-style
+                  sops
+                  statix
+                  ;
+              };
+            };
+          };
         };
     }
     // {
@@ -92,23 +109,6 @@
           };
         };
       };
-
-      devShells = lib.forEachSystem (pkgs: {
-        default = pkgs.mkShell {
-          name = "dotfiles";
-          buildInputs = builtins.attrValues {
-            inherit (pkgs)
-              age
-              deadnix
-              just
-              nil
-              nixfmt-rfc-style
-              sops
-              statix
-              ;
-          };
-        };
-      });
 
       homeConfigurations =
         let
