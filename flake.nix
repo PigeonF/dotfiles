@@ -61,58 +61,52 @@
         };
       };
 
-      devShells = lib.forEachSystem (
-        pkgs: {
-          default = pkgs.mkShell {
-            name = "dotfiles";
-            buildInputs = builtins.attrValues {
-              inherit (pkgs)
-                age
-                deadnix
-                just
-                nil
-                nixfmt-rfc-style
-                sops
-                statix
-                ;
-            };
+      devShells = lib.forEachSystem (pkgs: {
+        default = pkgs.mkShell {
+          name = "dotfiles";
+          buildInputs = builtins.attrValues {
+            inherit (pkgs)
+              age
+              deadnix
+              just
+              nil
+              nixfmt-rfc-style
+              sops
+              statix
+              ;
           };
-        }
-      );
+        };
+      });
 
       homeConfigurations =
         let
-          configurations = lib.forEachSystem (
-            pkgs: {
-              pigeon = inputs.home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
+          configurations = lib.forEachSystem (pkgs: {
+            pigeon = inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
 
-                extraSpecialArgs = {
-                  inherit inputs;
-                  stateVersion = "24.05";
-                };
-
-                modules = [
-                  ./users/common
-                  {
-                    home.username = "pigeon";
-                    home.homeDirectory = "/home/pigeon";
-                  }
-                ];
+              extraSpecialArgs = {
+                inherit inputs;
+                stateVersion = "24.05";
               };
-            }
-          );
+
+              modules = [
+                ./users/common
+                {
+                  home.username = "pigeon";
+                  home.homeDirectory = "/home/pigeon";
+                }
+              ];
+            };
+          });
         in
         {
           geonosis = configurations.x86_64-linux.pigeon;
         };
 
-      packages = lib.forEachSystem (
-        pkgs: {
-          committed = pkgs.callPackage ./overlays/committed { };
-          gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
-        }
-      );
+      packages = lib.forEachSystem (pkgs: {
+        committed = pkgs.callPackage ./overlays/committed { };
+        gitlab-ci-local = pkgs.callPackage ./overlays/gitlab-ci-local { };
+      });
 
       formatter = lib.forEachSystem (pkgs: pkgs.nixfmt-rfc-style);
 
