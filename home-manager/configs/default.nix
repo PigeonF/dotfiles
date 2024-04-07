@@ -17,10 +17,10 @@
       {
         home.packages = builtins.attrValues {
           inherit (pkgs)
-            # committed
+            committed
             dprint
             gh
-            # gitlab-ci-local
+            gitlab-ci-local
             glab
             lldb
             ;
