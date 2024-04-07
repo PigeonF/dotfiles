@@ -47,12 +47,21 @@
       systems = import inputs.systems;
 
       imports = [
+        ./all-modules.nix
+
+        ./home-manager
+
         ./modules/flake-parts/nixbox.nix
         ./modules/flake-parts/gitlab-runner.nix
       ];
 
       flake = {
         overlays = import ./overlays inputs;
+
+        flakeModules = {
+          default = ./all-modules.nix;
+          homeModules = ./extras/homeModules.nix;
+        };
 
         darwinConfigurations = lib.mkDarwinConfigurations {
           kamino = {
@@ -97,7 +106,7 @@
           };
 
           legacyPackages.homeConfigurations = {
-            geonosis = mkHomeConfiguration [ inputs.self.homeModules.pigeon ];
+            pigeon = mkHomeConfiguration [ inputs.self.homeModules.pigeon ];
           };
 
           devShells = {
