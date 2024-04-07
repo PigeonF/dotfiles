@@ -19,12 +19,17 @@
 
       system.stateVersion = "24.05";
 
-      boot.loader.grub = {
-        devices = [ "/dev/nvme0n1" ];
+      boot = {
+        initrd.availableKernelModules = [ "nvme" ];
+        kernelModules = [ "kvm-intel" ];
 
-        efiSupport = true;
-        efiInstallAsRemovable = true;
+        loader.grub = {
+          efiSupport = true;
+          efiInstallAsRemovable = true;
+        };
       };
+
+      hardware.cpu.intel.updateMicrocode = true;
 
       services.openssh.enable = true;
       users.users.pigeon.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];

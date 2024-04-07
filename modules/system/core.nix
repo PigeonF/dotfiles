@@ -1,10 +1,14 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 {
+  networking = {
+    useDHCP = lib.mkDefault true;
+  };
+
   time = {
-    timeZone = "Europe/Berlin";
+    timeZone = lib.mkDefault "Europe/Berlin";
   };
 
   system = {
-    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+    configurationRevision = lib.mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
   };
 }
