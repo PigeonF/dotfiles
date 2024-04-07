@@ -53,6 +53,49 @@
 
       flake = {
         overlays = import ./overlays inputs;
+
+        darwinConfigurations = lib.mkDarwinConfigurations {
+          kamino = {
+            system = "aarch64-darwin";
+            config = ./hosts/kamino;
+            home = {
+              home-manager.users.pigeon = import ./hosts/kamino/users/pigeon.nix;
+            };
+          };
+        };
+
+        homeConfigurations =
+          let
+            configurations = lib.forEachSystem (pkgs: {
+              pigeon = inputs.home-manager.lib.homeManagerConfiguration {
+                inherit pkgs;
+
+                extraSpecialArgs = {
+                  inherit inputs;
+                  stateVersion = "24.05";
+                };
+
+                modules = [
+                  ./users/common
+                  {
+                    home.username = "pigeon";
+                    home.homeDirectory = "/home/pigeon";
+                  }
+                ];
+              };
+            });
+          in
+          {
+            geonosis = configurations.x86_64-linux.pigeon;
+          };
+
+        checks = lib.forEachSystem (
+          pkgs:
+          import ./checks {
+            inherit (inputs) self;
+            inherit pkgs;
+          }
+        );
       };
 
       perSystem =
@@ -83,49 +126,5 @@
             };
           };
         };
-    }
-    // {
-      darwinConfigurations = lib.mkDarwinConfigurations {
-        kamino = {
-          system = "aarch64-darwin";
-          config = ./hosts/kamino;
-          home = {
-            home-manager.users.pigeon = import ./hosts/kamino/users/pigeon.nix;
-          };
-        };
-      };
-
-      homeConfigurations =
-        let
-          configurations = lib.forEachSystem (pkgs: {
-            pigeon = inputs.home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-
-              extraSpecialArgs = {
-                inherit inputs;
-                stateVersion = "24.05";
-              };
-
-              modules = [
-                ./users/common
-                {
-                  home.username = "pigeon";
-                  home.homeDirectory = "/home/pigeon";
-                }
-              ];
-            };
-          });
-        in
-        {
-          geonosis = configurations.x86_64-linux.pigeon;
-        };
-
-      checks = lib.forEachSystem (
-        pkgs:
-        import ./checks {
-          inherit (inputs) self;
-          inherit pkgs;
-        }
-      );
     };
 }
