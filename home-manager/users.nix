@@ -12,7 +12,7 @@
           home = {
             username = lib.mkDefault name;
             homeDirectory = lib.mkDefault (if pkgs.stdenv.isDarwin then "/Users/${name}" else "/home/${name}");
-            stateVersion = lib.mkDefault "24.05";
+            stateVersion = "24.05";
           };
         };
     in

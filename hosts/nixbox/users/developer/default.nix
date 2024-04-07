@@ -12,6 +12,8 @@
       }:
       {
         home = {
+          stateVersion = "24.05";
+
           packages = builtins.attrValues {
             inherit (pkgs)
               gdb

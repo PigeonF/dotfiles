@@ -36,6 +36,11 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
   };
 
   outputs =
@@ -50,6 +55,7 @@
         ./all-modules.nix
 
         ./home-manager
+        ./nixos
 
         ./modules/flake-parts/nixbox.nix
         ./modules/flake-parts/gitlab-runner.nix
@@ -62,6 +68,31 @@
           default = ./all-modules.nix;
           homeModules = ./extras/homeModules.nix;
         };
+
+        nixosConfigurations =
+          let
+            mkNixosConfiguration =
+              system: modules:
+              inputs.nixpkgs.lib.nixosSystem {
+                inherit system;
+
+                specialArgs = {
+                  inherit inputs;
+                };
+
+                modules = modules ++ [
+                  (
+                    { lib, ... }:
+                    {
+                      system.stateVersion = lib.mkDefault "24.05";
+                    }
+                  )
+                ];
+              };
+          in
+          {
+            geonosis = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.geonosis ];
+          };
 
         darwinConfigurations = lib.mkDarwinConfigurations {
           kamino = {
@@ -77,16 +108,6 @@
       perSystem =
         { inputs', pkgs, ... }:
         let
-          mkHomeConfiguration =
-            modules:
-            inputs.home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-
-              inherit modules;
-            };
           inherit (inputs) self;
           inherit (pkgs) lib runCommand;
         in
@@ -99,9 +120,22 @@
             inherit (pkgs) committed gitlab-ci-local;
           };
 
-          legacyPackages.homeConfigurations = {
-            pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
-          };
+          legacyPackages.homeConfigurations =
+            let
+              mkHomeConfiguration =
+                modules:
+                inputs.home-manager.lib.homeManagerConfiguration {
+                  inherit pkgs;
+                  extraSpecialArgs = {
+                    inherit inputs;
+                  };
+
+                  inherit modules;
+                };
+            in
+            {
+              pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
+            };
 
           checks = {
             deadnix = runCommand "check-deadnix" { } ''

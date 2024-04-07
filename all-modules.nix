@@ -1,1 +1,6 @@
-{ imports = [ ./extras/homeModules.nix ]; }
+{
+  imports = [
+    ./extras/home-manager.nix
+    ./extras/homeModules.nix
+  ];
+}
