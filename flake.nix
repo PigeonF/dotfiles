@@ -75,6 +75,18 @@
 
       perSystem =
         { inputs', pkgs, ... }:
+        let
+          mkHomeConfiguration =
+            modules:
+            inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+
+              inherit modules;
+            };
+        in
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.additions;
 
@@ -85,22 +97,7 @@
           };
 
           legacyPackages.homeConfigurations = {
-            geonosis = inputs.home-manager.lib.homeManagerConfiguration {
-              inherit pkgs;
-
-              extraSpecialArgs = {
-                inherit inputs;
-              };
-
-              modules = [
-                ./users/common
-                {
-                  home.username = "pigeon";
-                  home.homeDirectory = "/home/pigeon";
-                  home.stateVersion = "24.05";
-                }
-              ];
-            };
+            geonosis = mkHomeConfiguration [ inputs.self.homeModules.pigeon ];
           };
 
           devShells = {
