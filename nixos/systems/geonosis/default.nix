@@ -13,10 +13,11 @@
 
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
-        inputs.self.nixosModules.sshRoot
         inputs.self.nixosModules.pigeon
         ./disk.nix
       ];
+
+      system.stateVersion = "24.05";
 
       boot.loader.grub = {
         devices = [ "/dev/nvme0" ];
@@ -25,8 +26,7 @@
         efiInstallAsRemovable = true;
       };
 
-      system.stateVersion = "24.05";
-
+      services.openssh.enable = true;
       users.users.pigeon.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
       users.users.root.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
     };

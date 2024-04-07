@@ -24,22 +24,11 @@
             home = "/home/pigeon";
             createHome = true;
             useDefaultShell = true;
-            openssh.authorizedKeys.keys = [
-              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
-            ];
             isNormalUser = true;
           };
         };
 
         nix.settings.trusted-users = [ "pigeon" ];
       };
-
-    sshRoot = _: {
-      users.users.root.openssh.authorizedKeys.keys = [
-        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
-      ];
-
-      services.openssh.enable = true;
-    };
   };
 }
