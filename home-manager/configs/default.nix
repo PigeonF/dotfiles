@@ -1,30 +1,22 @@
 {
   flake.homeModules.configs = {
+    atuin = import ./atuin.nix;
     bash = import ./bash.nix;
     bat = import ./bat.nix;
     containers = import ./containers.nix;
     direnv = import ./direnv.nix;
+    erdtree = import ./erdtree.nix;
     ghq = import ./ghq.nix;
+    git = import ./git.nix;
+    gitlab-ci-local = import ./gitlab-ci-local.nix;
+    helix = import ./helix.nix;
     just = import ./just.nix;
     nix = import ./nix.nix;
+    nushell = import ./nushell.nix;
     rust = import ./rust.nix;
+    starship = import ./starship.nix;
     zellij = import ./zellij.nix;
     zoxide = import ./zoxide.nix;
     zsh = import ./zsh.nix;
-
-    tools =
-      { pkgs, ... }:
-      {
-        home.packages = builtins.attrValues {
-          inherit (pkgs)
-            committed
-            dprint
-            gh
-            gitlab-ci-local
-            glab
-            lldb
-            ;
-        };
-      };
   };
 }

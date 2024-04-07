@@ -1,3 +1,5 @@
+_:
+
 {
   programs.atuin = {
     enable = true;
@@ -6,5 +8,5 @@
     enableNushellIntegration = false;
   };
 
-  xdg.configFile."atuin/config.toml".source = ./atuin.toml;
+  xdg.configFile."atuin/config.toml".source = ../../dotfiles/atuin/atuin.toml;
 }

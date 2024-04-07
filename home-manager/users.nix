@@ -1,43 +1,62 @@
-{ inputs, ... }:
+{ inputs, lib, ... }:
 
 {
-  flake = {
-    homeModules =
-      let
-        mkUser =
-          name: imports:
-          { pkgs, ... }:
-          {
-            inherit imports;
+  flake.homeModules.users =
+    let
+      mkUser =
+        name: imports:
+        { pkgs, ... }:
+        {
+          inherit imports;
 
-            home = {
-              username = name;
-              homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${name}" else "/home/${name}";
-              stateVersion = "24.05";
-            };
+          home = {
+            username = lib.mkDefault name;
+            homeDirectory = lib.mkDefault (if pkgs.stdenv.isDarwin then "/Users/${name}" else "/home/${name}");
+            stateVersion = lib.mkDefault "24.05";
           };
-      in
-      {
-        pigeon = mkUser "pigeon" (
-          builtins.attrValues {
-            inherit (inputs.self.homeModules) core common xdg;
+        };
+    in
+    {
+      pigeon = mkUser "pigeon" (
+        builtins.attrValues {
+          inherit (inputs.self.homeModules) core xdg;
 
-            inherit (inputs.self.homeModules.configs)
-              bash
-              bat
-              containers
-              direnv
-              ghq
-              just
-              nix
-              rust
-              tools
-              zellij
-              zoxide
-              zsh
-              ;
-          }
-        );
-      };
-  };
+          inherit (inputs.self.homeModules.configs)
+            atuin
+            bash
+            bat
+            containers
+            direnv
+            erdtree
+            ghq
+            git
+            gitlab-ci-local
+            helix
+            just
+            nix
+            nushell
+            rust
+            starship
+            zellij
+            zoxide
+            zsh
+            ;
+        }
+      );
+
+      vagrant = mkUser "vagrant" (
+        builtins.attrValues {
+          inherit (inputs.self.homeModules) core xdg;
+
+          inherit (inputs.self.homeModules.configs)
+            bash
+            git
+            just
+            starship
+            zellij
+            zoxide
+            ;
+        }
+      );
+    };
 }

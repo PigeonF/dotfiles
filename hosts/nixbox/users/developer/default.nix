@@ -1,8 +1,8 @@
-{ registryHost, stateVersion }:
+{ registryHost }:
+{ inputs, ... }:
 {
   imports = [
-    ../../../../users/common
-    ../../../../dotfiles/bash
+    inputs.self.homeModules.users.pigeon
     (
       {
         config,
@@ -12,12 +12,9 @@
       }:
       {
         home = {
-          inherit stateVersion;
-
           packages = builtins.attrValues {
             inherit (pkgs)
               gdb
-              gitlab-ci-local
               nodejs
               rr
               valgrind

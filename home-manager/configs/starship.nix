@@ -1,3 +1,5 @@
+_:
+
 {
   programs.starship = {
     enable = true;
@@ -5,5 +7,5 @@
     enableNushellIntegration = false;
   };
 
-  xdg.configFile."starship.toml".source = ./starship.toml;
+  xdg.configFile."starship.toml".source = ../../dotfiles/starship/starship.toml;
 }

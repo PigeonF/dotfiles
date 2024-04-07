@@ -68,7 +68,7 @@
             system = "aarch64-darwin";
             config = ./hosts/kamino;
             home = {
-              home-manager.users.pigeon = import ./hosts/kamino/users/pigeon.nix;
+              home-manager.users.pigeon = inputs.self.homeModules.users.pigeon;
             };
           };
         };
@@ -106,7 +106,7 @@
           };
 
           legacyPackages.homeConfigurations = {
-            pigeon = mkHomeConfiguration [ inputs.self.homeModules.pigeon ];
+            pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
           };
 
           devShells = {

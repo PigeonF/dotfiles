@@ -1,4 +1,4 @@
-{ config, inputs, ... }:
+{ inputs, ... }:
 {
   imports = [
     "${inputs.nixpkgs}/nixos/modules/profiles/hardened.nix"
@@ -39,5 +39,5 @@
   nix.gc.automatic = true;
   nix.optimise.automatic = true;
 
-  home-manager.users.vagrant = import ./users/vagrant.nix { inherit (config.system) stateVersion; };
+  home-manager.users.vagrant = inputs.self.homeModules.users.vagrant;
 }
