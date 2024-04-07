@@ -18,7 +18,13 @@
           };
       in
       {
-        pigeon = mkUser "pigeon" [ inputs.self.homeModules.common ];
+        pigeon = mkUser "pigeon" (
+          builtins.attrValues {
+            inherit (inputs.self.homeModules) core common xdg;
+
+            inherit (inputs.self.homeModules.configs) rust;
+          }
+        );
       };
   };
 }

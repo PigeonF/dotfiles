@@ -5,7 +5,12 @@
   ...
 }:
 let
-  inherit (lib) mapAttrs mkOption types;
+  inherit (lib)
+    concatStringsSep
+    mapAttrsRecursive
+    mkOption
+    types
+    ;
   inherit (flake-parts-lib) mkSubmoduleOptions;
 in
 
@@ -15,9 +20,9 @@ in
       homeModules = mkOption {
         type = types.lazyAttrsOf types.unspecified;
         default = { };
-        apply = mapAttrs (
-          k: v: {
-            _file = "${toString moduleLocation}#homeModules.${k}";
+        apply = mapAttrsRecursive (
+          path: v: {
+            _file = "${toString moduleLocation}#homeModules.${concatStringsSep "." path}";
             imports = [ v ];
           }
         );

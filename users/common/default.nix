@@ -18,14 +18,6 @@
     ../../dotfiles/zsh
   ];
 
-  manual = {
-    html.enable = false;
-    manpages.enable = false;
-    json.enable = false;
-  };
-
-  programs.home-manager.enable = true;
-
   home = {
     packages = builtins.attrValues {
       inherit (pkgs)
@@ -41,7 +33,6 @@
         nil
         nixfmt-rfc-style
         regctl
-        rustup
         shfmt
         skopeo
         sops
@@ -50,29 +41,15 @@
 
     shellAliases = {
       g = "git";
-      c = "cargo";
     };
 
-    sessionPath = [
-      "$XDG_BIN_HOME"
-      "$CARGO_HOME/bin"
-    ];
+    sessionPath = [ "$GOPATH/bin" ];
 
-    sessionVariables = rec {
-      XDG_CACHE_HOME = "$HOME/.cache";
-      XDG_CONFIG_HOME = "$HOME/.config";
-      XDG_DATA_HOME = "$HOME/.local/share";
-      XDG_STATE_HOME = "$HOME/.local/state";
+    sessionVariables = {
+      DOCKER_CONFIG = "$XDG_DATA_HOME/docker";
+      GOPATH = "$XDG_DATA_HOME/go";
 
-      XDG_BIN_HOME = "$HOME/.local/bin";
-
-      CARGO_HOME = "${XDG_DATA_HOME}/cargo";
-      DOCKER_CONFIG = "${XDG_DATA_HOME}/docker";
-      GOPATH = "${XDG_DATA_HOME}/go";
-      RUSTUP_HOME = "${XDG_DATA_HOME}/rustup";
-
-      HISTFILE = "${XDG_STATE_HOME}/bash_history.txt";
-
+      HISTFILE = "$XDG_STATE_HOME/bash_history.txt";
       GCL_ARTIFACTS_TO_SOURCE = "false";
     };
   };
