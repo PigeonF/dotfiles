@@ -129,7 +129,7 @@ function Main([Config]$config) {
 
     Write-Output "Continue installation with"
     Write-Output "$($config.developmentDrive)\git\github.com\PigeonF\dotfiles\scripts\install-packages.ps1"
-    Write-Output "$($config.developmentDrive)\git\github.com\PigeonF\dotfiles\scripts\symlink-dotfiles.ps1"
+    Write-Output "$($config.developmentDrive)\git\github.com\PigeonF\dotfiles\dotfiles\symlink.ps1"
 }
 
 $config = [Config]::new()

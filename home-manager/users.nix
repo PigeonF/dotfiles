@@ -22,7 +22,20 @@
           builtins.attrValues {
             inherit (inputs.self.homeModules) core common xdg;
 
-            inherit (inputs.self.homeModules.configs) containers rust tools;
+            inherit (inputs.self.homeModules.configs)
+              bash
+              bat
+              containers
+              direnv
+              ghq
+              just
+              nix
+              rust
+              tools
+              zellij
+              zoxide
+              zsh
+              ;
           }
         );
       };

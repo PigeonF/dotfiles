@@ -4,6 +4,7 @@
   lib,
   ...
 }:
+
 {
   programs.zsh = {
     enable = true;
@@ -16,13 +17,7 @@
       eval "$(/opt/homebrew/bin/brew shellenv)"
     '';
 
-    shellAliases = {
-      ls = "eza";
-      la = "ls -la";
-
-      fda = "fd --no-ignore --hidden";
-      rga = "rg --no-ignore --hidden";
-    };
+    shellAliases = config.programs.bash.shellAliases // { };
 
     initExtra = ''
       bindkey -e
@@ -35,9 +30,5 @@
         __HM_SESS_VARS_SOURCED= source "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
       fi
     '';
-  };
-
-  home = {
-    packages = builtins.attrValues { inherit (pkgs) eza fd ripgrep; };
   };
 }

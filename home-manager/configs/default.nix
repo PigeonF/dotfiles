@@ -1,7 +1,16 @@
 {
   flake.homeModules.configs = {
-    rust = import ./rust.nix;
+    bash = import ./bash.nix;
+    bat = import ./bat.nix;
     containers = import ./containers.nix;
+    direnv = import ./direnv.nix;
+    ghq = import ./ghq.nix;
+    just = import ./just.nix;
+    nix = import ./nix.nix;
+    rust = import ./rust.nix;
+    zellij = import ./zellij.nix;
+    zoxide = import ./zoxide.nix;
+    zsh = import ./zsh.nix;
 
     tools =
       { pkgs, ... }:
@@ -14,10 +23,6 @@
             # gitlab-ci-local
             glab
             lldb
-            nil
-            nixfmt-rfc-style
-            shfmt
-            sops
             ;
         };
       };

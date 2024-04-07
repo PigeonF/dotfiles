@@ -1,9 +1,11 @@
-{ pkgs, config, ... }:
+{ pkgs, ... }:
+
 {
   programs.bash = {
     enable = true;
 
-    historyFile = "${config.xdg.cacheHome}/bash_history.txt";
+    historyFile = "$XDG_STATE_HOME/bash_history.txt";
+
     historyIgnore = [
       "ls"
       "exit"
@@ -19,6 +21,14 @@
   };
 
   home = {
-    packages = builtins.attrValues { inherit (pkgs) eza fd ripgrep; };
+    packages = builtins.attrValues {
+      inherit (pkgs)
+        eza
+        fd
+        ripgrep
+        shellcheck
+        shfmt
+        ;
+    };
   };
 }

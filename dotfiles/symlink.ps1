@@ -49,12 +49,27 @@ function Main() {
 
     $SSHDirTarget = Join-Path $HOME .ssh
 
+    # atuin
+    $AtuinDirSource = Join-Path $DotfilesDir atuin
+    $AtuinDirTarget = Join-Path $XdgConfigHome atuin
+    HandleSymlink (Join-Path $AtuinDirTarget "config.toml") (Join-Path $AtuinDirSource "atuin.toml")
+
+    # Erdtree
+    $ErdTreeSource = Join-Path $DotfilesDir erdtree
+    $ErdTreeTarget = Join-Path $env:APPDATA erdtree
+    HandleSymlink (Join-Path $ErdTreeTarget ".erdtreerc") (Join-Path $ErdTreeSource "config")
+
     # Git
     $GitDirSource = Join-Path $DotfilesDir git
     $GitDirTarget = Join-Path $XdgConfigHome git
     HandleSymlink (Join-Path $GitDirTarget "config") (Join-Path $GitDirSource "gitconfig")
     HandleSymlink (Join-Path $GitDirTarget "ignore") (Join-Path $GitDirSource "gitignore")
     HandleSymlink (Join-Path $SSHDirTarget "allowed_signers") (Join-Path $GitDirSource "allowed_signers")
+
+    # Helix
+    $HelixDirSource = Join-Path $DotfilesDir helix
+    $HelixDirTarget = Join-Path $env:SCOOP "persist\helix"
+    HandleSymlink (Join-Path $HelixDirTarget "config.toml") (Join-Path $HelixDirSource "config.toml")
 
     # Nushell
     $NuDirSource = Join-Path $DotfilesDir nushell
@@ -68,25 +83,10 @@ function Main() {
     $StarshipDirTarget = $XdgConfigHome
     HandleSymlink (Join-Path $StarshipDirTarget "starship.toml") (Join-Path $StarshipDirSource "starship.toml")
 
-    # atuin
-    $AtuinDirSource = Join-Path $DotfilesDir atuin
-    $AtuinDirTarget = Join-Path $XdgConfigHome atuin
-    HandleSymlink (Join-Path $AtuinDirTarget "config.toml") (Join-Path $AtuinDirSource "atuin.toml")
-
-    # Helix
-    $HelixDirSource = Join-Path $DotfilesDir helix
-    $HelixDirTarget = Join-Path $env:SCOOP "persist\helix"
-    HandleSymlink (Join-Path $HelixDirTarget "config.toml") (Join-Path $HelixDirSource "config.toml")
-
     # Topgrade
     $TopgradeDirSource = Join-Path $DotfilesDir topgrade
     $TopgradeDirTarget = $env:APPDATA
     HandleSymlink (Join-Path $TopgradeDirTarget "topgrade.toml") (Join-Path $TopgradeDirSource "topgrade.toml")
-
-    # Erdtree
-    $ErdTreeSource = Join-Path $DotfilesDir erdtree
-    $ErdTreeTarget = Join-Path $env:APPDATA erdtree
-    HandleSymlink (Join-Path $ErdTreeTarget ".erdtreerc") (Join-Path $ErdTreeSource "config")
 
     # VS Code
     $CodeDirSource = Join-Path $DotfilesDir vscode
