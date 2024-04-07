@@ -72,14 +72,6 @@
             };
           };
         };
-
-        checks = lib.forEachSystem (
-          pkgs:
-          import ./checks {
-            inherit (inputs) self;
-            inherit pkgs;
-          }
-        );
       };
 
       perSystem =
@@ -95,6 +87,8 @@
 
               inherit modules;
             };
+          inherit (inputs) self;
+          inherit (pkgs) lib runCommand;
         in
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.additions;
@@ -107,6 +101,18 @@
 
           legacyPackages.homeConfigurations = {
             pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
+          };
+
+          checks = {
+            deadnix = runCommand "check-deadnix" { } ''
+              ${lib.getExe pkgs.deadnix} -f ${self} | tee $out
+            '';
+            nixfmt = runCommand "check-nixfmt" { } ''
+              ${lib.getExe pkgs.nixfmt-rfc-style} --check ${self} | tee $out
+            '';
+            statix = runCommand "check-statix" { } ''
+              ${lib.getExe pkgs.statix} check ${self} | tee $out
+            '';
           };
 
           devShells = {
