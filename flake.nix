@@ -64,31 +64,6 @@
           };
         };
 
-        homeConfigurations =
-          let
-            configurations = lib.forEachSystem (pkgs: {
-              pigeon = inputs.home-manager.lib.homeManagerConfiguration {
-                inherit pkgs;
-
-                extraSpecialArgs = {
-                  inherit inputs;
-                  stateVersion = "24.05";
-                };
-
-                modules = [
-                  ./users/common
-                  {
-                    home.username = "pigeon";
-                    home.homeDirectory = "/home/pigeon";
-                  }
-                ];
-              };
-            });
-          in
-          {
-            geonosis = configurations.x86_64-linux.pigeon;
-          };
-
         checks = lib.forEachSystem (
           pkgs:
           import ./checks {
@@ -107,6 +82,25 @@
 
           packages = {
             inherit (pkgs) committed gitlab-ci-local;
+          };
+
+          legacyPackages.homeConfigurations = {
+            geonosis = inputs.home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+
+              extraSpecialArgs = {
+                inherit inputs;
+              };
+
+              modules = [
+                ./users/common
+                {
+                  home.username = "pigeon";
+                  home.homeDirectory = "/home/pigeon";
+                  home.stateVersion = "24.05";
+                }
+              ];
+            };
           };
 
           devShells = {
