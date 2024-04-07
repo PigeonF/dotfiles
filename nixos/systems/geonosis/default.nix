@@ -20,7 +20,7 @@
       system.stateVersion = "24.05";
 
       boot.loader.grub = {
-        devices = [ "/dev/nvme0" ];
+        devices = [ "/dev/nvme0n1" ];
 
         efiSupport = true;
         efiInstallAsRemovable = true;
