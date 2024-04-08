@@ -1,9 +1,12 @@
-{ inputs, ... }:
-
 {
   flake.nixosModules = {
     pigeon =
-      { config, lib, ... }:
+      {
+        inputs,
+        config,
+        lib,
+        ...
+      }:
       {
         home-manager.users.pigeon = inputs.self.homeModules.users.pigeon;
 

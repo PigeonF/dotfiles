@@ -1,7 +1,8 @@
 {
   imports = [
-    ./users.nix
+    ./nix.nix
     ./systems
+    ./users.nix
   ];
 
   flake.nixosModules = {
