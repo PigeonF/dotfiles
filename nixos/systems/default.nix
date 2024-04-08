@@ -1,6 +1,6 @@
 {
   imports = [
     ./geonosis
-    ./gitlab-runner
+    ./mustafar
   ];
 }

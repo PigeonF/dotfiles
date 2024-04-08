@@ -1,7 +1,7 @@
 { inputs, ... }:
 
 {
-  flake.nixosModules.gitlab-runner =
+  flake.nixosModules.mustafar =
     { lib, ... }:
     let
       sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF17mBkVi/0dKz4hgn4ZdM1qPzqMKZacXVbHpM1pddNU";
@@ -25,7 +25,7 @@
       sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
 
       system.stateVersion = "24.05";
-      networking.hostName = "gitlab-runner";
+      networking.hostName = "mustafar";
 
       boot = {
         initrd.checkJournalingFS = false;

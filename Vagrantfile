@@ -100,13 +100,13 @@ Vagrant.configure("2") do |config|
     nixos(nixbox, "nixbox")
   end
 
-  config.vm.define "gitlab-runner" do |gitlab_runner|
-    gitlab_runner.vm.hostname = "gitlab-runner"
-    gitlab_runner.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
+  config.vm.define "mustafar" do |mustafar|
+    mustafar.vm.hostname = "mustafar"
+    mustafar.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
 
-    virtualbox(gitlab_runner, name: "GitLab Runner", memory: 8192, cpus: 4)
-    sops(gitlab_runner, Secret.gitlab_runner_sops)
-    disksize(gitlab_runner, "128GB")
-    nixos(gitlab_runner, "gitlab-runner")
+    virtualbox(mustafar, name: "GitLab Runner", memory: 8192, cpus: 4)
+    sops(mustafar, Secret.mustafar_sops)
+    disksize(mustafar, "128GB")
+    nixos(mustafar, "mustafar")
   end
 end

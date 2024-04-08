@@ -2,7 +2,7 @@
 keys:
   - &nixbox age177xv2pujf3r9ly6jy9du03alf0w6lwqea9gqc2tw8uzvgjx0jpyqq4r8tx
   - &geonosis age18eug2ah672kzv6nnj3kaljm3v7kxdufg7dga73c2vpupsd0nk3zs0jevgw
-  - &gitlab_runner age1k9jct5hmsxx3kv2savq8c2ksqv3ec6fkve53sa6uhe9k3vvrf32qycfl65
+  - &mustafar age1k9jct5hmsxx3kv2savq8c2ksqv3ec6fkve53sa6uhe9k3vvrf32qycfl65
 
 creation_rules:
   - path_regex: hosts/nixbox/.*$
@@ -13,7 +13,7 @@ creation_rules:
     key_groups:
       - age:
           - *geonosis
-  - path_regex: nixos/systems/gitlab-runner/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: nixos/systems/mustafar/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *gitlab_runner
+          - *mustafar

@@ -44,7 +44,7 @@
           in
           {
             geonosis = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.geonosis ];
-            gitlab-runner = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.gitlab-runner ];
+            mustafar = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.mustafar ];
           };
 
         darwinConfigurations = lib.mkDarwinConfigurations {

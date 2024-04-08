@@ -55,9 +55,7 @@
     "redhat.telemetry.enabled": false,
     "editor.formatOnSave": true,
     "remote.SSH.remotePlatform": {
-        "Hesperidium": "linux",
-        "nixbox": "linux",
-        "gitlab-runner": "linux",
+        "mustafar": "linux",
         "geonosis": "linux"
     },
     "json.schemas": [
