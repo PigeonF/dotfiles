@@ -14,6 +14,7 @@
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
         inputs.self.nixosModules.pigeon
+        inputs.self.nixosModules.laptop
         ./disk.nix
       ];
 
@@ -28,8 +29,6 @@
           efiInstallAsRemovable = true;
         };
       };
-
-      hardware.cpu.intel.updateMicrocode = true;
 
       services.openssh.enable = true;
       users.users.pigeon.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
