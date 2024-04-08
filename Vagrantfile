@@ -29,6 +29,7 @@ def sops(cfg, secret)
       echo "#{secret}" > /var/lib/sops-nix/keys.txt
 
       chown -R root:root /var/lib/sops-nix/
+      chmod 0700 /var/lib/sops-nix/
       chmod 0600 /var/lib/sops-nix/keys.txt
     SHELL
   end

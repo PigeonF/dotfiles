@@ -17,7 +17,7 @@
         inputs.self.nixosModules.vagrant
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
-        inputs.self.nixosModules.gitlab-runner-service
+        ./gitlab-runner.nix
         ./disk.nix
       ];
 
