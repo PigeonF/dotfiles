@@ -30,9 +30,6 @@
       '';
     in
     {
-      # Enable dnsmasq, which forwards and listens on .localhost to (127.0.0.1 or docker0)
-      # Enable caddy
-
       services.dnsmasq = {
         enable = true;
 
@@ -67,11 +64,6 @@
               }
             }
           }
-        '';
-
-        virtualHosts."hello.internal".extraConfig = ''
-          tls internal
-          respond "Hello, world!"
         '';
       };
 

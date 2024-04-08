@@ -15,6 +15,7 @@
 
         inputs.self.nixosModules.core
         inputs.self.nixosModules.docker
+        inputs.self.nixosModules.dockerRegistry
         inputs.self.nixosModules.laptop
         inputs.self.nixosModules.nix
         inputs.self.nixosModules.pigeon

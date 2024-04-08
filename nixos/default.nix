@@ -4,6 +4,7 @@
     ./systems
     ./users.nix
     ./webservices.nix
+    ./dockerRegistry.nix
   ];
 
   flake.nixosModules = {
