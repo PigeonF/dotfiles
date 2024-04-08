@@ -23,6 +23,23 @@
         };
       };
 
+    docker = _: {
+      virtualisation = {
+        docker = {
+          enable = true;
+          daemon.settings = {
+            bip = "10.117.0.1/16";
+            default-address-pools = [
+              {
+                base = "10.118.0.0/16";
+                size = 24;
+              }
+            ];
+          };
+        };
+      };
+    };
+
     laptop = _: {
       # Do not suspend when closing lid while being charged.
       services.logind.lidSwitchExternalPower = "ignore";
