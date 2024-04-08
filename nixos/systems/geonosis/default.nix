@@ -13,6 +13,7 @@
 
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
+        inputs.self.nixosModules.core
         inputs.self.nixosModules.pigeon
         inputs.self.nixosModules.laptop
         inputs.self.nixosModules.vsCodeRemoteSSHFix
@@ -20,6 +21,7 @@
       ];
 
       system.stateVersion = "24.05";
+      networking.hostName = "geonosis";
 
       boot = {
         initrd.availableKernelModules = [ "nvme" ];

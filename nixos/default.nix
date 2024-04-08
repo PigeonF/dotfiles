@@ -5,6 +5,22 @@
   ];
 
   flake.nixosModules = {
+    core =
+      { inputs, lib, ... }:
+      {
+        networking = {
+          useDHCP = lib.mkDefault true;
+        };
+
+        time = {
+          timeZone = lib.mkDefault "Europe/Berlin";
+        };
+
+        system = {
+          configurationRevision = lib.mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
+        };
+      };
+
     laptop = _: {
       # Do not suspend when closing lid while being charged.
       services.logind.lidSwitchExternalPower = "ignore";
