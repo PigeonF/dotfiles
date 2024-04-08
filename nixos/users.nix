@@ -85,6 +85,11 @@
             ;
         };
 
+        # Allow passwordless sudo
+        security.sudo.extraConfig = ''
+          %wheel ALL=(ALL) NOPASSWD: ALL, SETENV: ALL
+        '';
+
         # Vagrant keys use RSA
         services.openssh.extraConfig = ''
           PubkeyAcceptedKeyTypes +ssh-rsa

@@ -10,6 +10,7 @@
       imports = [
         "${inputs.nixpkgs}/nixos/modules/profiles/hardened.nix"
         inputs.self.nixosModules.home-manager
+        inputs.sops-nix.nixosModules.sops
 
         inputs.self.nixosModules.core
         inputs.self.nixosModules.nix
@@ -19,6 +20,9 @@
         inputs.self.nixosModules.gitlab-runner-service
         ./disk.nix
       ];
+
+      # Inserted via Vagrant
+      sops.age.keyFile = "/var/lib/sops-nix/keys.txt";
 
       system.stateVersion = "24.05";
       networking.hostName = "gitlab-runner";

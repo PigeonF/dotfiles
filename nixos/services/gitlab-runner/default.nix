@@ -1,4 +1,4 @@
-{ inputs, ... }:
+_:
 
 {
   flake.nixosModules.gitlab-runner-service =
@@ -15,8 +15,6 @@
       ...
     }:
     {
-      imports = [ inputs.sops-nix.nixosModules.sops ];
-
       boot.kernel.sysctl."net.ipv4.ip_forward" = true;
       virtualisation.docker.enable = true;
 
