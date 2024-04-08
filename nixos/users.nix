@@ -28,6 +28,7 @@
             createHome = true;
             useDefaultShell = true;
             isNormalUser = true;
+            initialPassword = "pigeon";
           };
         };
 
