@@ -22,6 +22,7 @@
 
       imports = [
         ./all-modules.nix
+        ./lib.nix
 
         ./home-manager
         ./nixos
@@ -40,24 +41,7 @@
 
         nixosConfigurations =
           let
-            mkNixosConfiguration =
-              system: modules:
-              inputs.nixpkgs.lib.nixosSystem {
-                inherit system;
-
-                specialArgs = {
-                  inherit inputs;
-                };
-
-                modules = modules ++ [
-                  (
-                    { lib, ... }:
-                    {
-                      system.stateVersion = lib.mkDefault "24.05";
-                    }
-                  )
-                ];
-              };
+            inherit (inputs.self.lib) mkNixosConfiguration;
           in
           {
             geonosis = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.geonosis ];
@@ -78,7 +62,8 @@
         { inputs', pkgs, ... }:
         let
           inherit (inputs) self;
-          inherit (pkgs) lib runCommand;
+          inherit (pkgs) runCommand;
+          inherit (pkgs.lib) getExe;
         in
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.default;
@@ -91,16 +76,7 @@
 
           legacyPackages.homeConfigurations =
             let
-              mkHomeConfiguration =
-                modules:
-                inputs.home-manager.lib.homeManagerConfiguration {
-                  inherit pkgs;
-                  extraSpecialArgs = {
-                    inherit inputs;
-                  };
-
-                  inherit modules;
-                };
+              mkHomeConfiguration = self.lib.mkHomeConfiguration pkgs;
             in
             {
               pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
@@ -108,13 +84,13 @@
 
           checks = {
             deadnix = runCommand "check-deadnix" { } ''
-              ${lib.getExe pkgs.deadnix} -f ${self} | tee $out
+              ${getExe pkgs.deadnix} -f ${self} | tee $out
             '';
             nixfmt = runCommand "check-nixfmt" { } ''
-              ${lib.getExe pkgs.nixfmt-rfc-style} --check ${self} | tee $out
+              ${getExe pkgs.nixfmt-rfc-style} --check ${self} | tee $out
             '';
             statix = runCommand "check-statix" { } ''
-              ${lib.getExe pkgs.statix} check ${self} | tee $out
+              ${getExe pkgs.statix} check ${self} | tee $out
             '';
           };
 
