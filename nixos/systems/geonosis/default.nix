@@ -15,6 +15,7 @@
 
         inputs.self.nixosModules.pigeon
         inputs.self.nixosModules.laptop
+        inputs.self.nixosModules.vsCodeRemoteSSHFix
         ./disk.nix
       ];
 
