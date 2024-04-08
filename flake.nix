@@ -28,7 +28,6 @@
         ./nixos
 
         ./modules/flake-parts/nixbox.nix
-        ./modules/flake-parts/gitlab-runner.nix
       ];
 
       flake = {
@@ -45,6 +44,7 @@
           in
           {
             geonosis = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.geonosis ];
+            gitlab-runner = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.gitlab-runner ];
           };
 
         darwinConfigurations = lib.mkDarwinConfigurations {

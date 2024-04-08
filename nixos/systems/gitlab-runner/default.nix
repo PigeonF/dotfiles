@@ -1,0 +1,50 @@
+{ inputs, ... }:
+
+{
+  flake.nixosModules.gitlab-runner =
+    { lib, ... }:
+    let
+      sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF17mBkVi/0dKz4hgn4ZdM1qPzqMKZacXVbHpM1pddNU";
+    in
+    {
+      imports = [
+        "${inputs.nixpkgs}/nixos/modules/profiles/hardened.nix"
+        inputs.self.nixosModules.home-manager
+
+        inputs.self.nixosModules.core
+        inputs.self.nixosModules.nix
+        inputs.self.nixosModules.vagrant
+        inputs.self.nixosModules.ssh
+        inputs.self.nixosModules.vsCodeRemoteSSHFix
+        inputs.self.nixosModules.gitlab-runner-service
+        ./disk.nix
+      ];
+
+      system.stateVersion = "24.05";
+      networking.hostName = "gitlab-runner";
+
+      boot = {
+        initrd.checkJournalingFS = false;
+
+        loader.grub = {
+          enable = true;
+          device = "/dev/sda";
+        };
+      };
+
+      virtualisation.virtualbox.guest.enable = true;
+      systemd.coredump.enable = false;
+
+      users = {
+        mutableUsers = false;
+        users.root = {
+          hashedPassword = "!";
+          openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
+        };
+        users.vagrant.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
+      };
+
+      nix.gc.automatic = true;
+      nix.optimise.automatic = true;
+    };
+}

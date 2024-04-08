@@ -2,6 +2,7 @@
   imports = [
     ./nix.nix
     ./systems
+    ./services
     ./users.nix
   ];
 
@@ -20,6 +21,12 @@
 
         system = {
           configurationRevision = lib.mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
+        };
+
+        services = {
+          dbus.enable = true;
+          timesyncd.enable = true;
+          logrotate.checkConfig = false;
         };
       };
 
@@ -50,6 +57,7 @@
       { lib, ... }:
       {
         services.openssh.enable = lib.mkDefault true;
+        services.openssh.openFirewall = lib.mkDefault true;
 
         security.sudo.extraConfig = ''
           Defaults env_keep+=SSH_AUTH_SOCK

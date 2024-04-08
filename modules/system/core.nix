@@ -2,6 +2,7 @@
 {
   networking = {
     useDHCP = lib.mkDefault true;
+    firewall.enable = lib.mkDefault true;
   };
 
   time = {
