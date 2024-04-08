@@ -24,6 +24,9 @@
 
         home.sessionVariables = {
           XDG_BIN_HOME = "$HOME/.local/bin";
+
+          # Migrate these as soon as there is a corresponding entry in configs/
+          DOTNET_CLI_HOME = "$XDG_CACHE_HOME/dotnet";
         };
 
         home.sessionPath = [ "$XDG_BIN_HOME" ];
