@@ -17,6 +17,7 @@
         inputs.self.nixosModules.laptop
         inputs.self.nixosModules.nix
         inputs.self.nixosModules.pigeon
+        inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
         ./disk.nix
       ];
@@ -34,7 +35,6 @@
         };
       };
 
-      services.openssh.enable = true;
       users.users.pigeon.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
       users.users.root.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
     };

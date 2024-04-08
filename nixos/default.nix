@@ -11,6 +11,7 @@
       {
         networking = {
           useDHCP = lib.mkDefault true;
+          firewall.enable = lib.mkDefault true;
         };
 
         time = {
@@ -27,6 +28,16 @@
       services.logind.lidSwitchExternalPower = "ignore";
       hardware.cpu.intel.updateMicrocode = true;
     };
+
+    ssh =
+      { lib, ... }:
+      {
+        services.openssh.enable = lib.mkDefault true;
+
+        security.sudo.extraConfig = ''
+          Defaults env_keep+=SSH_AUTH_SOCK
+        '';
+      };
 
     vsCodeRemoteSSHFix = _: { programs.nix-ld.enable = true; };
   };
