@@ -2,6 +2,7 @@
 keys:
   - &gitlab_runner age177xv2pujf3r9ly6jy9du03alf0w6lwqea9gqc2tw8uzvgjx0jpyqq4r8tx
   - &nixbox age177xv2pujf3r9ly6jy9du03alf0w6lwqea9gqc2tw8uzvgjx0jpyqq4r8tx
+  - &geonosis age18eug2ah672kzv6nnj3kaljm3v7kxdufg7dga73c2vpupsd0nk3zs0jevgw
 
 creation_rules:
   - path_regex: hosts/gitlab-runner/.*$
@@ -12,3 +13,7 @@ creation_rules:
     key_groups:
       - age:
           - *nixbox
+  - path_regex: nixos/systems/geonosis/[^/]+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *geonosis
