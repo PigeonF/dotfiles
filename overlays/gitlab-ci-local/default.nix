@@ -5,15 +5,20 @@
   git,
   typescript,
 }:
-buildNpmPackage rec {
-  pname = "gitlab-ci-local";
-  # Includes components implementation
+
+let
   version = "c5524204d56101dbab8ed8db3c70f5dd72891dab"; # "4.46.1";
+  rev = version;
+in
+
+buildNpmPackage {
+  pname = "gitlab-ci-local";
+  inherit version;
 
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
-    rev = "${version}";
+    inherit rev;
     hash = "sha256-gjVwbXlgF96nNxSoBn/kBUOdNZwQxLQwWXDMotpqfnI=";
   };
 

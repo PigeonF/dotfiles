@@ -5,20 +5,24 @@
   rustPlatform,
   stdenv,
 }:
-rustPlatform.buildRustPackage rec {
-  pname = "committed";
+
+let
   version = "1.0.20";
+  rev = "v${version}";
+in
+
+rustPlatform.buildRustPackage {
+  pname = "committed";
+  inherit version;
 
   src = fetchFromGitHub {
     owner = "crate-ci";
     repo = "committed";
-    rev = "v${version}";
+    inherit rev;
     hash = "sha256-HqZYxV2YjnK7Q3A7B6yVFXME0oc3DZ4RfMkDGa2IQxA=";
   };
 
-  buildInputs = lib.optionals stdenv.isDarwin (
-    builtins.attrValues { inherit (darwin.apple_sdk.frameworks) Security; }
-  );
+  buildInputs = lib.optionals stdenv.isDarwin [ darwin.apple_sdk.frameworks.Security ];
 
   doCheck = false;
 
@@ -27,14 +31,10 @@ rustPlatform.buildRustPackage rec {
   meta = {
     description = "Nitpicking commit history since beabf39";
     homepage = "https://github.com/crate-ci/committed";
-    changelog = "https://github.com/crate-ci/committed/blob/${src.rev}/CHANGELOG.md";
-    license = builtins.attrValues {
-      inherit (lib.licenses)
-        asl20
-        # or
-
-        mit
-        ;
-    };
+    changelog = "https://github.com/crate-ci/committed/blob/${rev}/CHANGELOG.md";
+    license = [
+      lib.licenses.asl20 # or
+      lib.licenses.mit
+    ];
   };
 }

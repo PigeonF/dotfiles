@@ -112,7 +112,7 @@
           inherit (pkgs) lib runCommand;
         in
         {
-          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.additions;
+          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.default;
 
           formatter = pkgs.nixfmt-rfc-style;
 
