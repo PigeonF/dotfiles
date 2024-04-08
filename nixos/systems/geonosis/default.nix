@@ -20,6 +20,7 @@
         inputs.self.nixosModules.pigeon
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
+        inputs.self.nixosModules.webservices
         ./disk.nix
       ];
 

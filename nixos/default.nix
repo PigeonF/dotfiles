@@ -3,6 +3,7 @@
     ./nix.nix
     ./systems
     ./users.nix
+    ./webservices.nix
   ];
 
   flake.nixosModules = {
@@ -44,6 +45,8 @@
           };
         };
       };
+
+      networking.firewall.trustedInterfaces = [ "docker0" ];
     };
 
     laptop = _: {
