@@ -29,7 +29,9 @@
             useDefaultShell = true;
             isNormalUser = true;
             initialPassword = "pigeon";
-            openssh.authorizedKeys.keys = lib.mkForce ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"];
+            openssh.authorizedKeys.keys = lib.mkForce [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
+            ];
           };
         };
 
@@ -67,7 +69,9 @@
             useDefaultShell = true;
             isNormalUser = true;
             hashedPassword = "!";
-            openssh.authorizedKeys.keys = lib.mkForce ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"];
+            openssh.authorizedKeys.keys = lib.mkForce [
+              "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
+            ];
           };
         };
 
