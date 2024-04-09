@@ -3,9 +3,6 @@
 {
   flake.nixosModules.geonosis =
     { lib, ... }:
-    let
-      sshKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILt6md+QmEdseqB8kRqrsTIOvGsph+um1Lb5xijO7Vfj";
-    in
     {
       imports = [
         inputs.self.nixosModules.home-manager
@@ -37,8 +34,5 @@
           efiInstallAsRemovable = true;
         };
       };
-
-      users.users.pigeon.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
-      users.users.root.openssh.authorizedKeys.keys = lib.mkForce [ sshKey ];
     };
 }
