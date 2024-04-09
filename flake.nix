@@ -26,8 +26,6 @@
 
         ./home-manager
         ./nixos
-
-        ./modules/flake-parts/nixbox.nix
       ];
 
       flake = {

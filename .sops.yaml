@@ -1,14 +1,14 @@
 ---
 keys:
-  - &nixbox age177xv2pujf3r9ly6jy9du03alf0w6lwqea9gqc2tw8uzvgjx0jpyqq4r8tx
+  - &common age1nfa5tsvl33wmex09mj27kzcrl25xz5h74sg64rka2cekhjrd5frsnsymry
   - &geonosis age18eug2ah672kzv6nnj3kaljm3v7kxdufg7dga73c2vpupsd0nk3zs0jevgw
   - &mustafar age1k9jct5hmsxx3kv2savq8c2ksqv3ec6fkve53sa6uhe9k3vvrf32qycfl65
 
 creation_rules:
-  - path_regex: hosts/nixbox/.*$
+  - path_regex: home-manager/.+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *nixbox
+          - *common
   - path_regex: nixos/systems/geonosis/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:

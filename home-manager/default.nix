@@ -1,4 +1,4 @@
-{ ... }:
+_:
 
 {
   imports = [
@@ -8,16 +8,34 @@
 
   flake = {
     homeModules = {
-      core = _: {
-        # Manual breaks often, so disable it.
-        manual = {
-          html.enable = false;
-          manpages.enable = false;
-          json.enable = false;
-        };
+      core =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        {
+          # Manual breaks often, so disable it.
+          manual = {
+            html.enable = false;
+            manpages.enable = false;
+            json.enable = false;
+          };
 
-        programs.home-manager.enable = true;
-      };
+          programs.home-manager.enable = true;
+
+          home = {
+            packages = [ pkgs.sops ];
+            activation.sops-nix = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
+              config.lib.dag.entryAfter [ "writeBoundary" ] ''
+                /run/current-system/sw/bin/systemctl start --user sops-nix
+              ''
+            );
+          };
+
+          sops.age.keyFile = "${config.xdg.configHome}/sops/age/keys.txt";
+        };
 
       xdg = _: {
         xdg.enable = true;

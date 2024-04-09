@@ -8,7 +8,7 @@
     erdtree = import ./erdtree.nix;
     ghq = import ./ghq.nix;
     git = import ./git.nix;
-    gitlab-ci-local = import ./gitlab-ci-local.nix;
+    gitlab-ci-local = import ./gitlab-ci-local;
     helix = import ./helix.nix;
     just = import ./just.nix;
     nix = import ./nix.nix;

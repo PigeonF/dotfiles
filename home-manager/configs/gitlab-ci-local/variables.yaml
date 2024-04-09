@@ -1,0 +1,19 @@
+---
+global:
+  CI_REGISTRY: registry.internal
+  CI_DEPENDENCY_PROXY_SERVER: docker.io
+  CI_REGISTRY_USER: pigeonf
+  CI_REGISTRY_PASSWORD: {{ gitlab.oauth_token }}
+  CI_DEPENDENCY_PROXY_USER: pigeonf
+  CI_DEPENDENCY_PROXY_PASSWORD: {{ docker.oauth_token }}
+  CI_DEPENDENCY_PROXY_GROUP_IMAGE_PREFIX: docker.io
+  CI_PIPELINE_SOURCE: merge_request_event
+  CI_MERGE_REQUEST_TARGET_BRANCH_NAME: main
+  CACHIX_AUTH_TOKEN: {{ cachix.oauth_token }}
+
+project:
+  gitlab.com/PigeonF/renovate-bot-runner:
+    RENOVATE_TOKEN: {{ renovate.gitlab_token }}
+    GITHUB_COM_TOKEN: {{ github.oauth_token }}
+    PRIVATE_TOKEN: {{ renovate.gitlab_token }}
+    CI_PROJECT_ID: {{ renovate.project_id }}
