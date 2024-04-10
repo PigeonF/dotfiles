@@ -8,6 +8,7 @@
       inputs.sops-nix.nixosModules.sops
 
       inputs.self.nixosModules.core
+      inputs.self.nixosModules.network
       inputs.self.nixosModules.nix
       inputs.self.nixosModules.vagrant
       inputs.self.nixosModules.ssh
@@ -16,7 +17,6 @@
       ./disk.nix
     ];
 
-    system.stateVersion = "24.05";
     networking.hostName = "mustafar";
 
     boot = {

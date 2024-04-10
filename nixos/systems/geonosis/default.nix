@@ -12,6 +12,7 @@
       inputs.self.nixosModules.docker
       inputs.self.nixosModules.dockerRegistry
       inputs.self.nixosModules.laptop
+      inputs.self.nixosModules.network
       inputs.self.nixosModules.nix
       inputs.self.nixosModules.pigeon
       inputs.self.nixosModules.ssh
@@ -20,7 +21,6 @@
       ./disk.nix
     ];
 
-    system.stateVersion = "24.05";
     networking.hostName = "geonosis";
 
     boot = {

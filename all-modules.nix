@@ -1,6 +1,6 @@
 {
   imports = [
-    ./extras/home-manager.nix
+    ./extras/darwinModules.nix
     ./extras/homeModules.nix
   ];
 }

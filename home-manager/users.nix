@@ -30,7 +30,7 @@
             erdtree
             ghq
             git
-            gitlab-ci-local
+            # gitlab-ci-local
             helix
             just
             nix

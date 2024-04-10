@@ -14,9 +14,6 @@
 
   outputs =
     inputs:
-    let
-      lib = import ./lib { inherit inputs; };
-    in
     inputs.flake-parts.lib.mkFlake { inherit inputs; } {
       systems = import inputs.systems;
 
@@ -25,6 +22,7 @@
         ./lib.nix
 
         ./home-manager
+        ./nix-darwin
         ./nixos
       ];
 
@@ -34,6 +32,7 @@
         flakeModules = {
           default = ./all-modules.nix;
           homeModules = ./extras/homeModules.nix;
+          darwinModules = ./extras/darwinModules.nix;
         };
 
         nixosConfigurations =
@@ -45,15 +44,13 @@
             mustafar = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.mustafar ];
           };
 
-        darwinConfigurations = lib.mkDarwinConfigurations {
-          kamino = {
-            system = "aarch64-darwin";
-            config = ./hosts/kamino;
-            home = {
-              home-manager.users.pigeon = inputs.self.homeModules.users.pigeon;
-            };
+        darwinConfigurations =
+          let
+            inherit (inputs.self.lib) mkDarwinConfiguration;
+          in
+          {
+            kamino = mkDarwinConfiguration "aarch64-darwin" [ inputs.self.darwinModules.kamino ];
           };
-        };
       };
 
       perSystem =
