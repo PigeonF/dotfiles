@@ -27,7 +27,8 @@ _:
 
           home = {
             packages = [ pkgs.sops ];
-            activation.sops-nix = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
+            # sops-nix only adds the sops-nix service if there are secrets in the first place.
+            activation.sops-nix = lib.mkIf (pkgs.stdenv.hostPlatform.isLinux && config.sops.secrets != {}) (
               config.lib.dag.entryAfter [ "writeBoundary" ] ''
                 /run/current-system/sw/bin/systemctl start --user sops-nix
               ''

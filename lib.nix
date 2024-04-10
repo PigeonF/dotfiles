@@ -16,6 +16,7 @@
             { lib, ... }:
             {
               system.stateVersion = lib.mkDefault "24.05";
+              nixpkgs.hostPlatform = lib.mkDefault system;
             }
           )
         ];
