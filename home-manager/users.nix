@@ -35,6 +35,7 @@
             just
             nix
             nushell
+            nvim
             rust
             starship
             zellij

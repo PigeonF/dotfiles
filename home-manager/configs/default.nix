@@ -13,6 +13,7 @@
     just = import ./just.nix;
     nix = import ./nix.nix;
     nushell = import ./nushell.nix;
+    nvim = import ./nvim.nix;
     rust = import ./rust.nix;
     starship = import ./starship.nix;
     zellij = import ./zellij.nix;

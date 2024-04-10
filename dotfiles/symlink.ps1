@@ -76,6 +76,7 @@ function Main() {
     $NeoVimDirTarget = Join-Path $XdgConfigHome nvim
     HandleSymlink (Join-Path $NeoVimDirTarget "init.lua") (Join-Path $NeoVimDirSource "init.lua")
     HandleSymlink (Join-Path $NeoVimDirTarget "lua") (Join-Path $NeoVimDirSource "lua")
+    HandleSymlink (Join-Path $NeoVimDirTarget "lazy-lock.json") (Join-Path $NeoVimDirSource "lazy-lock.json")
 
     # Nushell
     $NuDirSource = Join-Path $DotfilesDir nushell
