@@ -71,6 +71,12 @@ function Main() {
     $HelixDirTarget = Join-Path $env:SCOOP "persist\helix"
     HandleSymlink (Join-Path $HelixDirTarget "config.toml") (Join-Path $HelixDirSource "config.toml")
 
+    # NeoVim
+    $NeoVimDirSource = Join-Path $DotfilesDir nvim
+    $NeoVimDirTarget = Join-Path $XdgConfigHome nvim
+    HandleSymlink (Join-Path $NeoVimDirTarget "init.lua") (Join-Path $NeoVimDirSource "init.lua")
+    HandleSymlink (Join-Path $NeoVimDirTarget "lua") (Join-Path $NeoVimDirSource "lua")
+
     # Nushell
     $NuDirSource = Join-Path $DotfilesDir nushell
     $NuDirTarget = Join-Path $XdgConfigHome nushell
