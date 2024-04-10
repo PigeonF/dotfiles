@@ -4,9 +4,22 @@ Vagrant.configure("2") do |config|
   config.vm.box_version = "23.11"
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  pubkey = File.expand_path("../.vagrant/pigeonf.pub", __FILE__)
+  unless File.exists?(pubkey)
+    require 'net/http'
+
+    File.write(pubkey, Net::HTTP.get(URI.parse("https://github.com/PigeonF.keys")))
+  end
+
   # The insecure key will be overwritten by the nixOS configuration
   config.ssh.insert_key = false
-  config.ssh.keys_only = false
+  config.ssh.private_key_path = [
+    # We use a public key so that ssh-agent is used.
+    pubkey,
+    File.expand_path('~/.vagrant.d/insecure_private_keys/vagrant.key.ed25519'),
+    File.expand_path('~/.vagrant.d/insecure_private_keys/vagrant.key.rsa'),
+  ]
   config.ssh.forward_agent = true
 
   config.vm.define "mustafar" do |mustafar|
