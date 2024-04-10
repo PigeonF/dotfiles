@@ -31,9 +31,7 @@
           inherit inputs;
         };
 
-        sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
-
-        inherit modules;
+        modules = modules ++ [ inputs.sops-nix.homeManagerModules.sops ];
       };
   };
 }
