@@ -86,6 +86,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder ".", "/vagrant", disabled: true
   # The insecure key will be overwritten by the nixOS configuration
   config.ssh.insert_key = false
+  config.ssh.keys_only = false
+  config.ssh.forward_agent = true
 
   config.vm.define "mustafar" do |mustafar|
     mustafar.vm.hostname = "mustafar"
