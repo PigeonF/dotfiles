@@ -1,3 +1,25 @@
+Vagrant.configure("2") do |config|
+  config.vm.box = "nixbox/nixos"
+  config.vm.box_url = "https://app.vagrantup.com/nixbox/boxes/nixos"
+  config.vm.box_version = "23.11"
+
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+  # The insecure key will be overwritten by the nixOS configuration
+  config.ssh.insert_key = false
+  config.ssh.keys_only = false
+  config.ssh.forward_agent = true
+
+  config.vm.define "mustafar" do |mustafar|
+    mustafar.vm.hostname = "mustafar"
+    mustafar.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
+
+    virtualbox(mustafar, name: "Mustafar", memory: 8192, cpus: 4)
+    disksize(mustafar, "128GB")
+    sops(mustafar, ENV['MUSTAFAR_HOST_KEY'])
+    nixos(mustafar, "mustafar")
+  end
+end
+
 def virtualbox(cfg, name:, memory:, cpus:, kvm: true)
   cfg.vm.provider "VirtualBox settings" do |v|
     v.name = name
@@ -58,44 +80,8 @@ def nixos(cfg, name)
         nix-env -iA nixos.git
       fi
 
-      # Provisioning hack is needed because running nixos-rebuild switch in here
-      # leads to vagrant getting stuck.
-      #
-      # We build here, but switch in a trigger
       nixos-rebuild build --verbose --print-build-logs --show-trace --refresh --flake github:PigeonF/dotfiles?ref=main##{name} --accept-flake-config
       nixos-rebuild switch --flake 'github:PigeonF/dotfiles?ref=main##{name}' --no-write-lock-file
-      # mkdir -p /tmp
-      # echo "exec sudo nixos-rebuild switch --flake 'github:PigeonF/dotfiles?ref=main##{name}' --no-write-lock-file" > /tmp/nixos-rebuild-switch.bash
     SHELL
-  end
-
-  # # Directly running the switch in a shell provision hangs indefinitely.
-  # cfg.trigger.after :provisioner_run, type: :hook do |trigger|
-  #   trigger.info = "Checking if nixos-rebuild needs switch"
-  #   trigger.run = {
-  #     inline: "vagrant ssh #{name} -- bash /tmp/nixos-rebuild-switch.bash"
-  #   }
-  # end
-end
-
-Vagrant.configure("2") do |config|
-  config.vm.box = "nixbox/nixos"
-  config.vm.box_url = "https://app.vagrantup.com/nixbox/boxes/nixos"
-  config.vm.box_version = "23.11"
-
-  config.vm.synced_folder ".", "/vagrant", disabled: true
-  # The insecure key will be overwritten by the nixOS configuration
-  config.ssh.insert_key = false
-  config.ssh.keys_only = false
-  config.ssh.forward_agent = true
-
-  config.vm.define "mustafar" do |mustafar|
-    mustafar.vm.hostname = "mustafar"
-    mustafar.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
-
-    virtualbox(mustafar, name: "Mustafar", memory: 8192, cpus: 4)
-    disksize(mustafar, "128GB")
-    sops(mustafar, ENV['MUSTAFAR_HOST_KEY'])
-    nixos(mustafar, "mustafar")
   end
 end
