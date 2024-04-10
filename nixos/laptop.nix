@@ -3,8 +3,11 @@ _:
 {
   flake.nixosModules = {
     laptop = _: {
-      # Do not suspend when closing lid while being charged.
-      hardware.cpu.intel.updateMicrocode = true;
+      hardware = {
+        # Do not suspend when closing lid while being charged.
+        cpu.intel.updateMicrocode = true;
+        enableRedistributableFirmware = true;
+      };
 
       services = {
         dbus.enable = true;
