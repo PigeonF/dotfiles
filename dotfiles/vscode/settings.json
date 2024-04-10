@@ -56,7 +56,8 @@
     "editor.formatOnSave": true,
     "remote.SSH.remotePlatform": {
         "mustafar": "linux",
-        "geonosis": "linux"
+        "geonosis": "linux",
+        "kamino": "macOS"
     },
     "json.schemas": [
         {
