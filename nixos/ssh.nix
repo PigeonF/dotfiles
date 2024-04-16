@@ -14,6 +14,9 @@ _:
             AcceptEnv COLORTERM TERM TERM_*
             AcceptEnv WEZTERM_REMOTE_PANE
           '';
+          settings = {
+            Macs = [ "hmac-sha2-512" ];
+          };
         };
 
         security.sudo.extraConfig = ''
