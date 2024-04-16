@@ -32,5 +32,11 @@
         nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
         registry.nixpkgs.flake = inputs.nixpkgs;
       };
+
+      nixpkgs = {
+        config = {
+          allowUnfree = true;
+        };
+      };
     };
 }

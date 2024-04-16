@@ -5,6 +5,7 @@
         inputs,
         config,
         lib,
+        pkgs,
         ...
       }:
       {
@@ -33,6 +34,12 @@
               "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICSGbm3QEVQFhYqJM29rQ6WibpQr613KgxoYTr/QvztV"
             ];
           };
+        };
+
+        programs._1password.enable = true;
+        programs._1password-gui = {
+          enable = true;
+          polkitPolicyOwners = [ "pigeon" ];
         };
 
         nix.settings.trusted-users = [ "pigeon" ];
