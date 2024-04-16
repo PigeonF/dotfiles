@@ -34,7 +34,6 @@ config.use_fancy_tab_bar = true
 config.window_close_confirmation = 'NeverPrompt'
 
 config.term = 'wezterm'
-config.ssh_backend = 'Ssh2'
 
 config.leader = { key = 'a', mods = 'CTRL' }
 config.disable_default_key_bindings = true
