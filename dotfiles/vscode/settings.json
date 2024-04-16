@@ -26,6 +26,8 @@
     "editor.rulers": [
         100
     ],
+    "terminal.integrated.windowsEnableConpty": false,
+    "terminal.integrated.allowChords": false,
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen"
     ],
