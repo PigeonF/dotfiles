@@ -13,6 +13,12 @@
   ];
 
   flake.nixosModules = {
-    vsCodeRemoteSSHFix = _: { programs.nix-ld.enable = true; };
+    vsCodeRemoteSSHFix =
+      { pkgs, ... }:
+      {
+        programs.nix-ld.enable = true;
+
+        environment.systemPackages = builtins.attrValues { inherit (pkgs) uutils-coreutils-noprefix wget; };
+      };
   };
 }

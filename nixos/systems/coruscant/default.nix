@@ -9,6 +9,8 @@
       inputs.self.nixosModules.home-manager
       inputs.self.nixosModules.nix
       inputs.self.nixosModules.pigeon
+
+      inputs.self.nixosModules.vsCodeRemoteSSHFix
     ];
 
     networking.hostName = "coruscant";
