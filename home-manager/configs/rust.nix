@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   home = {
@@ -9,8 +9,8 @@
     };
 
     sessionVariables = {
-      CARGO_HOME = "$XDG_DATA_HOME/cargo";
-      RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
+      CARGO_HOME = "${config.xdg.dataHome}/cargo";
+      RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
     };
 
     sessionPath = [ "$CARGO_HOME/bin" ];

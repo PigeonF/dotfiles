@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 {
   home = {
@@ -15,7 +15,7 @@
     };
 
     sessionVariables = {
-      DOCKER_CONFIG = "$XDG_DATA_HOME/docker";
+      DOCKER_CONFIG = "${config.xdg.dataHome}/docker";
     };
   };
 }
