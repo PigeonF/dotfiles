@@ -21,6 +21,8 @@ end
 
 config.color_scheme = scheme_for_appearance(get_appearance())
 
+config.mux_env_remove = {}
+
 config.font = wezterm.font_with_fallback {
   'Cartograph CF',
   'PragmataPro Mono',
