@@ -42,6 +42,7 @@
           {
             geonosis = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.geonosis ];
             mustafar = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.mustafar ];
+            coruscant = mkNixosConfiguration "x86_64-linux" [ inputs.self.nixosModules.coruscant ];
           };
 
         darwinConfigurations =
@@ -137,5 +138,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    nixos-wsl = {
+      url = "github:nix-community/NixOS-WSL";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }

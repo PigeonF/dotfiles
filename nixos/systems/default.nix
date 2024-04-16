@@ -1,5 +1,6 @@
 {
   imports = [
+    ./coruscant
     ./geonosis
     ./mustafar
   ];
