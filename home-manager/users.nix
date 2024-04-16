@@ -38,6 +38,7 @@
             nvim
             rust
             starship
+            wezterm
             zellij
             zoxide
             zsh
@@ -54,6 +55,7 @@
             git
             just
             starship
+            wezterm
             zellij
             zoxide
             ;

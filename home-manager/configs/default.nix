@@ -16,6 +16,7 @@
     nvim = import ./nvim.nix;
     rust = import ./rust.nix;
     starship = import ./starship.nix;
+    wezterm = import ./wezterm.nix;
     zellij = import ./zellij.nix;
     zoxide = import ./zoxide.nix;
     zsh = import ./zsh.nix;
