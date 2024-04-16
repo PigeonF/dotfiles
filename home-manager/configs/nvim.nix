@@ -14,11 +14,16 @@
     packages = builtins.attrValues {
       inherit (pkgs)
         clang
+        hadolint
+        markdownlint-cli
         stylua
         unzip
+        vale
         wget
         zig
         ;
+
+        inherit (pkgs.nodePackages) jsonlint;
     };
   };
 
