@@ -33,7 +33,7 @@ Vagrant.configure("2") do |config|
   end
 end
 
-def virtualbox(cfg, name:, memory:, cpus:, kvm: true)
+def virtualbox(cfg, name:, memory:, cpus:, kvm: false)
   cfg.vm.provider "VirtualBox settings" do |v|
     v.name = name
     v.memory = memory

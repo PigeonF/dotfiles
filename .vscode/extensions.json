@@ -4,6 +4,7 @@
         "editorconfig.editorconfig",
         "jeanp413.open-remote-ssh",
         "rust-lang.rust-analyzer",
+        "tekumara.typos-vscode",
         "thenuprojectcontributors.vscode-nushell-lang",
         "vadimcn.vscode-lldb",
     ]
