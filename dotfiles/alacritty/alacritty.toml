@@ -7,6 +7,18 @@ family = "Cartograph CF"
 [env]
 TERM = "alacritty"
 
+[mouse]
+bindings = [
+  { mouse = "Right", mods = "Control", action = "None" },
+  { mouse = "Middle", mode = "~Vi", action = "None" },
+]
+
+[keyboard]
+bindings = [
+  # Disable Vi mode
+  { key = "Space", mods = "Shift|Control", action = "None" },
+]
+
 # Catppuccin Macchiato (https://github.com/catppuccin/alacritty/blob/main/catppuccin-macchiato.toml)
 [colors.primary]
 background = "#24273a"
