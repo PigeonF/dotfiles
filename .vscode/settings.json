@@ -1,0 +1,10 @@
+{
+    "json.schemas": [
+        {
+            "fileMatch": [
+                "dotfiles/vscodium/keybindings.jsonc"
+            ],
+            "url": "vscode://schemas/keybindings"
+        }
+    ]
+}

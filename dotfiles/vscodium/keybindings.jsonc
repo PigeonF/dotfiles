@@ -1,1 +1,10 @@
-{}
+[
+    {
+        "key": "ctrl+k ctrl+k",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported",
+        "args": {
+            "text": "\u000b",
+        },
+    }
+]
