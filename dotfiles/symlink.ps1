@@ -47,6 +47,7 @@ function Main() {
 
     $XdgConfigHome = $env:XDG_CONFIG_HOME
     $AppData = $env:APPDATA
+    $ScoopDir = $env:SCOOP
 
     $SSHDirTarget = Join-Path $HOME .ssh
 
@@ -62,7 +63,7 @@ function Main() {
 
     # Erdtree
     $ErdTreeSource = Join-Path $DotfilesDir erdtree
-    $ErdTreeTarget = Join-Path $env:APPDATA erdtree
+    $ErdTreeTarget = Join-Path $AppData erdtree
     HandleSymlink (Join-Path $ErdTreeTarget ".erdtreerc") (Join-Path $ErdTreeSource "config")
 
     # Git
@@ -98,13 +99,14 @@ function Main() {
 
     # Topgrade
     $TopgradeDirSource = Join-Path $DotfilesDir topgrade
-    $TopgradeDirTarget = $env:APPDATA
+    $TopgradeDirTarget = $AppData
     HandleSymlink (Join-Path $TopgradeDirTarget "topgrade.toml") (Join-Path $TopgradeDirSource "topgrade.toml")
 
-    # VS Code
-    $CodeDirSource = Join-Path $DotfilesDir vscode
-    $CodeDirTarget = Join-Path $env:SCOOP "persist\vscode\data\user-data\User\"
-    HandleSymlink (Join-Path $CodeDirTarget "settings.json") (Join-Path $CodeDirSource "settings.json")
+    # VSCodium
+    $CodiumDirSource = Join-Path $DotfilesDir vscodium
+    $CodiumDirTarget = Join-Path $ScoopDir "persist\vscodium\data\user-data\User\"
+    HandleSymlink (Join-Path $CodiumDirTarget "settings.json") (Join-Path $CodiumDirSource "settings.json")
+    HandleSymlink (Join-Path $CodiumDirTarget "keybindings.json") (Join-Path $CodiumDirSource "keybindings.json")
 
     # Wezterm
     $WeztermDirSource = Join-Path $DotfilesDir wezterm
