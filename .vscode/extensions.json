@@ -2,5 +2,6 @@
     "recommendations": [
         "editorconfig.editorconfig",
         "jeanp413.open-remote-ssh",
+        "catppuccin.catppuccin-vsc-pack",
     ]
 }

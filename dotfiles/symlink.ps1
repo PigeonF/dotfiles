@@ -105,8 +105,8 @@ function Main() {
     # VSCodium
     $CodiumDirSource = Join-Path $DotfilesDir vscodium
     $CodiumDirTarget = Join-Path $ScoopDir "persist\vscodium\data\user-data\User\"
-    HandleSymlink (Join-Path $CodiumDirTarget "settings.json") (Join-Path $CodiumDirSource "settings.json")
-    HandleSymlink (Join-Path $CodiumDirTarget "keybindings.json") (Join-Path $CodiumDirSource "keybindings.json")
+    HandleSymlink (Join-Path $CodiumDirTarget "settings.json") (Join-Path $CodiumDirSource "settings.jsonc")
+    HandleSymlink (Join-Path $CodiumDirTarget "keybindings.json") (Join-Path $CodiumDirSource "keybindings.jsonc")
 
     # Wezterm
     $WeztermDirSource = Join-Path $DotfilesDir wezterm
