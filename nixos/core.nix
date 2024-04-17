@@ -22,6 +22,7 @@ _:
           ];
 
           extraLocaleSettings = {
+            LC_COLLATE = "C";
             LC_TIME = "de_DE.UTF-8";
           };
         };
