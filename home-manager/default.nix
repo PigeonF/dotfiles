@@ -40,18 +40,20 @@ _:
           ) "${config.xdg.configHome}/sops/age/keys.txt";
         };
 
-      xdg = {config, ...}: {
-        xdg.enable = true;
+      xdg =
+        { config, ... }:
+        {
+          xdg.enable = true;
 
-        home.sessionVariables = {
-          XDG_BIN_HOME = "$HOME/.local/bin";
+          home.sessionVariables = {
+            XDG_BIN_HOME = "$HOME/.local/bin";
 
-          # Migrate these as soon as there is a corresponding entry in configs/
-          DOTNET_CLI_HOME = "${config.xdg.cacheHome}/dotnet";
+            # Migrate these as soon as there is a corresponding entry in configs/
+            DOTNET_CLI_HOME = "${config.xdg.cacheHome}/dotnet";
+          };
+
+          home.sessionPath = [ "$XDG_BIN_HOME" ];
         };
-
-        home.sessionPath = [ "$XDG_BIN_HOME" ];
-      };
     };
   };
 }
