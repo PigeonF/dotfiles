@@ -46,8 +46,14 @@ function Main() {
     $DotfilesDir = Join-Path $Root dotfiles
 
     $XdgConfigHome = $env:XDG_CONFIG_HOME
+    $AppData = $env:APPDATA
 
     $SSHDirTarget = Join-Path $HOME .ssh
+
+    # alacritty
+    $AlacrittyDirSource = Join-Path $DotfilesDir alacritty
+    $AlacrittyDirTarget = Join-Path $AppData alacritty
+    HandleSymlink (Join-Path $AlacrittyDirTarget "alacritty.toml") (Join-Path $AlacrittyDirSource "alacritty.toml")
 
     # atuin
     $AtuinDirSource = Join-Path $DotfilesDir atuin
