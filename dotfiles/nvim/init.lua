@@ -26,6 +26,7 @@ vim.opt.scrolloff = 10
 -- [[ Basic Keymaps ]]
 vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -211,17 +212,22 @@ require('lazy').setup({
             },
           },
         },
-        nil_ls = {
-          autostart = true,
-          settings = {
-            ['nil'] = {
-              formatting = {
-                command = { 'nixfmt' },
+      }
+
+      if not vim.loop.os_uname().sysname == 'Windows_NT' then
+        vim.list_extend(servers, {
+          nil_ls = {
+            autostart = true,
+            settings = {
+              ['nil'] = {
+                formatting = {
+                  command = { 'nixfmt' },
+                },
               },
             },
           },
-        },
-      }
+        })
+      end
 
       require('mason').setup {
         PATH = 'append',
