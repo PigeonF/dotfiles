@@ -16,6 +16,7 @@
         clang
         hadolint
         markdownlint-cli
+        nixfmt-rfc-style
         stylua
         unzip
         vale
@@ -28,8 +29,8 @@
   };
 
   xdg.configFile = {
-    "nvim/init.lua".source = ../../dotfiles/nvim/init.lua;
-    "nvim/lua".source = ../../dotfiles/nvim/lua;
+    "nvim/init.lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/github.com/PigeonF/dotfiles/dotfiles/nvim/init.lua";
+    "nvim/lua".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/github.com/PigeonF/dotfiles/dotfiles/nvim/lua";
     "nvim/lazy-lock.json".source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/github.com/PigeonF/dotfiles/dotfiles/nvim/lazy-lock.json";
   };
 }

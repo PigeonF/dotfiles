@@ -211,12 +211,27 @@ require('lazy').setup({
             },
           },
         },
+        nil_ls = {
+          autostart = true,
+          settings = {
+            ['nil'] = {
+              formatting = {
+                command = { 'nixfmt' },
+              },
+            },
+          },
+        },
       }
 
-      require('mason').setup()
+      require('mason').setup {
+        PATH = 'append',
+      }
 
-      local ensure_installed = vim.tbl_keys(servers or {})
+      local ensure_installed = {}
+      -- On NixOS the tools are installed via nvim.nix, since most of them would have to be patched otherwise.
+      -- See <https://github.com/williamboman/mason.nvim/issues/428>
       if not string.find(vim.loop.os_uname().version, 'NixOS') then
+        ensure_installed = vim.tbl_keys(servers)
         vim.list_extend(ensure_installed, {
           'hadolint',
           'jsonlint',
@@ -226,19 +241,16 @@ require('lazy').setup({
         })
       end
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+      require('mason-lspconfig').setup {}
 
-      require('mason-lspconfig').setup {
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for tsserver)
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      }
+      for _, server_name in ipairs(vim.tbl_keys(servers)) do
+        local server = servers[server_name] or {}
+        -- This handles overriding only values explicitly passed
+        -- by the server configuration above. Useful when disabling
+        -- certain features of an LSP (for example, turning off formatting for tsserver)
+        server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+        require('lspconfig')[server_name].setup(server)
+      end
     end,
   },
 
