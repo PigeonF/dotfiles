@@ -17,7 +17,7 @@
     rust = import ./rust.nix;
     starship = import ./starship.nix;
     wezterm = import ./wezterm.nix;
-    zellij = import ./zellij.nix;
+    zellij = import ./zellij;
     zoxide = import ./zoxide.nix;
     zsh = import ./zsh.nix;
   };
