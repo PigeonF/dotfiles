@@ -1,4 +1,4 @@
-_:
+{config, ...}:
 
 {
   programs.zellij = {
@@ -8,6 +8,6 @@ _:
   };
 
   xdg.configFile."zellij/config.kdl" = {
-    source = ./config.kdl;
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/github.com/PigeonF/dotfiles/home-manager/configs/zellij/config.kdl";
   };
 }
