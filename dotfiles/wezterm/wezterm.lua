@@ -1,8 +1,6 @@
 local wezterm = require 'wezterm'
-local shells = require 'shells'
 
 local config = wezterm.config_builder()
-shells.apply_to_config(config)
 
 function get_appearance()
   if wezterm.gui then
@@ -17,6 +15,21 @@ function scheme_for_appearance(appearance)
   else
     return 'Catppuccin Latte'
   end
+end
+
+config.default_prog = { 'nu', '-l' }
+
+config.launch_menu = {
+  {
+    label = 'NuShell',
+  },
+}
+
+if wezterm.target_triple == 'x86_64-pc-windows-msvc' then
+  table.insert(config.launch_menu, {
+    label = 'PowerShell',
+    args = { 'pwsh', '-NoLogo' },
+  })
 end
 
 config.color_scheme = scheme_for_appearance(get_appearance())

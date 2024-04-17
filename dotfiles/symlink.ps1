@@ -104,7 +104,6 @@ function Main() {
     $WeztermDirSource = Join-Path $DotfilesDir wezterm
     $WeztermDirTarget = Join-Path $XdgConfigHome wezterm
     HandleSymlink (Join-Path $WeztermDirTarget "wezterm.lua") (Join-Path $WeztermDirSource "wezterm.lua")
-    HandleSymlink (Join-Path $WeztermDirTarget "shells.lua") (Join-Path $WeztermDirSource "shells.lua")
 }
 
 Main
