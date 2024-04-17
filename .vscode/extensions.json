@@ -1,8 +1,10 @@
 {
     "recommendations": [
+        "catppuccin.catppuccin-vsc-pack",
         "editorconfig.editorconfig",
         "jeanp413.open-remote-ssh",
-        "catppuccin.catppuccin-vsc-pack",
+        "rust-lang.rust-analyzer",
         "thenuprojectcontributors.vscode-nushell-lang",
+        "vadimcn.vscode-lldb",
     ]
 }

@@ -1,6 +1,6 @@
 [core]
     autocrlf = false
-    editor = code --wait
+    editor = nvim
     pager = delta
     abbrev = 16
     symlinks = true
