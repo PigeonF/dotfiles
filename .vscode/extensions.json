@@ -1,10 +1,6 @@
 {
     "recommendations": [
-        "arrterian.nix-env-selector",
-        "jnoortheen.nix-ide",
-        "kokakiwi.vscode-just",
-        "mkhl.direnv",
-        "github.vscode-github-actions",
-        "tamasfe.even-better-toml"
+        "editorconfig.editorconfig",
+        "jeanp413.open-remote-ssh",
     ]
 }
