@@ -8,6 +8,7 @@
       inputs.sops-nix.nixosModules.sops
 
       inputs.self.nixosModules.core
+      inputs.self.nixosModules.coreLinux
       inputs.self.nixosModules.network
       inputs.self.nixosModules.nix
       inputs.self.nixosModules.vagrant

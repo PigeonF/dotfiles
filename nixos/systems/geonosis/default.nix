@@ -12,6 +12,7 @@
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
         inputs.self.nixosModules.core
+        inputs.self.nixosModules.coreLinux
         inputs.self.nixosModules.docker
         inputs.self.nixosModules.dockerRegistry
         inputs.self.nixosModules.laptop

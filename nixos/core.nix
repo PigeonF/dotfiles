@@ -14,6 +14,19 @@ _:
           timeZone = lib.mkDefault "Europe/Berlin";
         };
 
+        system = {
+          configurationRevision = lib.mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
+        };
+      };
+
+    coreLinux =
+      { pkgs, ... }:
+      {
+        environment = {
+          enableAllTerminfo = true;
+          systemPackages = [ pkgs.glibcLocales ];
+        };
+
         i18n = {
           supportedLocales = [
             "C.UTF-8/UTF-8"
@@ -25,15 +38,6 @@ _:
             LC_COLLATE = "C";
             LC_TIME = "de_DE.UTF-8";
           };
-        };
-
-        system = {
-          configurationRevision = lib.mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
-        };
-
-        environment = {
-          enableAllTerminfo = true;
-          systemPackages = [ pkgs.glibcLocales ];
         };
       };
   };
