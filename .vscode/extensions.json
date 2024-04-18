@@ -3,6 +3,7 @@
         "catppuccin.catppuccin-vsc-pack",
         "editorconfig.editorconfig",
         "jeanp413.open-remote-ssh",
+        "jnoortheen.nix-ide",
         "rust-lang.rust-analyzer",
         "tekumara.typos-vscode",
         "thenuprojectcontributors.vscode-nushell-lang",
