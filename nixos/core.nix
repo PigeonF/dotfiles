@@ -3,12 +3,7 @@ _:
 {
   flake.nixosModules = {
     core =
-      {
-        inputs,
-        lib,
-        pkgs,
-        ...
-      }:
+      { inputs, lib, ... }:
       {
         time = {
           timeZone = lib.mkDefault "Europe/Berlin";

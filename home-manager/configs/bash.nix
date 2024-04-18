@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.bash = {
     enable = true;
 
-    historyFile = "$XDG_STATE_HOME/bash_history.txt";
+    historyFile = "${config.xdg.stateHome}/bash/bash_history.txt";
 
     historyIgnore = [
       "ls"
