@@ -1,0 +1,7 @@
+[default]
+extend-ignore-re = [
+  "\\[I\\]nner",
+  "\\[R\\]eferences",
+  "\\[S\\]earch",
+  "\\[S\\]ymbols",
+]
