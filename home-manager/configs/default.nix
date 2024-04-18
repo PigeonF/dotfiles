@@ -11,6 +11,7 @@
     gitlab-ci-local = import ./gitlab-ci-local;
     helix = import ./helix.nix;
     just = import ./just.nix;
+    newsboat = import ./newsboat.nix;
     nix = import ./nix.nix;
     nushell = import ./nushell.nix;
     nvim = import ./nvim.nix;

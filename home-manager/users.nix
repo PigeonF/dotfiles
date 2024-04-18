@@ -33,6 +33,7 @@
             # gitlab-ci-local
             helix
             just
+            newsboat
             nix
             nushell
             nvim
