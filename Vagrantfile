@@ -86,15 +86,26 @@ def nixos(cfg, name)
   cfg.vm.provision "nixos-rebuild for #{name}", type: "shell" do |shell|
     shell.privileged = true
     shell.inline = <<-SHELL
-      # We do not need them, since we use flake based dotfiles.
-      rm -f /etc/nixos/*.nix
-
       if ! type git &> /dev/null; then
         nix-env -iA nixos.git
       fi
 
-      nixos-rebuild build --verbose --print-build-logs --show-trace --refresh --flake github:PigeonF/dotfiles?ref=main##{name} --accept-flake-config
-      nixos-rebuild switch --flake 'github:PigeonF/dotfiles?ref=main##{name}' --no-write-lock-file
+      if [[ ! -r "/home/vagrant/.local/bin/rebuild-dotfiles" ]]; then
+        mkdir -p "/home/vagrant/.local/bin/"
+        chown -R vagrant:vagrant "/home/vagrant/.local"
+
+        echo '
+        #!/usr/bin/env bash
+
+        set -o errexit
+        set -o nounset
+        set -o pipefail
+
+        exec nixos-rebuild switch --flake "github:PigeonF/dotfiles?ref=main##{name}" --no-write-lock-file
+        ' > /home/vagrant/.local/bin/rebuild-dotfiles
+        chmod 0755 /home/vagrant/.local/bin/rebuild-dotfiles
+        chown vagrant:vagrant /home/vagrant/.local/bin/rebuild-dotfiles
+      fi
     SHELL
   end
 end
