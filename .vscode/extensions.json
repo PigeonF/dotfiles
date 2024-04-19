@@ -14,5 +14,6 @@
         "tekumara.typos-vscode",
         "thenuprojectcontributors.vscode-nushell-lang",
         "vadimcn.vscode-lldb",
+        "wolfmah-vscode.just-syntax",
     ]
 }

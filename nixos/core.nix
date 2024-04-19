@@ -22,6 +22,9 @@ _:
           systemPackages = [ pkgs.glibcLocales ];
         };
 
+        services.dbus.enable = true;
+        services.timesyncd.enable = true;
+
         i18n = {
           supportedLocales = [
             "C.UTF-8/UTF-8"

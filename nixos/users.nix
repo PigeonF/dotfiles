@@ -49,7 +49,6 @@
         inputs,
         config,
         lib,
-        pkgs,
         ...
       }:
       {
@@ -82,30 +81,6 @@
         };
 
         nix.settings.trusted-users = [ "vagrant" ];
-
-        # Required by vagrant
-        environment.systemPackages = builtins.attrValues {
-          inherit (pkgs)
-            findutils
-            gnumake
-            iputils
-            jq
-            nettools
-            netcat
-            nfs-utils
-            rsync
-            ;
-        };
-
-        # Allow passwordless sudo
-        security.sudo.extraConfig = ''
-          %wheel ALL=(ALL) NOPASSWD: ALL, SETENV: ALL
-        '';
-
-        # Vagrant keys use RSA
-        services.openssh.extraConfig = ''
-          PubkeyAcceptedKeyTypes +ssh-rsa
-        '';
       };
   };
 }

@@ -10,10 +10,8 @@ _:
       };
 
       services = {
-        dbus.enable = true;
         logind.lidSwitchExternalPower = "ignore";
         logrotate.checkConfig = false;
-        timesyncd.enable = true;
       };
     };
   };
