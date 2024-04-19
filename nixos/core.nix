@@ -37,6 +37,12 @@ _:
             LC_TIME = "de_DE.UTF-8";
           };
         };
+
+        security.sudo.extraConfig = ''
+          Defaults:root,%wheel env_keep+=LOCALE_ARCHIVE
+          Defaults:root,%wheel env_keep+=NIX_PATH
+          Defaults:root,%wheel env_keep+=TERMINFO_DIRS
+        '';
       };
   };
 }

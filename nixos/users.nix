@@ -64,11 +64,13 @@
             description = "Developer Account";
             name = "vagrant";
             group = "vagrant";
-            extraGroups = [
-              "users"
-              "wheel"
-              "vboxsf"
-            ] ++ lib.lists.optional config.virtualisation.docker.enable "docker";
+            extraGroups =
+              [
+                "users"
+                "wheel"
+              ]
+              ++ lib.lists.optional config.virtualisation.docker.enable "docker"
+              ++ lib.lists.optional config.virtualisation.virtualbox.guest.enable "vboxsf";
             home = "/home/vagrant";
             createHome = true;
             useDefaultShell = true;

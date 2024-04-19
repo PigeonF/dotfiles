@@ -52,9 +52,11 @@
           inherit (inputs.self.homeModules) core xdg;
 
           inherit (inputs.self.homeModules.configs)
+            atuin
             bash
             git
             just
+            nix
             starship
             wezterm
             zellij

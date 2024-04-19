@@ -38,8 +38,10 @@
         };
       };
 
-      virtualisation.virtualbox.guest.enable = true;
-      systemd.coredump.enable = false;
+      # For some reason changing this seems to lead to a crash in the current
+      # VirtualBox version. As mustafar does not require guest additions, we
+      # can just disable it.
+      virtualisation.virtualbox.guest.enable = false;
 
       users = {
         mutableUsers = false;
