@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
 end
 
 def virtualbox(cfg, name:, memory:, cpus:, kvm: false)
-  cfg.vm.provider "VirtualBox settings" do |v|
+  cfg.vm.provider "virtualbox" do |v|
     v.name = name
     v.memory = memory
     v.cpus = cpus
@@ -71,7 +71,7 @@ def sops(cfg, host_key)
 
       if [[ -z "$HOST_KEY_ED25519" ]]; then
           # Required in order to decrypt sops secrets
-          echo "Provisioning requires a host key. Run with 'op run --env-file vagrant.env -- vagrant up'"
+          echo "Provisioning requires a host key. Run with 'op run --env-file vagrant.env -- vagrant up --provision'"
           exit 1
       fi
 
