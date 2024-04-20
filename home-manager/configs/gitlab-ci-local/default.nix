@@ -1,15 +1,10 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
+{ pkgs, lib, ... }:
 
 {
-  sops.secrets."gitlab-ci-local" = {
-    sopsFile = ./secrets.ini;
-    format = "ini";
-  };
+  # sops.secrets."gitlab-ci-local" = {
+  #   sopsFile = ./secrets.ini;
+  #   format = "ini";
+  # };
 
   home = {
     packages = [ pkgs.gitlab-ci-local ];
@@ -39,27 +34,27 @@
     };
   };
 
-  systemd.user.services.gitlab-ci-local-variables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
-    Unit = {
-      Description = "gitlab-ci-local variables.yml activation";
-      After = [ "sops-nix.service" ];
-    };
+  # systemd.user.services.gitlab-ci-local-variables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
+  #   Unit = {
+  #     Description = "gitlab-ci-local variables.yml activation";
+  #     After = [ "sops-nix.service" ];
+  #   };
 
-    Service =
-      let
-        secrets = builtins.replaceStrings [ "%r" ] [ "%t" ] config.sops.secrets."gitlab-ci-local".path;
-      in
-      {
-        Type = "oneshot";
-        UMask = "0077";
-        ExecStart = "${lib.getExe pkgs.jinja2-cli} -o %t/gitlab-ci-local-variables.yaml --strict --format=ini ${./variables.yaml} ${secrets}";
-        ExecStartPost = "${lib.getExe' pkgs.coreutils "ln"} -s %t/gitlab-ci-local-variables.yaml %h/.gitlab-ci-local/variables.yml";
-      };
-  };
+  #   Service =
+  #     let
+  #       secrets = builtins.replaceStrings [ "%r" ] [ "%t" ] config.sops.secrets."gitlab-ci-local".path;
+  #     in
+  #     {
+  #       Type = "oneshot";
+  #       UMask = "0077";
+  #       ExecStart = "${lib.getExe pkgs.jinja2-cli} -o %t/gitlab-ci-local-variables.yaml --strict --format=ini ${./variables.yaml} ${secrets}";
+  #       ExecStartPost = "${lib.getExe' pkgs.coreutils "ln"} -s %t/gitlab-ci-local-variables.yaml %h/.gitlab-ci-local/variables.yml";
+  #     };
+  # };
 
-  home.activation.gitlab-ci-local-variables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
-    config.lib.dag.entryAfter [ "sops-nix" ] ''
-      /run/current-system/sw/bin/systemctl start --user gitlab-ci-local-variables
-    ''
-  );
+  # home.activation.gitlab-ci-local-variables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux (
+  #   config.lib.dag.entryAfter [ "sops-nix" ] ''
+  #     /run/current-system/sw/bin/systemctl start --user gitlab-ci-local-variables
+  #   ''
+  # );
 }
