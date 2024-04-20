@@ -7,4 +7,12 @@
             "text": "\u000b",
         },
     },
+    {
+        "key": "ctrl+v",
+        "command": "workbench.action.terminal.sendSequence",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported",
+        "args": {
+            "text": "\u0016",
+        },
+    },
 ]
