@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
     mustafar.vm.hostname = "mustafar"
     mustafar.vm.network :forwarded_port, guest: 22, host: 2201, id: "ssh"
 
-    virtualbox(mustafar, name: "Mustafar", memory: 8192, cpus: 4)
+    virtualbox(mustafar, name: "Mustafar", memory: 16384, cpus: 6)
     disksize(mustafar, "128GB")
     sops(mustafar, ENV['MUSTAFAR_HOST_KEY'])
     nixos(mustafar, "mustafar")
