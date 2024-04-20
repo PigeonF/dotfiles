@@ -16,3 +16,5 @@ $env.config = ($env.config | merge $custom_config)
 source atuin.nu
 source starship.nu
 source zoxide.nu
+
+overlay use nupm/ --prefix

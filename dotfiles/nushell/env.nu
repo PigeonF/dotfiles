@@ -113,3 +113,16 @@ def ensure-command-completion [
 ensure-command-completion atuin "--disable-up-arrow"
 ensure-command-completion starship
 ensure-command-completion zoxide --shell nushell
+
+if not ($env.NUPM_HOME | path join "modules" "nupm" | path exists) {
+    let dir = mktemp -d
+    git clone https://github.com/nushell/nupm ($dir)
+    ^$nu.current-exe ...[
+        --no-config-file
+        --no-history
+        --commands $"
+            use ($dir | path join 'nupm')
+            nupm install --force --path ($dir)
+        "
+    ]
+}
