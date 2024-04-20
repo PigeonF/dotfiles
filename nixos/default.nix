@@ -3,6 +3,7 @@
     ./core.nix
     ./docker.nix
     ./dockerRegistry.nix
+    ./gitlab-runner
     ./laptop.nix
     ./network.nix
     ./nix.nix

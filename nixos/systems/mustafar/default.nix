@@ -16,11 +16,17 @@
         inputs.self.nixosModules.vagrant
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
-        ./gitlab-runner.nix
+        inputs.self.nixosModules.gitlab-runner
         ./disk.nix
       ];
 
       networking.hostName = "mustafar";
+
+      sops.secrets."gitlab-runner/environment" = {
+        sopsFile = ./gitlab-runner-default.env;
+        format = "dotenv";
+        restartUnits = [ "gitlab-runner.service" ];
+      };
 
       boot = {
         initrd = {
