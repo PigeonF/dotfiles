@@ -20,6 +20,7 @@
     can = commit --amend --no-edit
     cc = "!f() { git commit -e -F \"$(git rev-parse --show-toplevel)/.git/COMMIT_EDITMSG\" $@; }; f"
     cm = commit -m
+    cl = clone --recurse-submodules
     d = diff --color
     ds = diff --color --cached
     fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
@@ -88,6 +89,9 @@
 [status]
     short = true
     branch = true
+
+[submodule]
+    recurse = true
 
 [tag]
     sort = -version:refname
