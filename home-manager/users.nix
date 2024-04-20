@@ -31,6 +31,7 @@
             ghq
             git
             gitlab-ci-local
+            go
             helix
             just
             newsboat
