@@ -57,10 +57,12 @@
                   committed
                   deadnix
                   editorconfig-checker
+                  markdownlint-cli2
                   nixfmt-rfc-style
                   reuse
                   statix
                   typos
+                  vale
                   yamllint
                   ;
               };
