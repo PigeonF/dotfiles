@@ -16,7 +16,7 @@
         100
     ],
     "editor.wordWrap": "on",
-    "explorer.excludeGitIgnore": true,
+    // "explorer.excludeGitIgnore": true,
     // updated 2024-04-10 13:52
     // https://github.com/antfu/vscode-file-nesting-config
     "explorer.fileNesting.enabled": true,
@@ -109,7 +109,7 @@
     "files.exclude": {
         "**/.gitlab-ci-local": true
     },
-    "git.enabled": false,
+    "git.enabled": true,
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nil",
     "nix.serverSettings": {
