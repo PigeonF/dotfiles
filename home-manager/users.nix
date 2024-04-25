@@ -36,6 +36,7 @@
             just
             newsboat
             nix
+            nodejs
             nushell
             nvim
             rust
