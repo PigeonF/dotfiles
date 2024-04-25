@@ -1,4 +1,9 @@
-{ pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # sops.secrets."gitlab-ci-local" = {
@@ -10,28 +15,27 @@
     packages = [ pkgs.gitlab-ci-local ];
 
     sessionVariables = {
+      GCL_HOME = "${config.xdg.configHome}/gitlab-ci-local";
       GCL_ARTIFACTS_TO_SOURCE = "false";
     };
+  };
 
-    file = {
-      ".gitlab-ci.local/.keep".source = builtins.toFile "keep" "";
-
-      ".gitlab-ci-local/.env" = {
-        text =
-          let
-            volumes = lib.strings.concatStringsSep " " [
-              "certs:/certs/client"
-              "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro"
-            ];
-            variables = lib.strings.concatStringsSep " " [ "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt" ];
-          in
-          ''
-            PRIVILEGED=true
-            VOLUME="${volumes}"
-            VARIABLE="${variables}"
-          '';
-      };
-    };
+  xdg.configFile.".gitlab-ci-local/.env" = {
+    text =
+      let
+        volumes = lib.strings.concatStringsSep " " [
+          "builds:/builds"
+          "cache:/cache"
+          "certs:/certs/client"
+          "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro"
+        ];
+        variables = lib.strings.concatStringsSep " " [ "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt" ];
+      in
+      ''
+        PRIVILEGED=true
+        VOLUME="${volumes}"
+        VARIABLE="${variables}"
+      '';
   };
 
   # systemd.user.services.gitlab-ci-local-variables = lib.mkIf pkgs.stdenv.hostPlatform.isLinux {
