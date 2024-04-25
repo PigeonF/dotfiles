@@ -7,8 +7,7 @@
 }:
 
 let
-  version = "c5524204d56101dbab8ed8db3c70f5dd72891dab"; # "4.46.1";
-  rev = version;
+  version = "4.48.2";
 in
 
 buildNpmPackage {
@@ -18,21 +17,19 @@ buildNpmPackage {
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
-    inherit rev;
-    hash = "sha256-gjVwbXlgF96nNxSoBn/kBUOdNZwQxLQwWXDMotpqfnI=";
+    rev = "refs/tags/${version}";
+    hash = "sha256-QdbVI6aby/UQCR3G25nvmvoXNMDndgLYz/hOTmj5dnc=";
   };
+  npmDepsHash = "sha256-ebrdMbSAsughHCuV86s6WA12a8hqA2yyC/rJUyViOrI=";
 
   patches = [ ./dotenv-services.patch ];
-
-  npmDepsHash = "sha256-55riOAlUeJjv/BRCVb1K+GS3haVRYXGUc7KpaSRboJg=";
 
   nativeBuildInputs = [
     git
     typescript
   ];
 
-  npmFlags = builtins.toString [ "--ignore-scripts" ];
-
+  # `npm run build` fails because the nix store does not include git directories
   buildPhase = ''
     runHook preBuild
 
@@ -42,8 +39,10 @@ buildNpmPackage {
   '';
 
   meta = {
-    description = "Tired of pushing to test your .gitlab-ci.yml?";
     homepage = "https://github.com/firecow/gitlab-ci-local";
+    changelog = "https://github.com/firecow/gitlab-ci-local/releases/tag/${version}";
+    description = "Tired of pushing to test your .gitlab-ci.yml?";
+    mainProgram = "gitlab-ci-local";
     license = lib.licenses.mit;
   };
 }
