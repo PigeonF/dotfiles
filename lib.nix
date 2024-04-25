@@ -11,6 +11,8 @@ let
 
       sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
     };
+
+    nixpkgs.overlays = [ inputs.self.overlays.default ];
   };
 in
 

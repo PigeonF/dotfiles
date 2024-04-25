@@ -18,7 +18,8 @@
     in
     {
       pigeon = mkUser "pigeon" (
-        builtins.attrValues {
+
+        (builtins.attrValues {
           inherit (inputs.self.homeModules) core xdg;
 
           inherit (inputs.self.homeModules.configs)
@@ -46,7 +47,26 @@
             zoxide
             zsh
             ;
-        }
+        })
+        ++ [
+          (
+            { pkgs, ... }:
+            {
+              home.packages = builtins.attrValues {
+                inherit (pkgs)
+                  committed
+                  deadnix
+                  editorconfig-checker
+                  nixfmt-rfc-style
+                  reuse
+                  statix
+                  typos
+                  yamllint
+                  ;
+              };
+            }
+          )
+        ]
       );
 
       vagrant = mkUser "vagrant" (
