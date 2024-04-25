@@ -15,7 +15,7 @@
     };
   };
 
-  xdg.configFile.".gitlab-ci-local/.env" = {
+  xdg.configFile."gitlab-ci-local/.gitlab-ci-local/.env" = {
     text =
       let
         volumes = lib.strings.concatStringsSep " " [
