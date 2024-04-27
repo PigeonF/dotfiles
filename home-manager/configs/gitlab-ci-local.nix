@@ -44,6 +44,7 @@
           CI_CONFIG_PATH: .gitlab-ci.yml
           CI_PIPELINE_SOURCE: "merge_request_event"
           CI_MERGE_REQUEST_TARGET_BRANCH_NAME: main
+          CI_REGISTRY: registry.internal
           GITLAB_USER_ID: 409429
           GITLAB_USER_LOGIN: PigeonF
       '';
