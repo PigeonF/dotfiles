@@ -39,5 +39,14 @@
       environment.etc."docker/certs.d/registry.internal/ca.crt" = {
         source = "${certificate}/registry.crt";
       };
+
+      environment.etc."buildkit/buildkitd.toml" = {
+        text = ''
+          [registry]
+
+            [registry."registry.internal"]
+              ca = ["${certificate}/registry.crt"]
+        '';
+      };
     };
 }
