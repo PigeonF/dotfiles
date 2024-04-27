@@ -121,6 +121,10 @@
             }
         }
     },
+    "nushellLanguageServer.includeDirs": [
+        "D:\\share\\nupm\\modules",
+        "~/.local/share/nupm/modules"
+    ],
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen"
     ],
