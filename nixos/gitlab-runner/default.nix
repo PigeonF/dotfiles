@@ -33,7 +33,7 @@ _:
                 "--docker-volumes /cache"
                 "--docker-volumes /certs/client"
                 "--output-limit 8192"
-              ] ++ lib.optional config.pigeonf.gitlabRunner.privileged [ "--docker-privileged" ];
+              ] ++ lib.optionals config.pigeonf.gitlabRunner.privileged [ "--docker-privileged" ];
             };
           };
         };
