@@ -32,6 +32,7 @@
         restartUnits = [ "wpa_supplicant.service" ];
       };
 
+      pigeonf.gitlabRunner.privileged = true;
       sops.secrets."gitlab-runner/environment" = {
         sopsFile = ./gitlab-runner-default.env;
         format = "dotenv";
