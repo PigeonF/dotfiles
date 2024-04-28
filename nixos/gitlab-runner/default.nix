@@ -2,34 +2,39 @@ _:
 
 {
   flake.nixosModules.gitlab-runner =
-    { config, ... }:
+    { config, lib, ... }:
 
     {
-      services.gitlab-runner = {
-        enable = true;
-        clear-docker-cache.enable = true;
+      options = {
+        pigeonf.gitlabRunner.privileged = lib.mkEnableOption "privileged mode for gitlab-runner";
+      };
 
-        settings = {
-          concurrent = 10;
-          check_interval = 3;
-          shutdown_timeout = 30;
-        };
+      config = {
+        services.gitlab-runner = {
+          enable = true;
+          clear-docker-cache.enable = true;
 
-        services = {
-          default = {
-            registrationConfigFile = config.sops.secrets."gitlab-runner/environment".path;
-            description = "Default Runner";
-            dockerImage = "busybox";
+          settings = {
+            concurrent = 10;
+            check_interval = 3;
+            shutdown_timeout = 30;
+          };
 
-            registrationFlags = [
-              "--cache-dir /cache"
-              "--docker-privileged"
-              "--docker-services-limit 5" # Fix warning about schema mismatch
-              "--docker-volumes /builds"
-              "--docker-volumes /cache"
-              "--docker-volumes /certs/client"
-              "--output-limit 8192"
-            ];
+          services = {
+            default = {
+              registrationConfigFile = config.sops.secrets."gitlab-runner/environment".path;
+              description = "Default Runner";
+              dockerImage = "busybox";
+
+              registrationFlags = [
+                "--cache-dir /cache"
+                "--docker-services-limit 5" # Fix warning about schema mismatch
+                "--docker-volumes /builds"
+                "--docker-volumes /cache"
+                "--docker-volumes /certs/client"
+                "--output-limit 8192"
+              ] ++ lib.optional config.pigeonf.gitlabRunner.privileged [ "--docker-privileged" ];
+            };
           };
         };
       };

@@ -20,6 +20,8 @@
         ./disk.nix
       ];
 
+      pigeonf.gitlabRunner.privileged = true;
+
       networking.hostName = "mustafar";
 
       sops.secrets."gitlab-runner/environment" = {
