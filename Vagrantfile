@@ -94,15 +94,13 @@ def nixos(cfg, name)
         mkdir -p "/home/vagrant/.local/bin/"
         chown -R vagrant:vagrant "/home/vagrant/.local"
 
-        echo '
-        #!/usr/bin/env bash
+        echo '#!/usr/bin/env bash
 
-        set -o errexit
-        set -o nounset
-        set -o pipefail
+set -o errexit
+set -o nounset
+set -o pipefail
 
-        exec nixos-rebuild switch --flake "github:PigeonF/dotfiles?ref=main##{name}" --no-write-lock-file
-        ' > /home/vagrant/.local/bin/rebuild-dotfiles
+exec nixos-rebuild switch --flake "github:PigeonF/dotfiles?ref=main##{name}" --no-write-lock-file' > /home/vagrant/.local/bin/rebuild-dotfiles
         chmod 0755 /home/vagrant/.local/bin/rebuild-dotfiles
         chown vagrant:vagrant /home/vagrant/.local/bin/rebuild-dotfiles
       fi
