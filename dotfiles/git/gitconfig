@@ -17,6 +17,7 @@
     aliases = config --get-regexp ^alias.
     branches = branch -vv
     c = commit
+    ca = commit --amend
     can = commit --amend --no-edit
     cc = "!f() { git commit -e -F \"$(git rev-parse --show-toplevel)/.git/COMMIT_EDITMSG\" $@; }; f"
     cm = commit -m
