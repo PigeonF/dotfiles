@@ -3,6 +3,7 @@
     { config, lib, ... }:
     let
       cfg = config.pigeonf.gitlabRunner;
+      hasPodman = config.virtualisation.podman.enable;
     in
     {
       options = {
@@ -46,6 +47,15 @@
               ] ++ lib.optionals cfg.privileged [ "--docker-privileged" ];
             };
           };
+        };
+
+        systemd.services.gitlab-runner = lib.mkIf hasPodman {
+          after = [
+            "network.target"
+            "podman.service"
+          ];
+          requires = [ "podman.service" ];
+          serviceConfig.SupplementaryGroups = "podman";
         };
       };
     };

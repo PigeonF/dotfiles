@@ -17,10 +17,13 @@
       description = "Developer Account";
       name = "pigeon";
       group = "pigeon";
-      extraGroups = [
-        "users"
-        "wheel"
-      ] ++ lib.lists.optional config.virtualisation.docker.enable "docker";
+      extraGroups =
+        [
+          "users"
+          "wheel"
+        ]
+        ++ lib.lists.optional config.virtualisation.docker.enable "docker"
+        ++ lib.lists.optional config.virtualisation.podman.enable "podman";
       home = "/home/pigeon";
       createHome = true;
       useDefaultShell = true;

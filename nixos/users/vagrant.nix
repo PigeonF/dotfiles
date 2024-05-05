@@ -23,6 +23,7 @@
           "wheel"
         ]
         ++ lib.lists.optional config.virtualisation.docker.enable "docker"
+        ++ lib.lists.optional config.virtualisation.podman.enable "podman"
         ++ lib.lists.optional config.virtualisation.virtualbox.guest.enable "vboxsf";
       home = "/home/vagrant";
       createHome = true;
