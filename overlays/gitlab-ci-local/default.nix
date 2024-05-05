@@ -22,7 +22,10 @@ buildNpmPackage {
   };
   npmDepsHash = "sha256-ebrdMbSAsughHCuV86s6WA12a8hqA2yyC/rJUyViOrI=";
 
-  patches = [ ./dotenv-services.patch ];
+  patches = [
+    ./dotenv-services.patch
+    ./network.patch
+  ];
 
   nativeBuildInputs = [
     git
