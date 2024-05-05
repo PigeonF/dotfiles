@@ -47,6 +47,10 @@
           CI_REGISTRY: registry.internal
           GITLAB_USER_ID: 409429
           GITLAB_USER_LOGIN: PigeonF
+
+        project:
+          gitlab.com/PigeonF/container-images.git:
+            CI_PROJECT_ID: 55640431
       '';
     };
   };
