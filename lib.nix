@@ -1,90 +1,59 @@
 { inputs, ... }:
 
-let
-  common = _: {
-    home-manager = {
-      useGlobalPkgs = true;
-      useUserPackages = true;
-      extraSpecialArgs = {
-        inherit inputs;
+{
+  flake.lib = {
+    mkNixosConfiguration =
+      system: modules:
+      inputs.nixpkgs.lib.nixosSystem {
+        inherit system;
+
+        specialArgs = {
+          inherit inputs;
+          isLinux = true;
+        };
+
+        modules = modules ++ [
+          (
+            { lib, ... }:
+            {
+              system.stateVersion = lib.mkDefault "24.05";
+              nixpkgs.hostPlatform = lib.mkDefault system;
+            }
+          )
+        ];
       };
 
-      sharedModules = [ inputs.sops-nix.homeManagerModules.sops ];
-    };
+    mkDarwinConfiguration =
+      system: modules:
+      inputs.nix-darwin.lib.darwinSystem {
+        inherit system;
 
-    nixpkgs.overlays = [ inputs.self.overlays.default ];
-  };
-in
-
-{
-  flake = {
-    nixosModules.home-manager = {
-      imports = [
-        inputs.home-manager.nixosModules.home-manager
-        common
-      ];
-    };
-    darwinModules.home-manager = {
-      imports = [
-        inputs.home-manager.darwinModules.home-manager
-        common
-      ];
-    };
-
-    lib = {
-      mkNixosConfiguration =
-        system: modules:
-        inputs.nixpkgs.lib.nixosSystem {
-          inherit system;
-
-          specialArgs = {
-            inherit inputs;
-            isLinux = true;
-          };
-
-          modules = modules ++ [
-            (
-              { lib, ... }:
-              {
-                system.stateVersion = lib.mkDefault "24.05";
-                nixpkgs.hostPlatform = lib.mkDefault system;
-              }
-            )
-          ];
+        specialArgs = {
+          inherit inputs;
+          isLinux = false;
         };
 
-      mkDarwinConfiguration =
-        system: modules:
-        inputs.nix-darwin.lib.darwinSystem {
-          inherit system;
+        modules = modules ++ [
+          (
+            { lib, ... }:
+            {
+              system.stateVersion = lib.mkDefault 4;
+              nixpkgs.hostPlatform = lib.mkDefault system;
+            }
+          )
+        ];
+      };
 
-          specialArgs = {
-            inherit inputs;
-            isLinux = false;
-          };
+    mkHomeConfiguration =
+      pkgs: modules:
+      inputs.home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
 
-          modules = modules ++ [
-            (
-              { lib, ... }:
-              {
-                system.stateVersion = lib.mkDefault 4;
-                nixpkgs.hostPlatform = lib.mkDefault system;
-              }
-            )
-          ];
+        extraSpecialArgs = {
+          inherit inputs;
         };
 
-      mkHomeConfiguration =
-        pkgs: modules:
-        inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          extraSpecialArgs = {
-            inherit inputs;
-          };
-
-          modules = modules ++ [ inputs.sops-nix.homeManagerModules.sops ];
-        };
-    };
+        modules = modules ++ [ inputs.sops-nix.homeManagerModules.sops ];
+      };
   };
 }
