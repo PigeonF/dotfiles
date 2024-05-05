@@ -11,9 +11,9 @@
     ../../../shared/nix.nix
 
     ../../core.nix
-    ../../podman.nix
-    # ../../dockerRegistry.nix
-    # ../../webservices.nix
+    ../../docker.nix
+    ../../dockerRegistry.nix
+    ../../webservices.nix
     ../../laptop.nix
     ../../network.nix
     ../../ssh.nix

@@ -21,9 +21,6 @@
   };
 
   xdg.dataFile."buildx/buildkitd.default.toml" = {
-    text = ''
-      [registry."registry.internal"]
-        ca=["/etc/docker/certs.d/registry.internal/ca.crt"]
-    '';
+    source = config.lib.file.mkOutOfStoreSymlink "/etc/buildkit/buildkitd.toml";
   };
 }

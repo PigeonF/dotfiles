@@ -14,7 +14,18 @@
       package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.podman;
       # dockerCompat = true;
       dockerSocket.enable = true;
-      defaultNetwork.settings.dns_enabled = true;
+      # defaultNetwork.settings = {
+      #   dns_enabled = true;
+      #   subnets = [
+      #     {
+      #       gateway = "10.117.0.1";
+      #       subnet = "10.117.0.0/16";
+      #     }
+      #   ];
+      # };
     };
+
+    oci-containers.backend = "podman";
   };
+  # networking.firewall.trustedInterfaces = [ "podman0" ];
 }

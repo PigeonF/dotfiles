@@ -25,12 +25,12 @@
             "certs:/certs/client"
             "/etc/ssl/certs/ca-certificates.crt:/etc/ssl/certs/ca-certificates.crt:ro"
           ];
-          variables = lib.strings.concatStringsSep " " [ "SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt" ];
+          networks = lib.strings.concatStringsSep " " [ "dev" ];
         in
         ''
           PRIVILEGED=true
           VOLUME="${volumes}"
-          VARIABLE="${variables}"
+          NETWORK="${networks}"
         '';
     };
 
