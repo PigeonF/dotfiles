@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   environment.systemPackages = [
     pkgs.docker-client
@@ -9,6 +9,9 @@
     docker.enable = false;
     podman = {
       enable = true;
+      # https://github.com/NixOS/nixpkgs/issues/306398
+      # https://github.com/containers/podman/issues/22561
+      package = inputs.nixpkgs-stable.legacyPackages.${pkgs.system}.podman;
       # dockerCompat = true;
       dockerSocket.enable = true;
       defaultNetwork.settings.dns_enabled = true;

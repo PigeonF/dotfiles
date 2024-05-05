@@ -35,7 +35,7 @@
             default = {
               registrationConfigFile = cfg.envFile;
               description = "Default Runner";
-              dockerImage = "busybox";
+              dockerImage = "docker.io/busybox";
 
               registrationFlags = [
                 "--cache-dir /cache"
@@ -44,6 +44,7 @@
                 "--docker-volumes /cache"
                 "--docker-volumes /certs/client"
                 "--output-limit 8192"
+                "--env FF_NETWORK_PER_BUILD=1"
               ] ++ lib.optionals cfg.privileged [ "--docker-privileged" ];
             };
           };
