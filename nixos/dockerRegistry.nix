@@ -26,7 +26,7 @@
 
   environment.etc."buildkit/buildkitd.toml" = {
     text = ''
-      debug = true
+      insecure-entitlements = [ "network.host", "security.insecure" ]
 
       [registry."registry.internal"]
         http = true
