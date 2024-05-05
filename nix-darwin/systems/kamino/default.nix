@@ -1,42 +1,39 @@
 { inputs, ... }:
-
 {
-  flake.darwinModules.kamino = _: {
-    imports = [
-      inputs.self.darwinModules.home-manager
+  imports = [
+    inputs.self.darwinModules.home-manager
 
-      ../../users/pigeon.nix
+    ../../users/pigeon.nix
 
-      ../../../shared/core.nix
-      ../../../shared/nix.nix
-    ];
+    ../../../shared/core.nix
+    ../../../shared/nix.nix
+  ];
 
-    networking.hostName = "kamino";
+  networking.hostName = "kamino";
 
-    system = {
-      keyboard = {
-        enableKeyMapping = true;
-        remapCapsLockToControl = true;
-      };
+  system = {
+    keyboard = {
+      enableKeyMapping = true;
+      remapCapsLockToControl = true;
     };
-
-    homebrew = {
-      enable = true;
-      onActivation = {
-        autoUpdate = true;
-        upgrade = true;
-      };
-      brews = [ "act" ];
-      casks = [
-        "1password"
-        "alacritty"
-        "docker"
-        "dropbox"
-        "spotify"
-        "visual-studio-code"
-      ];
-    };
-
-    services.nix-daemon.enable = true;
   };
+
+  homebrew = {
+    enable = true;
+    onActivation = {
+      autoUpdate = true;
+      upgrade = true;
+    };
+    brews = [ "act" ];
+    casks = [
+      "1password"
+      "alacritty"
+      "docker"
+      "dropbox"
+      "spotify"
+      "visual-studio-code"
+    ];
+  };
+
+  services.nix-daemon.enable = true;
 }
