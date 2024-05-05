@@ -45,6 +45,8 @@
           CI_PIPELINE_SOURCE: "merge_request_event"
           CI_MERGE_REQUEST_TARGET_BRANCH_NAME: main
           CI_REGISTRY: registry.internal
+          CI_REGISTRY_USER: nobody
+          CI_REGISTRY_PASSWORD: nobody
           GITLAB_USER_ID: 409429
           GITLAB_USER_LOGIN: PigeonF
       '';
