@@ -8,15 +8,6 @@
       ...
     }:
     let
-      inherit (inputs.nixpkgs-networking.lib) ipv4;
-      listenAddress =
-        if config.virtualisation.docker.enable then
-          if config.virtualisation.docker.daemon.settings ? bip then
-            ipv4.prettyIp (ipv4.cidrToFirstUsableIp config.virtualisation.docker.daemon.settings.bip)
-          else
-            "172.17.0.1"
-        else
-          "127.0.0.1";
       certificate = pkgs.runCommand "self-signed-certs" { buildInputs = [ pkgs.openssl ]; } ''
         mkdir $out
 
@@ -34,11 +25,11 @@
         enable = true;
 
         settings = {
-          address = [ "/internal/${listenAddress}" ];
+          address = [ "/internal/${config.pigeonf.docker0}" ];
           local = [ "/internal/" ];
 
           listen-address = lib.lists.unique [
-            "${listenAddress}"
+            config.pigeonf.docker0
             "127.0.0.1"
             "::1"
           ];
@@ -47,8 +38,8 @@
         };
       };
 
-      virtualisation.docker.daemon.settings.dns = [
-        listenAddress
+      virtualisation.docker.daemon.settings.dns = lib.lists.unique [
+        config.pigeonf.docker0
         "8.8.8.8"
         "8.8.4.4"
       ];
