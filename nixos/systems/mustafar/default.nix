@@ -13,7 +13,7 @@
         inputs.self.nixosModules.coreLinux
         inputs.self.nixosModules.network
         inputs.self.nixosModules.nix
-        inputs.self.nixosModules.vagrant
+        ../../users/vagrant.nix
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
         inputs.self.nixosModules.gitlab-runner

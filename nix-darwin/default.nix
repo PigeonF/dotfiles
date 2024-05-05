@@ -1,6 +1,0 @@
-{
-  imports = [
-    ./systems
-    ./users.nix
-  ];
-}

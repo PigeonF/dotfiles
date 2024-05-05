@@ -1,7 +1,6 @@
 {
   flake.nixosModules.webservices =
     {
-      inputs,
       pkgs,
       lib,
       config,

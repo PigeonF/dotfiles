@@ -9,7 +9,6 @@
     ./nix.nix
     ./ssh.nix
     ./systems
-    ./users.nix
     ./webservices.nix
   ];
 

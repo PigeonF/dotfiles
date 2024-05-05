@@ -2,12 +2,7 @@ _:
 
 {
   flake.nixosModules.docker =
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
+    { config, lib, ... }:
     {
 
       options = {

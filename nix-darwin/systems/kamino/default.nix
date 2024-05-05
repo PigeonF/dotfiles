@@ -4,7 +4,8 @@
   flake.darwinModules.kamino = _: {
     imports = [
       inputs.self.darwinModules.home-manager
-      inputs.self.darwinModules.pigeon
+
+      ../../users/pigeon.nix
 
       inputs.self.nixosModules.core
       inputs.self.nixosModules.nix

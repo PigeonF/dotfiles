@@ -11,8 +11,7 @@
         inputs.self.nixosModules.coreLinux
         inputs.self.nixosModules.home-manager
         inputs.self.nixosModules.nix
-        inputs.self.nixosModules.pigeon
-
+        ../../users/pigeon.nix
         inputs.self.nixosModules.vsCodeRemoteSSHFix
       ];
 

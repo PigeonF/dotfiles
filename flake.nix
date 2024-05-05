@@ -22,7 +22,6 @@
         ./lib.nix
 
         ./home-manager
-        ./nix-darwin
         ./nixos
       ];
 
@@ -50,7 +49,7 @@
             inherit (inputs.self.lib) mkDarwinConfiguration;
           in
           {
-            kamino = mkDarwinConfiguration "aarch64-darwin" [ inputs.self.darwinModules.kamino ];
+            kamino = mkDarwinConfiguration "aarch64-darwin" [ ./nix-darwin/systems/kamino ];
           };
       };
 

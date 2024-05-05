@@ -18,7 +18,7 @@
         inputs.self.nixosModules.laptop
         inputs.self.nixosModules.network
         inputs.self.nixosModules.nix
-        inputs.self.nixosModules.pigeon
+        ../../users/pigeon.nix
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
         inputs.self.nixosModules.webservices
