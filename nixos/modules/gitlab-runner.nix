@@ -37,15 +37,18 @@
               description = "Default Runner";
               dockerImage = "docker.io/busybox";
 
-              registrationFlags = [
-                "--cache-dir /cache"
-                "--docker-services-limit 5" # Fix warning about schema mismatch
-                "--docker-volumes /builds"
-                "--docker-volumes /cache"
-                "--docker-volumes /certs/client"
-                "--output-limit 8192"
-                "--env FF_NETWORK_PER_BUILD=1"
-              ] ++ lib.optionals cfg.privileged [ "--docker-privileged" ];
+              registrationFlags =
+                [
+                  "--cache-dir /cache"
+                  "--docker-services-limit 5" # Fix warning about schema mismatch
+                  "--docker-volumes /builds"
+                  "--docker-volumes /cache"
+                  "--docker-volumes /certs/client"
+                  "--output-limit 8192"
+                  "--env FF_NETWORK_PER_BUILD=1"
+                ]
+                ++ lib.optionals cfg.privileged [ "--docker-privileged" ]
+                ++ lib.optionals hasPodman [ "--docker-network-mode podman" ];
             };
           };
         };
