@@ -6,7 +6,6 @@
     ./gitlab-runner
     ./laptop.nix
     ./network.nix
-    ./nix.nix
     ./ssh.nix
     ./systems
     ./webservices.nix

@@ -7,10 +7,11 @@
       imports = [
         inputs.nixos-wsl.nixosModules.wsl
 
-        inputs.self.nixosModules.core
+        ../../../shared/core.nix
+        ../../../shared/nix.nix
+
         inputs.self.nixosModules.coreLinux
         inputs.self.nixosModules.home-manager
-        inputs.self.nixosModules.nix
         ../../users/pigeon.nix
         inputs.self.nixosModules.vsCodeRemoteSSHFix
       ];

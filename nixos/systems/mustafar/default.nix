@@ -9,10 +9,10 @@
         inputs.self.nixosModules.home-manager
         inputs.sops-nix.nixosModules.sops
 
-        inputs.self.nixosModules.core
+        ../../../shared/core.nix
+        ../../../shared/nix.nix
         inputs.self.nixosModules.coreLinux
         inputs.self.nixosModules.network
-        inputs.self.nixosModules.nix
         ../../users/vagrant.nix
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix

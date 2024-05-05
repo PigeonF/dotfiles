@@ -7,8 +7,8 @@
 
       ../../users/pigeon.nix
 
-      inputs.self.nixosModules.core
-      inputs.self.nixosModules.nix
+      ../../../shared/core.nix
+      ../../../shared/nix.nix
     ];
 
     networking.hostName = "kamino";

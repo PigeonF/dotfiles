@@ -11,13 +11,13 @@
 
         inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
 
-        inputs.self.nixosModules.core
+        ../../../shared/core.nix
+        ../../../shared/nix.nix
         inputs.self.nixosModules.coreLinux
         inputs.self.nixosModules.docker
         inputs.self.nixosModules.dockerRegistry
         inputs.self.nixosModules.laptop
         inputs.self.nixosModules.network
-        inputs.self.nixosModules.nix
         ../../users/pigeon.nix
         inputs.self.nixosModules.ssh
         inputs.self.nixosModules.vsCodeRemoteSSHFix
