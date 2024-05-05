@@ -1,15 +1,25 @@
-_:
-
 {
   flake.nixosModules.gitlab-runner =
     { config, lib, ... }:
-
+    let
+      cfg = config.pigeonf.gitlabRunner;
+    in
     {
       options = {
-        pigeonf.gitlabRunner.privileged = lib.mkEnableOption "privileged mode for gitlab-runner";
+        pigeonf.gitlabRunner = {
+          enable = lib.mkEnableOption "enable gitlab-runner";
+          privileged = lib.mkEnableOption "privileged mode for gitlab-runner";
+          envFile = lib.mkOption {
+            type = lib.types.path;
+            description = ''
+              Path to an environment file that is sourced before service
+              configuration.
+            '';
+          };
+        };
       };
 
-      config = {
+      config = lib.mkIf cfg.enable {
         services.gitlab-runner = {
           enable = true;
           clear-docker-cache.enable = true;
@@ -22,7 +32,7 @@ _:
 
           services = {
             default = {
-              registrationConfigFile = config.sops.secrets."gitlab-runner/environment".path;
+              registrationConfigFile = cfg.envFile;
               description = "Default Runner";
               dockerImage = "busybox";
 
@@ -33,7 +43,7 @@ _:
                 "--docker-volumes /cache"
                 "--docker-volumes /certs/client"
                 "--output-limit 8192"
-              ] ++ lib.optionals config.pigeonf.gitlabRunner.privileged [ "--docker-privileged" ];
+              ] ++ lib.optionals cfg.privileged [ "--docker-privileged" ];
             };
           };
         };

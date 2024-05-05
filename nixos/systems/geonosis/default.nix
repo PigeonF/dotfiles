@@ -1,90 +1,90 @@
-{ inputs, ... }:
-
+{ config, inputs, ... }:
 {
-  flake.nixosModules.geonosis =
-    { config, ... }:
-    {
-      imports = [
-        inputs.self.nixosModules.home-manager
-        inputs.sops-nix.nixosModules.sops
-        inputs.disko.nixosModules.disko
+  imports = [
+    inputs.disko.nixosModules.disko
+    inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
+    inputs.self.nixosModules.gitlab-runner
+    inputs.self.nixosModules.home-manager
+    inputs.sops-nix.nixosModules.sops
 
-        inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
+    ../../../shared/core.nix
+    ../../../shared/nix.nix
 
-        ../../../shared/core.nix
-        ../../../shared/nix.nix
-        inputs.self.nixosModules.coreLinux
-        inputs.self.nixosModules.docker
-        inputs.self.nixosModules.dockerRegistry
-        inputs.self.nixosModules.laptop
-        inputs.self.nixosModules.network
-        ../../users/pigeon.nix
-        inputs.self.nixosModules.ssh
-        inputs.self.nixosModules.vsCodeRemoteSSHFix
-        inputs.self.nixosModules.webservices
-        inputs.self.nixosModules.gitlab-runner
-        ./disk.nix
-      ];
+    ../../core.nix
+    ../../docker.nix
+    ../../dockerRegistry.nix
+    ../../laptop.nix
+    ../../network.nix
+    ../../ssh.nix
+    ../../users/pigeon.nix
+    ../../webservices.nix
 
-      sops.secrets."network" = {
-        sopsFile = ./network.env;
-        format = "dotenv";
-        restartUnits = [ "wpa_supplicant.service" ];
+    ./disk.nix
+  ];
+
+  sops.secrets."network" = {
+    sopsFile = ./network.env;
+    format = "dotenv";
+    restartUnits = [ "wpa_supplicant.service" ];
+  };
+
+  sops.secrets."gitlab-runner/environment" = {
+    sopsFile = ./gitlab-runner-default.env;
+    format = "dotenv";
+    restartUnits = [ "gitlab-runner.service" ];
+  };
+
+  pigeonf.gitlabRunner = {
+    enable = true;
+    privileged = true;
+    envFile = config.sops.secrets."gitlab-runner/environment".path;
+  };
+
+  networking.hostName = "geonosis";
+  networking.wireless = {
+    enable = true;
+    userControlled.enable = true;
+    environmentFile = config.sops.secrets."network".path;
+    scanOnLowSignal = false;
+    fallbackToWPA2 = false;
+
+    networks = {
+      "Obi-Lan Kenobi" = {
+        psk = "@PASS_OBI_LAN_KENOBI@";
       };
 
-      pigeonf.gitlabRunner.privileged = true;
-      sops.secrets."gitlab-runner/environment" = {
-        sopsFile = ./gitlab-runner-default.env;
-        format = "dotenv";
-        restartUnits = [ "gitlab-runner.service" ];
-      };
+      eduroam = {
+        auth = ''
+          key_mgmt=WPA-EAP
+          eap=TTLS
+          anonymous_identity="eduroam@ruhr-uni-bochum.de"
 
-      networking.hostName = "geonosis";
-      networking.wireless = {
-        enable = true;
-        userControlled.enable = true;
-        environmentFile = config.sops.secrets."network".path;
-        scanOnLowSignal = false;
-        fallbackToWPA2 = false;
+          identity="@USER_EDUROAM@@ruhr-uni-bochum.de"
+          password="@PASS_EDUROAM@"
 
-        networks = {
-          "Obi-Lan Kenobi" = {
-            psk = "@PASS_OBI_LAN_KENOBI@";
-          };
+          phase2="auth=PAP"
 
-          eduroam = {
-            auth = ''
-              key_mgmt=WPA-EAP
-              eap=TTLS
-              anonymous_identity="eduroam@ruhr-uni-bochum.de"
+          proto=RSN WPA
+          mode=0
+          pairwise=CCMP TKIP
+          group=CCMP TKIP
 
-              identity="@USER_EDUROAM@@ruhr-uni-bochum.de"
-              password="@PASS_EDUROAM@"
-
-              phase2="auth=PAP"
-
-              proto=RSN WPA
-              mode=0
-              pairwise=CCMP TKIP
-              group=CCMP TKIP
-
-              subject_match="/C=DE/ST=Nordrhein-Westfalen/L=Bochum/O=Ruhr-Universitaet Bochum/OU=Network Operation Center/CN=radius.ruhr-uni-bochum.de"
-            '';
-          };
-        };
-      };
-
-      boot = {
-        initrd.availableKernelModules = [ "nvme" ];
-        kernelModules = [
-          "kvm-intel"
-          "iwlwifi"
-        ];
-
-        loader.grub = {
-          efiSupport = true;
-          efiInstallAsRemovable = true;
-        };
+          subject_match="/C=DE/ST=Nordrhein-Westfalen/L=Bochum/O=Ruhr-Universitaet Bochum/OU=Network Operation Center/CN=radius.ruhr-uni-bochum.de"
+        '';
       };
     };
+  };
+
+  boot = {
+    initrd.availableKernelModules = [ "nvme" ];
+    kernelModules = [
+      "kvm-intel"
+      "iwlwifi"
+    ];
+
+    loader.grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+    };
+  };
 }

@@ -1,14 +1,7 @@
-_:
-
+{ lib, ... }:
 {
-  flake.nixosModules = {
-    network =
-      { lib, ... }:
-      {
-        networking = {
-          firewall.enable = lib.mkDefault true;
-          useDHCP = lib.mkDefault true;
-        };
-      };
+  networking = {
+    firewall.enable = lib.mkDefault true;
+    useDHCP = lib.mkDefault true;
   };
 }
