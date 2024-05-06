@@ -8,6 +8,16 @@
       daemon.settings = {
         bip = "10.117.0.1/16";
         ip = "127.0.0.1";
+        default-address-pools = [
+          {
+            base = "10.118.0.0/16";
+            size = 24;
+          }
+          {
+            base = "10.119.0.0/16";
+            size = 24;
+          }
+        ];
       };
     };
   };
