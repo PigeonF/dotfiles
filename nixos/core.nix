@@ -3,6 +3,7 @@
   environment = {
     enableAllTerminfo = true;
     systemPackages = [ pkgs.glibcLocales ];
+    localBinInPath = true;
   };
 
   i18n = {
