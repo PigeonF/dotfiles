@@ -36,7 +36,24 @@
         '';
       }
     );
-    postStop = "${lib.getExe pkgs.docker} network rm -f dev";
+    preStop = lib.getExe (
+      pkgs.writeShellApplication {
+        name = "docker-create-dev-network";
+
+        runtimeInputs = [ pkgs.docker ];
+
+        text = ''
+          docker network inspect dev --format '{{ range $k, $v := .Containers }}{{ printf "%s\n" $k }}{{ end }}' | while read -r container; do
+            if [[ -z "$container" ]]; then
+              continue
+            fi
+
+            docker network disconnect --force dev "$container"
+          done
+        '';
+      }
+    );
+    postStop = "${lib.getExe pkgs.docker} network rm --force dev";
   };
 
   networking.firewall.trustedInterfaces = [ "docker0" ];
