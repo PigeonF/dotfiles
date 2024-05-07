@@ -19,11 +19,14 @@
     "gitlab-ci-local/.gitlab-ci-local/.env" = {
       text =
         let
+          regctlConfig =
+            config.sessionVariables.REGCTL_CONFIG or "${config.home.homeDirectory}/.regctl/config.json";
           volumes = lib.strings.concatStringsSep " " [
             "builds:/builds"
             "cache:/cache"
             "certs:/certs/client"
             "/etc/buildkit/buildkitd.toml:/etc/buildkit/buildkitd.toml:ro"
+            "${regctlConfig}:/root/.regctl/config.json:ro"
           ];
           networks = lib.strings.concatStringsSep " " [ "dev" ];
         in

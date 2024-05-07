@@ -17,6 +17,7 @@
     sessionVariables = {
       DOCKER_CONFIG = "${config.xdg.dataHome}/docker";
       BUILDX_CONFIG = "${config.xdg.dataHome}/buildx";
+      REGCTL_CONFIG = "${config.xdg.dataHome}/regctl/config.json";
     };
   };
 
