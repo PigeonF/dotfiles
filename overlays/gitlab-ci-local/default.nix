@@ -7,7 +7,7 @@
 }:
 
 let
-  version = "4.48.2";
+  version = "4.49.0";
 in
 
 buildNpmPackage {
@@ -18,14 +18,9 @@ buildNpmPackage {
     owner = "firecow";
     repo = "gitlab-ci-local";
     rev = "refs/tags/${version}";
-    hash = "sha256-QdbVI6aby/UQCR3G25nvmvoXNMDndgLYz/hOTmj5dnc=";
+    hash = "sha256-hhzkC9wnPNwQwky2FegTMRIbcyCMzrZ/hoQlfZwk3sk=";
   };
-  npmDepsHash = "sha256-ebrdMbSAsughHCuV86s6WA12a8hqA2yyC/rJUyViOrI=";
-
-  patches = [
-    ./dotenv-services.patch
-    ./network.patch
-  ];
+  npmDepsHash = "sha256-mnnP1YvKSm/CgZYQWF8VU+cuQ0SUV5tW1dCRrGRBrmg=";
 
   nativeBuildInputs = [
     git
