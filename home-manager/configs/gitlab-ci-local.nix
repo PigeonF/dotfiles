@@ -20,7 +20,7 @@
       text =
         let
           regctlConfig =
-            config.sessionVariables.REGCTL_CONFIG or "${config.home.homeDirectory}/.regctl/config.json";
+            config.home.sessionVariables.REGCTL_CONFIG or "${config.home.homeDirectory}/.regctl/config.json";
           volumes = lib.strings.concatStringsSep " " [
             "builds:/builds"
             "cache:/cache"
