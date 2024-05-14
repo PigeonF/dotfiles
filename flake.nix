@@ -109,7 +109,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-pigeonf.url = "github:PigeonF/nixpkgs?ref=init-committed";
     # https://github.com/NixOS/nixpkgs/pull/258250
     nixpkgs-networking.url = "github:djacu/nixpkgs?ref=add-networking-lib";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";

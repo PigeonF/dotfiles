@@ -183,22 +183,6 @@
         "type": "github"
       }
     },
-    "nixpkgs-pigeonf": {
-      "locked": {
-        "lastModified": 1713439889,
-        "narHash": "sha256-5P3MRgOGpUyn0HfS3JLcaugGS1tP4ABh0gwOYbu12yA=",
-        "owner": "PigeonF",
-        "repo": "nixpkgs",
-        "rev": "b171ecfe9750ffa13ac297be48c6842f0e140848",
-        "type": "github"
-      },
-      "original": {
-        "owner": "PigeonF",
-        "ref": "init-committed",
-        "repo": "nixpkgs",
-        "type": "github"
-      }
-    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1705957679,
@@ -240,7 +224,6 @@
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
         "nixpkgs-networking": "nixpkgs-networking",
-        "nixpkgs-pigeonf": "nixpkgs-pigeonf",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
         "sops-nix": "sops-nix",
