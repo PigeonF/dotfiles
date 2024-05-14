@@ -144,5 +144,8 @@
     strategy = worktree
     jobs = 0
 
+[branchless "test.alias"]
+    gcl = gitlab-ci-local --concurrency=1
+
 [branchless "next"]
     interactive = true
