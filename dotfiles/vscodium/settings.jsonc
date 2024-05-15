@@ -125,6 +125,7 @@
         "D:\\share\\nupm\\modules",
         "~/.local/share/nupm/modules"
     ],
+    "redhat.telemetry.enabled": false,
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen"
     ],
@@ -135,5 +136,5 @@
     "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${profileName}",
     "workbench.colorTheme": "Catppuccin Frappé",
     "workbench.iconTheme": "catppuccin-frappe",
-    "workbench.sideBar.location": "right"
+    "workbench.sideBar.location": "right",
 }
