@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   programs.nushell = {
@@ -9,7 +9,10 @@
     loginFile.source = ../../dotfiles/nushell/login.nu;
   };
 
-  home.sessionVariables = {
-    NUPM_HOME = "${config.xdg.dataHome}/nupm";
+  home = {
+    sessionVariables = {
+      NUPM_HOME = "${config.xdg.dataHome}/nupm";
+    };
+    packages = builtins.attrValues { inherit (pkgs.nushellPlugins) formats query; };
   };
 }
