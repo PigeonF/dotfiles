@@ -221,7 +221,16 @@ require('lazy').setup({
           },
         },
         rust_analyzer = {},
-        yamlls = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              format = { enable = true },
+              customTags = {
+                '!reference sequence',
+              },
+            },
+          },
+        },
         gitlab_ci_ls = {},
       }
 
