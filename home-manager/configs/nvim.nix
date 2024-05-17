@@ -23,10 +23,12 @@
         hadolint
         markdownlint-cli
         nixfmt-rfc-style
+        rust-analyzer
         stylua
         unzip
         vale
         wget
+        yaml-language-server
         zig
         ;
 

@@ -218,6 +218,8 @@ require('lazy').setup({
           },
         },
         rust_analyzer = {},
+        yamlls = {},
+        gitlab_ci_ls = {},
       }
 
       if not vim.loop.os_uname().sysname == 'Windows_NT' then
