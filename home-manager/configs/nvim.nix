@@ -23,7 +23,6 @@
         hadolint
         markdownlint-cli
         nixfmt-rfc-style
-        rust-analyzer
         stylua
         unzip
         vale
