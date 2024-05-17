@@ -37,7 +37,7 @@ keybinds clear-defaults=true {
         bind "Alt t" { SwitchToMode "Tab"; }
     }
     shared_except "move" "locked" {
-        bind "Alt h" { SwitchToMode "Move"; }
+        bind "Alt m" { SwitchToMode "Move"; }
     }
 
     // Mode specific
@@ -144,7 +144,7 @@ keybinds clear-defaults=true {
     }
 
     move {
-        bind "Alt h" { SwitchToMode "Normal"; }
+        bind "Alt m" { SwitchToMode "Normal"; }
         bind "h" { MovePane "Left"; }
         bind "j" { MovePane "Down"; }
         bind "k" { MovePane "Up"; }
