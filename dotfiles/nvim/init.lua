@@ -222,8 +222,8 @@ require('lazy').setup({
         gitlab_ci_ls = {},
       }
 
-      if not vim.loop.os_uname().sysname == 'Windows_NT' then
-        vim.list_extend(servers, {
+      if vim.uv.os_uname().sysname ~= 'Windows_NT' then
+        servers = vim.tbl_deep_extend('force', servers, {
           nil_ls = {
             autostart = true,
             settings = {
