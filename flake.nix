@@ -112,6 +112,7 @@
     # https://github.com/NixOS/nixpkgs/pull/258250
     nixpkgs-networking.url = "github:djacu/nixpkgs?ref=add-networking-lib";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
+    nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nix-darwin = {
       url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";

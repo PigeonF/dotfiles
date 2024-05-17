@@ -1,8 +1,14 @@
-{ pkgs, config, ... }:
+{
+  pkgs,
+  config,
+  inputs,
+  ...
+}:
 
 {
   programs.neovim = {
     enable = true;
+    package = inputs.nixos-unstable-small.legacyPackages.${pkgs.system}.neovim-unwrapped;
 
     viAlias = true;
     vimAlias = true;
