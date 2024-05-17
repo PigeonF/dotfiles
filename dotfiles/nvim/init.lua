@@ -22,6 +22,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
+vim.opt.colorcolumn = '80,100,+2'
 
 -- [[ Basic Keymaps ]]
 vim.opt.hlsearch = true
@@ -429,13 +430,27 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'html', 'lua', 'luadoc', 'markdown', 'nix', 'vim', 'vimdoc' },
+      ensure_installed = {
+        'bash',
+        'c',
+        'html',
+        'lua',
+        'luadoc',
+        'markdown',
+        'nix',
+        'rust',
+        'vim',
+        'vimdoc',
+      },
       auto_install = true,
       highlight = {
         enable = true,
         additional_vim_regex_highlighting = { 'ruby' },
       },
       indent = { enable = true, disable = { 'ruby' } },
+    },
+    dependencies = {
+      { "nushell/tree-sitter-nu" },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
