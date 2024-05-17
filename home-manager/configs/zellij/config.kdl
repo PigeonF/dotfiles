@@ -62,6 +62,7 @@ keybinds clear-defaults=true {
     }
     renamepane {
         bind "Esc" { UndoRenamePane; SwitchToMode "Pane"; }
+        bind "Enter" { SwitchToMode "Normal"; }
     }
 
     resize {
@@ -139,6 +140,7 @@ keybinds clear-defaults=true {
     }
     renametab {
         bind "Esc" { UndoRenameTab; SwitchToMode "Tab"; }
+        bind "Enter" { SwitchToMode "Normal"; }
     }
 
     move {
