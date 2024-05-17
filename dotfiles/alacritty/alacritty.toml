@@ -1,3 +1,6 @@
+[env]
+TERM = "alacritty"
+
 [font]
 size = 16.0
 normal = { family = "FiraCode Nerd Font", style = "Regular" }
@@ -5,13 +8,11 @@ bold = { family = "FiraCode Nerd Font", style = "Bold" }
 italic = { family = "VictorMono Nerd Font", style = "Italic" }
 bold_italic = { family = "VictorMono Nerd Font", style = "Oblique" }
 
-[window]
-decorations = "Buttonless"
-padding = { x = 20, y = 20 }
-startup_mode = "Windowed"
-
-[env]
-TERM = "alacritty"
+[keyboard]
+bindings = [
+  # Disable Vi mode
+  { key = "Space", mods = "Shift|Control", action = "None" },
+]
 
 [mouse]
 bindings = [
@@ -19,11 +20,10 @@ bindings = [
   { mouse = "Middle", mode = "~Vi", action = "None" },
 ]
 
-[keyboard]
-bindings = [
-  # Disable Vi mode
-  { key = "Space", mods = "Shift|Control", action = "None" },
-]
+[window]
+decorations = "Buttonless"
+padding = { x = 20, y = 20 }
+startup_mode = "Windowed"
 
 # Catppuccin Macchiato (https://github.com/catppuccin/alacritty/blob/main/catppuccin-macchiato.toml)
 [colors.primary]
