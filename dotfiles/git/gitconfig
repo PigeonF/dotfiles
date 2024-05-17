@@ -120,6 +120,7 @@
 #
 
 [delta]
+    dark = true
     navigate = true
     line-numbers = true
     hyperlinks = true
@@ -149,3 +150,5 @@
 
 [branchless "next"]
     interactive = true
+
+# vim: set ft=gitconfig

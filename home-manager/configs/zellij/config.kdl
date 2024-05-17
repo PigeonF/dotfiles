@@ -119,7 +119,7 @@ keybinds clear-defaults=true {
     }
 
     tab {
-        bind "Alt t" { SwitchToMode "Normal"; }
+        bind "Enter" "Alt t" { SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "h" "k" { GoToPreviousTab; }
         bind "l" "j" { GoToNextTab; }
