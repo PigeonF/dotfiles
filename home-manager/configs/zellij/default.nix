@@ -7,7 +7,17 @@
     # do not generate the configuration via nix.
   };
 
-  xdg.configFile."zellij/config.kdl" = {
-    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/git/github.com/PigeonF/dotfiles/home-manager/configs/zellij/config.kdl";
-  };
+  xdg.configFile =
+    let
+      inherit (config.lib.file) mkOutOfStoreSymlink;
+      dotfiles = "${config.home.homeDirectory}/git/github.com/PigeonF/dotfiles";
+    in
+    {
+      "zellij/config.kdl" = {
+        source = mkOutOfStoreSymlink "${dotfiles}/home-manager/configs/zellij/config.kdl";
+      };
+      "zellij/layouts/terminal.kdl" = {
+        source = mkOutOfStoreSymlink "${dotfiles}/home-manager/configs/zellij/layouts/terminal.kdl";
+      };
+    };
 }
