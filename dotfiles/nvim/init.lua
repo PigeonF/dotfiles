@@ -235,13 +235,6 @@ require('lazy').setup({
         gitlab_ci_ls = {},
       }
 
-      vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-        pattern = '*.gitlab-ci.yml',
-        callback = function()
-          vim.bo.filetype = 'yaml.gitlab'
-        end,
-      })
-
       if vim.uv.os_uname().sysname ~= 'Windows_NT' then
         servers = vim.tbl_deep_extend('force', servers, {
           nil_ls = {
@@ -450,10 +443,22 @@ require('lazy').setup({
       indent = { enable = true, disable = { 'ruby' } },
     },
     dependencies = {
-      { "nushell/tree-sitter-nu" },
+      { 'nushell/tree-sitter-nu' },
     },
     config = function(_, opts)
       -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
+
+      vim.filetype.add {
+        extension = {
+          Containerfile = 'dockerfile',
+          yml = function(path, _)
+            if vim.endswith(path, 'gitlab-ci.yml') then
+              return 'yaml.gitlab'
+            end
+            return 'yaml'
+          end,
+        },
+      }
 
       ---@diagnostic disable-next-line: missing-fields
       require('nvim-treesitter.configs').setup(opts)
