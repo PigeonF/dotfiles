@@ -222,6 +222,13 @@ require('lazy').setup({
         gitlab_ci_ls = {},
       }
 
+      vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+        pattern = '*.gitlab-ci.yml',
+        callback = function()
+          vim.bo.filetype = 'yaml.gitlab'
+        end,
+      })
+
       if vim.uv.os_uname().sysname ~= 'Windows_NT' then
         servers = vim.tbl_deep_extend('force', servers, {
           nil_ls = {
