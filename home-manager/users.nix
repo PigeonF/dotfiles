@@ -58,8 +58,10 @@
                   deadnix
                   editorconfig-checker
                   fzf
+                  gnumake
                   htop
                   jq
+                  lemonade
                   markdownlint-cli2
                   nixfmt-rfc-style
                   pstree
