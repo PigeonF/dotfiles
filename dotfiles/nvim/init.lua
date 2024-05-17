@@ -212,6 +212,18 @@ require('lazy').setup({
 
       -- Enable the following language servers
       local servers = {
+        gitlab_ci_ls = {},
+        jsonls = {
+          filetypes = { 'json', 'jsonc', 'json5' },
+          settings = {
+            json = {
+              format = {
+                enable = true,
+              },
+            },
+            validate = { enable = true },
+          },
+        },
         lua_ls = {
           settings = {
             Lua = {
@@ -232,7 +244,6 @@ require('lazy').setup({
             },
           },
         },
-        gitlab_ci_ls = {},
       }
 
       if vim.uv.os_uname().sysname ~= 'Windows_NT' then

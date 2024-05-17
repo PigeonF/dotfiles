@@ -31,7 +31,7 @@
         zig
         ;
 
-      inherit (pkgs.nodePackages) jsonlint;
+      inherit (pkgs.nodePackages) jsonlint vscode-json-languageserver;
     };
   };
 
