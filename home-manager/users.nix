@@ -57,12 +57,19 @@
                   committed
                   deadnix
                   editorconfig-checker
+                  fzf
+                  htop
+                  jq
                   markdownlint-cli2
                   nixfmt-rfc-style
+                  pstree
                   reuse
+                  skim
                   statix
+                  tree
                   typos
                   vale
+                  watchexec
                   yamllint
                   ;
               };
