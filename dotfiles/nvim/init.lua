@@ -214,6 +214,7 @@ require('lazy').setup({
       local servers = {
         gitlab_ci_ls = {},
         jsonls = {
+          cmd = { 'vscode-json-languageserver', '--stdio' },
           filetypes = { 'json', 'jsonc', 'json5' },
           settings = {
             json = {
