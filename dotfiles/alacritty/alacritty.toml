@@ -12,6 +12,8 @@ bold_italic = { family = "VictorMono Nerd Font", style = "Oblique" }
 bindings = [
   # Disable Vi mode
   { key = "Space", mods = "Shift|Control", action = "None" },
+  { key = "Slash", mods = "Control", chars = "\u001F" },
+  { key = "Slash", mods = "Shift|Control", chars = "\u001F" },
 ]
 
 [mouse]
