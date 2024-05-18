@@ -10,10 +10,18 @@ bold_italic = { family = "VictorMono Nerd Font", style = "Oblique" }
 
 [keyboard]
 bindings = [
-  # Disable Vi mode
   { key = "Space", mods = "Shift|Control", action = "None" },
   { key = "Slash", mods = "Control", chars = "\u001F" },
   { key = "Slash", mods = "Shift|Control", chars = "\u001F" },
+  { key = "6", mods = "Control", chars = "\u001E" },
+  { key = "6", mods = "Shift|Control", chars = "\u001E" },
+  # Also disables Vi mode
+  # https://github.com/neovim/neovim/issues/8435
+  # Currently does not map to C-Space in neovim.
+  { key = "Space", mods = "Control", chars = "\u0000" },
+  { key = "Space", mods = "Shift|Control", chars = "\u0000" },
+  { key = "2", mods = "Control", chars = "\u0000" },
+  { key = "2", mods = "Shift|Control", chars = "\u0000" },
 ]
 
 [mouse]
