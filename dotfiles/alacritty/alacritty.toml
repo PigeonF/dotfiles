@@ -15,6 +15,11 @@ bindings = [
   { key = "Slash", mods = "Shift|Control", chars = "\u001F" },
   { key = "6", mods = "Control", chars = "\u001E" },
   { key = "6", mods = "Shift|Control", chars = "\u001E" },
+  { key = "\\", mods = "Control", chars = "\u001C" },
+  { key = "\\", mods = "Shift|Control", chars = "\u001C" },
+  # Backslash does not work, so we use the key next to it..
+  { key = "'", mods = "Control", chars = "\u001C" },
+  { key = "'", mods = "Shift|Control", chars = "\u001C" },
   # Also disables Vi mode
   # https://github.com/neovim/neovim/issues/8435
   # Currently does not map to C-Space in neovim.
