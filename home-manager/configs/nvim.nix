@@ -20,6 +20,7 @@
     packages = builtins.attrValues {
       inherit (pkgs)
         clang
+        emmet-ls
         hadolint
         markdownlint-cli
         nixfmt-rfc-style
@@ -31,7 +32,7 @@
         zig
         ;
 
-      inherit (pkgs.nodePackages) jsonlint vscode-json-languageserver;
+      inherit (pkgs.nodePackages) jsonlint typescript-language-server vscode-json-languageserver;
     };
   };
 

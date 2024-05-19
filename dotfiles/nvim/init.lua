@@ -212,6 +212,7 @@ require('lazy').setup({
 
       -- Enable the following language servers
       local servers = {
+        emmet_ls = {},
         gitlab_ci_ls = {},
         jsonls = {
           cmd = { 'vscode-json-languageserver', '--stdio' },
@@ -234,7 +235,34 @@ require('lazy').setup({
             },
           },
         },
-        rust_analyzer = {},
+        rust_analyzer = {
+          settings = {
+            ['rust-analyzer'] = {
+              assist = {
+                importGranularity = 'module',
+                importPrefix = 'by_self',
+              },
+              cargo = {
+                loadOutDirsFromCheck = true,
+              },
+              procMacro = {
+                enable = true,
+              },
+              hoverActions = {
+                references = true,
+              },
+              lens = {
+                enumVariantReferences = true,
+                methodReferences = true,
+                references = true,
+              },
+              rustfmt = {
+                enableRangeFormatting = true,
+              },
+            },
+          },
+        },
+        tsserver = {},
         yamlls = {
           settings = {
             yaml = {
