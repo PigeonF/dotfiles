@@ -472,6 +472,7 @@ require('lazy').setup({
         'lua',
         'luadoc',
         'markdown',
+        'markdown_inline',
         'nix',
         'rust',
         'vim',
