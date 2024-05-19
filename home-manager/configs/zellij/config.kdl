@@ -148,6 +148,8 @@ keybinds clear-defaults=true {
         bind "j" { MovePane "Down"; }
         bind "k" { MovePane "Up"; }
         bind "l" { MovePane "Right"; }
+        bind "H" { MoveTab "Left"; }
+        bind "L" { MoveTab "Right"; }
     }
 }
 
