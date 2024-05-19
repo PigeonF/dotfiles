@@ -22,7 +22,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
-vim.opt.colorcolumn = '80,100,+2'
+vim.opt.colorcolumn = '80,100,+0'
 
 -- [[ Basic Keymaps ]]
 vim.opt.hlsearch = true
