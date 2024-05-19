@@ -16,6 +16,8 @@
 [alias]
     aliases = config --get-regexp ^alias.
     branches = branch -vv
+    bd = branch -d
+    bD = branch -D
     c = commit
     ca = commit --amend
     can = commit --amend --no-edit
