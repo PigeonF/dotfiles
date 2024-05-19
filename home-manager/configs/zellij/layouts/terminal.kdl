@@ -6,8 +6,7 @@ layout {
             plugin location="zellij:compact-bar"
         }
     }
-    tab name="Editor" {
-        pane name="editor"
-        pane name="terminal" size="30%"
+    tab {
+        pane
     }
 }
