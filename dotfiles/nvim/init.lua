@@ -396,8 +396,6 @@ require('lazy').setup({
 
           -- Manually trigger a completion from nvim-cmp.
           ['<C-Space>'] = cmp.mapping.complete {},
-          -- Until https://github.com/neovim/neovim/issues/8435
-          ['<C-j>'] = cmp.mapping.complete {},
 
           -- <c-l> will move you to the right of each of the expansion locations.
           -- <c-h> is similar, except moving you backwards.
