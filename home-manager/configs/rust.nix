@@ -4,6 +4,8 @@
   home = {
     packages = builtins.attrValues {
       inherit (pkgs)
+        cargo-audit
+        cargo-auditable
         cargo-bloat
         cargo-cross
         cargo-cyclonedx
