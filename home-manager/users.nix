@@ -56,6 +56,7 @@
                 inherit (pkgs)
                   committed
                   deadnix
+                  dust
                   editorconfig-checker
                   fzf
                   gnumake
