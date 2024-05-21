@@ -27,6 +27,8 @@ buildNpmPackage {
     typescript
   ];
 
+  patches = [ ./ci-node-index.patch ];
+
   # `npm run build` fails because the nix store does not include git directories
   buildPhase = ''
     runHook preBuild

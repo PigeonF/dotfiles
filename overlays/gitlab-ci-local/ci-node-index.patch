@@ -1,0 +1,131 @@
+diff --git a/src/job.ts b/src/job.ts
+index c1e34cfac7f8b2aa..535eac896a94d63e 100644
+--- a/src/job.ts
++++ b/src/job.ts
+@@ -169,7 +169,9 @@ export class Job {
+         predefinedVariables["CI_ENVIRONMENT_NAME"] = this.environment?.name ?? "";
+         predefinedVariables["CI_ENVIRONMENT_SLUG"] = this.environment?.name?.replace(/[^a-z\d]+/ig, "-").replace(/^-/, "").slice(0, 23).replace(/-$/, "").toLowerCase() ?? "";
+         predefinedVariables["CI_ENVIRONMENT_URL"] = this.environment?.url ?? "";
+-        predefinedVariables["CI_NODE_INDEX"] = `${opt.nodeIndex}`;
++        if (opt.nodeIndex !== null) {
++            predefinedVariables["CI_NODE_INDEX"] = `${opt.nodeIndex}`;
++        }
+         predefinedVariables["CI_NODE_TOTAL"] = `${opt.nodesTotal}`;
+         predefinedVariables["CI_REGISTRY"] = `local-registry.${this.gitData.remote.host}`;
+         predefinedVariables["CI_REGISTRY_IMAGE"] = `$CI_REGISTRY/${this._variables["CI_PROJECT_PATH"].toLowerCase()}`;
+diff --git a/src/parallel.ts b/src/parallel.ts
+index 2de0934880a6bbf8..3a49bc3f587d3353 100644
+--- a/src/parallel.ts
++++ b/src/parallel.ts
+@@ -1,6 +1,28 @@
+ import assert from "assert";
+ import deepExtend from "deep-extend";
+ 
++export function variablesList (jobData: any, jobName: string) {
++    if (jobData?.parallel) {
++        if (jobData.parallel?.matrix) {
++            return {
++                matrixVariables: matrixVariablesList(jobData, jobName),
++                nodesTotal: null,
++            }
++        } else {
++            assert(Number.isInteger(jobData.parallel), `${jobName} parallel is not an integer`);
++            return {
++                matrixVariables: Array(jobData.parallel).fill(null),
++                nodesTotal: jobData.parallel
++            }
++        }
++    } else {
++        return {
++            matrixVariables: null,
++            nodesTotal: null
++        }
++    }
++}
++
+ export function matrixVariablesList (jobData: any, jobName: string) {
+     if (jobData?.parallel?.matrix == null) {
+         return null;
+diff --git a/src/parser.ts b/src/parser.ts
+index d5207fa0131a3258..152d15685f71f314 100644
+--- a/src/parser.ts
++++ b/src/parser.ts
+@@ -150,11 +150,13 @@ export class Parser {
+             assert(variablesFromFiles != null, "homeVariables must be set");
+ 
+             let nodeIndex = 1;
+-            const parallelMatrixVariablesList = parallel.matrixVariablesList(jobData, jobName) ?? [null];
+-            for (const parallelMatrixVariables of parallelMatrixVariablesList) {
++            const variablesList = parallel.variablesList(jobData, jobName);
++            for (const parallelMatrixVariables of (variablesList.matrixVariables ?? [null])) {
+                 let matrixJobName = jobName;
+                 if (parallelMatrixVariables) {
+                     matrixJobName = `${jobName}: [${Object.values(parallelMatrixVariables ?? []).join(",")}]`;
++                } else if (variablesList.nodesTotal) {
++                    matrixJobName = `${jobName}: [${nodeIndex}/${variablesList.nodesTotal}]`;
+                 }
+ 
+                 const job = new Job({
+@@ -169,8 +171,8 @@ export class Parser {
+                     gitData,
+                     variablesFromFiles,
+                     matrixVariables: parallelMatrixVariables,
+-                    nodeIndex: parallelMatrixVariables !== null ? nodeIndex : null,
+-                    nodesTotal: parallelMatrixVariablesList.length,
++                    nodeIndex: parallelMatrixVariables !== null ? nodeIndex : (variablesList.nodesTotal !== null ? nodeIndex : null),
++                    nodesTotal: variablesList.nodesTotal ?? 1,
+                     expandVariables: this.expandVariables,
+                 });
+                 const foundStage = this.stages.includes(job.stage);
+diff --git a/tests/test-cases/parallel/.gitlab-ci.yml b/tests/test-cases/parallel/.gitlab-ci.yml
+new file mode 100644
+index 0000000000000000..9f7a3142c3645a52
+--- /dev/null
++++ b/tests/test-cases/parallel/.gitlab-ci.yml
+@@ -0,0 +1,6 @@
++---
++test-job:
++  stage: build
++  script:
++    - echo "$CI_NODE_INDEX/$CI_NODE_TOTAL"
++  parallel: 2
+diff --git a/tests/test-cases/parallel/integration.parallel.test.ts b/tests/test-cases/parallel/integration.parallel.test.ts
+new file mode 100644
+index 0000000000000000..38d2fb0f9b17e657
+--- /dev/null
++++ b/tests/test-cases/parallel/integration.parallel.test.ts
+@@ -0,0 +1,34 @@
++import { WriteStreamsMock } from "../../../src/write-streams";
++import { handler } from "../../../src/handler";
++import chalk from "chalk";
++
++test("parallel <test-job>", async () => {
++    const writeStreams = new WriteStreamsMock();
++    await handler({
++        cwd: "tests/test-cases/parallel",
++        jobs: ["test-job"],
++        shellIsolation: true,
++    }, writeStreams);
++
++    expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining([
++        chalk`{blueBright test-job: [1/2]} {greenBright >} 1/2`,
++        chalk`{blueBright test-job: [2/2]} {greenBright >} 2/2`,
++    ]));
++});
++
++test("parallel 'test-job [1/2]'", async () => {
++    const writeStreams = new WriteStreamsMock();
++    await handler({
++        cwd: "tests/test-cases/parallel",
++        job: ["test-job: [1/2]"],
++        shellIsolation: true,
++    }, writeStreams);
++
++    expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining([
++        chalk`{blueBright test-job: [1/2]} {greenBright >} 1/2`,
++    ]));
++
++    expect(writeStreams.stdoutLines).not.toEqual(expect.arrayContaining([
++        chalk`{blueBright test-job: [2/2]} {greenBright >} 2/2`,
++    ]));
++});
