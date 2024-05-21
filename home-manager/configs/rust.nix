@@ -2,7 +2,18 @@
 
 {
   home = {
-    packages = [ pkgs.rustup ];
+    packages = builtins.attrValues {
+      inherit (pkgs)
+        cargo-bloat
+        cargo-cross
+        cargo-cyclonedx
+        cargo-deny
+        cargo-dist
+        cargo-geiger
+        cargo-hack
+        rustup
+        ;
+    };
 
     shellAliases = {
       c = "cargo";
