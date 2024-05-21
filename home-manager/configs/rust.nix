@@ -11,6 +11,7 @@
         cargo-dist
         cargo-geiger
         cargo-hack
+        cargo-nextest
         rustup
         ;
     };
