@@ -5,6 +5,7 @@
     packages = builtins.attrValues {
       inherit (pkgs)
         crane
+        diffoci
         diffoscopeMinimal
         dive
         docker-client

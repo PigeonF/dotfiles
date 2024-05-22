@@ -6,6 +6,7 @@
       inherit (pkgs)
         cargo-audit
         cargo-auditable
+        cargo-binutils
         cargo-bloat
         cargo-cross
         cargo-cyclonedx
