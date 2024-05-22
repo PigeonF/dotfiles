@@ -9,13 +9,16 @@
   i18n = {
     supportedLocales = [
       "C.UTF-8/UTF-8"
-      "en_US.UTF-8/UTF-8"
       "de_DE.UTF-8/UTF-8"
+      "en_DK.UTF-8/UTF-8"
+      "en_US.UTF-8/UTF-8"
     ];
 
     extraLocaleSettings = {
       LC_COLLATE = "C";
-      LC_TIME = "de_DE.UTF-8";
+      LC_TIME = "en_DK.UTF-8";
+      LC_MONETARY = "de_DE.UTF-8";
+      LC_MEASUREMENT = "de_DE.UTF-8";
     };
   };
 
