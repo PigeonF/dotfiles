@@ -83,7 +83,7 @@ keybinds clear-defaults=true {
 
     scroll {
         bind "e" { EditScrollback; SwitchToMode "Normal"; }
-        bind "s" { SwitchToMode "EnterSearch"; SearchInput 0; }
+        bind "s" "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
     }
     entersearch {
         bind "Esc" { SwitchToMode "Scroll"; }
