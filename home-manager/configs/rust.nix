@@ -14,6 +14,7 @@
         cargo-dist
         cargo-geiger
         cargo-hack
+        cargo-llvm-cov
         cargo-nextest
         rustup
         ;
