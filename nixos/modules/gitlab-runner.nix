@@ -46,6 +46,7 @@
                   "--docker-volumes /certs/client"
                   "--output-limit 8192"
                   "--env FF_NETWORK_PER_BUILD=1"
+                  "--env DOCKER_DRIVER=overlay2"
                 ]
                 ++ lib.optionals cfg.privileged [ "--docker-privileged" ]
                 ++ lib.optionals hasPodman [ "--docker-network-mode podman" ];
