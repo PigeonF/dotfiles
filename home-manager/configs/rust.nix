@@ -16,7 +16,9 @@
         cargo-hack
         cargo-llvm-cov
         cargo-nextest
+        cargo-zigbuild
         rustup
+        zig
         ;
     };
 
