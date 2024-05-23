@@ -18,6 +18,7 @@
             size = 24;
           }
         ];
+        registry-mirrors = [ "http://registry-cache.internal" ];
       };
     };
   };
