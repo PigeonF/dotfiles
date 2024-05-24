@@ -4,7 +4,6 @@
     inputs.disko.nixosModules.disko
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
     inputs.self.nixosModules.gitlab-runner
-    inputs.self.nixosModules.home-manager
     inputs.sops-nix.nixosModules.sops
 
     ../../../shared/core.nix

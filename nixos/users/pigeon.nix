@@ -1,12 +1,5 @@
+{ config, lib, ... }:
 {
-  inputs,
-  config,
-  lib,
-  ...
-}:
-{
-  home-manager.users.pigeon = inputs.self.homeModules.users.pigeon;
-
   users = {
     groups.pigeon = {
       name = "pigeon";
