@@ -1,0 +1,34 @@
+diff --git a/reprotest/lib/adt_testbed.py b/reprotest/lib/adt_testbed.py
+index 110f42ef2f63fe96..ef8a147964bd9ffc 100644
+--- a/reprotest/lib/adt_testbed.py
++++ b/reprotest/lib/adt_testbed.py
+@@ -41,6 +41,7 @@ from reprotest.lib.system_interface.debian import DebianInterface
+ from reprotest.lib.system_interface.arch import ArchInterface
+ from reprotest.lib.system_interface.fedora import FedoraInterface
+ from reprotest.lib.system_interface.guix import GuixInterface
++from reprotest.lib.system_interface.nix import NixInterface
+ from reprotest.lib import adtlog
+ from reprotest.lib import VirtSubproc
+
+@@ -49,6 +50,7 @@ SYSTEM_INTERFACES = {
+         'arch': ArchInterface,
+         'fedora': FedoraInterface,
+         'guix': GuixInterface,
++        'nixos': NixInterface,
+         }
+
+ timeouts = {
+diff --git a/reprotest/lib/system_interface/nixos.py b/reprotest/lib/system_interface/nixos.py
+new file mode 100644
+index 0000000000000000..8f71c36ba591f494
+--- /dev/null
++++ b/reprotest/lib/system_interface/nix.py
+@@ -0,0 +1,8 @@
++from . import SystemInterface
++
++class NixInterface(SystemInterface):
++    def get_arch(self):
++        return ['uname', '-m']
++
++    def can_query_packages(self):
++        return False

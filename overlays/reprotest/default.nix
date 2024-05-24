@@ -17,6 +17,8 @@ python3Packages.buildPythonApplication rec {
   inherit version;
   pyproject = true;
 
+  patches = [ ./nixos-system.patch ];
+
   src = fetchurl {
     url = "mirror://debian/pool/main/r/reprotest/reprotest_${version}.tar.xz";
     hash = "sha256-sN6qdpCgyWxmfe6REcm31AcQsIKR5iIUGXwFImi4Pwo=";
