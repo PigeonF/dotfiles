@@ -23,7 +23,9 @@
           "wheel"
         ]
         ++ lib.lists.optional config.virtualisation.docker.enable "docker"
-        ++ lib.lists.optional config.virtualisation.podman.enable "podman";
+        ++ lib.lists.optional config.virtualisation.podman.enable "podman"
+        ++ lib.lists.optional config.virtualisation.lxd.enable "lxd"
+        ++ lib.lists.optional config.virtualisation.incus.enable "incus-admin";
       home = "/home/pigeon";
       createHome = true;
       useDefaultShell = true;
