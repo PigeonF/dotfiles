@@ -1,2 +1,6 @@
 /result
 /.vagrant
+
+/.dotter/cache.toml
+/.dotter/cache/
+/.dotter/local.toml

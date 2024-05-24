@@ -1,0 +1,4 @@
+[git.files]
+"dotfiles/git/gitconfig" = "~/.config/git/config"
+"dotfiles/git/gitignore" = "~/.config/git/ignore"
+"dotfiles/git/allowed_signers" = "~/.ssh/allowed_singers"

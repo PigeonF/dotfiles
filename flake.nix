@@ -52,6 +52,10 @@
             in
             {
               pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
+              pigeonf = import ./home/pigeonf {
+                inherit inputs pkgs;
+                overlays = self.overlays;
+              };
             };
 
           checks = {
@@ -86,7 +90,7 @@
     };
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     # https://github.com/NixOS/nixpkgs/pull/258250
     nixpkgs-networking.url = "github:djacu/nixpkgs?ref=add-networking-lib";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
