@@ -34,6 +34,12 @@ python3Packages.buildPythonApplication rec {
     }"
   ];
 
+  postFixup = ''
+    for file in "$out/lib/python3."*"/site-packages/reprotest/virt/autopkgtest-virt-"*; do
+      wrapProgram "$file" --prefix PYTHONPATH : "$PYTHONPATH"
+    done
+  '';
+
   dependencies = [
     python3Packages.distro
     python3Packages.rstr
