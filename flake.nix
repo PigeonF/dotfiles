@@ -27,8 +27,6 @@
           in
           {
             geonosis = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/geonosis ];
-            # mustafar = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/mustafar ];
-            # coruscant = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/coruscant ];
           };
       };
 
