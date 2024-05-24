@@ -1,8 +1,11 @@
 {
   lib,
   python3Packages,
-  diffoscopeMinimal,
   fetchurl,
+  # Dependencies
+  diffoscopeMinimal,
+  disorderfs,
+  libfaketime,
 }:
 
 let
@@ -21,12 +24,22 @@ python3Packages.buildPythonApplication rec {
 
   build-system = [ python3Packages.setuptools ];
 
+  makeWrapperArgs = [
+    "--prefix PATH : ${
+      lib.makeBinPath [
+        disorderfs
+        libfaketime
+        diffoscopeMinimal
+      ]
+    }"
+  ];
+
   dependencies = [
     python3Packages.distro
     python3Packages.rstr
+    # pkg_resources
+    python3Packages.setuptools
   ];
-
-  optional-dependencies = [ diffoscopeMinimal ];
 
   meta = with lib; {
     description = "Build packages and check them for reproducibility.";
