@@ -39,17 +39,17 @@
           in
           {
             geonosis = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/geonosis ];
-            mustafar = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/mustafar ];
-            coruscant = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/coruscant ];
+            # mustafar = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/mustafar ];
+            # coruscant = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/coruscant ];
           };
 
-        darwinConfigurations =
-          let
-            inherit (inputs.self.lib) mkDarwinConfiguration;
-          in
-          {
-            kamino = mkDarwinConfiguration "aarch64-darwin" [ ./nix-darwin/systems/kamino ];
-          };
+        # darwinConfigurations =
+        #   let
+        #     inherit (inputs.self.lib) mkDarwinConfiguration;
+        #   in
+        #   {
+        #     kamino = mkDarwinConfiguration "aarch64-darwin" [ ./nix-darwin/systems/kamino ];
+        #   };
       };
 
       perSystem =
