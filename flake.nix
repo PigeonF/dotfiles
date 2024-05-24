@@ -65,7 +65,7 @@
           formatter = pkgs.nixfmt-rfc-style;
 
           packages = {
-            inherit (pkgs) committed gitlab-ci-local;
+            inherit (pkgs) gitlab-ci-local reprotest;
           };
 
           legacyPackages.homeConfigurations =

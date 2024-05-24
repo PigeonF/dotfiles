@@ -5,6 +5,7 @@ let
 
   overlays = {
     gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };
+    reprotest = final: _: { reprotest = final.callPackage ./reprotest.nix { }; };
   };
 in
 

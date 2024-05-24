@@ -66,6 +66,7 @@
                   markdownlint-cli2
                   nixfmt-rfc-style
                   pstree
+                  reprotest
                   reuse
                   skim
                   statix
