@@ -23,27 +23,6 @@
         ];
       };
 
-    mkDarwinConfiguration =
-      system: modules:
-      inputs.nix-darwin.lib.darwinSystem {
-        inherit system;
-
-        specialArgs = {
-          inherit inputs;
-          isLinux = false;
-        };
-
-        modules = modules ++ [
-          (
-            { lib, ... }:
-            {
-              system.stateVersion = lib.mkDefault 4;
-              nixpkgs.hostPlatform = lib.mkDefault system;
-            }
-          )
-        ];
-      };
-
     mkHomeConfiguration =
       pkgs: modules:
       inputs.home-manager.lib.homeManagerConfiguration {

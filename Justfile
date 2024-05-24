@@ -13,10 +13,10 @@ _default:
   @just --justfile {{ justfile() }} --list
 
 build:
-  {{if os() == "linux" { "nixos"  } else { "darwin"  } }}-rebuild build --verbose --print-build-logs --show-trace --flake .
+  nixos-rebuild build --verbose --print-build-logs --show-trace --flake .
 
 switch:
-  {{if os() == "linux" { "sudo nixos"  } else { "darwin"  } }}-rebuild switch --verbose --print-build-logs --show-trace --flake .
+  nixos-rebuild switch --verbose --print-build-logs --show-trace --flake .
 
 hm TARGET="":
   home-manager switch --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}

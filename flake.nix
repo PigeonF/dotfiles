@@ -19,7 +19,6 @@
         flakeModules = {
           default = ./all-modules.nix;
           homeModules = ./extras/homeModules.nix;
-          darwinModules = ./extras/darwinModules.nix;
         };
 
         nixosConfigurations =
@@ -31,14 +30,6 @@
             # mustafar = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/mustafar ];
             # coruscant = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/coruscant ];
           };
-
-        # darwinConfigurations =
-        #   let
-        #     inherit (inputs.self.lib) mkDarwinConfiguration;
-        #   in
-        #   {
-        #     kamino = mkDarwinConfiguration "aarch64-darwin" [ ./nix-darwin/systems/kamino ];
-        #   };
       };
 
       perSystem =
@@ -102,10 +93,6 @@
     nixpkgs-networking.url = "github:djacu/nixpkgs?ref=add-networking-lib";
     nixpkgs-stable.url = "github:NixOS/nixpkgs/release-23.05";
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nix-darwin = {
-      url = "github:LnL7/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";

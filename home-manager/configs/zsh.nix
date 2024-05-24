@@ -1,9 +1,4 @@
-{
-  pkgs,
-  config,
-  lib,
-  ...
-}:
+{ config, ... }:
 
 {
   programs.zsh = {
@@ -12,10 +7,6 @@
     dotDir = ".config/zsh";
 
     history.path = "${config.xdg.stateHome}/zsh/zsh_history.txt";
-
-    profileExtra = lib.optionalString pkgs.stdenv.isDarwin ''
-      eval "$(/opt/homebrew/bin/brew shellenv)"
-    '';
 
     shellAliases = config.programs.bash.shellAliases // { };
 
