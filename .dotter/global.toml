@@ -8,10 +8,10 @@
 "dotfiles/erdtree/config.toml" = "~/.config/erdtree/.erdtree.toml"
 
 [bash.files]
-"dotfiles/bash/bash-preexec.sh" = "~/.config/bashrc.d/bash-preexec.sh"
-"dotfiles/bash/bashrc" = { target = "~/.bashrc", type = "template" }
-"dotfiles/bash/profile" = "~/.profile"
-"dotfiles/bash/bash_profile" = "~/.bash_profile"
+"dotfiles/bash/.bash_profile" = "~/.bash_profile"
+"dotfiles/bash/.bashrc" = { target = "~/.bashrc", type = "template" }
+"dotfiles/bash/.config/bashrc.d/bash-preexec.sh" = "~/.config/bashrc.d/bash-preexec.sh"
+"dotfiles/bash/.profile" = "~/.profile"
 
 [git.files]
 "dotfiles/git/gitconfig" = "~/.config/git/config"
