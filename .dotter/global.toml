@@ -1,5 +1,8 @@
+[atuin.files]
+"dotfiles/atuin/atuin.toml" = "~/.config/atuin/config.toml"
+
 [bash.files]
-"dotfiles/bash/bashrc" = "~/.bashrc"
+"dotfiles/bash/bashrc" = { target = "~/.bashrc", type = "template" }
 "dotfiles/bash/profile" = "~/.profile"
 "dotfiles/bash/bash_profile" = "~/.bash_profile"
 

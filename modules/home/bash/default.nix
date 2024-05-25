@@ -17,7 +17,6 @@ in
   };
 
   config = mkIf cfg.enable {
-
     home = {
       packages = builtins.attrValues {
         inherit (pkgs)
