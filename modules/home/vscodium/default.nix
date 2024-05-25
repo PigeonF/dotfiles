@@ -13,7 +13,7 @@ in
   _file = ./default.nix;
 
   options.pigeonf.vscodium = {
-    enable = mkEnableOption "PigeonF VSCodium";
+    enable = mkEnableOption "PigeonF VSCodium Packages";
   };
 
   config = mkIf cfg.enable {
