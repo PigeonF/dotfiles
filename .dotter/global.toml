@@ -30,3 +30,6 @@
 
 [starship.files]
 "dotfiles/starship/.config/starship.toml" = "~/.config/starship.toml"
+
+[topgrade.files]
+"dotfiles/topgrade/.config/topgrade.toml" = "~/.config/topgrade.toml"
