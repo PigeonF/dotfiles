@@ -1,0 +1,25 @@
+[alacritty.files]
+"dotfiles/alacritty/.config/alacritty/alacritty.toml" = "~/AppData/Roaming/alacritty/alacritty.toml"
+
+[atuin.files]
+"dotfiles/atuin/.config/atuin/config.toml" = "~/.config/atuin/config.toml"
+
+[erdtree.files]
+"dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/AppData/Roaming/erdtree/.erdtree.toml"
+
+[nushell.files]
+"dotfiles/nushell/.config/nushell/config.nu" = "~/AppData/Roaming/nushell/config.nu"
+"dotfiles/nushell/.config/nushell/env.nu" = "~/AppData/Roaming/nushell/env.nu"
+"dotfiles/nushell/.config/nushell/login.nu" = "~/AppData/Roaming/nushell/login.nu"
+
+[nvim.files]
+"dotfiles/nvim/.config/nvim/init.lua" = "~/AppData/Local/nvim/init.lua"
+"dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/AppData/Local/nvim/lazy-lock.json"
+"dotfiles/nvim/.config/nvim/lua" = "~/AppData/Local/nvim/lua"
+
+[topgrade.files]
+"dotfiles/topgrade/.config/topgrade.toml" = "~/AppData/Roaming/topgrade.toml"
+
+[vscodium.files]
+"dotfiles/vscodium/.config/VSCodium/User/keybindings.json" = "D:/scoop/persist/vscodium/data/user-data/User/keybindings.json"
+"dotfiles/vscodium/.config/VSCodium/User/settings.json" = "D:/scoop/persist/vscodium/data/user-data/User/settings.json"
