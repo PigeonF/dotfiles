@@ -31,6 +31,10 @@ fi
 alias c="cargo"
 {{/if}}
 
+{{#if (is_executable "git")}}
+alias g="git"
+{{/if}}
+
 {{#if (is_executable "eza") }}
 alias ls='eza'
 {{/if}}
