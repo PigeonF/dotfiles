@@ -9,7 +9,6 @@
       imports = [
         (import ./flake-modules.nix { inherit (inputs.nixpkgs) lib; }).default
 
-        ./all-modules.nix
         ./lib.nix
 
         ./home-manager
