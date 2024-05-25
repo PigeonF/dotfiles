@@ -14,8 +14,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
         imports = [ inputs.self.homeModules.default ];
 
         home = {
-          username = "pigeon";
-          homeDirectory = "/home/pigeon";
+          username = "pigeonf";
+          homeDirectory = "/home/pigeonf";
           stateVersion = "24.05";
           packages = [ pkgs.dotter ];
         };

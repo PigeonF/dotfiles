@@ -16,7 +16,7 @@
     ../../laptop.nix
     ../../network.nix
     ../../ssh.nix
-    ../../users/pigeon.nix
+    ../../users/pigeonf.nix
 
     ./disk.nix
   ];
