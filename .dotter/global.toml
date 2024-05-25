@@ -18,5 +18,10 @@
 "dotfiles/git/.config/git/ignore" = "~/.config/git/ignore"
 "dotfiles/git/.ssh/allowed_signers" = "~/.ssh/allowed_singers"
 
+[nushell.files]
+"dotfiles/nushell/.config/nushell/config.nu" = "~/.config/nushell/config.nu"
+"dotfiles/nushell/.config/nushell/env.nu" = "~/.config/nushell/env.nu"
+"dotfiles/nushell/.config/nushell/login.nu" = "~/.config/nushell/login.nu"
+
 [starship.files]
 "dotfiles/starship/starship.toml" = "~/.config/starship.toml"

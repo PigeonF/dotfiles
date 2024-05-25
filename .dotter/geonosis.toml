@@ -1,1 +1,1 @@
-packages = ["atuin", "bash", "git", "starship"]
+packages = ["atuin", "bash", "git", "nushell", "starship"]
