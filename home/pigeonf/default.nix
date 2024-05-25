@@ -32,6 +32,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
         xdg.enable = true;
 
         pigeonf = {
+          admintools.enable = true;
           atuin.enable = true;
           bash.enable = true;
           git.enable = true;
