@@ -1,4 +1,17 @@
 {
+  boot = {
+    initrd.availableKernelModules = [ "nvme" ];
+    kernelModules = [
+      "kvm-intel"
+      "iwlwifi"
+    ];
+
+    loader.grub = {
+      efiSupport = true;
+      efiInstallAsRemovable = true;
+    };
+  };
+
   disko.devices = {
     disk = {
       vdb = {
@@ -26,7 +39,7 @@
               size = "100%";
               content = {
                 type = "luks";
-                name = "crypted";
+                name = "encrypted";
                 settings = {
                   allowDiscards = true;
                 };

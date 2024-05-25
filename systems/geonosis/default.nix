@@ -18,20 +18,9 @@
     ../../nixos/ssh.nix
     ../../nixos/users/pigeonf.nix
 
-    ./disk.nix
+    ./hardware.nix
+    ./secrets
   ];
-
-  sops.secrets."network" = {
-    sopsFile = ./network.env;
-    format = "dotenv";
-    restartUnits = [ "wpa_supplicant.service" ];
-  };
-
-  sops.secrets."gitlab-runner/environment" = {
-    sopsFile = ./gitlab-runner-default.env;
-    format = "dotenv";
-    restartUnits = [ "gitlab-runner.service" ];
-  };
 
   pigeonf.gitlabRunner = {
     enable = true;
@@ -87,19 +76,6 @@
           '';
         };
       };
-    };
-  };
-
-  boot = {
-    initrd.availableKernelModules = [ "nvme" ];
-    kernelModules = [
-      "kvm-intel"
-      "iwlwifi"
-    ];
-
-    loader.grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
     };
   };
 }
