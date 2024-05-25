@@ -24,6 +24,7 @@ in
         emmet-ls
         fzf
         hadolint
+        lua-language-server
         markdownlint-cli
         nixfmt-rfc-style
         skim
