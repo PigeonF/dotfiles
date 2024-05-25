@@ -32,3 +32,7 @@ if [[ $TERM != "dumb" ]]; then
   eval "$(starship init bash --print-full-init)"
 fi
 {{/if}}
+
+{{#if (is_executable "zoxide") }}
+eval "$(zoxide init bash)"
+{{/if}}

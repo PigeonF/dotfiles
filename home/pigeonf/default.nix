@@ -36,6 +36,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           git.enable = true;
           starship.enable = true;
           vscodium.enable = true;
+          zoxide.enable = true;
         };
       }
     )
