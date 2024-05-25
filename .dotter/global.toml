@@ -14,9 +14,9 @@
 "dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/.config/erdtree/.erdtree.toml"
 
 [git.files]
-"dotfiles/git/gitconfig" = "~/.config/git/config"
-"dotfiles/git/gitignore" = "~/.config/git/ignore"
-"dotfiles/git/allowed_signers" = "~/.ssh/allowed_singers"
+"dotfiles/git/.config/git/config" = "~/.config/git/config"
+"dotfiles/git/.config/git/ignore" = "~/.config/git/ignore"
+"dotfiles/git/.ssh/allowed_signers" = "~/.ssh/allowed_singers"
 
 [starship.files]
 "dotfiles/starship/starship.toml" = "~/.config/starship.toml"
