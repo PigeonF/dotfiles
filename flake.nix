@@ -9,21 +9,13 @@
       imports = [
         (import ./flake-modules.nix).default
         ./modules
-        ./lib.nix
+        ./systems
+        ./homes
       ];
 
       flake = {
         overlays = import ./overlays inputs;
-
         flakeModules = import ./flake-modules.nix;
-
-        nixosConfigurations =
-          let
-            inherit (inputs.self.lib) mkNixosConfiguration;
-          in
-          {
-            geonosis = mkNixosConfiguration "x86_64-linux" [ ./nixos/systems/geonosis ];
-          };
       };
 
       perSystem =
@@ -40,13 +32,6 @@
 
           packages = {
             inherit (pkgs) gitlab-ci-local reprotest;
-          };
-
-          legacyPackages.homeConfigurations = {
-            pigeonf = import ./home/pigeonf {
-              inherit inputs pkgs;
-              inherit (self) overlays;
-            };
           };
 
           checks = {

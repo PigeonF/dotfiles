@@ -2,18 +2,13 @@
 keys:
   - &common age1nfa5tsvl33wmex09mj27kzcrl25xz5h74sg64rka2cekhjrd5frsnsymry
   - &geonosis age18eug2ah672kzv6nnj3kaljm3v7kxdufg7dga73c2vpupsd0nk3zs0jevgw
-  - &mustafar age1k9jct5hmsxx3kv2savq8c2ksqv3ec6fkve53sa6uhe9k3vvrf32qycfl65
 
 creation_rules:
-  - path_regex: home-manager/.+\.(yaml|json|env|ini)$
+  - path_regex: homes/pigeonf/.+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *common
-  - path_regex: nixos/systems/geonosis/[^/]+\.(yaml|json|env|ini)$
+  - path_regex: systems/geonosis/[^/]+\.(yaml|json|env|ini)$
     key_groups:
       - age:
           - *geonosis
-  - path_regex: nixos/systems/mustafar/[^/]+\.(yaml|json|env|ini)$
-    key_groups:
-      - age:
-          - *mustafar

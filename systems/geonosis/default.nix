@@ -6,17 +6,17 @@
     inputs.self.nixosModules.gitlab-runner
     inputs.sops-nix.nixosModules.sops
 
-    ../../../shared/core.nix
-    ../../../shared/nix.nix
+    ../../shared/core.nix
+    ../../shared/nix.nix
 
-    ../../core.nix
-    ../../docker.nix
-    ../../dockerRegistry.nix
-    ../../webservices.nix
-    ../../laptop.nix
-    ../../network.nix
-    ../../ssh.nix
-    ../../users/pigeonf.nix
+    ../../nixos/core.nix
+    ../../nixos/docker.nix
+    ../../nixos/dockerRegistry.nix
+    ../../nixos/webservices.nix
+    ../../nixos/laptop.nix
+    ../../nixos/network.nix
+    ../../nixos/ssh.nix
+    ../../nixos/users/pigeonf.nix
 
     ./disk.nix
   ];
