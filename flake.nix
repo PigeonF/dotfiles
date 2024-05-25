@@ -45,7 +45,7 @@
           legacyPackages.homeConfigurations = {
             pigeonf = import ./home/pigeonf {
               inherit inputs pkgs;
-              overlays = self.overlays;
+              inherit (self) overlays;
             };
           };
 
