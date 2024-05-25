@@ -29,5 +29,13 @@ in
           ;
       };
     };
+
+    xdg.configFile."bashrc.d/bash_completion.sh" = {
+      text = ''
+        if [[ ! -v BASH_COMPLETION_VERSINFO ]]; then
+          . "${pkgs.bash-completion}/etc/profile.d/bash_completion.sh"
+        fi
+      '';
+    };
   };
 }

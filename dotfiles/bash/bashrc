@@ -1,5 +1,11 @@
 [[ $- == *i* ]] || return
 
+for file in "${XDG_CONFIG_HOME}/bashrc.d"/*.sh; do
+  if [ -r "$file" ]; then
+    . "$file"
+  fi
+done
+
 HISTFILE="/home/pigeon/.local/state/bash/bash_history.txt"
 HISTFILESIZE=100000
 HISTIGNORE='ls:exit'
@@ -16,13 +22,8 @@ alias la='ls -la'
 alias ls='eza'
 alias rga='rg --no-ignore --hidden'
 
-if [[ ! -v BASH_COMPLETION_VERSINFO ]]; then
-  . "/nix/store/m44hmzsiwqxw0jc6sf32k4r280h28m6s-bash-completion-2.13.0/etc/profile.d/bash_completion.sh"
-fi
-
 {{#if (is_executable "atuin") }}
 if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
-  source "/nix/store/m58msqmgb3vnrv7l18jqhwdm600fj35l-bash-preexec-0.5.0/share/bash/bash-preexec.sh"
   eval "$(atuin init bash --disable-up-arrow)"
 fi
 {{/if}}
