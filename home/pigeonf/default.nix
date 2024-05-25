@@ -28,6 +28,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           };
         };
 
+        programs.home-manager.enable = true;
         xdg.enable = true;
 
         pigeonf = {
