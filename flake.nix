@@ -7,15 +7,15 @@
       systems = import inputs.systems;
 
       imports = [
-        (import ./flake-modules.nix { inherit (inputs.nixpkgs) lib; }).default
-
+        (import ./flake-modules.nix).default
+        ./modules
         ./lib.nix
       ];
 
       flake = {
         overlays = import ./overlays inputs;
 
-        flakeModules = import ./flake-modules.nix { inherit (inputs.nixpkgs) lib; };
+        flakeModules = import ./flake-modules.nix;
 
         nixosConfigurations =
           let
