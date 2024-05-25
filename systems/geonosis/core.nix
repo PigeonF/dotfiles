@@ -1,5 +1,12 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
+  time = {
+    timeZone = "Europe/Berlin";
+  };
+  system = {
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
+  };
+
   environment = {
     enableAllTerminfo = true;
     systemPackages = [ pkgs.glibcLocales ];

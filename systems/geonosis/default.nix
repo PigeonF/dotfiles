@@ -3,29 +3,30 @@
   imports = [
     inputs.disko.nixosModules.disko
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
-    inputs.self.nixosModules.gitlab-runner
+    inputs.self.nixosModules.default
     inputs.sops-nix.nixosModules.sops
 
-    ../../shared/core.nix
-    ../../shared/nix.nix
-
-    ../../nixos/core.nix
-    ../../nixos/docker.nix
-    ../../nixos/dockerRegistry.nix
-    ../../nixos/webservices.nix
-    ../../nixos/laptop.nix
-    ../../nixos/network.nix
-    ../../nixos/ssh.nix
-    ../../nixos/users/pigeonf.nix
+    ./core.nix
+    ./docker.nix
+    ./dockerRegistry.nix
+    ./laptop.nix
+    ./network.nix
+    ./nix.nix
+    ./ssh.nix
+    ./webservices.nix
 
     ./hardware.nix
     ./secrets
   ];
 
-  pigeonf.gitlabRunner = {
-    enable = true;
-    privileged = true;
-    envFile = config.sops.secrets."gitlab-runner/environment".path;
+  pigeonf = {
+    userAccount.enable = true;
+
+    gitlabRunner = {
+      enable = true;
+      privileged = true;
+      envFile = config.sops.secrets."gitlab-runner/environment".path;
+    };
   };
 
   virtualisation.incus.enable = true;
