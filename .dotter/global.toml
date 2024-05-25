@@ -1,3 +1,6 @@
+[alacritty.files]
+"dotfiles/alacritty/.config/alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
+
 [atuin.files]
 "dotfiles/atuin/atuin.toml" = "~/.config/atuin/config.toml"
 
