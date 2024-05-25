@@ -31,6 +31,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
         xdg.enable = true;
 
         pigeonf = {
+          bash.enable = true;
           git.enable = true;
           vscodium.enable = true;
         };
