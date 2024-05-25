@@ -2,7 +2,7 @@
 "dotfiles/alacritty/.config/alacritty/alacritty.toml" = "~/.config/alacritty/alacritty.toml"
 
 [atuin.files]
-"dotfiles/atuin/atuin.toml" = "~/.config/atuin/config.toml"
+"dotfiles/atuin/.config/atuin/config.toml" = "~/.config/atuin/config.toml"
 
 [erdtree.files]
 "dotfiles/erdtree/config.toml" = "~/.config/erdtree/.erdtree.toml"
