@@ -22,18 +22,22 @@ alias la='ls -la'
 alias ls='eza'
 alias rga='rg --no-ignore --hidden'
 
-{{#if (is_executable "atuin") }}
+{{#if (is_executable "cargo") }}
+alias c="cargo"
+{{/if}}
+
+{{#if (is_executable "atuin")}}
 if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
   eval "$(atuin init bash --disable-up-arrow)"
 fi
 {{/if}}
 
-{{#if (is_executable "starship") }}
+{{#if (is_executable "starship")}}
 if [[ $TERM != "dumb" ]]; then
   eval "$(starship init bash --print-full-init)"
 fi
 {{/if}}
 
-{{#if (is_executable "zoxide") }}
+{{#if (is_executable "zoxide")}}
 eval "$(zoxide init bash)"
 {{/if}}
