@@ -4,7 +4,11 @@ let
   inherit (nixpkgs) lib;
 
   overlays = {
-    gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };
+    gitlab-ci-local = final: prev: {
+      gitlab-ci-local = prev.gitlab-ci-local.overrideAttrs (
+        _: _: { patches = [ ./gitlab-ci-local/ci-node-index.patch ]; }
+      );
+    };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
   };
 in
