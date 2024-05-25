@@ -16,7 +16,7 @@
 [git.files]
 "dotfiles/git/.config/git/config" = "~/.config/git/config"
 "dotfiles/git/.config/git/ignore" = "~/.config/git/ignore"
-"dotfiles/git/.ssh/allowed_signers" = "~/.ssh/allowed_singers"
+"dotfiles/git/.ssh/allowed_signers" = "~/.ssh/allowed_signers"
 
 [nushell.files]
 "dotfiles/nushell/.config/nushell/config.nu" = "~/.config/nushell/config.nu"
