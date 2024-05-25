@@ -35,6 +35,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           admintools.enable = true;
           atuin.enable = true;
           bash.enable = true;
+          devtools.enable = true;
           git.enable = true;
           nvim.enable = true;
           rust.enable = true;

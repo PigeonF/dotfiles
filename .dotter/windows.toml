@@ -4,6 +4,9 @@
 [atuin.files]
 "dotfiles/atuin/.config/atuin/config.toml" = "~/.config/atuin/config.toml"
 
+[bat.files]
+"dotfiles/bat/.config/bat/config" = "~/AppData/Roaming/bat/config"
+
 [erdtree.files]
 "dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/AppData/Roaming/erdtree/.erdtree.toml"
 

@@ -10,6 +10,9 @@
 "dotfiles/bash/.config/bashrc.d/bash-preexec.sh" = "~/.config/bashrc.d/bash-preexec.sh"
 "dotfiles/bash/.profile" = "~/.profile"
 
+[bat.files]
+"dotfiles/bat/.config/bat/config" = "~/.config/bat/config"
+
 [erdtree.files]
 "dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/.config/erdtree/.erdtree.toml"
 
