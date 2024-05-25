@@ -1,6 +1,9 @@
 [atuin.files]
 "dotfiles/atuin/atuin.toml" = "~/.config/atuin/config.toml"
 
+[erdtree.files]
+"dotfiles/erdtree/config.toml" = "~/.config/erdtree/.erdtree.toml"
+
 [bash.files]
 "dotfiles/bash/bash-preexec.sh" = "~/.config/bashrc.d/bash-preexec.sh"
 "dotfiles/bash/bashrc" = { target = "~/.bashrc", type = "template" }
