@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -24,7 +25,6 @@ in
         fzf
         hadolint
         markdownlint-cli
-        neovim-unwrapped
         nixfmt-rfc-style
         skim
         stylua
@@ -34,6 +34,8 @@ in
         yaml-language-server
         zig
         ;
+
+      inherit (inputs.nixos-unstable-small.legacyPackages.${pkgs.system}) neovim-unwrapped;
 
       inherit (pkgs.nodePackages) jsonlint typescript-language-server vscode-json-languageserver;
     };
