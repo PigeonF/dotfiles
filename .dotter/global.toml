@@ -37,3 +37,6 @@
 [vscodium.files]
 "dotfiles/vscodium/.config/VSCodium/User/keybindings.json" = "~/.config/VSCodium/Users/keybindings.json"
 "dotfiles/vscodium/.config/VSCodium/User/settings.json" = "~/.config/VSCodium/Users/settings.json"
+
+[wezterm.files]
+"dotfiles/wezterm/.config/wezterm/wezterm.lua" = "~/.config/wezterm/wezterm.lua"
