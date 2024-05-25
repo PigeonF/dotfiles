@@ -38,6 +38,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           starship.enable = true;
           vscodium.enable = true;
           zoxide.enable = true;
+          zellij.enable = true;
         };
       }
     )

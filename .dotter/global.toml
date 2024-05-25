@@ -40,3 +40,7 @@
 
 [wezterm.files]
 "dotfiles/wezterm/.config/wezterm/wezterm.lua" = "~/.config/wezterm/wezterm.lua"
+
+[zellij.files]
+"dotfiles/zellij/.config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
+"dotfiles/zellij/.config/zellij/layouts/terminal.kdl" = "~/.config/zellij/layouts/terminal.kdl"
