@@ -28,7 +28,11 @@ in
           dive
           docker-client
           ghq
+          gnumake
           just
+          meson
+          openssl
+          pkg-config
           podman
           regctl
           ;
