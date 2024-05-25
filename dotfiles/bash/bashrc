@@ -26,3 +26,9 @@ if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
   eval "$(atuin init bash --disable-up-arrow)"
 fi
 {{/if}}
+
+{{#if (is_executable "starship") }}
+if [[ $TERM != "dumb" ]]; then
+  eval "$(starship init bash --print-full-init)"
+fi
+{{/if}}

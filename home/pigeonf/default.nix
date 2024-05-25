@@ -34,6 +34,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           atuin.enable = true;
           bash.enable = true;
           git.enable = true;
+          starship.enable = true;
           vscodium.enable = true;
         };
       }
