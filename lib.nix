@@ -22,17 +22,5 @@
           )
         ];
       };
-
-    mkHomeConfiguration =
-      pkgs: modules:
-      inputs.home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-
-        extraSpecialArgs = {
-          inherit inputs;
-        };
-
-        modules = modules ++ [ inputs.sops-nix.homeManagerModules.sops ];
-      };
   };
 }

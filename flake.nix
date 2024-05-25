@@ -10,8 +10,6 @@
         (import ./flake-modules.nix { inherit (inputs.nixpkgs) lib; }).default
 
         ./lib.nix
-
-        ./home-manager
       ];
 
       flake = {
@@ -44,17 +42,12 @@
             inherit (pkgs) gitlab-ci-local reprotest;
           };
 
-          legacyPackages.homeConfigurations =
-            let
-              mkHomeConfiguration = self.lib.mkHomeConfiguration pkgs;
-            in
-            {
-              pigeon = mkHomeConfiguration [ inputs.self.homeModules.users.pigeon ];
-              pigeonf = import ./home/pigeonf {
-                inherit inputs pkgs;
-                overlays = self.overlays;
-              };
+          legacyPackages.homeConfigurations = {
+            pigeonf = import ./home/pigeonf {
+              inherit inputs pkgs;
+              overlays = self.overlays;
             };
+          };
 
           checks = {
             deadnix = runCommand "check-deadnix" { } ''
