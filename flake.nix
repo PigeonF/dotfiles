@@ -7,6 +7,8 @@
       systems = import inputs.systems;
 
       imports = [
+        (import ./flake-modules.nix).default
+
         ./all-modules.nix
         ./lib.nix
 
@@ -16,10 +18,7 @@
       flake = {
         overlays = import ./overlays inputs;
 
-        flakeModules = {
-          default = ./all-modules.nix;
-          homeModules = ./extras/homeModules.nix;
-        };
+        flakeModules = import ./flake-modules.nix;
 
         nixosConfigurations =
           let

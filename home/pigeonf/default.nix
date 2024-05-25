@@ -11,6 +11,8 @@ inputs.home-manager.lib.homeManagerConfiguration {
     (
       { pkgs, ... }:
       {
+        imports = [ inputs.self.homeModules.default ];
+
         home = {
           username = "pigeon";
           homeDirectory = "/home/pigeon";
@@ -18,7 +20,19 @@ inputs.home-manager.lib.homeManagerConfiguration {
           packages = [ pkgs.dotter ];
         };
 
+        nix = {
+          enable = true;
+          package = pkgs.nix;
+          settings = {
+            use-xdg-base-directories = true;
+          };
+        };
+
         xdg.enable = true;
+
+        pigeonf = {
+          vscodium.enable = true;
+        };
       }
     )
   ];
