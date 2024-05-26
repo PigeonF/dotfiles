@@ -15,47 +15,23 @@ in
         "registry.internal".containerConfig = {
           image = "docker.io/library/registry";
           environments = {
-            REGISTRY_HTTP_ADDR = "0.0.0.0:5000";
+            REGISTRY_HTTP_ADDR = "0.0.0.0:80";
           };
-          publishPorts = [ "5000" ];
           networks = [ "internal.network" ];
         };
 
         "registry-cache.internal".containerConfig = {
           image = "docker.io/library/registry";
           environments = {
-            REGISTRY_HTTP_ADDR = "0.0.0.0:5000";
+            REGISTRY_HTTP_ADDR = "0.0.0.0:80";
             REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
           };
-          publishPorts = [ "5000" ];
           networks = [ "internal.network" ];
         };
       };
     };
 
     pigeonf = {
-      dns.virtualHosts = {
-        "registry.internal" = {
-          hostName = "registry.internal";
-          address = "registry.internal:5000";
-          extraConfig = ''
-            request_body {
-            	max_size 0
-            }
-          '';
-        };
-
-        "registry-cache.internal" = {
-          hostName = "registry-cache.internal";
-          address = "registry-cache.internal:5000";
-          extraConfig = ''
-            request_body {
-            	max_size 0
-            }
-          '';
-        };
-      };
-
       virtualisation.containers.registries.settings = {
         registry = [
           {
