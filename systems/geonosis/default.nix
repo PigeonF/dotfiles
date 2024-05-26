@@ -6,24 +6,30 @@
     inputs.self.nixosModules.default
     inputs.sops-nix.nixosModules.sops
 
-    ./core.nix
-    ./docker.nix
-    ./dockerRegistry.nix
-    ./laptop.nix
-    ./network.nix
-    ./nix.nix
-    ./ssh.nix
-    ./webservices.nix
-
     ./hardware.nix
     ./secrets
   ];
 
+  networking.hostName = "geonosis";
+
   pigeonf = {
+    container-registry.enable = true;
+    core.enable = true;
+    nix.enable = true;
+    podman.enable = true;
     userAccount.enable = true;
 
-    gitlabRunner = {
+    network = {
       enable = true;
+      envFile = config.sops.secrets."network".path;
+
+      networks = {
+        obi-lan-kenobi.enable = true;
+      };
+    };
+
+    gitlabRunner = {
+      enable = false;
       runners = {
         default = {
           description = "Default Runner";
@@ -34,51 +40,6 @@
           description = "Buildah Enabled Runner";
           envFile = config.sops.secrets."gitlab-runner/buildah/environment".path;
           buildahEnabled = true;
-        };
-      };
-    };
-  };
-
-  virtualisation.containers.enable = true;
-  virtualisation.incus.enable = true;
-  networking.firewall.trustedInterfaces = [ "incusbr0" ];
-  services.dnsmasq.settings.address = [ "/incus/10.109.165.1" ];
-
-  networking = {
-    nftables.enable = true;
-
-    hostName = "geonosis";
-
-    wireless = {
-      enable = true;
-      userControlled.enable = true;
-      environmentFile = config.sops.secrets."network".path;
-      scanOnLowSignal = false;
-      fallbackToWPA2 = false;
-
-      networks = {
-        "Obi-Lan Kenobi" = {
-          psk = "@PASS_OBI_LAN_KENOBI@";
-        };
-
-        eduroam = {
-          auth = ''
-            key_mgmt=WPA-EAP
-            eap=TTLS
-            anonymous_identity="eduroam@ruhr-uni-bochum.de"
-
-            identity="@USER_EDUROAM@@ruhr-uni-bochum.de"
-            password="@PASS_EDUROAM@"
-
-            phase2="auth=PAP"
-
-            proto=RSN WPA
-            mode=0
-            pairwise=CCMP TKIP
-            group=CCMP TKIP
-
-            subject_match="/C=DE/ST=Nordrhein-Westfalen/L=Bochum/O=Ruhr-Universitaet Bochum/OU=Network Operation Center/CN=radius.ruhr-uni-bochum.de"
-          '';
         };
       };
     };

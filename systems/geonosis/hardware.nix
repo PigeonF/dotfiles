@@ -12,6 +12,11 @@
     };
   };
 
+  hardware = {
+    cpu.intel.updateMicrocode = true;
+    enableRedistributableFirmware = true;
+  };
+
   disko.devices = {
     disk = {
       vdb = {
