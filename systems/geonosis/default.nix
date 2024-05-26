@@ -39,6 +39,7 @@
     };
   };
 
+  virtualisation.containers.enable = true;
   virtualisation.incus.enable = true;
   networking.firewall.trustedInterfaces = [ "incusbr0" ];
   services.dnsmasq.settings.address = [ "/incus/10.109.165.1" ];
