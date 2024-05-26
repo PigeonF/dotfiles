@@ -38,11 +38,21 @@ in
         "registry.internal" = {
           hostName = "registry.internal";
           address = "registry.internal:5000";
+          extraConfig = ''
+            request_body {
+            	max_size 0
+            }
+          '';
         };
 
         "registry-cache.internal" = {
           hostName = "registry-cache.internal";
           address = "registry-cache.internal:5000";
+          extraConfig = ''
+            request_body {
+            	max_size 0
+            }
+          '';
         };
       };
 

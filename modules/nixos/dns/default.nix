@@ -20,6 +20,10 @@ in
             options = {
               hostName = mkOption { type = types.str; };
               address = mkOption { type = types.str; };
+              extraConfig = mkOption {
+                type = types.str;
+                default = "";
+              };
             };
           }
         );
@@ -33,6 +37,7 @@ in
       mkVHostConfig = opts: ''
         http://${opts.hostName} {
           reverse_proxy ${opts.address}
+          ${opts.extraConfig}
         }
       '';
       caddyfile = pkgs.writeTextDir "Caddyfile" ''
