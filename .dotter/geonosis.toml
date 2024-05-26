@@ -1,1 +1,10 @@
-packages = ["atuin", "bash", "git", "nushell", "nvim", "starship", "zellij"]
+packages = [
+  "atuin",
+  "bash",
+  "git",
+  "gitlab-ci-local",
+  "nushell",
+  "nvim",
+  "starship",
+  "zellij",
+]

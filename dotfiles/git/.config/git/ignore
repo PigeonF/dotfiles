@@ -1,3 +1,4 @@
-.git/
+/.git/
 *.gitignored.*
-.gitlab-ci-local/
+
+/.gitlab-ci-local/

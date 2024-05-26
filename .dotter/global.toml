@@ -21,6 +21,10 @@
 "dotfiles/git/.config/git/ignore" = "~/.config/git/ignore"
 "dotfiles/git/.ssh/allowed_signers" = "~/.ssh/allowed_signers"
 
+[gitlab-ci-local.files]
+"dotfiles/gitlab-ci-local/.config/.gitlab-ci-local/.env" = "~/.config/gitlab-ci-local/.config/.gitlab-ci-local/.env"
+"dotfiles/gitlab-ci-local/.config/.gitlab-ci-local/variables.yml" = "~/.config/gitlab-ci-local/.config/.gitlab-ci-local/variables.yml"
+
 [nushell.files]
 "dotfiles/nushell/.config/nushell/config.nu" = "~/.config/nushell/config.nu"
 "dotfiles/nushell/.config/nushell/env.nu" = "~/.config/nushell/env.nu"

@@ -28,6 +28,7 @@ in
           dive
           docker-client
           ghq
+          gitlab-ci-local
           gnumake
           just
           meson
