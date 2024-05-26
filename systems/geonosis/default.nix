@@ -30,10 +30,10 @@
           envFile = config.sops.secrets."gitlab-runner/environment".path;
         };
 
-        privileged = {
-          description = "Privileged Runner";
-          envFile = config.sops.secrets."gitlab-runner/privileged/environment".path;
-          privileged = true;
+        buildah = {
+          description = "Buildah Enabled Runner";
+          envFile = config.sops.secrets."gitlab-runner/buildah/environment".path;
+          buildahEnabled = true;
         };
       };
     };

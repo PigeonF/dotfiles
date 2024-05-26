@@ -18,10 +18,10 @@ in
                 type = lib.types.str;
                 description = "Description of the runner";
               };
-              privileged = lib.mkOption {
+              buildahEnabled = lib.mkOption {
                 type = lib.types.bool;
                 default = false;
-                description = "Enable privileged mode for the runner";
+                description = "Enable buildah for the runner";
               };
               envFile = lib.mkOption {
                 type = lib.types.path;
@@ -36,7 +36,7 @@ in
 
   config = lib.mkIf cfg.enable {
     services.gitlab-runner = {
-      enable = (cfg.runners != { });
+      enable = cfg.runners != { };
       clear-docker-cache.enable = true;
 
       settings = {
@@ -48,6 +48,58 @@ in
       services = builtins.mapAttrs (
         _: cfg:
         let
+          moby = builtins.fetchGit {
+            url = "https://github.com/moby/moby.git";
+            ref = "master";
+            rev = "ceefb7d0b9c5b6fbd1ea7511592a4ddb28ec4821";
+          };
+          defaultSeccomp = builtins.fromJSON (builtins.readFile "${moby}/profiles/seccomp/default.json");
+          inherit (defaultSeccomp) syscalls;
+          # Due to https://gitlab.com/gitlab-org/gitlab-runner/-/issues/27235
+          # we use the actual json contents instead of a file path
+          buildahSeccompFilter = lib.strings.escapeShellArg (
+            builtins.toJSON (
+              defaultSeccomp
+              // {
+                # Instead of adding SYS_CAP_ADMIN, we explicitly allow the syscalls that buildah
+                # uses.
+                syscalls = syscalls ++ [
+                  {
+                    names = [
+                      "mount"
+                      "umount2"
+                    ];
+                    action = "SCMP_ACT_ALLOW";
+                  }
+                  {
+                    names = [ "unshare" ];
+                    action = "SCMP_ACT_ALLOW";
+                    args = [
+                      {
+                        index = 0;
+                        # CLONE_NEWNS
+                        value = 131072;
+                        op = "SCMP_CMP_EQ";
+                      }
+                      {
+                        index = 0;
+                        # CLONE_NEWUSER
+                        value = 67239936;
+                        op = "SCMP_CMP_EQ";
+                      }
+                      {
+                        index = 0;
+                        # CLONE_NEWNS | CLONE_NEWUTS
+                        value = 268435456;
+                        op = "SCMP_CMP_EQ";
+                      }
+                    ];
+                  }
+                ];
+              }
+            )
+          );
+
           registrationFlags =
             [
               "--cache-dir /cache"
@@ -57,10 +109,12 @@ in
               "--docker-volumes /certs/client"
               "--output-limit 8192"
               "--env FF_NETWORK_PER_BUILD=1"
-              "--env DOCKER_DRIVER=overlay2"
             ]
             ++ lib.optionals hasPodman [ "--docker-network-mode podman" ]
-            ++ lib.optionals cfg.privileged [ "--docker-privileged" ];
+            ++ lib.optionals cfg.buildahEnabled [
+              "--docker-devices /dev/fuse"
+              "--docker-security-opt seccomp=${buildahSeccompFilter}"
+            ];
         in
         {
           registrationConfigFile = cfg.envFile;
