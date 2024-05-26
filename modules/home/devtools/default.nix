@@ -33,6 +33,7 @@ in
           just
           meson
           openssl
+          passt
           pkg-config
           podman
           regctl
