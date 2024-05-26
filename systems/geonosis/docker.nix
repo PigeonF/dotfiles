@@ -58,4 +58,5 @@
   };
 
   networking.firewall.trustedInterfaces = [ "docker0" ];
+  services.dnsmasq.settings.interface = [ "docker0" ];
 }

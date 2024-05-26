@@ -31,14 +31,7 @@
 
   virtualisation.incus.enable = true;
   networking.firewall.trustedInterfaces = [ "incusbr0" ];
-  services.dnsmasq.settings = {
-    interface = [
-      "docker0"
-      "wlp61s0"
-    ];
-    bind-interfaces = true;
-    address = [ "/incus/10.109.165.1" ];
-  };
+  services.dnsmasq.settings.address = [ "/incus/10.109.165.1" ];
 
   networking = {
     nftables.enable = true;

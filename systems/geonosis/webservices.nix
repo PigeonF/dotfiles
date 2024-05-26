@@ -4,14 +4,23 @@
 
     settings = {
       address = [ "/internal/127.0.0.1" ];
-      local = [ "/internal/" ];
-
+      bind-interfaces = true;
+      domain-needed = true;
+      interface = [ "wlp61s0" ];
       listen-address = [
         "127.0.0.1"
         "::1"
       ];
-      domain-needed = true;
+      local = [
+        "/internal/"
+        "/fritz.box/"
+      ];
     };
+  };
+
+  systemd.services.dnsmasq = {
+    after = [ "network-online.target" ];
+    wants = [ "network-online.target" ];
   };
 
   services.nginx = {
