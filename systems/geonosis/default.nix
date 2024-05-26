@@ -4,6 +4,7 @@
     inputs.disko.nixosModules.disko
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s
     inputs.self.nixosModules.default
+    inputs.quadlet-nix.nixosModules.quadlet
     inputs.sops-nix.nixosModules.sops
 
     ./hardware.nix

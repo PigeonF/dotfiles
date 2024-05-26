@@ -11,47 +11,58 @@ in
 
   config = lib.mkIf cfg.enable {
     virtualisation = {
-      oci-containers.containers = {
-        "registry.internal" = {
+      quadlet.containers = {
+        "registry.internal".containerConfig = {
           image = "docker.io/library/registry";
-          ports = [
-            "127.0.0.1:5000:80"
-            "[::1]:5000:80"
-          ];
-          environment = {
-            REGISTRY_HTTP_ADDR = "0.0.0.0:80";
+          environments = {
+            REGISTRY_HTTP_ADDR = "0.0.0.0:5000";
           };
+          publishPorts = [ "5000" ];
+          networks = [ "internal.network" ];
         };
 
-        "registry-cache.internal" = {
+        "registry-cache.internal".containerConfig = {
           image = "docker.io/library/registry";
-          ports = [
-            "127.0.0.1:5050:80"
-            "[::1]:5050:80"
-          ];
-          environment = {
-            REGISTRY_HTTP_ADDR = "0.0.0.0:80";
+          environments = {
+            REGISTRY_HTTP_ADDR = "0.0.0.0:5000";
             REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
           };
+          publishPorts = [ "5000" ];
+          networks = [ "internal.network" ];
         };
       };
     };
 
-    pigeonf.virtualisation.containers.registries.settings = {
-      registry = [
-        {
-          prefix = "*.internal";
-          insecure = true;
-        }
-        {
-          prefix = "127.0.0.1:*";
-          insecure = true;
-        }
-        {
-          prefix = "docker.io/";
-          mirror = [ { location = "registry-cache.internal"; } ];
-        }
-      ];
+    pigeonf = {
+      dns.virtualHosts = {
+        "registry.internal" = {
+          hostName = "registry.internal";
+          address = "registry.internal:5000";
+        };
+
+        "registry-cache.internal" = {
+          hostName = "registry-cache.internal";
+          address = "registry-cache.internal:5000";
+        };
+      };
+
+      virtualisation.containers.registries.settings = {
+        registry = [
+          {
+            location = "*.internal";
+            insecure = true;
+          }
+          {
+            location = "docker.io";
+            mirror = [
+              {
+                location = "registry-cache.internal";
+                insecure = true;
+              }
+            ];
+          }
+        ];
+      };
     };
   };
 }

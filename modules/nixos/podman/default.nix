@@ -17,6 +17,10 @@ in
       podman = {
         enable = true;
 
+        defaultNetwork.settings = {
+          dns_enabled = true;
+        };
+
         autoPrune = {
           enable = true;
           dates = "Tuesday 12:00";
@@ -24,5 +28,10 @@ in
         };
       };
     };
+
+    networking.firewall.interfaces."podman*".allowedUDPPorts = [
+      53
+      5353
+    ];
   };
 }

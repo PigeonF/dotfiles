@@ -14,7 +14,7 @@ in
     # https://github.com/NixOS/nixpkgs/issues/280288
     pigeonf.virtualisation.containers.registries = {
       settings = mkOption {
-        type = toml.type;
+        inherit (toml) type;
         default = { };
         description = "registries.conf configuration";
       };
