@@ -1,2 +1,14 @@
 includes = [".dotter/windows.toml"]
-packages = ["alacritty", "atuin", "erdtree", "git", "nushell", "nvim", "starship", "topgrade", "vscodium", "wezterm"]
+
+packages = [
+  "alacritty",
+  "atuin",
+  "erdtree",
+  "git",
+  "nushell",
+  "nvim",
+  "starship",
+  "topgrade",
+  "vscodium",
+  "wezterm",
+]
