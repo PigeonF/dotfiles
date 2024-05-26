@@ -1,7 +1,6 @@
 { config, lib, ... }:
 let
   cfg = config.pigeonf.container-registry;
-  hasPodman = config.virtualisation.podman.enable;
 in
 {
   options = {
@@ -36,6 +35,23 @@ in
           };
         };
       };
+    };
+
+    pigeonf.virtualisation.containers.registries.settings = {
+      registry = [
+        {
+          prefix = "*.internal";
+          insecure = true;
+        }
+        {
+          prefix = "127.0.0.1:*";
+          insecure = true;
+        }
+        {
+          prefix = "docker.io/";
+          mirror = [ { location = "registry-cache.internal"; } ];
+        }
+      ];
     };
   };
 }

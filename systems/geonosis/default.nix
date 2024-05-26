@@ -15,6 +15,7 @@
   pigeonf = {
     container-registry.enable = true;
     core.enable = true;
+    dns.enable = true;
     nix.enable = true;
     podman.enable = true;
     userAccount.enable = true;
