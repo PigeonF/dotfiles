@@ -18,7 +18,15 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = builtins.attrValues { inherit (pkgs) lemonade lynx pstree; };
+      packages = builtins.attrValues {
+        inherit (pkgs)
+          age
+          lemonade
+          lynx
+          pstree
+          sops
+          ;
+      };
     };
   };
 }

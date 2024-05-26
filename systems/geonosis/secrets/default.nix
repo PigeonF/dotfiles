@@ -10,4 +10,10 @@
     format = "dotenv";
     restartUnits = [ "gitlab-runner.service" ];
   };
+
+  sops.secrets."gitlab-runner/privileged/environment" = {
+    sopsFile = ./gitlab-runner-privileged.env;
+    format = "dotenv";
+    restartUnits = [ "gitlab-runner.service" ];
+  };
 }

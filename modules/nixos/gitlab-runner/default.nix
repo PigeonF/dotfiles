@@ -7,20 +7,36 @@ in
   options = {
     pigeonf.gitlabRunner = {
       enable = lib.mkEnableOption "enable gitlab-runner";
-      privileged = lib.mkEnableOption "privileged mode for gitlab-runner";
-      envFile = lib.mkOption {
-        type = lib.types.path;
-        description = ''
-          Path to an environment file that is sourced before service
-          configuration.
-        '';
+
+      runners = lib.mkOption {
+        description = "Gitlab Runner runners";
+        default = { };
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              description = lib.mkOption {
+                type = lib.types.str;
+                description = "Description of the runner";
+              };
+              privileged = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+                description = "Enable privileged mode for the runner";
+              };
+              envFile = lib.mkOption {
+                type = lib.types.path;
+                description = "Environment file to load before registration";
+              };
+            };
+          }
+        );
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
     services.gitlab-runner = {
-      enable = true;
+      enable = (cfg.runners != { });
       clear-docker-cache.enable = true;
 
       settings = {
@@ -29,12 +45,9 @@ in
         shutdown_timeout = 30;
       };
 
-      services = {
-        default = {
-          registrationConfigFile = cfg.envFile;
-          description = "Default Runner";
-          dockerImage = "docker.io/busybox";
-
+      services = builtins.mapAttrs (
+        _: cfg:
+        let
           registrationFlags =
             [
               "--cache-dir /cache"
@@ -46,10 +59,17 @@ in
               "--env FF_NETWORK_PER_BUILD=1"
               "--env DOCKER_DRIVER=overlay2"
             ]
-            ++ lib.optionals cfg.privileged [ "--docker-privileged" ]
-            ++ lib.optionals hasPodman [ "--docker-network-mode podman" ];
-        };
-      };
+            ++ lib.optionals hasPodman [ "--docker-network-mode podman" ]
+            ++ lib.optionals cfg.privileged [ "--docker-privileged" ];
+        in
+        {
+          registrationConfigFile = cfg.envFile;
+          inherit (cfg) description;
+          dockerImage = "docker.io/busybox";
+
+          inherit registrationFlags;
+        }
+      ) cfg.runners;
     };
 
     systemd.services.gitlab-runner = lib.mkIf hasPodman {

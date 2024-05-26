@@ -24,8 +24,18 @@
 
     gitlabRunner = {
       enable = true;
-      privileged = true;
-      envFile = config.sops.secrets."gitlab-runner/environment".path;
+      runners = {
+        default = {
+          description = "Default Runner";
+          envFile = config.sops.secrets."gitlab-runner/environment".path;
+        };
+
+        privileged = {
+          description = "Privileged Runner";
+          envFile = config.sops.secrets."gitlab-runner/privileged/environment".path;
+          privileged = true;
+        };
+      };
     };
   };
 
