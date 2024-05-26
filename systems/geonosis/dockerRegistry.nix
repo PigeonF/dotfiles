@@ -47,6 +47,7 @@
     '';
   };
 
+  # docker buildx create --use --driver docker-container --driver-opt "network=dev" --config /etc/buildkit/buildkitd.toml
   environment.etc."buildkit/buildkitd.toml" = {
     text = ''
       insecure-entitlements = [ "network.host", "security.insecure" ]
