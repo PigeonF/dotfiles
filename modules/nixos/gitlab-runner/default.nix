@@ -23,6 +23,11 @@ in
                 default = false;
                 description = "Enable buildah for the runner";
               };
+              buildkitEnabled = lib.mkOption {
+                type = lib.types.bool;
+                default = false;
+                description = "Enable buildkit for the runner";
+              };
               envFile = lib.mkOption {
                 type = lib.types.path;
                 description = "Environment file to load before registration";
@@ -113,6 +118,10 @@ in
             ++ lib.optionals cfg.buildahEnabled [
               "--docker-devices /dev/fuse"
               "--docker-security-opt seccomp=${buildahSeccompFilter}"
+            ]
+            ++ lib.optionals cfg.buildkitEnabled [
+              "--docker-services_privileged true"
+              "--docker-allowed-privileged-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1-rootless"
             ];
         in
         {
