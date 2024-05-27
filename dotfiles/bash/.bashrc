@@ -6,7 +6,7 @@ for file in "${XDG_CONFIG_HOME}/bashrc.d"/*.sh; do
   fi
 done
 
-HISTFILE="${XDG_STATE_HOME}/bash/bash_history.txt"
+HISTFILE="${XDG_STATE_HOME}/bash/history"
 HISTFILESIZE=100000
 HISTIGNORE='ls:exit'
 HISTSIZE=10000

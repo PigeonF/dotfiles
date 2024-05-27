@@ -37,6 +37,7 @@ in
           pkg-config
           podman
           regctl
+          xdg-ninja
           ;
       };
     };

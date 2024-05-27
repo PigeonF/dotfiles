@@ -1,6 +1,7 @@
-alias fda='fd --no-ignore --hidden'
-alias la='ls -la'
-alias rga='rg --no-ignore --hidden'
+alias fda="fd --no-ignore --hidden"
+alias la="ls -la"
+alias rga="rg --no-ignore --hidden"
+alias wget="wget --hsts-file ${XDG_CACHE_HOME}/wget/hsts"
 
 {{#if (is_executable "cargo") }}
 alias c="cargo"
@@ -11,11 +12,11 @@ alias g="git"
 {{/if}}
 
 {{#if (is_executable "eza") }}
-alias ls='eza'
+alias ls="eza"
 {{/if}}
 
 
 {{#if (is_executable "nvim") }}
-alias vi='nvim'
-alias vim='nvim'
+alias vi="nvim"
+alias vim="nvim"
 {{/if}}
