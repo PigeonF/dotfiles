@@ -1,11 +1,11 @@
 { config, lib, ... }:
 let
-  cfg = config.pigeonf.gitlabRunner;
+  cfg = config.pigeonf.gitlab-runner;
   hasPodman = config.virtualisation.podman.enable;
 in
 {
   options = {
-    pigeonf.gitlabRunner = {
+    pigeonf.gitlab-runner = {
       enable = lib.mkEnableOption "enable gitlab-runner";
 
       runners = lib.mkOption {
@@ -110,7 +110,6 @@ in
               "--output-limit 8192"
               "--env FF_NETWORK_PER_BUILD=1"
             ]
-            ++ lib.optionals hasPodman [ "--docker-network-mode podman" ]
             ++ lib.optionals cfg.buildahEnabled [
               "--docker-devices /dev/fuse"
               "--docker-security-opt seccomp=${buildahSeccompFilter}"
@@ -127,11 +126,8 @@ in
     };
 
     systemd.services.gitlab-runner = lib.mkIf hasPodman {
-      after = [
-        "network.target"
-        "podman.service"
-      ];
-      requires = [ "podman.service" ];
+      after = [ "podman.socket" ];
+      requires = [ "podman.socket" ];
       serviceConfig.SupplementaryGroups = "podman";
     };
   };

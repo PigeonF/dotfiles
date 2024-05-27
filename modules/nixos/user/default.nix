@@ -1,10 +1,10 @@
 { config, lib, ... }:
 let
-  cfg = config.pigeonf.userAccount;
+  cfg = config.pigeonf.user;
 in
 {
   options = {
-    pigeonf.userAccount = {
+    pigeonf.user = {
       enable = lib.mkEnableOption "Enable PigeonF User Account";
     };
   };

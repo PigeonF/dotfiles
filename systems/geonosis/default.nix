@@ -11,6 +11,7 @@
     ./secrets
   ];
 
+  system.stateVersion = "24.05";
   networking.hostName = "geonosis";
 
   pigeonf = {
@@ -19,7 +20,7 @@
     dns.enable = true;
     nix.enable = true;
     podman.enable = true;
-    userAccount.enable = true;
+    user.enable = true;
 
     network = {
       enable = true;
@@ -31,8 +32,8 @@
       };
     };
 
-    gitlabRunner = {
-      enable = false;
+    gitlab-runner = {
+      enable = true;
       runners = {
         default = {
           description = "Default Runner";

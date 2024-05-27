@@ -8,13 +8,7 @@
         inherit inputs;
       };
 
-      modules = [
-        ./geonosis
-        (_: {
-          system.stateVersion = "24.05";
-          nixpkgs.hostPlatform = "x86_64-linux";
-        })
-      ];
+      modules = [ ./geonosis ];
     };
   };
 }
