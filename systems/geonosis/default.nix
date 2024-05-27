@@ -23,6 +23,7 @@
 
     network = {
       enable = true;
+      avahi.enable = true;
       envFile = config.sops.secrets."network".path;
 
       networks = {

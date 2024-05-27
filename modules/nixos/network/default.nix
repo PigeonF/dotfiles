@@ -7,6 +7,7 @@ in
   options = {
     pigeonf.network = {
       enable = lib.mkEnableOption "Use default network configuration";
+      avahi.enable = lib.mkEnableOption "Enable avahi";
 
       envFile = lib.mkOption {
         type = lib.types.path;
@@ -84,6 +85,11 @@ in
           };
         };
       };
+    };
+
+    services.avahi = lib.mkIf cfg.avahi.enable {
+      enable = true;
+      nssmdns4 = true;
     };
   };
 }

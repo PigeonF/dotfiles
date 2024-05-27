@@ -21,6 +21,7 @@ in
       packages = builtins.attrValues {
         inherit (pkgs)
           age
+          dig
           lemonade
           lynx
           pstree
