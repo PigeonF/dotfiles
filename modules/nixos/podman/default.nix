@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.podman = {
-      enable = lib.mkEnableOption "Use podman as the container backend";
+      enable = lib.mkEnableOption "Enable podman";
     };
   };
 
@@ -16,6 +16,7 @@ in
 
       podman = {
         enable = true;
+        dockerSocket.enable = true;
 
         defaultNetwork.settings = {
           dns_enabled = true;
@@ -23,7 +24,6 @@ in
 
         autoPrune = {
           enable = true;
-          dates = "Tuesday 12:00";
           flags = [ "--all" ];
         };
       };
