@@ -15,6 +15,12 @@ in
         rootless = {
           enable = true;
           setSocketVariable = true;
+
+          daemon.settings = {
+            features = {
+              containerd-snapshotter = true;
+            };
+          };
         };
       };
     };
