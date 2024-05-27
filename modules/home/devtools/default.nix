@@ -1,4 +1,5 @@
 {
+  inputs,
   config,
   lib,
   pkgs,
@@ -21,7 +22,6 @@ in
       packages = builtins.attrValues {
         inherit (pkgs)
           bat
-          buildah
           crane
           diffoci
           diffoscopeMinimal
@@ -39,6 +39,8 @@ in
           regctl
           xdg-ninja
           ;
+
+        inherit (inputs.nixpkgs-buildah.legacyPackages.${pkgs.system}) buildah;
       };
     };
   };
