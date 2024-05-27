@@ -113,6 +113,12 @@ in
               # Due to https://gitlab.com/gitlab-org/gitlab-runner/-/issues/27235
               # we use the actual json contents instead of a file path
               lib.strings.escapeShellArg buildahSeccompFilter;
+          buildkitdConfig = pkgs.writeText "buildkitd.toml" ''
+            debug = true
+
+            [registry."docker.io"]
+              mirrors = ["mirror.gcr.io"]
+          '';
 
           registrationFlags =
             [
@@ -133,7 +139,9 @@ in
             ]
             ++ lib.optionals cfg.buildkitEnabled [
               "--docker-services_privileged true"
+              "--docker-allowed-privileged-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1"
               "--docker-allowed-privileged-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1-rootless"
+              "--docker-volumes \"${buildkitdConfig}:/etc/buildkit/buildkitd.toml:ro\""
             ];
         in
         {
