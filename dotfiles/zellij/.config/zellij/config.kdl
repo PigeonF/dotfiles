@@ -83,7 +83,6 @@ keybinds clear-defaults=true {
 
     scroll {
         bind "e" { EditScrollback; SwitchToMode "Normal"; }
-        bind "s" "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
     }
     entersearch {
         bind "Esc" { SwitchToMode "Scroll"; }
@@ -104,6 +103,7 @@ keybinds clear-defaults=true {
         bind "Ctrl b" "PageUp" "h" { PageScrollUp; }
         bind "d" "Ctrl d" { HalfPageScrollDown; }
         bind "u" "Ctrl u" { HalfPageScrollUp; }
+        bind "s" "/" { SwitchToMode "EnterSearch"; SearchInput 0; }
     }
 
     session {
