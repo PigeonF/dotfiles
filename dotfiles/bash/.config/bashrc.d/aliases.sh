@@ -1,6 +1,8 @@
-alias fda="fd --no-ignore --hidden"
+alias fda="fd --hidden"
+alias fdA="fd --no-ignore --hidden"
 alias la="ls -la"
-alias rga="rg --no-ignore --hidden"
+alias rga="rg --hidden"
+alias rgA="rg --no-ignore --hidden"
 alias wget="wget --hsts-file ${XDG_CACHE_HOME}/wget/hsts"
 
 {{#if (is_executable "cargo") }}
