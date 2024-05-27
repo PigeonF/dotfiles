@@ -221,7 +221,7 @@ require('lazy').setup({
       -- Enable the following language servers
       local servers = {
         emmet_ls = {},
-        gitlab_ci_ls = {},
+        -- gitlab_ci_ls = {},
         jsonls = {
           cmd = { 'vscode-json-languageserver', '--stdio' },
           filetypes = { 'json', 'jsonc', 'json5' },
