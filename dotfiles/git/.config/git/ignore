@@ -2,3 +2,4 @@
 *.gitignored.*
 
 /.gitlab-ci-local/
+!/.config/.gitlab-ci-local/
