@@ -1,9 +1,1 @@
-packages = [
-  "atuin",
-  "bash",
-  "git",
-  "nushell",
-  "nvim",
-  "starship",
-  "zellij",
-]
+packages = ["atuin", "git", "nushell", "nvim", "starship", "zellij", "zsh"]
