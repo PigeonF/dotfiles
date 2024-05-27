@@ -17,32 +17,10 @@ shopt -s extglob
 shopt -s globstar
 shopt -s checkjobs
 
-alias fda='fd --no-ignore --hidden'
-alias la='ls -la'
-alias rga='rg --no-ignore --hidden'
-
 {{#if (is_executable "atuin")}}
 if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
   eval "$(atuin init bash --disable-up-arrow)"
 fi
-{{/if}}
-
-{{#if (is_executable "cargo") }}
-alias c="cargo"
-{{/if}}
-
-{{#if (is_executable "git")}}
-alias g="git"
-{{/if}}
-
-{{#if (is_executable "eza") }}
-alias ls='eza'
-{{/if}}
-
-{{#if (is_executable "nvim") }}
-alias vi='nvim'
-alias vim='nvim'
-export EDITOR=nvim
 {{/if}}
 
 {{#if (is_executable "starship")}}

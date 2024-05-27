@@ -31,3 +31,9 @@ export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 
 # Path Adjustments
 export PATH="${PATH}${PATH:+:}${XDG_BIN_HOME}:${CARGO_HOME}/bin:${XDG_DATA_HOME}/npm/bin:${GOPATH}/bin"
+
+# Conditional Settings
+
+{{#if (is_executable "nvim") }}
+export EDITOR=nvim
+{{/if}}
