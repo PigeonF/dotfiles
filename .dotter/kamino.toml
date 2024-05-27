@@ -1,0 +1,9 @@
+packages = [
+  "atuin",
+  "bash",
+  "git",
+  "nushell",
+  "nvim",
+  "starship",
+  "zellij",
+]
