@@ -26,6 +26,9 @@
 "dotfiles/gitlab-ci-local/.config/.gitlab-ci-local/.env" = "~/.config/.gitlab-ci-local/.env"
 "dotfiles/gitlab-ci-local/.config/.gitlab-ci-local/variables.yml" = "~/.config/.gitlab-ci-local/variables.yml"
 
+[npm.files]
+"dotfiles/npm/.config/npm/npmrc" = "~/.config/npm/npmrc"
+
 [nushell.files]
 "dotfiles/nushell/.config/nushell/config.nu" = "~/.config/nushell/config.nu"
 "dotfiles/nushell/.config/nushell/env.nu" = "~/.config/nushell/env.nu"
