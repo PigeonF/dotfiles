@@ -138,6 +138,7 @@ in
               "--docker-security-opt seccomp=${seccomp}"
             ]
             ++ lib.optionals cfg.buildkitEnabled [
+              "--env DOCKER_DRIVER=overlay2"
               "--docker-services_privileged true"
               "--docker-allowed-privileged-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1"
               "--docker-allowed-privileged-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1-rootless"

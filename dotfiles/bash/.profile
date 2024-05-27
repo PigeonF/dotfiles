@@ -18,17 +18,17 @@ export GHQ_ROOT="${HOME}/git"
 export GCL_ARTIFACTS_TO_SOURCE=false
 
 # Make some programs adhere to the XDG directories
-export BUILDX_CONFIG="${XDG_DATA_HOME}/buildx"
+export BUILDX_CONFIG="${XDG_CONFIG_HOME}/buildx"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
-export DOCKER_CONFIG="${XDG_DATA_HOME}/docker"
+export DOCKER_CONFIG="${XDG_CONFIG_HOME}/docker"
 export DOTNET_CLI_HOME="${XDG_DATA_HOME}/dotnet"
 export GCL_HOME="${XDG_CONFIG_HOME}"
 export GOPATH="${XDG_DATA_HOME}/go"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME}/npm/npmrc"
 export NUPM_HOME="${XDG_DATA_HOME}/nupm"
-export REGCTL_CONFIG="${XDG_DATA_HOME}/regctl/config.json"
-export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 export PYTHON_HISTORY="${XDG_CACHE_HOME}/python/history"
+export REGCTL_CONFIG="${XDG_CONFIG_HOME}/regctl/config.json"
+export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 
 # Path Adjustments
 export PATH="${PATH}${PATH:+:}${XDG_BIN_HOME}:${CARGO_HOME}/bin:${XDG_DATA_HOME}/npm/bin:${GOPATH}/bin"

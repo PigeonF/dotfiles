@@ -1,6 +1,7 @@
 { config, lib, ... }:
 let
   cfg = config.pigeonf.docker-rootless;
+  hasRegistry = config.pigeonf.container-registry.enable;
 in
 {
   options = {
@@ -20,6 +21,8 @@ in
             features = {
               containerd-snapshotter = true;
             };
+
+            registry-mirrors = lib.mkIf hasRegistry [ "http://registry-cache.internal" ];
           };
         };
       };
