@@ -12,6 +12,13 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    assertions = [
+      {
+        assertion = config.pigeonf.dns.enable;
+        message = "container registries will not be addressable without DNS setup";
+      }
+    ];
+
     virtualisation = {
       quadlet.containers = {
         "registry.internal".containerConfig = {
@@ -22,7 +29,7 @@ in
           networks = [ "internal.network" ];
         };
 
-        "registry-cache.internal".containerConfig = {
+        "cache.internal".containerConfig = {
           image = "docker.io/library/registry:2";
           environments = {
             REGISTRY_HTTP_ADDR = ":80";
@@ -43,7 +50,7 @@ in
           location = "docker.io";
           mirror = [
             {
-              location = "registry-cache.internal";
+              location = "cache.internal";
               insecure = true;
             }
           ];
@@ -52,11 +59,12 @@ in
     };
 
     virtualisation.docker.rootless.daemon.settings = lib.mkIf hasDocker {
+      registry-mirrors = [ "http://cache.internal" ];
+
       insecure-registries = [
         "registry.internal"
-        "registry-cache.internal"
+        "cache.internal"
       ];
-      registry-mirrors = [ "http://registry-cache.internal" ];
     };
   };
 }

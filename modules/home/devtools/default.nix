@@ -43,17 +43,5 @@ in
         inherit (inputs.nixpkgs-buildah.legacyPackages.${pkgs.system}) buildah;
       };
     };
-
-    xdg.configFile."buildx/buildkitd.default.toml" = {
-      text = ''
-        insecure-entitlements = [ "security.insecure" ]
-
-        [registry."registry.internal"]
-          http = true
-
-        [registry."registry-cache.internal"]
-          http = true
-      '';
-    };
   };
 }

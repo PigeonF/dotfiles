@@ -20,7 +20,10 @@ in
         server = [ "/internal/${gateway}" ];
         bind-interfaces = true;
         domain-needed = true;
-        listen-address = [ "::1" ];
+        listen-address = [
+          "127.0.0.1"
+          "::1"
+        ];
         local = [
           "/internal/"
           "/fritz.box/"
