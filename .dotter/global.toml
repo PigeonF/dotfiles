@@ -6,10 +6,10 @@
 
 [bash.files]
 "dotfiles/bash/.bash_profile" = "~/.bash_profile"
-"dotfiles/bash/.bashrc" = { target = "~/.bashrc", type = "template" }
-"dotfiles/bash/.config/bashrc.d/aliases.sh" = { target = "~/.config/bashrc.d/aliases.sh", type = "template" }
+"dotfiles/bash/.bashrc" = "~/.bashrc"
+"dotfiles/bash/.config/bashrc.d/aliases.sh" = "~/.config/bashrc.d/aliases.sh"
 "dotfiles/bash/.config/bashrc.d/bash-preexec.sh" = "~/.config/bashrc.d/bash-preexec.sh"
-"dotfiles/bash/.profile" = { target = "~/.profile", type = "template" }
+"dotfiles/bash/.profile" = "~/.profile"
 
 [bat.files]
 "dotfiles/bat/.config/bat/config" = "~/.config/bat/config"
@@ -39,6 +39,9 @@
 "dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/.config/nvim/lazy-lock.json"
 "dotfiles/nvim/.config/nvim/lua" = "~/.config/nvim/lua"
 
+[spicetify.files]
+"dotfiles/spicetify/.config/spicetify/config-xpui.ini" = "~/.config/spicetify/config-xpui.ini"
+
 [starship.files]
 "dotfiles/starship/.config/starship.toml" = "~/.config/starship.toml"
 
@@ -57,7 +60,7 @@
 "dotfiles/zellij/.config/zellij/layouts/terminal.kdl" = "~/.config/zellij/layouts/terminal.kdl"
 
 [zsh.files]
-"dotfiles/bash/.profile" = { target = "~/.config/zsh/.zprofile", type = "template" }
-"dotfiles/bash/.config/bashrc.d/aliases.sh" = { target = "~/.config/zshrc.d/aliases.zsh", type = "template" }
+"dotfiles/bash/.profile" = "~/.config/zsh/.zprofile"
+"dotfiles/bash/.config/bashrc.d/aliases.sh" = "~/.config/zshrc.d/aliases.zsh"
 "dotfiles/zsh/.zshenv" = "~/.zshenv"
 "dotfiles/zsh/.config/zsh/.zshrc" = "~/.config/zsh/.zshrc"

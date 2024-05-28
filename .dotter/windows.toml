@@ -20,6 +20,9 @@
 "dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/AppData/Local/nvim/lazy-lock.json"
 "dotfiles/nvim/.config/nvim/lua" = "~/AppData/Local/nvim/lua"
 
+[spicetify.files]
+"dotfiles/spicetify/.config/spicetify/config-xpui.ini" = "~/AppData/Roaming/spicetify/config-xpui.ini"
+
 [topgrade.files]
 "dotfiles/topgrade/.config/topgrade.toml" = "~/AppData/Roaming/topgrade.toml"
 
