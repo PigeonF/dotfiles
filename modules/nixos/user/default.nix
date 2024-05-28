@@ -40,6 +40,8 @@ in
       };
     };
 
+    systemd.services."user@".serviceConfig.Delegate = "cpu io memory pids cpuset";
+
     nix.settings.trusted-users = [ "pigeonf" ];
   };
 }
