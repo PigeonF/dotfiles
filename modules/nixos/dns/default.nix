@@ -1,6 +1,9 @@
 { config, lib, ... }:
 let
   cfg = config.pigeonf.dns;
+  base = "fd90:7c2e:b8d2:bf65";
+  subnet = "${base}::/64";
+  gateway = "${base}::1";
 in
 {
   options = {
@@ -14,13 +17,10 @@ in
       enable = true;
 
       settings = {
-        server = [ "/internal/10.0.124.1" ];
+        server = [ "/internal/${gateway}" ];
         bind-interfaces = true;
         domain-needed = true;
-        listen-address = [
-          "127.0.0.1"
-          "::1"
-        ];
+        listen-address = [ "::1" ];
         local = [
           "/internal/"
           "/fritz.box/"
@@ -31,7 +31,8 @@ in
     virtualisation.quadlet = {
       networks = {
         internal.networkConfig = {
-          subnets = [ "10.0.124.0/24" ];
+          subnets = [ "${subnet}" ];
+          gateways = [ "${gateway}" ];
         };
       };
     };

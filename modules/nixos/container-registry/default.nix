@@ -15,17 +15,17 @@ in
     virtualisation = {
       quadlet.containers = {
         "registry.internal".containerConfig = {
-          image = "docker.io/library/registry";
+          image = "docker.io/library/registry:2";
           environments = {
-            REGISTRY_HTTP_ADDR = "0.0.0.0:80";
+            REGISTRY_HTTP_ADDR = ":80";
           };
           networks = [ "internal.network" ];
         };
 
         "registry-cache.internal".containerConfig = {
-          image = "docker.io/library/registry";
+          image = "docker.io/library/registry:2";
           environments = {
-            REGISTRY_HTTP_ADDR = "0.0.0.0:80";
+            REGISTRY_HTTP_ADDR = ":80";
             REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
           };
           networks = [ "internal.network" ];
