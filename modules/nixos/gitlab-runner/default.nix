@@ -64,14 +64,14 @@ in
             ref = "master";
             rev = "ceefb7d0b9c5b6fbd1ea7511592a4ddb28ec4821";
           };
-          defaultSeccomp = builtins.fromJSON (builtins.readFile "${moby}/profiles/seccomp/default.json");
-          inherit (defaultSeccomp) syscalls;
-          buildahSeccompFilter = builtins.toJSON (
-            defaultSeccomp
+          mobySeccomp = builtins.fromJSON (builtins.readFile "${moby}/profiles/seccomp/default.json");
+
+          buildahSeccompJson = builtins.toJSON (
+            mobySeccomp
             // {
               # Instead of adding SYS_CAP_ADMIN, we explicitly allow the syscalls that buildah
               # uses.
-              syscalls = syscalls ++ [
+              syscalls = mobySeccomp.syscalls ++ [
                 {
                   names = [
                     "mount"
@@ -106,13 +106,40 @@ in
               ];
             }
           );
-          seccomp =
+          buildahSeccomp =
             if hasPodman then
-              pkgs.writeText "seccomp.json" buildahSeccompFilter
+              pkgs.writeText "seccomp.json" buildahSeccompJson
             else
               # Due to https://gitlab.com/gitlab-org/gitlab-runner/-/issues/27235
               # we use the actual json contents instead of a file path
-              lib.strings.escapeShellArg buildahSeccompFilter;
+              lib.strings.escapeShellArg buildahSeccompJson;
+          buildkitSeccompJson = builtins.toJSON (
+            mobySeccomp
+            // {
+              syscalls = mobySeccomp.syscalls ++ [
+                {
+                  names = [
+                    "clone"
+                    "keyctl"
+                    "mount"
+                    "pivot_root"
+                    "sethostname"
+                    "umount2"
+                    "unshare"
+                  ];
+                  action = "SCMP_ACT_ALLOW";
+                }
+              ];
+            }
+          );
+          buildkitSeccomp =
+            if hasPodman then
+              pkgs.writeText "seccomp.json" buildkitSeccompJson
+            else
+              # Due to https://gitlab.com/gitlab-org/gitlab-runner/-/issues/27235
+              # we use the actual json contents instead of a file path
+              lib.strings.escapeShellArg buildkitSeccompJson;
+
           buildkitdConfig = pkgs.writeText "buildkitd.toml" ''
             debug = true
 
@@ -128,6 +155,7 @@ in
               "--docker-volumes /certs/client"
               "--output-limit 8192"
               "--env FF_NETWORK_PER_BUILD=1"
+              "--env FF_USE_INIT_WITH_DOCKER_EXECUTOR=1"
             ]
             ++ lib.optionals hasPodman [
               "--docker-host unix:///run/podman/podman.sock"
@@ -135,13 +163,12 @@ in
             ]
             ++ lib.optionals cfg.buildahEnabled [
               "--docker-devices /dev/fuse"
-              "--docker-security-opt seccomp=${seccomp}"
+              "--docker-security-opt seccomp=${buildahSeccomp}"
             ]
             ++ lib.optionals cfg.buildkitEnabled [
-              "--env DOCKER_DRIVER=overlay2"
-              "--docker-services_privileged true"
-              "--docker-allowed-privileged-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1-rootless"
+              "--docker-services-security-opt seccomp=${buildkitSeccomp}"
               "--docker-volumes \"${buildkitdConfig}:/home/user/.config/buildkit/buildkitd.toml:ro\""
+              "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1-rootless"
             ];
         in
         {

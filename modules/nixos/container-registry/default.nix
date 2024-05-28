@@ -27,6 +27,7 @@ in
             REGISTRY_HTTP_ADDR = ":80";
           };
           networks = [ "internal.network" ];
+          noNewPrivileges = true;
         };
 
         "cache.internal".containerConfig = {
@@ -36,6 +37,7 @@ in
             REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
           };
           networks = [ "internal.network" ];
+          noNewPrivileges = true;
         };
       };
     };
