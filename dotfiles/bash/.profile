@@ -13,6 +13,7 @@ fi
 
 # Program specific
 export GHQ_ROOT="${HOME}/git"
+export BUILDX_NO_DEFAULT_ATTESTATIONS=true
 
 # https://github.com/firecow/gitlab-ci-local/issues/1233
 export GCL_ARTIFACTS_TO_SOURCE=false
