@@ -24,6 +24,7 @@ in
           environments = {
             REGISTRY_HTTP_ADDR = ":80";
           };
+          volumes = [ "registry-images:/var/lib/registry" ];
           networks = [ "internal.network" ];
           noNewPrivileges = true;
         };
@@ -38,6 +39,7 @@ in
               REGISTRY_HTTP_ADDR = ":80";
               REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
             };
+            volumes = [ "registry-cache:/var/lib/registry" ];
             networks = [ "internal.network" ];
             noNewPrivileges = true;
           };
