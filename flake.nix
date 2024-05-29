@@ -69,7 +69,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     # For neovim 0.10
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
-    nixpkgs-buildah.url = "github:r-ryantm/nixpkgs/auto-update/buildah-unwrapped";
+    nixpkgs-nushell.url = "github:getchoo/nixpkgs/pkgs/nushell/0.94.0";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -40,7 +40,7 @@ in
           xdg-ninja
           ;
 
-        inherit (inputs.nixpkgs-buildah.legacyPackages.${pkgs.system}) buildah;
+        inherit (inputs.nixos-unstable-small.legacyPackages.${pkgs.system}) buildah;
       };
     };
   };

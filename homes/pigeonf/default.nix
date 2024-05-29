@@ -37,6 +37,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           bash.enable = true;
           devtools.enable = true;
           git.enable = true;
+          nushell.enable = true;
           nvim.enable = true;
           rust.enable = true;
           starship.enable = true;

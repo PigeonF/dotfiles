@@ -108,18 +108,18 @@
         "type": "github"
       }
     },
-    "nixpkgs-buildah": {
+    "nixpkgs-nushell": {
       "locked": {
-        "lastModified": 1716511064,
-        "narHash": "sha256-dNSA3JDuqwJPLcff5jiSZmbDkatLcJAyhs4zqy/6m1E=",
-        "owner": "r-ryantm",
+        "lastModified": 1716984813,
+        "narHash": "sha256-tn2LNLLc0QczcXsNttoUMTK0kZPg/iP1Cf+MKSG8Hgg=",
+        "owner": "getchoo",
         "repo": "nixpkgs",
-        "rev": "32fdfea7c6a2a85e9ddc63f635e5587dfbfc7615",
+        "rev": "9a326e227e49c269e60c894449afb728c114754b",
         "type": "github"
       },
       "original": {
-        "owner": "r-ryantm",
-        "ref": "auto-update/buildah-unwrapped",
+        "owner": "getchoo",
+        "ref": "pkgs/nushell/0.94.0",
         "repo": "nixpkgs",
         "type": "github"
       }
@@ -152,7 +152,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-unstable-small": "nixos-unstable-small",
         "nixpkgs": "nixpkgs",
-        "nixpkgs-buildah": "nixpkgs-buildah",
+        "nixpkgs-nushell": "nixpkgs-nushell",
         "quadlet-nix": "quadlet-nix",
         "sops-nix": "sops-nix",
         "systems": "systems"
