@@ -48,7 +48,11 @@ in
     pigeonf.virtualisation.containers.registries.settings = {
       registry = [
         {
-          location = "*.internal";
+          location = "registry.internal";
+          insecure = true;
+        }
+        {
+          location = "cache.internal";
           insecure = true;
         }
         {
