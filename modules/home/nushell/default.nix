@@ -19,10 +19,18 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = builtins.attrValues {
-
+      packages = builtins.attrValues rec {
         nushellFull = inputs.nixpkgs-nushell.legacyPackages.${pkgs.system}.nushellFull.override {
           additionalFeatures = p: p;
+        };
+
+        nupmWrapper = pkgs.writeShellApplication {
+          name = "nupm";
+
+          runtimeInputs = [ nushellFull ];
+          text = ''
+            exec nu -n -I "$NUPM_HOME/modules" -c "use nupm/; nupm ''${*}"
+          '';
         };
       };
     };
