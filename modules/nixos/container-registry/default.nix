@@ -67,13 +67,25 @@ in
       ];
     };
 
-    virtualisation.docker.rootless.daemon.settings = {
-      registry-mirrors = [ "http://cache.internal" ];
+    virtualisation.docker =
+      let
+        settings = {
+          registry-mirrors = [ "http://cache.internal" ];
 
-      insecure-registries = [
-        "http://registry.internal"
-        "http://cache.internal"
-      ];
-    };
+          insecure-registries = [
+            "http://registry.internal"
+            "http://cache.internal"
+          ];
+        };
+      in
+      {
+        daemon = {
+          inherit settings;
+        };
+
+        rootless.daemon = {
+          inherit settings;
+        };
+      };
   };
 }

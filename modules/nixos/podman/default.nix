@@ -16,7 +16,7 @@ in
 
       podman = {
         enable = true;
-        dockerSocket.enable = true;
+        dockerSocket.enable = !config.virtualisation.docker.enable;
 
         defaultNetwork.settings = {
           dns_enabled = true;

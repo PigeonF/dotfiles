@@ -45,8 +45,6 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    virtualisation.docker.enable = lib.mkIf hasPodman (lib.mkForce false);
-
     services.gitlab-runner = {
       enable = cfg.runners != { };
 
