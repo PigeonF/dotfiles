@@ -22,11 +22,13 @@ in
       packages = builtins.attrValues {
         inherit (pkgs)
           bat
+          committed
           crane
           diffoci
           diffoscopeMinimal
           dive
           docker-client
+          editorconfig-checker
           ghq
           gitlab-ci-local
           gnumake
@@ -37,8 +39,17 @@ in
           pkg-config
           podman
           regctl
+          reuse
           xdg-ninja
+          yamllint
           ;
+
+        markdownlint-cli2 = pkgs.markdownlint-cli2.overrideAttrs (
+          _: _: {
+            # Install the other output formatters as well
+            dontNpmPrune = true;
+          }
+        );
 
         inherit (inputs.nixos-unstable-small.legacyPackages.${pkgs.system}) buildah;
       };
