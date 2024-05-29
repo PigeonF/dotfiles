@@ -67,8 +67,8 @@ in
       registry-mirrors = [ "http://cache.internal" ];
 
       insecure-registries = [
-        "registry.internal"
-        "cache.internal"
+        "http://registry.internal"
+        "http://cache.internal"
       ];
     };
   };

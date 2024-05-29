@@ -37,9 +37,9 @@ in
           in
           {
             image = "docker.io/moby/buildkit:buildx-stable-1-rootless";
-            volumes = [ "${buildkitdConfig}:/home/user/.config/buildkit/buildkitd.toml:ro" ];
+            volumes = [ "${buildkitdConfig}:/etc/buildkit/buildkitd.toml:ro" ];
             publishPorts = [ "3375" ];
-            exec = "--oci-worker-no-process-sandbox --oci-worker-snapshotter=fuse-overlayfs --addr tcp://:3375";
+            exec = "--oci-worker-no-process-sandbox --oci-worker-snapshotter=fuse-overlayfs --config /etc/buildkit/buildkitd.toml --addr tcp://:3375";
             addCapabilities = [ "CAP_SYS_ADMIN" ];
             devices = [ "/dev/fuse" ];
             networks = lib.mkIf hasRegistry [ "internal.network" ];
