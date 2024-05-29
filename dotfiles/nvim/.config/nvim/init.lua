@@ -129,23 +129,23 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
-      vim.keymap.set('n', '<leader>sF', function()
+      vim.keymap.set('n', '<leader>sF', builtin.find_files, { desc = '[S]earch [F]iles (exclude hidden)' })
+      vim.keymap.set('n', '<leader>sf', function()
         builtin.find_files {
           hidden = true,
         }
-      end, { desc = '[S]earch [F]iles (include hidden)' })
+      end, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', function()
         builtin.grep_string { additional_args = { '--hidden' } }
       end, { desc = '[S]earch current [W]ord' })
-      vim.keymap.set('n', '<leader>sW', builtin.grep_string, { desc = '[S]earch current [W]ord (include hidden)' })
-      vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
-      vim.keymap.set('n', '<leader>sG', function()
+      vim.keymap.set('n', '<leader>sW', builtin.grep_string, { desc = '[S]earch current [W]ord (exclude hidden)' })
+      vim.keymap.set('n', '<leader>sG', builtin.live_grep, { desc = '[S]earch by [G]rep (exclude hidden)' })
+      vim.keymap.set('n', '<leader>sg', function()
         builtin.live_grep {
           additional_args = { '--hidden' },
         }
-      end, { desc = '[S]earch by [G]rep (include hidden)' })
+      end, { desc = '[S]earch by [G]rep' })
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
@@ -180,6 +180,7 @@ require('lazy').setup({
 
       { 'j-hui/fidget.nvim', opts = {} },
       { 'folke/neodev.nvim', opts = {} },
+      { 'b0o/SchemaStore.nvim', lazy = true },
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -227,11 +228,30 @@ require('lazy').setup({
           filetypes = { 'json', 'jsonc', 'json5' },
           settings = {
             json = {
+              schemas = require('schemastore').json.schemas(),
               format = {
                 enable = true,
               },
             },
             validate = { enable = true },
+          },
+          handlers = {
+            ['textDocument/publishDiagnostics'] = function(err, result, ctx, config)
+              -- jsonls doesn't really support json5
+              -- remove some annoying errors
+              if string.match(result.uri, '%.json5$', -6) and result.diagnostics ~= nil then
+                local idx = 1
+                while idx <= #result.diagnostics do
+                  -- "Comments are not permitted in JSON."
+                  if result.diagnostics[idx].code == 521 then
+                    table.remove(result.diagnostics, idx)
+                  else
+                    idx = idx + 1
+                  end
+                end
+              end
+              vim.lsp.diagnostic.on_publish_diagnostics(err, result, ctx, config)
+            end,
           },
         },
         lua_ls = {
@@ -274,6 +294,8 @@ require('lazy').setup({
         yamlls = {
           settings = {
             yaml = {
+              schemaStore = { enable = false, url = '' },
+              schemas = require('schemastore').yaml.schemas(),
               format = { enable = true },
               customTags = {
                 '!reference sequence',
