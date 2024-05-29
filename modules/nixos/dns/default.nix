@@ -34,6 +34,10 @@ in
     virtualisation.quadlet = {
       networks = {
         internal.networkConfig = {
+          # This gives an IPv4 address as well, but we need one to connect to
+          # the gitlab container registry.
+          # https://gitlab.com/gitlab-com/gl-infra/production-engineering/-/issues/18058
+          ipv6 = true;
           subnets = [ "${subnet}" ];
           gateways = [ "${gateway}" ];
         };

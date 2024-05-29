@@ -167,14 +167,16 @@ in
             ]
             ++ lib.optionals cfg.buildkitEnabled [
               "--docker-services-security-opt seccomp=${buildkitSeccomp}"
+              "--docker-volumes /home/user/.local/share/buildkit"
               "--docker-volumes \"${buildkitdConfig}:/home/user/.config/buildkit/buildkitd.toml:ro\""
-              "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:buildx-stable-1-rootless"
+              "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless"
+              "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless@sha256:*"
             ];
         in
         {
           registrationConfigFile = cfg.envFile;
           inherit (cfg) description;
-          dockerImage = "docker.io/busybox";
+          dockerImage = "docker.io/library/busybox:stable";
 
           inherit registrationFlags;
         }

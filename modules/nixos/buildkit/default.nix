@@ -38,9 +38,10 @@ in
           {
             image = "docker.io/moby/buildkit:buildx-stable-1-rootless";
             volumes = [ "${buildkitdConfig}:/home/user/.config/buildkit/buildkitd.toml:ro" ];
-            publishPorts = [ "[::1]:3375:3375" ];
-            exec = "--oci-worker-no-process-sandbox --addr tcp://:3375";
+            publishPorts = [ "3375" ];
+            exec = "--oci-worker-no-process-sandbox --oci-worker-snapshotter=fuse-overlayfs --addr tcp://:3375";
             addCapabilities = [ "CAP_SYS_ADMIN" ];
+            devices = [ "/dev/fuse" ];
             networks = lib.mkIf hasRegistry [ "internal.network" ];
           };
       };
