@@ -22,6 +22,7 @@ in
         inherit (pkgs)
           age
           dig
+          file
           lemonade
           lynx
           pstree
