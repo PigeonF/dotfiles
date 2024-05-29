@@ -30,14 +30,19 @@ in
           noNewPrivileges = true;
         };
 
-        "cache.internal".containerConfig = {
-          image = "docker.io/library/registry:2";
-          environments = {
-            REGISTRY_HTTP_ADDR = ":80";
-            REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
+        "cache.internal" = {
+          serviceConfig = {
+            after = [ "network-online.target" ];
           };
-          networks = [ "internal.network" ];
-          noNewPrivileges = true;
+          containerConfig = {
+            image = "docker.io/library/registry:2";
+            environments = {
+              REGISTRY_HTTP_ADDR = ":80";
+              REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";
+            };
+            networks = [ "internal.network" ];
+            noNewPrivileges = true;
+          };
         };
       };
     };
