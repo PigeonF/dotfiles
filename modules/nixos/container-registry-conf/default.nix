@@ -13,6 +13,7 @@ in
   options = {
     # https://github.com/NixOS/nixpkgs/issues/280288
     pigeonf.virtualisation.containers.registries = {
+      enable = lib.mkEnableOption "Enable registries conf";
       settings = mkOption {
         inherit (toml) type;
         default = { };
@@ -21,7 +22,7 @@ in
     };
   };
 
-  config = {
+  config = lib.mkIf cfg.enable {
     environment.etc = {
       "containers/registries.conf".source = lib.mkForce (toml.generate "registries.conf" cfg.settings);
     };

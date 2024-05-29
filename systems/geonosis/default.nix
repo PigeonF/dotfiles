@@ -19,9 +19,11 @@
     container-registry.enable = true;
     core.enable = true;
     dns.enable = true;
+    docker-rootless.enable = true;
     nix.enable = true;
     podman.enable = true;
     user.enable = true;
+    virtualisation.containers.registries.enable = true;
 
     network = {
       enable = true;

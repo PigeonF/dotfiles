@@ -1,8 +1,6 @@
 { config, lib, ... }:
 let
   cfg = config.pigeonf.container-registry;
-  hasPodman = config.pigeonf.podman.enable;
-  hasDocker = config.pigeonf.docker-rootless.enable;
 in
 {
   options = {
@@ -47,7 +45,7 @@ in
       };
     };
 
-    pigeonf.virtualisation.containers.registries.settings = lib.mkIf hasPodman {
+    pigeonf.virtualisation.containers.registries.settings = {
       registry = [
         {
           location = "*.internal";
@@ -65,7 +63,7 @@ in
       ];
     };
 
-    virtualisation.docker.rootless.daemon.settings = lib.mkIf hasDocker {
+    virtualisation.docker.rootless.daemon.settings = {
       registry-mirrors = [ "http://cache.internal" ];
 
       insecure-registries = [
