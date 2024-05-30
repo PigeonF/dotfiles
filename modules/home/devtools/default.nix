@@ -31,6 +31,7 @@ in
           editorconfig-checker
           ghq
           gitlab-ci-local
+          gitleaks
           gnumake
           go
           just
