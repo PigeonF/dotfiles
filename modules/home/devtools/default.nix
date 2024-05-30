@@ -32,8 +32,10 @@ in
           ghq
           gitlab-ci-local
           gnumake
+          go
           just
           meson
+          nodejs
           openssl
           passt
           pkg-config
