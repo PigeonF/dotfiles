@@ -23,8 +23,10 @@ in
           age
           dig
           file
+          jq
           lemonade
           lynx
+          moreutils
           pstree
           sops
           ;
