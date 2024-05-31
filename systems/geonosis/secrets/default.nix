@@ -11,17 +11,5 @@
       format = "dotenv";
       restartUnits = [ "gitlab-runner.service" ];
     };
-
-    "gitlab-runner/buildah/environment" = {
-      sopsFile = ./gitlab-runner-buildah.env;
-      format = "dotenv";
-      restartUnits = [ "gitlab-runner.service" ];
-    };
-
-    "gitlab-runner/buildkit/environment" = {
-      sopsFile = ./gitlab-runner-buildkit.env;
-      format = "dotenv";
-      restartUnits = [ "gitlab-runner.service" ];
-    };
   };
 }

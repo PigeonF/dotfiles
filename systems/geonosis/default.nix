@@ -43,17 +43,6 @@
           envFile = config.sops.secrets."gitlab-runner/environment".path;
           buildkitEnabled = true;
         };
-
-        # buildah = {
-        #   description = "Buildah-Enabled Runner";
-        #   envFile = config.sops.secrets."gitlab-runner/buildah/environment".path;
-        #   buildahEnabled = true;
-        # };
-
-        # buildkit = {
-        #   description = "Buildkit-Enabled Runner";
-        #   envFile = config.sops.secrets."gitlab-runner/buildkit/environment".path;
-        # };
       };
     };
   };

@@ -167,8 +167,6 @@ in
               "--docker-services-security-opt seccomp=${buildkitSeccomp}"
               "--docker-volumes /home/user/.local/share/buildkit"
               "--docker-volumes \"${buildkitdConfig}:/home/user/.config/buildkit/buildkitd.toml:ro\""
-              # "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless"
-              # "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless@sha256:*"
             ];
         in
         {
