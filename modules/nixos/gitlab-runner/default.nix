@@ -153,7 +153,7 @@ in
               "--docker-volumes /certs/client"
               "--output-limit 8192"
               "--env FF_NETWORK_PER_BUILD=1"
-              "--env FF_USE_INIT_WITH_DOCKER_EXECUTOR=1"
+              # "--env FF_USE_INIT_WITH_DOCKER_EXECUTOR=1"
             ]
             ++ lib.optionals hasPodman [
               "--docker-host unix:///run/podman/podman.sock"
@@ -167,8 +167,8 @@ in
               "--docker-services-security-opt seccomp=${buildkitSeccomp}"
               "--docker-volumes /home/user/.local/share/buildkit"
               "--docker-volumes \"${buildkitdConfig}:/home/user/.config/buildkit/buildkitd.toml:ro\""
-              "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless"
-              "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless@sha256:*"
+              # "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless"
+              # "--docker-allowed-services registry.gitlab.com/pigeonf/repository-helper/buildkit:rootless@sha256:*"
             ];
         in
         {
