@@ -38,7 +38,7 @@ in
           "buildkit.internal".containerConfig =
 
             {
-              image = "docker.io/moby/buildkit:master-rootless";
+              image = "docker.io/moby/buildkit:buildx-stable-1-rootless";
               volumes = [ "${buildkitdConfig}:/etc/buildkit/buildkitd.toml:ro" ];
               publishPorts = [ "3375" ];
               exec = "--oci-worker-no-process-sandbox --oci-worker-snapshotter=fuse-overlayfs --config /etc/buildkit/buildkitd.toml --addr tcp://:3375";
