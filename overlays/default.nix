@@ -10,6 +10,7 @@ let
       );
     };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
+    markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
   };
 in
 

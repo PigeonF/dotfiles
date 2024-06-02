@@ -35,6 +35,7 @@ in
           gnumake
           go
           just
+          markdownlint-cli2
           meson
           nodejs
           openssl
@@ -46,13 +47,6 @@ in
           xdg-ninja
           yamllint
           ;
-
-        markdownlint-cli2 = pkgs.markdownlint-cli2.overrideAttrs (
-          _: _: {
-            # Install the other output formatters as well
-            dontNpmPrune = true;
-          }
-        );
 
         inherit (inputs.nixos-unstable-small.legacyPackages.${pkgs.system}) buildah;
       };
