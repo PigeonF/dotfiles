@@ -34,6 +34,7 @@ in
           gitleaks
           gnumake
           go
+          grype
           just
           markdownlint-cli2
           meson
