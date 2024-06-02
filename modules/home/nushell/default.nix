@@ -20,14 +20,14 @@ in
   config = mkIf cfg.enable {
     home = {
       packages = builtins.attrValues rec {
-        nushellFull = inputs.nixpkgs-nushell.legacyPackages.${pkgs.system}.nushellFull.override {
+        nushell = inputs.nixpkgs-nushell.legacyPackages.${pkgs.system}.nushell.override {
           additionalFeatures = p: p;
         };
 
         nupmWrapper = pkgs.writeShellApplication {
           name = "nupm";
 
-          runtimeInputs = [ nushellFull ];
+          runtimeInputs = [ nushell ];
           text = ''
             exec nu -n -I "$NUPM_HOME/modules" -c "use nupm/; nupm ''${*}"
           '';
