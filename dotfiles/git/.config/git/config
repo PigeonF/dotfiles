@@ -151,7 +151,8 @@
     # !Only works with worktrees!
     # We not only have to map the worktree itself, but also the 'commondir',
     # which is hopefully more or less stable across git branchless versions.
-    gcl = "gitlab-ci-local --privileged --umask=false --concurrency=1 --volume \"$(git rev-parse --path-format=absolute --git-common-dir):$(git rev-parse --path-format=absolute --git-common-dir):ro\""
+    gcl = "gitlab-ci-local --umask=false --concurrency=1 --volume \"$(git rev-parse --path-format=absolute --git-common-dir):$(git rev-parse --path-format=absolute --git-common-dir):ro\""
+    gclp = "gitlab-ci-local --privileged --umask=false --concurrency=1 --volume \"$(git rev-parse --path-format=absolute --git-common-dir):$(git rev-parse --path-format=absolute --git-common-dir):ro\""
 
 [branchless "next"]
     interactive = true
