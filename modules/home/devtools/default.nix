@@ -30,6 +30,7 @@ in
           docker-client
           editorconfig-checker
           ghq
+          git-cliff
           gitlab-ci-local
           gitleaks
           gnumake
