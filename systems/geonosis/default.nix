@@ -20,6 +20,7 @@
     core.enable = true;
     dns.enable = true;
     docker.enable = true;
+    incus.enable = true;
     nix.enable = true;
     podman.enable = true;
     user.enable = true;
