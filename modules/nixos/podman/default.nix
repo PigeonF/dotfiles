@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   cfg = config.pigeonf.podman;
 in
@@ -28,5 +33,6 @@ in
         };
       };
     };
+    environment.systemPackages = [ pkgs.passt ];
   };
 }
