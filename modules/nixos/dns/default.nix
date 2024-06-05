@@ -44,6 +44,11 @@ in
       };
     };
 
-    networking.firewall.interfaces."podman*".allowedUDPPorts = [ 53 ];
+    networking.firewall.interfaces."docker*".allowedUDPPorts = lib.mkIf config.pigeonf.docker.enable [
+      53
+    ];
+    networking.firewall.interfaces."podman*".allowedUDPPorts = lib.mkIf config.pigeonf.podman.enable [
+      53
+    ];
   };
 }
