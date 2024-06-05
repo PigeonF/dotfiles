@@ -17,8 +17,11 @@ in
           features = {
             containerd-snapshotter = true;
           };
+          dns = [ "10.117.0.1" ];
         };
       };
     };
+
+    services.dnsmasq.settings.interface = [ "docker0" ];
   };
 }

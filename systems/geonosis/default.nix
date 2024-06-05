@@ -19,8 +19,8 @@
     container-registry.enable = true;
     core.enable = true;
     dns.enable = true;
-    docker-rootless.enable = true;
-    docker.enable = false;
+    docker-rootless.enable = false;
+    docker.enable = true;
     incus.enable = true;
     nix.enable = true;
     podman.enable = true;
