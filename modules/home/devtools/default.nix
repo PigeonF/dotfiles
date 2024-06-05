@@ -1,5 +1,4 @@
 {
-  inputs,
   config,
   lib,
   pkgs,
@@ -47,6 +46,7 @@ in
           podman
           regctl
           reuse
+          tagref
           xdg-ninja
           yamllint
           ;
