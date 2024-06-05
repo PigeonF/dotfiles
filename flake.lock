@@ -124,6 +124,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-just": {
+      "locked": {
+        "lastModified": 1717160125,
+        "narHash": "sha256-aJOYD56D5vBz6yyXWkb5YytEfZ4iqtSPUfH4msVwcmI=",
+        "owner": "vlaci",
+        "repo": "nixpkgs",
+        "rev": "5b62e8d622568eb8d85a75b9faabd36fa1c35ee4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "vlaci",
+        "ref": "just-127",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "quadlet-nix": {
       "inputs": {
         "nixpkgs": [
@@ -153,6 +169,7 @@
         "nixos-unstable-small": "nixos-unstable-small",
         "nixpkgs": "nixpkgs",
         "nixpkgs-gitlab-ci-local": "nixpkgs-gitlab-ci-local",
+        "nixpkgs-just": "nixpkgs-just",
         "quadlet-nix": "quadlet-nix",
         "sops-nix": "sops-nix",
         "systems": "systems"

@@ -2,6 +2,7 @@
   nixpkgs,
   nixos-unstable-small,
   nixpkgs-gitlab-ci-local,
+  nixpkgs-just,
   ...
 }:
 
@@ -14,6 +15,7 @@ let
     gitlab-ci-local = _: prev: {
       inherit (nixpkgs-gitlab-ci-local.legacyPackages.${prev.system}) gitlab-ci-local;
     };
+    just = _: prev: { inherit (nixpkgs-just.legacyPackages.${prev.system}) just; };
     neovim = _: prev: {
       inherit (nixos-unstable-small.legacyPackages.${prev.system}) neovim-unwrapped;
     };

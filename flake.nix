@@ -70,6 +70,7 @@
     # For neovim 0.10
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixpkgs-gitlab-ci-local.url = "github:r-ryantm/nixpkgs/auto-update/gitlab-ci-local";
+    nixpkgs-just.url = "github:vlaci/nixpkgs/just-127";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
