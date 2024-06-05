@@ -15,9 +15,6 @@ fi
 export GHQ_ROOT="${HOME}/git"
 export BUILDX_NO_DEFAULT_ATTESTATIONS=true
 
-# https://github.com/firecow/gitlab-ci-local/issues/1233
-export GCL_ARTIFACTS_TO_SOURCE=false
-
 # Make some programs adhere to the XDG directories
 export BUILDX_CONFIG="${XDG_CONFIG_HOME}/buildx"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
