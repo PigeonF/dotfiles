@@ -1,17 +1,25 @@
-{ nixpkgs, ... }:
+{
+  nixpkgs,
+  nixos-unstable-small,
+  nixpkgs-gitlab-ci-local,
+  ...
+}:
 
 let
   inherit (nixpkgs) lib;
 
   overlays = {
-    gitlab-ci-local = _: prev: {
-      gitlab-ci-local = prev.gitlab-ci-local.overrideAttrs (
-        _: _: { patches = [ ./gitlab-ci-local/ci-node-index.patch ]; }
-      );
-    };
-    reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
-    markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
+    buildah = _: prev: { inherit (nixos-unstable-small.legacyPackages.${prev.system}) buildah; };
     git-cliff = final: _: { git-cliff = final.callPackage ./git-cliff { }; };
+    gitlab-ci-local = _: prev: {
+      inherit (nixpkgs-gitlab-ci-local.legacyPackages.${prev.system}) gitlab-ci-local;
+    };
+    neovim = _: prev: {
+      inherit (nixos-unstable-small.legacyPackages.${prev.system}) neovim-unwrapped;
+    };
+    nushell = _: prev: { inherit (nixos-unstable-small.legacyPackages.${prev.system}) nushell; };
+    markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
+    reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
   };
 in
 

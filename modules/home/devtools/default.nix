@@ -22,6 +22,7 @@ in
       packages = builtins.attrValues {
         inherit (pkgs)
           bat
+          buildah
           committed
           crane
           diffoci
@@ -49,8 +50,6 @@ in
           xdg-ninja
           yamllint
           ;
-
-        inherit (inputs.nixos-unstable-small.legacyPackages.${pkgs.system}) buildah;
       };
     };
   };

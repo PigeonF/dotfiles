@@ -26,12 +26,10 @@ in
         # Typos spell checker
         typos
         # vscode-nushell-lang
-        # nushell
+        nushell
         # Vale
         vale
         ;
-
-      inherit (inputs.nixpkgs-nushell.legacyPackages.${pkgs.system}) nushell;
     };
   };
 }

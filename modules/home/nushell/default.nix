@@ -1,6 +1,5 @@
 {
   config,
-  inputs,
   lib,
   pkgs,
   ...
@@ -20,9 +19,7 @@ in
   config = mkIf cfg.enable {
     home = {
       packages = builtins.attrValues rec {
-        nushell = inputs.nixpkgs-nushell.legacyPackages.${pkgs.system}.nushell.override {
-          additionalFeatures = p: p;
-        };
+        inherit (pkgs) nushell;
 
         nupmWrapper = pkgs.writeShellApplication {
           name = "nupm";
