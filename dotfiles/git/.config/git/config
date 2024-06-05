@@ -28,12 +28,15 @@
     ds = diff --color --cached
     fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
     ignore = update-index --skip-worktree
-    l = lr
-    ls = lrs
-    lg = lrg
+    l = lrm
+    ls = lrsm
+    lg = lrgm
     lr = log --pretty=pretty --abbrev-commit --date=relative
-    lrg = lr --graph
+    lrm = log --pretty=pretty --abbrev-commit --date=relative main...@
+    lrg = lr --pretty=pretty --abbrev-commit --date=relative --graph
+    lrgm = lr --pretty=pretty --abbrev-commit --date=relative --graph main...@
     lrs = log --pretty=pretty-sig --abbrev-commit --date=relative
+    lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
     ll = log --pretty=pretty --abbrev-commit --date=local
     llg = ll --graph
     lls = log --pretty=pretty-sig --abbrev-commit --date=local
