@@ -1,0 +1,13 @@
+diff --git a/src/argv.ts b/src/argv.ts
+index de3c0ac63bf9fb21..eac6b5d4a7b276d1 100644
+--- a/src/argv.ts
++++ b/src/argv.ts
+@@ -155,7 +155,7 @@ export class Argv {
+ 
+     get umask (): boolean {
+         // TODO: default to false in 5.x.x
+-        return this.map.get("umask") ?? true;
++        return this.map.get("umask") ?? false;
+     }
+ 
+     get privileged (): boolean {
