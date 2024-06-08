@@ -18,6 +18,7 @@ let
           (
             _: prev: {
               patches = (prev.patches or [ ]) ++ [
+                ./gitlab-ci-local/inputs-arrays.patch
                 ./gitlab-ci-local/pr-1258.patch
                 ./gitlab-ci-local/umask.patch
               ];
