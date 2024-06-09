@@ -58,5 +58,9 @@ in
     };
 
     services.dnsmasq.settings.interface = [ "docker0" ];
+    systemd.services.dnsmasq = {
+      after = [ "docker.service" ];
+      requires = [ "docker.service" ];
+    };
   };
 }
