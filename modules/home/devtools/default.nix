@@ -35,10 +35,12 @@ in
           gitleaks
           gnumake
           go
+          go-task
           grype
           just
           markdownlint-cli2
           meson
+          miller
           nodejs
           openssl
           passt
