@@ -15,33 +15,34 @@
 
 [alias]
     aliases = config --get-regexp ^alias.
-    branches = branch -vv
     bd = branch -d
     bD = branch -D
+    branches = branch -vv
     c = commit
     ca = commit --amend
     can = commit --amend --no-edit
     cc = "!f() { git commit -e -F \"$(git rev-parse --show-toplevel)/.git/COMMIT_EDITMSG\" $@; }; f"
-    cm = commit -m
+    cf = commit --fixup
     cl = clone --recurse-submodules
+    cm = commit -m
     d = diff --color
     ds = diff --color --cached
     fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
     ignore = update-index --skip-worktree
     l = lrm
-    ls = lrsm
+    la = llast 1
     lg = lrgm
-    lr = log --pretty=pretty --abbrev-commit --date=relative
-    lrm = log --pretty=pretty --abbrev-commit --date=relative main...@
-    lrg = lr --pretty=pretty --abbrev-commit --date=relative --graph
-    lrgm = lr --pretty=pretty --abbrev-commit --date=relative --graph main...@
-    lrs = log --pretty=pretty-sig --abbrev-commit --date=relative
-    lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
     ll = log --pretty=pretty --abbrev-commit --date=local
+    llast = "!f() { git l HEAD...HEAD~$1; }; f"
     llg = ll --graph
     lls = log --pretty=pretty-sig --abbrev-commit --date=local
-    la = llast 1
-    llast = "!f() { git l HEAD...HEAD~$1; }; f"
+    lr = log --pretty=pretty --abbrev-commit --date=relative
+    lrg = lr --pretty=pretty --abbrev-commit --date=relative --graph
+    lrgm = lr --pretty=pretty --abbrev-commit --date=relative --graph main...@
+    lrm = log --pretty=pretty --abbrev-commit --date=relative main...@
+    lrs = log --pretty=pretty-sig --abbrev-commit --date=relative
+    lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
+    ls = lrsm
     purge = clean -dx -e "*.gitignored.*"
     root = rev-parse --show-toplevel
     s = status -s
