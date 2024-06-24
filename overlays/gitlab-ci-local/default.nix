@@ -5,18 +5,18 @@
   nix-update-script,
 }:
 
-buildNpmPackage rec {
+buildNpmPackage {
   pname = "gitlab-ci-local";
   version = "master";
 
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
-    rev = "ba3509a42b5e0155913fb09d0885c93284df1f39";
-    hash = "sha256-q77+/Hy4YDC/RG9Evx0yjlBOz/VIfmFGrKgrANGI7jQ=";
+    rev = "4c4359d2d4b1316b98d3d2a643a658b58c2dd372";
+    hash = "sha256-D1zviTj7isAuEyzRYEyjq4sx+jo/U3ZQZLFr35/1ZNo=";
   };
 
-  npmDepsHash = "sha256-Z9ikvEdPeg1qHbwqLVqQ1YZEl4eZc68QJ4N2ZF/OroQ=";
+  npmDepsHash = "sha256-ocrSOPLbWkU0LBpWAdl54hWr+7gE3z2sy8lJilGsExo=";
 
   postPatch = ''
     # remove cleanup which runs git commands
@@ -27,7 +27,7 @@ buildNpmPackage rec {
   passthru.updateScript = nix-update-script { };
 
   patches = [
-    ./pr-1261.patch
+    ./pr-1266.patch
     ./umask.patch
   ];
 

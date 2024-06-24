@@ -19,4 +19,7 @@ switch:
   nixos-rebuild switch --verbose --print-build-logs --show-trace --flake .
 
 hm TARGET="":
+  home-manager build --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
+
+shm TARGET="":
   home-manager switch --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
