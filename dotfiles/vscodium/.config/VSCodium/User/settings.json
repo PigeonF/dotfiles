@@ -124,7 +124,8 @@
     },
     "nushellLanguageServer.includeDirs": [
         "D:\\share\\nupm\\modules",
-        "~/.local/share/nupm/modules"
+        "~/.local/share/nupm/modules",
+        "$(git rev-parse --show-toplevel)"
     ],
     "redhat.telemetry.enabled": false,
     "terminal.integrated.commandsToSkipShell": [
