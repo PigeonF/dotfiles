@@ -170,7 +170,7 @@ in
             ];
         in
         {
-          registrationConfigFile = cfg.envFile;
+          authenticationTokenConfigFile = cfg.envFile;
           inherit (cfg) description;
           dockerImage = "docker.io/library/busybox:stable";
 
