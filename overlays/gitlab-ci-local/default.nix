@@ -12,11 +12,11 @@ buildNpmPackage {
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
-    rev = "4c4359d2d4b1316b98d3d2a643a658b58c2dd372";
-    hash = "sha256-D1zviTj7isAuEyzRYEyjq4sx+jo/U3ZQZLFr35/1ZNo=";
+    rev = "4.52.0";
+    hash = "sha256-rdG5mcNgRUdFS6zdRNLoawIvXLzG/ZW6tOF4EkPUymg=";
   };
 
-  npmDepsHash = "sha256-ocrSOPLbWkU0LBpWAdl54hWr+7gE3z2sy8lJilGsExo=";
+  npmDepsHash = "sha256-erDRpN9EtGS1K6SRsujeqmUflRNGUjHOeUvYJD3Nkmg=";
 
   postPatch = ''
     # remove cleanup which runs git commands
@@ -26,10 +26,7 @@ buildNpmPackage {
 
   passthru.updateScript = nix-update-script { };
 
-  patches = [
-    ./pr-1266.patch
-    ./umask.patch
-  ];
+  patches = [ ./umask.patch ];
 
   meta = with lib; {
     description = "Run gitlab pipelines locally as shell executor or docker executor";
