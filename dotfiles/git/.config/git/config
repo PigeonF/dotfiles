@@ -42,6 +42,7 @@
     lrm = log --pretty=pretty --abbrev-commit --date=relative main...@
     lrs = log --pretty=pretty-sig --abbrev-commit --date=relative
     lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
+    lg = lrgm
     ls = lrsm
     purge = clean -dx -e "*.gitignored.*"
     root = rev-parse --show-toplevel
