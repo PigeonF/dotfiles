@@ -23,6 +23,7 @@ in
           bat
           buildah
           committed
+          corepack
           crane
           diffoci
           diffoscopeMinimal
