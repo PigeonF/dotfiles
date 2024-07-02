@@ -4,11 +4,11 @@ let
   inherit (nixpkgs) lib;
 
   overlays = {
-    buildah = _: prev: { inherit (nixos-unstable-small.legacyPackages.${prev.system}) buildah; };
-    git-cliff = final: _: { git-cliff = final.callPackage ./git-cliff { }; };
+    buildah = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) buildah; };
+    git-cliff = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) git-cliff; };
     gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };
-    neovim = _: prev: {
-      inherit (nixos-unstable-small.legacyPackages.${prev.system}) neovim-unwrapped;
+    neovim = final: _: {
+      inherit (nixos-unstable-small.legacyPackages.${final.system}) neovim-unwrapped;
     };
     nushell = final: _: {
       nushell = final.callPackage ./nushell {
