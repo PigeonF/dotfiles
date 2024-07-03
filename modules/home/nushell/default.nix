@@ -26,7 +26,19 @@ in
 
           runtimeInputs = [ nushell ];
           text = ''
-            exec nu -n -I "$NUPM_HOME/modules" -c "use nupm/; nupm ''${*}"
+            subcommand="''$1"
+            shift
+
+            args=()
+            for arg in "$@"; do
+              if [[ "$arg" == --* ]]; then
+                args+=("$arg")
+              else
+                args+=("''${arg@Q}")
+              fi
+            done
+
+            exec nu -n -I "$NUPM_HOME/modules" -c "use nupm/; nupm $subcommand ''${args[*]}"
           '';
         };
       };
