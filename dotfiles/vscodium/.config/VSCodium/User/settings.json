@@ -108,7 +108,10 @@
         "*.nuon": "nushell",
     },
     "files.exclude": {
-        "**/.gitlab-ci-local": true
+        "**/__pycache__": true,
+        "**/.gitlab-ci-local": true,
+        "**/.pytest_cache": true,
+        "**/.ruff_cache": true,
     },
     "git.enabled": true,
     "nix.enableLanguageServer": true,
