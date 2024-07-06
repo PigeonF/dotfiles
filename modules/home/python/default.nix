@@ -20,7 +20,7 @@ in
     home = {
       packages = (builtins.attrValues { inherit (pkgs) uv pipx; }) ++ [
         (pkgs.hiPrio pkgs.gcc)
-        (pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) nox virtualenv; }))
+        (pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) nox pip virtualenv; }))
       ];
     };
   };
