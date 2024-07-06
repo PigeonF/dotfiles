@@ -214,7 +214,7 @@ symbol = "🧊 "
 disabled = true
 
 [python]
-disabled = true
+disabled = false
 
 [quarto]
 disabled = true
