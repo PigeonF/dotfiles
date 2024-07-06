@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -18,10 +19,21 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = (builtins.attrValues { inherit (pkgs) uv pipx; }) ++ [
-        (pkgs.hiPrio pkgs.gcc)
-        (pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) nox pip virtualenv; }))
-      ];
+      packages =
+        let
+          nixpkgs-python = inputs.nixpkgs-python.packages.${pkgs.system};
+        in
+        (builtins.attrValues { inherit (pkgs) uv pipx; })
+        ++ [
+          (pkgs.hiPrio pkgs.gcc)
+          (pkgs.hiPrio (
+            pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) nox pip virtualenv; })
+          ))
+          nixpkgs-python."3.8"
+          nixpkgs-python."3.9"
+          nixpkgs-python."3.10"
+          nixpkgs-python."3.11"
+        ];
     };
   };
 }
