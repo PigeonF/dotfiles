@@ -1,0 +1,81 @@
+diff --git a/src/job.ts b/src/job.ts
+index 8b6fef86bee70f43..1d5cc39a00586ee9 100644
+--- a/src/job.ts
++++ b/src/job.ts
+@@ -194,7 +194,7 @@ export class Job {
+ 
+         // Set {when, allowFailure} based on rules result
+         if (this.rules) {
+-            const ruleResult = Utils.getRulesResult({cwd, rules: this.rules, variables: this._variables}, this.gitData, this.when);
++            const ruleResult = Utils.getRulesResult({cwd, rules: this.rules, variables: this._variables}, this.gitData, this.when, this.allowFailure);
+             this.when = ruleResult.when;
+             this.allowFailure = ruleResult.allowFailure;
+             this._variables = {...globalVariables, ...jobVariables, ...ruleResult.variables, ...matrixVariables, ...predefinedVariables, ...envMatchedVariables, ...argvVariables};
+diff --git a/src/utils.ts b/src/utils.ts
+index 88fdfb0ba4404124..34bc02d45ad26a60 100644
+--- a/src/utils.ts
++++ b/src/utils.ts
+@@ -180,11 +180,11 @@ export class Utils {
+         return envMatchedVariables;
+     }
+ 
+-    static getRulesResult (opt: RuleResultOpt, gitData: GitData, jobWhen: string = "on_success"): {when: string; allowFailure: boolean; variables?: {[name: string]: string}} {
++    static getRulesResult (opt: RuleResultOpt, gitData: GitData, jobWhen: string = "on_success", jobAllowFailure: boolean | {exit_codes: number | number[]} = false): {when: string; allowFailure: boolean | {exit_codes: number | number[]}; variables?: {[name: string]: string}} {
+         let when = "never";
+ 
+         // optional manual jobs allowFailure defaults to true https://docs.gitlab.com/ee/ci/jobs/job_control.html#types-of-manual-jobs
+-        let allowFailure = jobWhen === "manual";
++        let allowFailure = jobWhen === "manual" ? true : jobAllowFailure;
+         let ruleVariable: {[name: string]: string} | undefined;
+ 
+         for (const rule of opt.rules) {
+diff --git a/tests/test-cases/script-failures/.gitlab-ci.yml b/tests/test-cases/script-failures/.gitlab-ci.yml
+index e884d2a4c903c938..aeb6ebced5ca5a1b 100644
+--- a/tests/test-cases/script-failures/.gitlab-ci.yml
++++ b/tests/test-cases/script-failures/.gitlab-ci.yml
+@@ -62,9 +62,18 @@ exit_code[number[]] not allowed:
+ 
+ rules:allow_failure precedence:
+   image: nginx:alpine
+-  allow_failure: false
++  allow_failure:
++    exit_codes: 137
+   rules:
+     - if: $CI_DEFAULT_BRANCH == "main"
+-      allow_failure: true
++      allow_failure: false
+   script:
+-    - exit 1
++    - exit 137
++
++rules:without allow_failure:
++  allow_failure:
++    exit_codes: 137
++  rules:
++    - when: always
++  script:
++    - exit 137
+diff --git a/tests/test-cases/script-failures/integration.script-failures.test.ts b/tests/test-cases/script-failures/integration.script-failures.test.ts
+index cbb0a0df6e89a034..17c9f51dd1a9c921 100644
+--- a/tests/test-cases/script-failures/integration.script-failures.test.ts
++++ b/tests/test-cases/script-failures/integration.script-failures.test.ts
+@@ -141,6 +141,18 @@ test("script-failures <rules:allow_failure precedence>", async () => {
+     }, writeStreams);
+ 
+     expect(writeStreams.stdoutLines.join("\n")).toContain(
+-        chalk`{black.bgYellowBright  WARN } {blueBright rules:allow_failure precedence}`,
++        chalk`{black.bgRed  FAIL } {blueBright rules:allow_failure precedence}`,
++    );
++});
++
++test("script-failures <rules:without allow_failure>", async () => {
++    const writeStreams = new WriteStreamsMock();
++    await handler({
++        cwd: "tests/test-cases/script-failures",
++        job: ["rules:without allow_failure"],
++    }, writeStreams);
++
++    expect(writeStreams.stdoutLines.join("\n")).toContain(
++        chalk`{black.bgYellowBright  WARN } {blueBright rules:without allow_failure}`,
+     );
+ });
