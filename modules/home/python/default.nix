@@ -23,11 +23,10 @@ in
         let
           nixpkgs-python = inputs.nixpkgs-python.packages.${pkgs.system};
         in
-        (builtins.attrValues { inherit (pkgs) uv pipx; })
-        ++ [
+        [
           (pkgs.hiPrio pkgs.gcc)
           (pkgs.hiPrio (
-            pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) nox pip virtualenv; })
+            pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) virtualenv; })
           ))
           nixpkgs-python."3.8"
           nixpkgs-python."3.9"
