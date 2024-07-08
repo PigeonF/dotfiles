@@ -26,7 +26,7 @@ in
         [
           (pkgs.hiPrio pkgs.gcc)
           (pkgs.hiPrio (
-            pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) virtualenv; })
+            pkgs.python312.withPackages (ppkgs: builtins.attrValues { inherit (ppkgs) pipx virtualenv; })
           ))
           nixpkgs-python."3.8"
           nixpkgs-python."3.9"
