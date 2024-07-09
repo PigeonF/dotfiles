@@ -110,8 +110,11 @@
     "files.exclude": {
         "**/__pycache__": true,
         "**/.gitlab-ci-local": true,
+        "**/.mypy_cache": true,
         "**/.pytest_cache": true,
         "**/.ruff_cache": true,
+        "**/.venv": true,
+        "**/markdownlint-cli2-codequality.json": true,
     },
     "git.enabled": true,
     "nix.enableLanguageServer": true,
