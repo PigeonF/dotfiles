@@ -47,6 +47,7 @@ in
           passt
           pkg-config
           podman
+          pre-commit
           regctl
           reuse
           tagref
