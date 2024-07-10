@@ -49,7 +49,7 @@ in
       enable = cfg.runners != { };
 
       settings = {
-        concurrent = 4;
+        concurrent = 8;
         check_interval = 3;
         shutdown_timeout = 30;
       };
