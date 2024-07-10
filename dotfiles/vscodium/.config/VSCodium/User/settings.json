@@ -23,7 +23,7 @@
     "explorer.fileNesting.expand": false,
     "explorer.fileNesting.patterns": {
         ".clang-tidy": ".clang-format, .clangd, compile_commands.json",
-        ".editorconfig": "committed.toml, .typos.toml, .vale.ini, .markdownlint-cli2.yaml, .markdownlint.yaml",
+        ".editorconfig": "committed.toml, .typos.toml, .vale.ini, .markdownlint-cli2.yaml, .markdownlint.yaml, .yamllint.yaml",
         ".env": "*.env, .env.*, .envrc, env.d.ts",
         ".gitignore": ".gitattributes, .gitmodules, .gitmessage, .mailmap, .git-blame*",
         ".project": ".classpath",
