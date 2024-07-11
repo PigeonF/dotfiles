@@ -11,10 +11,6 @@ fi
 [ -n "${XDG_DATA_HOME:-}" ] || export XDG_DATA_HOME="${HOME}/.local/share"
 [ -n "${XDG_STATE_HOME:-}" ] || export XDG_STATE_HOME="${HOME}/.local/state"
 
-# Program specific
-export GHQ_ROOT="${HOME}/git"
-export BUILDX_NO_DEFAULT_ATTESTATIONS=true
-
 # Make some programs adhere to the XDG directories
 export BUILDX_CONFIG="${XDG_CONFIG_HOME}/buildx"
 export CARGO_HOME="${XDG_DATA_HOME}/cargo"
@@ -32,6 +28,20 @@ export RUSTUP_HOME="${XDG_DATA_HOME}/rustup"
 export PATH="${PATH}${PATH:+:}${XDG_BIN_HOME}:${CARGO_HOME}/bin:${XDG_DATA_HOME}/npm/bin:${GOPATH}/bin"
 
 # Conditional Settings
+
+{{#if (is_executable "docker") }}
+export BUILDX_NO_DEFAULT_ATTESTATIONS=true
+{{/if}}
+
+{{#if (is_executable "ghq") }}
+export GHQ_ROOT="${HOME}/git"
+{{/if}}
+
+{{#if (is_executable "gitlab-ci-local") }}
+export GCL_ARTIFACTS_TO_SOURCE=false
+export CI_JOB_TOKEN=_
+export CI_PYPI_REPOSITORY=http://pypi.internal:8080
+{{/if}}
 
 {{#if (is_executable "nvim") }}
 export EDITOR=nvim

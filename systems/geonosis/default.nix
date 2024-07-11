@@ -22,6 +22,7 @@
     docker-rootless.enable = false;
     docker.enable = true;
     incus.enable = true;
+    pypiserver.enable = true;
     nix.enable = true;
     podman.enable = true;
     user.enable = true;

@@ -3,10 +3,12 @@ global:
   CI_API_GRAPHQ_URL: https://gitlab.com/api/graphql
   CI_BUILDS_DIR: /gcl-builds
   CI_CONFIG_PATH: .gitlab-ci.yml
+  CI_JOB_TOKEN: _
   CI_MERGE_REQUEST_ID: 133337
   CI_MERGE_REQUEST_IID: 1337
   CI_MERGE_REQUEST_TARGET_BRANCH_NAME: main
   CI_PIPELINE_SOURCE: "merge_request_event"
+  CI_PYPI_REPOSITORY: http://pypi.internal:8080
   CI_REGISTRY: registry.internal
   CI: "true"
   GITLAB_USER_ID: 409429
