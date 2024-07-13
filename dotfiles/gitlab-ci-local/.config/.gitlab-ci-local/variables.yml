@@ -11,5 +11,7 @@ global:
   CI_PYPI_REPOSITORY: http://pypi.internal:8080
   CI_REGISTRY: registry.internal
   CI: "true"
+  GITLAB_USER_EMAIL: fnoegip@gmail.com
   GITLAB_USER_ID: 409429
   GITLAB_USER_LOGIN: PigeonF
+  GITLAB_USER_NAME: Jonas Fierlings
