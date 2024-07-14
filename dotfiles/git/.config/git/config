@@ -14,6 +14,9 @@
     windowMemory = 2047m
 
 [alias]
+    a = add
+    ap = add -p
+    rep = restore -p
     aliases = config --get-regexp ^alias.
     bd = branch -d
     bD = branch -D
@@ -44,6 +47,7 @@
     lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
     lg = lrgm
     ls = lrsm
+    cleanup = clean -dix -e "*.gitignored.*"
     purge = clean -dx -e "*.gitignored.*"
     root = rev-parse --show-toplevel
     s = status -s
