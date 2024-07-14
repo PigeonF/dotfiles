@@ -152,6 +152,9 @@
 [branchless "core"]
     mainBranch = "main"
 
+[branchless "revsets.alias"]
+    branched = difference(descendants(exactly(children($1), 1)), only(HEAD, $1))
+
 [branchless "test"]
     strategy = worktree
     jobs = 0
