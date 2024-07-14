@@ -1,0 +1,148 @@
+diff --git a/src/job.ts b/src/job.ts
+index 1d5cc39a00586ee9..c86f40080d17ac08 100644
+--- a/src/job.ts
++++ b/src/job.ts
+@@ -79,11 +79,12 @@ export class Job {
+     readonly environment?: {name: string; url: string | null; deployment_tier: string | null; action: string | null};
+     readonly jobId: number;
+     readonly rules?: {
+-        if: string;
+-        when: string;
+-        exists: string[];
+-        allow_failure: boolean;
+-        variables: {[key: string]: string};
++        if?: string;
++        when?: string;
++        changes?: string[] | {paths: string[]};
++        exists?: string[];
++        allow_failure?: boolean;
++        variables?: {[name: string]: string};
+     }[];
+ 
+     readonly allowFailure: boolean | {
+@@ -181,6 +182,26 @@ export class Job {
+         predefinedVariables["CI_REGISTRY"] = `local-registry.${this.gitData.remote.host}`;
+         predefinedVariables["CI_REGISTRY_IMAGE"] = `$CI_REGISTRY/${this._variables["CI_PROJECT_PATH"].toLowerCase()}`;
+ 
++        // Expand variables in rules:changes
++        if (this.rules && expandVariables) {
++            const expanded = Utils.expandVariables(this._variables);
++            this.rules.forEach((rule, ruleIdx) => {
++                const changes = Array.isArray(rule.changes) ? rule.changes : rule.changes?.paths;
++                if (!changes || !Array.isArray(changes)) {
++                    return;
++                }
++
++                changes.forEach((change, changeIdx) => {
++                    changes[changeIdx] = Utils.expandText(change, expanded);
++                });
++
++                assert(this.rules);
++                assert(this.rules[ruleIdx]);
++
++                this.rules[ruleIdx].changes = changes;
++            });
++        }
++
+         // Find environment matched variables
+         if (this.environment && expandVariables) {
+             const expanded = Utils.expandVariables(this._variables);
+diff --git a/tests/test-cases/rules-changes/.gitlab-ci-rules:changes:paths.yml b/tests/test-cases/rules-changes/.gitlab-ci-rules:changes:paths.yml
+index 193ea862db54317d..ed91a8fa2f5b1d42 100644
+--- a/tests/test-cases/rules-changes/.gitlab-ci-rules:changes:paths.yml
++++ b/tests/test-cases/rules-changes/.gitlab-ci-rules:changes:paths.yml
+@@ -7,3 +7,16 @@ alpine:
+           - "foo"
+   script:
+     - echo "Job is running"
++
++matrix:
++  image: alpine
++  parallel:
++    matrix:
++      - FILE:
++          - foo
++  rules:
++    - changes:
++        paths:
++          - "${FILE}"
++  script:
++    - echo "Job is running"
+diff --git a/tests/test-cases/rules-changes/.gitlab-ci.yml b/tests/test-cases/rules-changes/.gitlab-ci.yml
+index a71d92cb4a746caa..9acaa8a16d97d766 100644
+--- a/tests/test-cases/rules-changes/.gitlab-ci.yml
++++ b/tests/test-cases/rules-changes/.gitlab-ci.yml
+@@ -6,3 +6,15 @@ alpine:
+         - "foo"
+   script:
+     - echo "Job is running"
++
++matrix:
++  image: alpine
++  parallel:
++    matrix:
++      - FILE:
++          - foo
++  rules:
++    - changes:
++        - "${FILE}"
++  script:
++    - echo "Job is running"
+diff --git a/tests/test-cases/rules-changes/integration.rules-changes.test.ts b/tests/test-cases/rules-changes/integration.rules-changes.test.ts
+index 18f055fa6158cbf9..05afaa103df76c38 100644
+--- a/tests/test-cases/rules-changes/integration.rules-changes.test.ts
++++ b/tests/test-cases/rules-changes/integration.rules-changes.test.ts
+@@ -18,9 +18,10 @@ test("rules:changes (has changes))", async () => {
+         cwd: "tests/test-cases/rules-changes",
+     }, writeStreams);
+ 
+-    expect(writeStreams.stdoutLines.join("\n")).toContain(
+-        chalk`{blueBright alpine} {greenBright >} Job is running\n`
+-    );
++    expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining([
++        chalk`{blueBright alpine       } {greenBright >} Job is running`,
++        chalk`{blueBright matrix: [foo]} {greenBright >} Job is running`,
++    ]));
+ });
+ 
+ test("rules:changes:paths (has changes)", async () => {
+@@ -34,9 +35,10 @@ test("rules:changes:paths (has changes)", async () => {
+         file: ".gitlab-ci-rules:changes:paths.yml",
+     }, writeStreams);
+ 
+-    expect(writeStreams.stdoutLines.join("\n")).toContain(
+-        chalk`{blueBright alpine} {greenBright >} Job is running\n`
+-    );
++    expect(writeStreams.stdoutLines).toEqual(expect.arrayContaining([
++        chalk`{blueBright alpine       } {greenBright >} Job is running`,
++        chalk`{blueBright matrix: [foo]} {greenBright >} Job is running`,
++    ]));
+ });
+ 
+ test("rules:changes (no changes)", async () => {
+@@ -49,9 +51,10 @@ test("rules:changes (no changes)", async () => {
+         cwd: "tests/test-cases/rules-changes",
+     }, writeStreams);
+ 
+-    expect(writeStreams.stdoutLines.join("\n")).not.toContain(
+-        chalk`{blueBright alpine} {greenBright >} Job is running\n`
+-    );
++    expect(writeStreams.stdoutLines).not.toEqual(expect.arrayContaining([
++        chalk`{blueBright alpine       } {greenBright >} Job is running`,
++        chalk`{blueBright matrix: [foo]} {greenBright >} Job is running`,
++    ]));
+ });
+ 
+ test("rules:changes:paths (no changes)", async () => {
+@@ -65,7 +68,8 @@ test("rules:changes:paths (no changes)", async () => {
+         file: ".gitlab-ci-rules:changes:paths.yml",
+     }, writeStreams);
+ 
+-    expect(writeStreams.stdoutLines.join("\n")).not.toContain(
+-        chalk`{blueBright alpine} {greenBright >} Job is running\n`
+-    );
++    expect(writeStreams.stdoutLines).not.toEqual(expect.arrayContaining([
++        chalk`{blueBright alpine       } {greenBright >} Job is running`,
++        chalk`{blueBright matrix: [foo]} {greenBright >} Job is running`,
++    ]));
+ });
