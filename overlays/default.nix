@@ -1,4 +1,9 @@
-{ nixpkgs, nixos-unstable-small, ... }:
+{
+  nixpkgs,
+  nixos-unstable-small,
+  nixpkgs-pull-326317,
+  ...
+}:
 
 let
   inherit (nixpkgs) lib;
@@ -6,6 +11,8 @@ let
   overlays = {
     buildah = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) buildah; };
     git-cliff = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) git-cliff; };
+    go-task = final: _: { inherit (nixpkgs-pull-326317.legacyPackages.${final.system}) go-task; };
+
     gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };
     neovim = final: _: {
       inherit (nixos-unstable-small.legacyPackages.${final.system}) neovim-unwrapped;

@@ -69,6 +69,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     # For neovim 0.10
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs-pull-326317.url = "github:NixOS/nixpkgs/6e21726cb6507e9edb56af6b7bb8d21f1b35f1a5";
     nixpkgs-python = {
       url = "github:cachix/nixpkgs-python";
       inputs.nixpkgs.follows = "nixpkgs";
