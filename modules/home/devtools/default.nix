@@ -21,6 +21,7 @@ in
       packages = builtins.attrValues {
         inherit (pkgs)
           bat
+          bpftrace
           buildah
           committed
           corepack
@@ -51,6 +52,7 @@ in
           regctl
           reuse
           tagref
+          valgrind
           xdg-ninja
           yamllint
           ;
