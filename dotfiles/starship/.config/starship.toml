@@ -121,7 +121,7 @@ disabled = true
 disabled = true
 
 [guix_shell]
-disabled = true
+disabled = false
 
 [haskell]
 disabled = true
