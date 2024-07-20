@@ -59,8 +59,14 @@
 "dotfiles/zellij/.config/zellij/config.kdl" = "~/.config/zellij/config.kdl"
 "dotfiles/zellij/.config/zellij/layouts/terminal.kdl" = "~/.config/zellij/layouts/terminal.kdl"
 
-[zsh.files]
-"dotfiles/bash/.profile" = "~/.config/zsh/.zprofile"
-"dotfiles/bash/.config/bashrc.d/aliases.sh" = "~/.config/zshrc.d/aliases.zsh"
-"dotfiles/zsh/.zshenv" = "~/.zshenv"
+[zsh-light.files]
 "dotfiles/zsh/.config/zsh/.zshrc" = "~/.config/zsh/.zshrc"
+"dotfiles/zsh/.zprofile" = "~/.config/zsh/.zprofile"
+"dotfiles/zsh/.zshenv" = "~/.zshenv"
+
+[zsh]
+depends = ["zsh-light"]
+
+[zsh.files]
+"dotfiles/bash/.profile" = "~/.profile"
+"dotfiles/bash/.config/bashrc.d/aliases.sh" = "~/.config/zshrc.d/aliases.zsh"
