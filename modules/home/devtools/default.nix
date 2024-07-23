@@ -43,6 +43,7 @@ in
           markdownlint-cli2
           meson
           miller
+          ninja
           nodejs
           openssl
           passt
