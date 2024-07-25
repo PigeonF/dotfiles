@@ -12,8 +12,8 @@ buildNpmPackage {
   src = fetchFromGitHub {
     owner = "firecow";
     repo = "gitlab-ci-local";
-    rev = "4.52.1";
-    hash = "sha256-yNOlcb1I8BiR9rbqxeE7PEshEAudw62M77QBgTCBETg=";
+    rev = "2493c9dfdae16308994ff38ccaf6dfae17012520";
+    hash = "sha256-fH1qXekTy+dg5Nr4Z1NlKyXOEHfS+3o9WVAawmYtvHU=";
   };
 
   npmDepsHash = "sha256-8Fxkd3JPyspcZeENpvvuguPNXbnWL1WrcYL9c77+Gok=";
@@ -28,9 +28,7 @@ buildNpmPackage {
 
   patches = [
     ./umask.patch
-    ./1283.patch
-    ./1294.patch
-    ./1295.patch
+    ./1301.patch
   ];
 
   meta = with lib; {
