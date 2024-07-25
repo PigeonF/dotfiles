@@ -17,6 +17,7 @@ in
           setSocketVariable = true;
 
           daemon.settings = {
+            iptables = !config.networking.nftables.enable;
             features = {
               containerd-snapshotter = true;
             };
