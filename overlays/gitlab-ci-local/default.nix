@@ -29,6 +29,7 @@ buildNpmPackage {
   patches = [
     ./umask.patch
     ./1301.patch
+    ./1302.patch
   ];
 
   meta = with lib; {
