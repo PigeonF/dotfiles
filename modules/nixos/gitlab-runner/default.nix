@@ -11,7 +11,7 @@ in
 {
   options = {
     pigeonf.gitlab-runner = {
-      enable = lib.mkEnableOption "enable gitlab-runner";
+      enable = lib.mkEnableOption "gitlab-runner";
 
       runners = lib.mkOption {
         description = "Gitlab Runner runners";

@@ -6,8 +6,14 @@ in
 {
   options = {
     pigeonf.network = {
-      enable = lib.mkEnableOption "Use default network configuration";
-      avahi.enable = lib.mkEnableOption "Enable avahi";
+      enable = lib.mkEnableOption "default network configuration";
+      avahi.enable = lib.mkEnableOption "avahi";
+      nftables.enable = lib.mkOption {
+        default = true;
+        example = false;
+        description = "Whether to enable nftables";
+        type = lib.types.bool;
+      };
 
       envFile = lib.mkOption {
         type = lib.types.path;
@@ -16,7 +22,7 @@ in
 
       networks = {
         obi-lan-kenobi = {
-          enable = lib.mkEnableOption "Add Obi-Lan Kenobi Network";
+          enable = lib.mkEnableOption "Obi-Lan Kenobi Network";
           env = {
             pass = lib.mkOption {
               type = lib.types.str;
@@ -27,7 +33,7 @@ in
         };
 
         eduroam = {
-          enable = lib.mkEnableOption "Add Eduroam Network";
+          enable = lib.mkEnableOption "Eduroam Network";
 
           env = {
             user = lib.mkOption {
@@ -48,7 +54,7 @@ in
 
   config = lib.mkIf cfg.enable {
     networking = {
-      nftables.enable = mkDefault true;
+      nftables.enable = mkDefault cfg.nftables.enable;
       firewall.enable = mkDefault true;
       useDHCP = mkDefault true;
 

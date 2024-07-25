@@ -13,7 +13,7 @@ in
   options = {
     # https://github.com/NixOS/nixpkgs/issues/280288
     pigeonf.virtualisation.containers.registries = {
-      enable = lib.mkEnableOption "Enable registries conf";
+      enable = lib.mkEnableOption "registries conf";
       settings = mkOption {
         inherit (toml) type;
         default = { };

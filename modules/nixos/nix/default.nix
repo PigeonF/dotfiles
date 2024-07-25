@@ -11,7 +11,7 @@ in
 {
   options = {
     pigeonf.nix = {
-      enable = lib.mkEnableOption "Use default nix configuration";
+      enable = lib.mkEnableOption "default nix configuration";
     };
   };
 

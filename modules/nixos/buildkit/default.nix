@@ -11,7 +11,7 @@ in
 {
   options = {
     pigeonf.buildkit = {
-      enable = lib.mkEnableOption "Enable buildkit";
+      enable = lib.mkEnableOption "buildkit";
     };
   };
 

@@ -10,7 +10,7 @@ in
 {
   options = {
     pigeonf.docker = {
-      enable = lib.mkEnableOption "Enable docker";
+      enable = lib.mkEnableOption "docker";
     };
   };
 

@@ -10,7 +10,7 @@ in
 {
   options = {
     pigeonf.podman = {
-      enable = lib.mkEnableOption "Enable podman";
+      enable = lib.mkEnableOption "podman";
     };
   };
 

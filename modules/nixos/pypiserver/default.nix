@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.pypiserver = {
-      enable = lib.mkEnableOption "enable local pypi server";
+      enable = lib.mkEnableOption "local pypi server";
     };
   };
 

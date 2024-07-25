@@ -12,7 +12,7 @@ in
 {
   options = {
     pigeonf.core = {
-      enable = lib.mkEnableOption "Use default core configuration";
+      enable = lib.mkEnableOption "default core configuration";
     };
   };
 

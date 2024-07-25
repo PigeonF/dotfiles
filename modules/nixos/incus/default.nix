@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.incus = {
-      enable = lib.mkEnableOption "Enable incus";
+      enable = lib.mkEnableOption "incus";
     };
   };
 

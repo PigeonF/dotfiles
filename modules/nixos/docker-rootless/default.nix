@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.docker-rootless = {
-      enable = lib.mkEnableOption "Enable docker-rootless";
+      enable = lib.mkEnableOption "docker-rootless";
     };
   };
 

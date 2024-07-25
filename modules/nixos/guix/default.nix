@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.guix = {
-      enable = lib.mkEnableOption "Use default guix configuration";
+      enable = lib.mkEnableOption "guix";
     };
   };
 

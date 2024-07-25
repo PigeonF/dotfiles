@@ -8,7 +8,7 @@ in
 {
   options = {
     pigeonf.dns = {
-      enable = lib.mkEnableOption "Use .internal DNS setup";
+      enable = lib.mkEnableOption ".internal DNS setup";
     };
   };
 

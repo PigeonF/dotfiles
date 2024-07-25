@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.user = {
-      enable = lib.mkEnableOption "Enable PigeonF User Account";
+      enable = lib.mkEnableOption "PigeonF User Account";
     };
   };
 

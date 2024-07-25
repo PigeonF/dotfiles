@@ -5,7 +5,7 @@ in
 {
   options = {
     pigeonf.container-registry = {
-      enable = lib.mkEnableOption "enable local container registry";
+      enable = lib.mkEnableOption "local container registry";
     };
   };
 
