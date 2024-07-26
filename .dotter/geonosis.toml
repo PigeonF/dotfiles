@@ -3,6 +3,7 @@ packages = [
   "bash",
   "git",
   "gitlab-ci-local",
+  "jj",
   "npm",
   "nushell",
   "nvim",

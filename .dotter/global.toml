@@ -26,6 +26,9 @@
 "dotfiles/gitlab-ci-local/.config/.gitlab-ci-local/.env" = "~/.config/.gitlab-ci-local/.env"
 "dotfiles/gitlab-ci-local/.config/.gitlab-ci-local/variables.yml" = "~/.config/.gitlab-ci-local/variables.yml"
 
+[jj.files]
+"dotfiles/jj/.config/jj/config.toml" = "~/.config/jj/config.toml"
+
 [npm.files]
 "dotfiles/npm/.config/npm/npmrc" = "~/.config/npm/npmrc"
 
