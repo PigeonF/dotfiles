@@ -39,6 +39,7 @@ in
           go
           go-task
           grype
+          jujutsu
           just
           markdownlint-cli2
           meson
