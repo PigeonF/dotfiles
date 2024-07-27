@@ -1,3 +1,29 @@
 [user]
-name = "Jonas Fierlings"
 email = "fnoegip@gmail.com"
+name = "Jonas Fierlings"
+
+[ui]
+default-command = "log"
+diff-editor = "diffedit3-ssh"
+paginate = "never"
+
+[signing]
+backend = "ssh"
+key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL"
+sign-all = true
+
+[merge-tools.diffedit3-ssh]
+program = "diffedit3"
+edit-args = [
+  "$left",
+  "$right",
+  "$output",
+  "--port",
+  "17376-17380",
+  "--no-browser",
+]
+
+[aliases]
+d = ["diff"]
+l = ["log"]
+s = ["status"]

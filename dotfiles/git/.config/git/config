@@ -47,8 +47,8 @@
     lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
     lg = lrgm
     ls = lrsm
-    cleanup = clean -dix -e "*.gitignored.*"
-    purge = clean -dx -e "*.gitignored.*"
+    cleanup = clean -dix -e "*.gitignored.*" -e ".jj"
+    purge = clean -dx -e "*.gitignored.*" -e ".jj"
     root = rev-parse --show-toplevel
     s = status -s
     undo = reset --soft HEAD~1

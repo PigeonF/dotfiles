@@ -26,6 +26,7 @@ in
           committed
           corepack
           crane
+          diffedit3
           diffoci
           diffoscopeMinimal
           dive
