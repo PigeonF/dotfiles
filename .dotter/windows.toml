@@ -19,6 +19,7 @@
 "dotfiles/nushell/.config/nushell/login.nu" = "~/AppData/Roaming/nushell/login.nu"
 
 [nvim.files]
+"dotfiles/nvim/.config/nvim/ftplugin" = "~/AppData/Local/nvim/ftplugin"
 "dotfiles/nvim/.config/nvim/init.lua" = "~/AppData/Local/nvim/init.lua"
 "dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/AppData/Local/nvim/lazy-lock.json"
 "dotfiles/nvim/.config/nvim/lua" = "~/AppData/Local/nvim/lua"

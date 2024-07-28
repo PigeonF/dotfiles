@@ -22,7 +22,7 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣', eol = '↲' }
 vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 vim.opt.scrolloff = 10
-vim.opt.colorcolumn = '80,100,+0'
+vim.opt.colorcolumn = '81,101,+1'
 
 -- [[ Basic Keymaps ]]
 vim.opt.hlsearch = true
@@ -515,6 +515,9 @@ require('lazy').setup({
       ensure_installed = {
         'bash',
         'c',
+        'diff',
+        'gitcommit',
+        'git_rebase',
         'html',
         'lua',
         'luadoc',

@@ -38,6 +38,7 @@
 "dotfiles/nushell/.config/nushell/login.nu" = "~/.config/nushell/login.nu"
 
 [nvim.files]
+"dotfiles/nvim/.config/nvim/ftplugin" = "~/.config/nvim/ftplugin"
 "dotfiles/nvim/.config/nvim/init.lua" = "~/.config/nvim/init.lua"
 "dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/.config/nvim/lazy-lock.json"
 "dotfiles/nvim/.config/nvim/lua" = "~/.config/nvim/lua"
