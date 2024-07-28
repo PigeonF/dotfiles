@@ -176,7 +176,7 @@ require('lazy').setup({
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
       { 'j-hui/fidget.nvim', opts = {} },
-      { 'folke/lazydev.nvim', ft='lua', opts = {} },
+      { 'folke/lazydev.nvim', ft = 'lua', opts = {} },
       { 'b0o/SchemaStore.nvim', lazy = true },
     },
     config = function()
