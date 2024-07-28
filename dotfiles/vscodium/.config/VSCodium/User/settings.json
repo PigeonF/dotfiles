@@ -112,6 +112,7 @@
     "files.exclude": {
         "**/__pycache__": true,
         "**/.gitlab-ci-local": true,
+        "**/.jj": true,
         "**/.mypy_cache": true,
         "**/.pytest_cache": true,
         "**/.ruff_cache": true,
