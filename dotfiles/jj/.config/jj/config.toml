@@ -5,6 +5,7 @@ name = "Jonas Fierlings"
 [ui]
 default-command = "log"
 diff-editor = "diffedit3-ssh"
+merge-editor = "vscodium"
 paginate = "never"
 
 [git]
@@ -25,6 +26,11 @@ edit-args = [
   "17376-17380",
   "--no-browser",
 ]
+
+[merge-tools.vscodium]
+program = "codium"
+merge-args = ["--wait", "--merge", "$left", "$right", "$base", "$output"]
+merge-tool-edits-conflict-markers = true
 
 [aliases]
 d = ["diff"]
