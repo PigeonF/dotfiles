@@ -4,7 +4,7 @@ palette = "catppuccin_macchiato"
 format = "$all"
 
 [custom.jj]
-format = '[$symbol( $output )]($style)'
+format = '[$symbol ($output )]($style)'
 style = "bold purple"
 description = "jj repository info"
 command = '''
