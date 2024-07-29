@@ -8,12 +8,16 @@ alias rgA="rg --no-ignore --hidden"
 alias c="cargo"
 {{/if}}
 
+{{#if (is_executable "eza") }}
+alias ls="eza"
+{{/if}}
+
 {{#if (is_executable "git")}}
 alias g="git"
 {{/if}}
 
-{{#if (is_executable "eza") }}
-alias ls="eza"
+{{#if (is_executable "git")}}
+alias jjj="jj --ignore-working-copy"
 {{/if}}
 
 {{#if (is_executable "nvim") }}
