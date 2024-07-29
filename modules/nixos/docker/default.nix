@@ -19,7 +19,7 @@ in
       docker = {
         enable = true;
         daemon.settings = {
-          iptables = !config.networking.nftables.enable;
+          # iptables = !config.networking.nftables.enable;
           features = {
             containerd-snapshotter = true;
           };
