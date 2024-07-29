@@ -7,6 +7,9 @@ default-command = "log"
 diff-editor = "diffedit3-ssh"
 paginate = "never"
 
+[git]
+push-branch-prefix = "PigeonF/push-"
+
 [signing]
 backend = "ssh"
 key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL"
