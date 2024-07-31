@@ -19,10 +19,10 @@
 "dotfiles/nushell/.config/nushell/login.nu" = "~/AppData/Roaming/nushell/login.nu"
 
 [nvim.files]
-"dotfiles/nvim/.config/nvim/ftplugin" = "~/AppData/Local/nvim/ftplugin"
-"dotfiles/nvim/.config/nvim/init.lua" = "~/AppData/Local/nvim/init.lua"
-"dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/AppData/Local/nvim/lazy-lock.json"
-"dotfiles/nvim/.config/nvim/lua" = "~/AppData/Local/nvim/lua"
+"dotfiles/nvim/.config/nvim/ftplugin" = "~/AppData/Roaming/nvim/ftplugin"
+"dotfiles/nvim/.config/nvim/init.lua" = "~/AppData/Roaming/nvim/init.lua"
+"dotfiles/nvim/.config/nvim/lazy-lock.json" = "~/AppData/Roaming/nvim/lazy-lock.json"
+"dotfiles/nvim/.config/nvim/lua" = "~/AppData/Roaming/nvim/lua"
 
 [spicetify.files]
 "dotfiles/spicetify/.config/spicetify/config-xpui.ini" = "~/AppData/Roaming/spicetify/config-xpui.ini"

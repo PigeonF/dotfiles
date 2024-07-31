@@ -22,13 +22,27 @@ def with-env-defaults [defaults: record] nothing -> record {
     | transpose -i -r -d
 }
 
-export-env { load-env (with-env-defaults {
-    XDG_CACHE_HOME: ($nu.home-path | path join ".cache")
-    XDG_CONFIG_HOME: ($nu.home-path | path join ".config")
-    XDG_DATA_HOME: ($nu.home-path | path join ".local" "share")
-    XDG_STATE_HOME: ($nu.home-path | path join ".local" "state")
-    XDG_BIN_HOME: ($nu.home-path | path join ".local" "bin")
-}) }
+def is-windows? []: nothing -> bool {
+    ($nu.os-info | get family) == "windows"
+}
+
+if (is-windows?) {
+    export-env { load-env (with-env-defaults {
+        XDG_CACHE_HOME: ($nu.home-path | path join "AppData" "Local")
+        XDG_CONFIG_HOME: ($nu.home-path | path join "AppData" "Roaming")
+        XDG_DATA_HOME: ($nu.home-path | path join "AppData" "Local")
+        XDG_STATE_HOME: ($nu.home-path | path join "AppData" "Local")
+        XDG_BIN_HOME: ($nu.home-path | path join "bin")
+    }) }
+} else {
+    export-env { load-env (with-env-defaults {
+        XDG_CACHE_HOME: ($nu.home-path | path join ".cache")
+        XDG_CONFIG_HOME: ($nu.home-path | path join ".config")
+        XDG_DATA_HOME: ($nu.home-path | path join ".local" "share")
+        XDG_STATE_HOME: ($nu.home-path | path join ".local" "state")
+        XDG_BIN_HOME: ($nu.home-path | path join ".local" "bin")
+    }) }
+}
 
 export-env { load-env (with-env-defaults {
     CARGO_HOME: ($env.XDG_DATA_HOME | path join "cargo")
@@ -51,10 +65,6 @@ $env.NU_PLUGIN_DIRS = [
     ($env.CARGO_HOME | path join "bin")
     ($env.NUPM_HOME | path join "plugins/bin")
 ]
-
-def is-windows? []: nothing -> bool {
-    ($nu.os-info | get family) == "windows"
-}
 
 use std ["path add"]
 
