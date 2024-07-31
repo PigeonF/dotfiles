@@ -20,6 +20,7 @@ in
     home = {
       packages = builtins.attrValues {
         inherit (pkgs)
+          cargo-asm
           cargo-audit
           cargo-auditable
           cargo-binutils
