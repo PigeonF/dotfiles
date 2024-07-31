@@ -67,6 +67,7 @@ path add $env.XDG_BIN_HOME
 
 if (is-windows?) {
     $env.Path = ($env.Path | uniq)
+    $env.EDITOR = 'nvim'
 } else {
     $env.PATH = ($env.PATH | uniq)
 }
