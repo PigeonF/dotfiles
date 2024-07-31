@@ -144,6 +144,7 @@
     "terminal.integrated.fontFamily": "IosevkaTerm Nerd Font Mono",
     "terminal.integrated.fontSize": 18,
     "terminal.integrated.fontWeight": 450,
+    "tinymist.formatterMode": "typstyle",
     "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${profileName}",
     "workbench.colorTheme": "Catppuccin Frappé",
     "workbench.iconTheme": "catppuccin-frappe",
