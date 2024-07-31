@@ -42,9 +42,15 @@
     gitlab-runner = {
       enable = true;
       runners = {
+        gitlab = {
+          description = "gitlab.com Runner";
+          envFile = config.sops.secrets."gitlab-runner-gitlab-com/environment".path;
+          buildkitEnabled = true;
+        };
+
         default = {
-          description = "Default Runner";
-          envFile = config.sops.secrets."gitlab-runner/environment".path;
+          description = "git.noc.rub.de Runner";
+          envFile = config.sops.secrets."gitlab-runner-git-noc-rub-de/environment".path;
           buildkitEnabled = true;
         };
       };
