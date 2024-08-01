@@ -9,6 +9,8 @@ let
   inherit (lib) mkDefault;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.nix = {
       enable = lib.mkEnableOption "default nix configuration";

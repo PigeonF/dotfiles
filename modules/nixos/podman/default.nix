@@ -8,6 +8,8 @@ let
   cfg = config.pigeonf.podman;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.podman = {
       enable = lib.mkEnableOption "podman";

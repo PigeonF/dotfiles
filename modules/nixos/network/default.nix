@@ -4,6 +4,8 @@ let
   inherit (lib) mkDefault;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.network = {
       enable = lib.mkEnableOption "default network configuration";

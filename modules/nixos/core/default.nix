@@ -10,6 +10,8 @@ let
   inherit (lib) mkDefault;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.core = {
       enable = lib.mkEnableOption "default core configuration";

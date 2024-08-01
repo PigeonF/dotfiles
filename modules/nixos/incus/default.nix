@@ -3,6 +3,8 @@ let
   cfg = config.pigeonf.incus;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.incus = {
       enable = lib.mkEnableOption "incus";

@@ -1,6 +1,8 @@
 { inputs, ... }:
 
 {
+  _file = ./default.nix;
+
   perSystem =
     { pkgs, ... }:
     {

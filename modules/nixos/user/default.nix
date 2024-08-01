@@ -3,6 +3,8 @@ let
   cfg = config.pigeonf.user;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.user = {
       enable = lib.mkEnableOption "PigeonF User Account";

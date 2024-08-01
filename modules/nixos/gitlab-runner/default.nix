@@ -9,6 +9,8 @@ let
   hasPodman = config.virtualisation.podman.enable;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.gitlab-runner = {
       enable = lib.mkEnableOption "gitlab-runner";

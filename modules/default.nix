@@ -23,6 +23,8 @@ let
 in
 
 {
+  _file = ./default.nix;
+
   flake.homeModules = readModulesIn ./home;
   flake.nixosModules = readModulesIn ./nixos;
 }

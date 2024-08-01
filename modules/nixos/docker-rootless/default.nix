@@ -3,6 +3,8 @@ let
   cfg = config.pigeonf.docker-rootless;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.docker-rootless = {
       enable = lib.mkEnableOption "docker-rootless";

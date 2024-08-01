@@ -10,6 +10,8 @@ let
   toml = pkgs.formats.toml { };
 in
 {
+  _file = ./default.nix;
+
   options = {
     # https://github.com/NixOS/nixpkgs/issues/280288
     pigeonf.virtualisation.containers.registries = {

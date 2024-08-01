@@ -15,6 +15,8 @@ let
 in
 
 {
+  _file = ./home-modules.nix;
+
   options = {
     flake = mkSubmoduleOptions {
       homeModules = mkOption {

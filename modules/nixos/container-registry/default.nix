@@ -3,6 +3,8 @@ let
   cfg = config.pigeonf.container-registry;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.container-registry = {
       enable = lib.mkEnableOption "local container registry";

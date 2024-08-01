@@ -1,5 +1,7 @@
 { config, inputs, ... }:
 {
+  _file = ./default.nix;
+
   imports = [
     inputs.disko.nixosModules.disko
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-t480s

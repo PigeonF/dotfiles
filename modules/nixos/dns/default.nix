@@ -6,6 +6,8 @@ let
   gateway = "${base}::1";
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.dns = {
       enable = lib.mkEnableOption ".internal DNS setup";

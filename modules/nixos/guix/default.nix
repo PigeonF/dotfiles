@@ -3,6 +3,8 @@ let
   cfg = config.pigeonf.guix;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.guix = {
       enable = lib.mkEnableOption "guix";

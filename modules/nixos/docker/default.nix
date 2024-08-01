@@ -8,6 +8,8 @@ let
   cfg = config.pigeonf.docker;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.docker = {
       enable = lib.mkEnableOption "docker";

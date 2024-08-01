@@ -1,4 +1,6 @@
 {
+  _file = ./hardware.nix;
+
   boot = {
     initrd.availableKernelModules = [ "nvme" ];
     kernelModules = [

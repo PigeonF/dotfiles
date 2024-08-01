@@ -1,4 +1,6 @@
 {
+  _file = ./default.nix;
+
   sops.secrets = {
     "network" = {
       sopsFile = ./network.env;

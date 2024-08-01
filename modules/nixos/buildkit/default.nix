@@ -9,6 +9,8 @@ let
   hasRegistry = config.pigeonf.container-registry.enable;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.buildkit = {
       enable = lib.mkEnableOption "buildkit";

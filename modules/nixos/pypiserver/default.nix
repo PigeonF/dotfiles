@@ -3,6 +3,8 @@ let
   cfg = config.pigeonf.pypiserver;
 in
 {
+  _file = ./default.nix;
+
   options = {
     pigeonf.pypiserver = {
       enable = lib.mkEnableOption "local pypi server";
