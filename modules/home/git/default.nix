@@ -22,6 +22,7 @@ in
         delta
         gh
         git-branchless
+        git-lfs
         glab
         ;
 
