@@ -149,4 +149,7 @@
     "workbench.colorTheme": "Catppuccin Frappé",
     "workbench.iconTheme": "catppuccin-frappe",
     "workbench.sideBar.location": "right",
+    "yaml.customTags": [
+        "!reference sequence"
+    ]
 }
