@@ -34,5 +34,6 @@ merge-tool-edits-conflict-markers = true
 
 [aliases]
 d = ["diff"]
+ds = ["diff", "--stat"]
 l = ["log"]
 s = ["status"]
