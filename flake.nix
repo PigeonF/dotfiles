@@ -26,7 +26,10 @@
           inherit (pkgs.lib) getExe;
         in
         {
-          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.extend inputs.self.overlays.default;
+          _module.args.pkgs = inputs'.nixpkgs.legacyPackages.appendOverlays [
+            inputs.self.overlays.default
+            inputs.typst.overlays.default
+          ];
 
           formatter = pkgs.nixfmt-rfc-style;
 
@@ -93,6 +96,11 @@
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    typst = {
+      url = "github:typst/typst";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.systems.follows = "systems";
     };
     nixos-hardware.url = "github:NixOS/nixos-hardware";
   };

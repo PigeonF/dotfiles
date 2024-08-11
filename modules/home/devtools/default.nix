@@ -55,6 +55,7 @@ in
           regctl
           reuse
           tagref
+          typst-dev
           valgrind
           xdg-ninja
           yamllint

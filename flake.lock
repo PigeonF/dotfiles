@@ -1,5 +1,26 @@
 {
   "nodes": {
+    "crane": {
+      "inputs": {
+        "nixpkgs": [
+          "typst",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1698166613,
+        "narHash": "sha256-y4rdN4flxRiROqNi1waMYIZj/Fs7L2OrszFk/1ry9vU=",
+        "owner": "ipetkov",
+        "repo": "crane",
+        "rev": "b7db46f0f1751f7b1d1911f6be7daf568ad5bc65",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ipetkov",
+        "repo": "crane",
+        "type": "github"
+      }
+    },
     "disko": {
       "inputs": {
         "nixpkgs": [
@@ -54,6 +75,23 @@
         "owner": "hercules-ci",
         "repo": "flake-parts",
         "type": "github"
+      }
+    },
+    "flake-parts_2": {
+      "inputs": {
+        "nixpkgs-lib": "nixpkgs-lib"
+      },
+      "locked": {
+        "lastModified": 1696343447,
+        "narHash": "sha256-B2xAZKLkkeRFG5XcHHSXXcP7To9Xzr59KXeZiRf4vdQ=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "c9afaba3dfa4085dbd2ccb38dfade5141e33d9d4",
+        "type": "github"
+      },
+      "original": {
+        "id": "flake-parts",
+        "type": "indirect"
       }
     },
     "home-manager": {
@@ -124,6 +162,24 @@
         "type": "github"
       }
     },
+    "nixpkgs-lib": {
+      "locked": {
+        "dir": "lib",
+        "lastModified": 1696019113,
+        "narHash": "sha256-X3+DKYWJm93DRSdC5M6K5hLqzSya9BjibtBsuARoPco=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "f5892ddac112a1e9b3612c39af1b72987ee5783a",
+        "type": "github"
+      },
+      "original": {
+        "dir": "lib",
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-python": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -176,7 +232,8 @@
         "nixpkgs-python": "nixpkgs-python",
         "quadlet-nix": "quadlet-nix",
         "sops-nix": "sops-nix",
-        "systems": "systems"
+        "systems": "systems",
+        "typst": "typst"
       }
     },
     "sops-nix": {
@@ -214,6 +271,31 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "typst": {
+      "inputs": {
+        "crane": "crane",
+        "flake-parts": "flake-parts_2",
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "systems": [
+          "systems"
+        ]
+      },
+      "locked": {
+        "lastModified": 1721660722,
+        "narHash": "sha256-mVLtuw+tX4OrMaEjJ7OWOHOOLg0KouCJZ6vUF6Twwok=",
+        "owner": "typst",
+        "repo": "typst",
+        "rev": "c4dd6fa06227b8c4a04cf488f371f52d5379ef9b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "typst",
+        "repo": "typst",
         "type": "github"
       }
     }
