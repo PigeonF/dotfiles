@@ -1,5 +1,8 @@
 [user]
-email = "fnoegip@gmail.com"
+# Set with `jj config set --repo user.email "fnoegip@gmail.com"
+# Not set to default value so that projects always use the correct E-Mail by forcing me to choose
+# manually.
+# email = "fnoegip@gmail.com"
 name = "Jonas Fierlings"
 
 [ui]
