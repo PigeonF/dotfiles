@@ -18,7 +18,7 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = [ (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-medium latex-bin latexmk; }) ];
+      packages = [ (pkgs.texlive.combine { inherit (pkgs.texlive) scheme-full latex-bin latexmk; }) ];
     };
   };
 }
