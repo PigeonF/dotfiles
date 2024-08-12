@@ -31,6 +31,7 @@ edit-args = [
 program = "codium"
 merge-args = ["--wait", "--merge", "$left", "$right", "$base", "$output"]
 merge-tool-edits-conflict-markers = true
+diff-invocation-mode = "file-by-file"
 
 [aliases]
 d = ["diff"]
