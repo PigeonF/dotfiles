@@ -20,6 +20,7 @@ let
     markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
     starship = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) starship; };
+    cargo-cross = final: _: { cargo-cross = final.callPackage ./cargo-cross { }; };
   };
 in
 
