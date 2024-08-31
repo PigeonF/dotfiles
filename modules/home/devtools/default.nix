@@ -55,6 +55,7 @@ in
           regctl
           reuse
           tagref
+          tealdeer
           typst-dev
           valgrind
           xdg-ninja
