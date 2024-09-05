@@ -41,6 +41,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
           nushell.enable = true;
           nvim.enable = true;
           python.enable = true;
+          ruby.enable = true;
           rust.enable = true;
           starship.enable = true;
           vscodium.enable = true;
