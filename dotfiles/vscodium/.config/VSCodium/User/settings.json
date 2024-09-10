@@ -9,6 +9,7 @@
     "editor.fontWeight": "450",
     "editor.formatOnSave": true,
     "editor.guides.bracketPairs": "active",
+    "editor.inlayHints.enabled": "offUnlessPressed",
     "editor.minimap.enabled": false,
     "editor.minimap.showSlider": "always",
     "editor.renderWhitespace": "trailing",
