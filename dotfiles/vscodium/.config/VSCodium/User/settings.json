@@ -144,12 +144,21 @@
     "terminal.integrated.fontFamily": "IosevkaTerm Nerd Font Mono",
     "terminal.integrated.fontSize": 18,
     "terminal.integrated.fontWeight": 450,
-    "tinymist.formatterMode": "typstyle",
+    "texlab.bibtexFormatter": "latexindent",
+    "texlab.build.executable": "nextonic",
+    "texlab.build.args": [
+        "compile",
+        "%f",
+        "--synctex",
+        "--keep-logs",
+        "--keep-intermediates"
+    ],
+    "texlab.latexFormatter": "latexindent",
     "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${profileName}",
     "workbench.colorTheme": "Catppuccin Frappé",
     "workbench.iconTheme": "catppuccin-frappe",
     "workbench.sideBar.location": "right",
     "yaml.customTags": [
         "!reference sequence"
-    ]
+    ],
 }
