@@ -120,6 +120,7 @@
         "**/markdownlint-cli2-codequality.json": true,
     },
     "git.enabled": true,
+    "go.toolsManagement.autoUpdate": true,
     "nix.enableLanguageServer": true,
     "nix.serverPath": "nil",
     "nix.serverSettings": {
