@@ -19,9 +19,12 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    boot.initrd.systemd.enable = mkDefault true;
+
     time = {
       timeZone = mkDefault "Europe/Berlin";
     };
+
     system = {
       configurationRevision = mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
       switch = {
