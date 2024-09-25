@@ -43,6 +43,7 @@ in
           jujutsu
           just
           markdownlint-cli2
+          mdbook
           meson
           miller
           ninja

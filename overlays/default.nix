@@ -9,6 +9,7 @@ let
     go-task = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) go-task; };
     gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };
     jujutsu = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) jujutsu; };
+    mdbook = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) mdbook; };
     neovim = final: _: {
       inherit (nixos-unstable-small.legacyPackages.${final.system}) neovim-unwrapped;
     };
