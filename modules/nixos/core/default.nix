@@ -24,6 +24,10 @@ in
     };
     system = {
       configurationRevision = mkDefault (inputs.self.rev or inputs.self.dirtyRev or null);
+      switch = {
+        enable = mkDefault false;
+        enableNg = mkDefault true;
+      };
     };
 
     environment = {
