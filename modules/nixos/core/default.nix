@@ -69,7 +69,11 @@ in
     '';
 
     services = {
-      dbus.enable = mkDefault true;
+      dbus = {
+        enable = mkDefault true;
+        implementation = "broker";
+      };
+
       timesyncd.enable = mkDefault true;
       # Do not suspend when closing lid while being charged.
       logind.lidSwitchExternalPower = mkDefault "ignore";
