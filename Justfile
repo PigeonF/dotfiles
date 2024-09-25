@@ -12,14 +12,18 @@ export JUST_LOG := log
 _default:
   @just --justfile {{ justfile() }} --list
 
-build:
-  nixos-rebuild build --verbose --print-build-logs --show-trace --flake .
+build: build-os build-hm
 
-switch:
-  nixos-rebuild switch --verbose --print-build-logs --show-trace --flake .
+build-os:
+  nixos-rebuild build --verbose --print-build-logs --show-trace --keep-going --flake .
 
-hm TARGET="":
+build-hm TARGET="":
   home-manager build --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
 
-shm TARGET="":
+switch: switch-os switch-hm
+
+switch-os:
+  nixos-rebuild switch --verbose --print-build-logs --show-trace --flake .
+
+switch-hm TARGET="":
   home-manager switch --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
