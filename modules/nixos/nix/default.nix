@@ -56,5 +56,9 @@ in
         allowUnfree = mkDefault true;
       };
     };
+
+    systemd.services.nix-daemon = {
+      environment.TMPDIR = "/var/tmp";
+    };
   };
 }
