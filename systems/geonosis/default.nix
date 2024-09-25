@@ -56,11 +56,11 @@
     dns.enable = true;
     docker-rootless.enable = false;
     docker.enable = true;
-    guix.enable = true;
+    # guix.enable = true;
     incus.enable = true;
     nix.enable = true;
     podman.enable = true;
-    pypiserver.enable = true;
+    # pypiserver.enable = true;
     user.enable = true;
     virtualisation.containers.registries.enable = true;
 
