@@ -13,6 +13,7 @@ paginate = "never"
 
 [git]
 push-branch-prefix = "PigeonF/push-"
+private-commits = "description(glob:\"private:*\")"
 
 [signing]
 backend = "ssh"
