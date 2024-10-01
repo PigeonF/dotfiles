@@ -10,6 +10,9 @@
 [erdtree.files]
 "dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/AppData/Roaming/erdtree/.erdtree.toml"
 
+[helix.files]
+"dotfiles/helix/.config/helix/config.toml" = "~/AppData/Roaming/helix/config.toml"
+
 [jj.files]
 "dotfiles/jj/.config/jj/config.toml" = "~/AppData/Roaming/jj/config.toml"
 

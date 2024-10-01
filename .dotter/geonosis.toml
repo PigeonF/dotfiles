@@ -3,6 +3,7 @@ packages = [
   "bash",
   "git",
   "gitlab-ci-local",
+  "helix",
   "jj",
   "npm",
   "nushell",

@@ -5,6 +5,7 @@ packages = [
   "atuin",
   "erdtree",
   "git",
+  "helix",
   "jj",
   "nushell",
   "nvim",
