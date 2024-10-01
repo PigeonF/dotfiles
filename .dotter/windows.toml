@@ -2,16 +2,21 @@
 "dotfiles/alacritty/.config/alacritty/alacritty.toml" = "~/AppData/Roaming/alacritty/alacritty.toml"
 
 [atuin.files]
-"dotfiles/atuin/.config/atuin/config.toml" = "~/.config/atuin/config.toml"
+"dotfiles/atuin/.config/atuin/config.toml" = "~/AppData/Roaming/atuin/config.toml"
 
 [bat.files]
 "dotfiles/bat/.config/bat/config" = "~/AppData/Roaming/bat/config"
 
 [bin.files]
-"bin/alarm.ps1" = "D:/bin/alarm.ps1"
+"bin/alarm.ps1" = "~/bin/alarm.ps1"
 
 [erdtree.files]
 "dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/AppData/Roaming/erdtree/.erdtree.toml"
+
+[git.files]
+"dotfiles/git/.config/git/config" = "~/AppData/Roaming/git/config"
+"dotfiles/git/.config/git/ignore" = "~/AppData/Roaming/git/ignore"
+"dotfiles/git/.ssh/allowed_signers" = "~/.ssh/allowed_signers"
 
 [helix.files]
 "dotfiles/helix/.config/helix/config.toml" = "~/AppData/Roaming/helix/config.toml"

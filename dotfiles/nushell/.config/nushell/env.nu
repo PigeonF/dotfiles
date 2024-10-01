@@ -28,10 +28,10 @@ def is-windows? []: nothing -> bool {
 
 if (is-windows?) {
     export-env { load-env (with-env-defaults {
-        XDG_CACHE_HOME: ($nu.home-path | path join "AppData" "Local")
+        XDG_CACHE_HOME: ($nu.home-path | path join "AppData" "Local" "Cache")
         XDG_CONFIG_HOME: ($nu.home-path | path join "AppData" "Roaming")
-        XDG_DATA_HOME: ($nu.home-path | path join "AppData" "Local")
-        XDG_STATE_HOME: ($nu.home-path | path join "AppData" "Local")
+        XDG_DATA_HOME: ($nu.home-path | path join "AppData" "Local" "Data")
+        XDG_STATE_HOME: ($nu.home-path | path join "AppData" "Local" "State")
         XDG_BIN_HOME: ($nu.home-path | path join "bin")
     }) }
 } else {
