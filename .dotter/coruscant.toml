@@ -3,6 +3,8 @@ includes = [".dotter/windows.toml"]
 packages = [
   "alacritty",
   "atuin",
+  "bat",
+  "bin",
   "erdtree",
   "git",
   "helix",

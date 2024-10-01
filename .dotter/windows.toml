@@ -7,6 +7,9 @@
 [bat.files]
 "dotfiles/bat/.config/bat/config" = "~/AppData/Roaming/bat/config"
 
+[bin.files]
+"bin/alarm.ps1" = "D:/bin/alarm.ps1"
+
 [erdtree.files]
 "dotfiles/erdtree/.config/erdtree/.erdtree.toml" = "~/AppData/Roaming/erdtree/.erdtree.toml"
 
