@@ -20,7 +20,7 @@ in
     home = {
       packages = builtins.attrValues {
         inherit (pkgs)
-          cargo-asm
+          bacon
           cargo-audit
           cargo-auditable
           cargo-binutils
@@ -33,6 +33,7 @@ in
           cargo-hack
           cargo-llvm-cov
           cargo-nextest
+          cargo-show-asm
           cargo-zigbuild
           rustup
           zig
