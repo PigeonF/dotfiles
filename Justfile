@@ -23,7 +23,7 @@ build-hm TARGET="":
 switch: switch-os switch-hm
 
 switch-os:
-  nixos-rebuild switch --verbose --print-build-logs --show-trace --flake .
+  sudo nixos-rebuild switch --verbose --print-build-logs --show-trace --flake .
 
 switch-hm TARGET="":
   home-manager switch --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
