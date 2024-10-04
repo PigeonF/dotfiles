@@ -12,7 +12,7 @@ merge-editor = "vscodium"
 paginate = "never"
 
 [git]
-push-branch-prefix = "PigeonF/push-"
+push-bookmark-prefix = "PigeonF/push-"
 private-commits = "description(glob:\"private:*\")"
 
 [signing]
@@ -42,3 +42,24 @@ d = ["diff"]
 ds = ["diff", "--stat"]
 l = ["log"]
 s = ["status"]
+
+[templates]
+draft_commit_description = '''
+concat(
+  description,
+  "\n",
+  surround(
+    "JJ: HEAD detached at ", "\n",
+    concat(commit_id, "\n"),
+  ),
+  surround(
+    "JJ: This commit contains the following changes:\n", "\n",
+    indent("JJ:     ", diff.summary()),
+  ),
+  surround(
+    "JJ: ------------------------ >8 ------------------------\n",
+    "",
+    indent("JJ: ", diff.git()),
+  )
+)
+'''
