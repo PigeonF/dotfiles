@@ -9,4 +9,4 @@ text-width = 72
 
 [[grammar]]
 name = "jjdescription"
-source = { git = "https://github.com/kareigu/tree-sitter-jjdescription", rev = "2ddec6cad07b366aee276a608e1daa2c29d3caf2" }
+source = { git = "https://github.com/PigeonF/tree-sitter-jjdescription", rev = "342d9730ee9dc2da2cdc1090a72064c587912a66" }
