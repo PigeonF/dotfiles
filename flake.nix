@@ -71,6 +71,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixos-hardware.url = "github:NixOS/nixos-hardware";
     nixpkgs-python = {
       url = "github:cachix/nixpkgs-python";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -102,6 +103,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.systems.follows = "systems";
     };
-    nixos-hardware.url = "github:NixOS/nixos-hardware";
+    jujutsu = {
+      url = "github:martinvonz/jj";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 }
