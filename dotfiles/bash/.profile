@@ -59,6 +59,10 @@ export GUIX_LOCPATH="${GUIX_PROFILE}/lib/locale"
 export PATH="${GUIX_PROFILE}/bin${PATH:+:}${PATH}"
 {{/if}}
 
+{{#if (is_executable "hx") }}
+export EDITOR=hx
+{{/if}}
+
 {{#if (is_executable "node") }}
 export NODE_REPL_HISTORY="${XDG_DATA_HOME}/node_repl_history"
 {{/if}}
@@ -72,9 +76,11 @@ export PATH="${XDG_DATA_HOME}/npm/bin${PATH:+:}${PATH}"
 export NUPM_HOME="${XDG_DATA_HOME}/nupm"
 {{/if}}
 
+{{#unless (is_executable "hx") }}
 {{#if (is_executable "nvim") }}
 export EDITOR=nvim
 {{/if}}
+{{/unless}}
 
 {{#if (is_executable "python") }}
 export PYTHON_HISTORY="${XDG_CACHE_HOME}/python/history"

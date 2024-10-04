@@ -30,7 +30,7 @@ keybinds clear-defaults=true {
         bind "Alt r" { SwitchToMode "Resize"; }
     }
     shared_except "scroll" "locked" {
-        bind "Alt s" { SwitchToMode "Scroll"; }
+        bind "Alt l" { SwitchToMode "Scroll"; }
     }
     shared_except "session" "locked" {
         bind "Alt o" { SwitchToMode "Session"; }
@@ -45,6 +45,10 @@ keybinds clear-defaults=true {
     // Mode specific
     locked {
         bind "Alt g" { SwitchToMode "Normal"; }
+        // For better integration when using helix
+        bind "Alt [" { GoToPreviousTab; }
+        bind "Alt ]" { GoToNextTab; }
+        bind "Alt w" { ToggleFloatingPanes; }
     }
 
     pane {
