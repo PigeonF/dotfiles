@@ -28,6 +28,7 @@
 
 [helix.files]
 "dotfiles/helix/.config/helix/config.toml" = "~/.config/helix/config.toml"
+"dotfiles/helix/.config/helix/languages.toml" = "~/.config/helix/languages.toml"
 
 [jj.files]
 "dotfiles/jj/.config/jj/config.toml" = "~/.config/jj/config.toml"

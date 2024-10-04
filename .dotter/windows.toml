@@ -20,6 +20,7 @@
 
 [helix.files]
 "dotfiles/helix/.config/helix/config.toml" = "~/AppData/Roaming/helix/config.toml"
+"dotfiles/helix/.config/helix/languages.toml" = "~/AppData/Roaming/helix/languages.toml"
 
 [jj.files]
 "dotfiles/jj/.config/jj/config.toml" = "~/AppData/Roaming/jj/config.toml"
