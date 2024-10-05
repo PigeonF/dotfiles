@@ -13,11 +13,13 @@
 
     inputs.disko.nixosModules.disko
     inputs.self.nixosModules.hetzner
+    inputs.sops-nix.nixosModules.sops
 
-    ./hardware-configuration.nix
     ./disko.nix
-    ./users.nix
+    ./hardware-configuration.nix
+    ./secrets
     ./services
+    ./users.nix
   ];
 
   boot = {
@@ -32,6 +34,22 @@
   };
 
   environment.defaultPackages = lib.mkForce [ ];
+
+  nix = {
+    settings = {
+      use-xdg-base-directories = true;
+
+      experimental-features = [
+        "flakes"
+        "nix-command"
+      ];
+
+      auto-optimise-store = true;
+    };
+
+    nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
+    registry.nixpkgs.flake = inputs.nixpkgs;
+  };
 
   pigeonf = {
     hetzner = {

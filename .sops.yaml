@@ -2,6 +2,7 @@
 keys:
   - &common age1nfa5tsvl33wmex09mj27kzcrl25xz5h74sg64rka2cekhjrd5frsnsymry
   - &geonosis age18eug2ah672kzv6nnj3kaljm3v7kxdufg7dga73c2vpupsd0nk3zs0jevgw
+  - &tatooine age18gmnk2hvzandt6a0kw6yl5rmqs4l4sxxyasgt7fymt9jsjrv5pks56utmn
 
 creation_rules:
   - path_regex: homes/pigeonf/.+\.(yaml|json|env|ini)$
@@ -12,3 +13,7 @@ creation_rules:
     key_groups:
       - age:
           - *geonosis
+  - path_regex: systems/tatooine/secrets/.+\.(yaml|json|env|ini)$
+    key_groups:
+      - age:
+          - *tatooine
