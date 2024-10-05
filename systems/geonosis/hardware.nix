@@ -2,6 +2,8 @@
   _file = ./hardware.nix;
 
   boot = {
+    binfmt.emulatedSystems = [ "aarch64-linux" ];
+
     initrd.availableKernelModules = [ "nvme" ];
     kernelModules = [
       "kvm-intel"
