@@ -19,7 +19,12 @@
       };
 
       perSystem =
-        { inputs', pkgs, ... }:
+        {
+          inputs',
+          pkgs,
+          lib,
+          ...
+        }:
         let
           inherit (inputs) self;
           inherit (pkgs) runCommand;
@@ -72,6 +77,10 @@
     nixpkgs.url = "github:NixOS/nixpkgs/release-24.05";
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    cloudflare-ipv6s = {
+      url = "https://www.cloudflare.com/ips-v6";
+      flake = false;
+    };
     nixpkgs-python = {
       url = "github:cachix/nixpkgs-python";
       inputs.nixpkgs.follows = "nixpkgs";

@@ -1,5 +1,17 @@
 {
   "nodes": {
+    "cloudflare-ipv6s": {
+      "flake": false,
+      "locked": {
+        "narHash": "sha256-BgpkXCAh/MmK3GTAElKiGJctCYUN+/UgvpuawqGmitE=",
+        "type": "file",
+        "url": "https://www.cloudflare.com/ips-v6"
+      },
+      "original": {
+        "type": "file",
+        "url": "https://www.cloudflare.com/ips-v6"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1727060013,
@@ -312,6 +324,7 @@
     },
     "root": {
       "inputs": {
+        "cloudflare-ipv6s": "cloudflare-ipv6s",
         "deploy-rs": "deploy-rs",
         "disko": "disko",
         "flake-parts": "flake-parts",
