@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  config,
+  inputs,
+  lib,
+  ...
+}:
 
 {
   services.nginx = {
@@ -40,9 +45,9 @@
         };
       };
 
-      "rc4.xyz" = {
+      "${config.networking.domain}" = {
         forceSSL = true;
-        useACMEHost = "rc4.xyz";
+        useACMEHost = "${config.networking.domain}";
       };
     };
   };

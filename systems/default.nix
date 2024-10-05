@@ -10,16 +10,12 @@
 
     deploy.nodes = {
       tatooine = {
-        hostname = "2a01:4f8:1c1b:a16c::1";
+        hostname = "tatooine";
         profiles = {
           system = {
             sshUser = "administrator";
             user = "root";
-            sshOpts = [
-              "-p"
-              "55195"
-            ];
-            path = inputs.deploy-rs.lib.aarch64-linux.activate.nixos inputs.self.nixosConfigurations.tatooine;
+            path = inputs.deploy-rs.lib."aarch64-linux".activate.nixos inputs.self.nixosConfigurations.tatooine;
           };
         };
       };

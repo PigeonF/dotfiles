@@ -1,19 +1,40 @@
 ---
+# Keys are generated using [age](github.com/FiloSottile/age).
+#
+# Administrators are expected to have a secret key available here. To add a new administrator, an
+# existing administrator must re-encrypt all secrets using `sops updatekeys <file>`.
+#
+# The keys for the different hosts are derived from the host SSH keys using
+# `ssh-keyscan <host> | ssh-to-age`.
+#
+# Technically there is no reason for the host specific secrets to also be encrypted for the
+# administrators. The only reason they are is for convenience: since my trustmodel considers all
+# administrators trustworthy the tradeoff between security and convenience is worth it.
 keys:
-  - &common age1nfa5tsvl33wmex09mj27kzcrl25xz5h74sg64rka2cekhjrd5frsnsymry
+  # Administrators
+  #
+  # curl -sSfL https://github.com/PigeonF.keys | ssh-to-age
+  - &pigeonf age1nfa5tsvl33wmex09mj27kzcrl25xz5h74sg64rka2cekhjrd5frsnsymry
+
+  # Hosts
+  #
+  # ssh-keyscan geonosis.lan | ssh-to-age
   - &geonosis age18eug2ah672kzv6nnj3kaljm3v7kxdufg7dga73c2vpupsd0nk3zs0jevgw
-  - &tatooine age1qdev3fstezvtq3zyvxxdgneqy2v48whjak6pvqsk38eg30g74ecqz55c8m
+  # ssh-keyscan rc4.xyz | ssh-to-age
+  - &tatooine age14kr205m2pvtgu4x92qewerhz09fpy9qgdchtpv4ruw3gy4l0xa2q743s5p
 
 creation_rules:
   - path_regex: homes/pigeonf/.+\.(yaml|json|env|ini)$
     key_groups:
       - age:
-          - *common
-  - path_regex: systems/geonosis/secrets/[^/]+\.(yaml|json|env|ini)$
+          - *pigeonf
+  - path_regex: systems/geonosis/secrets/.+\.(yaml|json|env|ini)$
     key_groups:
       - age:
+          - *pigeonf
           - *geonosis
   - path_regex: systems/tatooine/secrets/.+\.(yaml|json|env|ini)$
     key_groups:
       - age:
+          - *pigeonf
           - *tatooine

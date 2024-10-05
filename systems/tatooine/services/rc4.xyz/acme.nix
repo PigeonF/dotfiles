@@ -9,10 +9,10 @@
       email = "fnoegip+letsencrypt@gmail.com";
     };
 
-    certs."rc4.xyz" = {
+    certs."${config.networking.domain}" = {
       dnsProvider = "cloudflare";
-      credentialsFile = config.sops.secrets."rc4.xyz/acme".path;
-      extraDomainNames = [ "*.rc4.xyz" ];
+      credentialsFile = config.sops.secrets."${config.networking.domain}/acme".path;
+      extraDomainNames = [ "*.${config.networking.domain}" ];
       group = "nginx";
       reloadServices = [ "nginx.service" ];
     };

@@ -31,6 +31,7 @@
 
   networking = {
     hostName = "tatooine";
+    domain = "rc4.xyz";
   };
 
   environment.defaultPackages = lib.mkForce [ ];
@@ -57,7 +58,7 @@
         enable = true;
         dhcp = true;
         name = "enp1s0";
-        addresses = [ "2a01:4f8:1c1b:a16c::1/64" ];
+        addresses = [ "2a01:4f8:c17:cd61::1/64" ];
       };
     };
   };

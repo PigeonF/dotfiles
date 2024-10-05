@@ -2,6 +2,7 @@
   imports = [
     ./openssh.nix
     ./rc4.xyz/acme.nix
+    ./rc4.xyz/git.nix
     ./rc4.xyz/nginx.nix
   ];
 
