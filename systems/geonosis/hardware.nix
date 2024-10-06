@@ -10,9 +10,9 @@
       "iwlwifi"
     ];
 
-    loader.grub = {
-      efiSupport = true;
-      efiInstallAsRemovable = true;
+    loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
   };
 
