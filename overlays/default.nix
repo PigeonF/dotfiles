@@ -25,6 +25,7 @@ let
     };
     markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
+    reuse = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) reuse; };
     starship = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) starship; };
     cargo-cross = final: _: { cargo-cross = final.callPackage ./cargo-cross { }; };
   };
