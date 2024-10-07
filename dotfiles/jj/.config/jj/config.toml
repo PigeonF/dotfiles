@@ -18,7 +18,7 @@ private-commits = "description(glob:\"private:*\")"
 [signing]
 backend = "ssh"
 key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL"
-sign-all = true
+sign-all = false
 
 [merge-tools.diffedit3-ssh]
 program = "diffedit3"
@@ -40,10 +40,13 @@ diff-invocation-mode = "file-by-file"
 [aliases]
 d = ["diff"]
 ds = ["diff", "--stat"]
-l = ["log"]
+l = ["log", "-T", "builtin_log_compact"]
+ll = ["log", "-T", "builtin_log_detailed"]
 s = ["status"]
 
 [templates]
+log = "builtin_log_comfortable"
+
 draft_commit_description = '''
 concat(
   description,
