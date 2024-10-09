@@ -40,6 +40,7 @@ diff-invocation-mode = "file-by-file"
 [aliases]
 d = ["diff"]
 ds = ["diff", "--stat"]
+g = ["git"]
 l = ["log", "-T", "builtin_log_compact"]
 ll = ["log", "-T", "builtin_log_detailed"]
 s = ["status"]
