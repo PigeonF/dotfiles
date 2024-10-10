@@ -15,4 +15,159 @@
             "text": "\u0016",
         },
     },
+    {
+        "key": "ctrl+j",
+        "command": "editor.action.joinLines",
+        "when": "editorLangId != 'rust'"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "rust-analyzer.joinLines",
+        "when": "editorLangId == 'rust'"
+    },
+    {
+        "key": "ctrl+.",
+        "command": "findJump.activate"
+    },
+    {
+        "key": "ctrl+shift+.",
+        "command": "findJump.activateWithSelection"
+    },
+    {
+        "key": "ctrl+k l",
+        "command": "workbench.action.splitEditorRight"
+    },
+    {
+        "key": "ctrl+k j",
+        "command": "workbench.action.splitEditorDown"
+    },
+    {
+        "key": "ctrl+k n",
+        "command": "workbench.action.focusNextGroup"
+    },
+    // Devil Mode
+    {
+        "key": ", space",
+        "command": "type",
+        "when": "editorTextFocus",
+        "args": {
+            "text": ", "
+        }
+    },
+    {
+        "key": ", ,",
+        "command": "type",
+        "when": "editorTextFocus",
+        "args": {
+            "text": ","
+        }
+    },
+    {
+        "key": ", enter",
+        "command": "type",
+        "when": "editorTextFocus",
+        "args": {
+            "text": ",\n"
+        }
+    },
+    {
+        "key": ", .",
+        "when": "editorTextFocus",
+        "command": "editor.action.revealDefinition"
+    },
+    {
+        "key": ", shift+.",
+        "when": "editorTextFocus",
+        "command": "editor.action.revealDefinitionAside"
+    },
+    {
+        "key": ", shift+/",
+        "when": "editorTextFocus",
+        "command": "whichkey.show"
+    },
+    {
+        "key": ", w",
+        "when": "editorTextFocus",
+        "command": "rewrap.rewrapComment"
+    },
+    {
+        "key": ", b",
+        "when": "editorTextFocus",
+        "command": "editor.action.jumpToBracket"
+    },
+    {
+        "key": ", =",
+        "when": "editorTextFocus",
+        "command": "workbench.action.focusFirstEditorGroup"
+    },
+    {
+        "key": ", g",
+        "command": "runCommands",
+        "when": "editorTextFocus",
+        "args": {
+            "commands": [
+                "whichkey.show",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "g"
+                }
+            ]
+        }
+    },
+    {
+        "key": ", e",
+        "command": "runCommands",
+        "when": "editorTextFocus",
+        "args": {
+            "commands": [
+                "whichkey.show",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "e"
+                }
+            ]
+        }
+    },
+    {
+        "key": ", o",
+        "command": "runCommands",
+        "when": "editorTextFocus",
+        "args": {
+            "commands": [
+                "whichkey.show",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "o"
+                }
+            ]
+        }
+    },
+    {
+        "key": ", m",
+        "command": "runCommands",
+        "when": "editorTextFocus",
+        "args": {
+            "commands": [
+                "whichkey.show",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "m"
+                }
+            ]
+        }
+    },
+    {
+        "key": ", n",
+        "command": "runCommands",
+        "when": "editorTextFocus",
+        "args": {
+            "commands": [
+                "whichkey.show",
+                {
+                    "command": "whichkey.triggerKey",
+                    "args": "n"
+                }
+            ]
+        }
+    },
 ]

@@ -15,5 +15,9 @@
         "thenuprojectcontributors.vscode-nushell-lang",
         "vadimcn.vscode-lldb",
         "wolfmah-vscode.just-syntax",
+        "stkb.rewrap",
+        "kahole.magit",
+        "mujichok.vscode-project-name-in-statusbar",
+        "mksafi.find-jump",
     ]
 }

@@ -1,11 +1,14 @@
 {
     "$schema": "vscode://schemas/settings/user",
+    "editor.accessibilitySupport": "off",
     "editor.bracketPairColorization.enabled": true,
+    "editor.codeLens": false,
     "editor.cursorBlinking": "solid",
     "editor.cursorStyle": "block",
+    "editor.cursorSurroundingLines": 5,
     "editor.fontFamily": "Rec Mono Duotone",
     "editor.fontLigatures": "'calt', 'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06', 'zero', 'onum'",
-    "editor.fontSize": 19,
+    "editor.fontSize": 18,
     "editor.fontWeight": "450",
     "editor.formatOnSave": true,
     "editor.guides.bracketPairs": "active",
@@ -120,6 +123,9 @@
         "**/.venv": true,
         "**/markdownlint-cli2-codequality.json": true,
     },
+    "[git-commit]": {
+        "rewrap.wrappingColumn": 72
+    },
     "git.enabled": true,
     "go.toolsManagement.autoUpdate": true,
     "nix.enableLanguageServer": true,
@@ -138,6 +144,7 @@
         "~/.local/share/nupm/modules",
         "$(git rev-parse --show-toplevel)"
     ],
+    "projectNameInStatusBar.textStyle": "uppercase",
     "redhat.telemetry.enabled": false,
     "terminal.integrated.commandsToSkipShell": [
         "-workbench.action.quickOpen"
@@ -156,7 +163,282 @@
         "--keep-intermediates"
     ],
     "texlab.latexFormatter": "latexindent",
-    "window.title": "${dirty}${activeEditorMedium}${separator}${rootName}${separator}${profileName}",
+    "whichkey.bindings": [
+        {
+            "key": "g",
+            "name": "go",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "g",
+                    "name": "First line",
+                    "type": "command",
+                    "command": "cursorTop"
+                },
+                {
+                    "key": "l",
+                    "name": "Line",
+                    "command": "workbench.action.gotoLine"
+                },
+                {
+                    "key": "e",
+                    "name": "Last line",
+                    "type": "command",
+                    "command": "cursorBottom"
+                },
+                {
+                    "key": "d",
+                    "name": "Definition",
+                    "type": "command",
+                    "command": "editor.action.revealDefinition"
+                },
+                {
+                    "key": "D",
+                    "name": "Declaration",
+                    "type": "command",
+                    "command": "editor.action.revealDeclaration"
+                },
+                {
+                    "key": "y",
+                    "name": "Type definition",
+                    "type": "command",
+                    "command": "editor.action.goToTypeDefinition"
+                },
+                {
+                    "key": "r",
+                    "name": "References",
+                    "type": "command",
+                    "command": "references-view.findReferences"
+                },
+                {
+                    "key": "i",
+                    "name": "Implementations",
+                    "type": "command",
+                    "command": "editor.action.goToImplementation"
+                },
+                {
+                    "key": "t",
+                    "name": "Top of the window",
+                    "type": "command",
+                    "command": "cursorMove",
+                    "args": {
+                        "to": "viewPortTop"
+                    }
+                },
+                {
+                    "key": "c",
+                    "name": "Center of the window",
+                    "type": "command",
+                    "command": "cursorMove",
+                    "args": {
+                        "to": "viewPortCenter"
+                    }
+                },
+                {
+                    "key": "b",
+                    "name": "Bottom of the window",
+                    "type": "command",
+                    "command": "cursorMove",
+                    "args": {
+                        "to": "viewPortBottom"
+                    }
+                },
+                {
+                    "key": ".",
+                    "name": "Last edited",
+                    "type": "command",
+                    "command": "workbench.action.navigateToLastEditLocation"
+                },
+                {
+                    "key": "p",
+                    "name": "Parent",
+                    "type": "command",
+                    "command": "rust-analyzer.parentModule"
+                },
+                {
+                    "key": "m",
+                    "name": "Manifest",
+                    "type": "command",
+                    "command": "rust-analyzer.openCargoToml"
+                }
+            ]
+        },
+        {
+            "key": "e",
+            "name": "edit",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "f",
+                    "name": "Format",
+                    "type": "command",
+                    "command": "editor.action.formatDocument"
+                },
+                {
+                    "key": "w",
+                    "name": "Wrap",
+                    "type": "command",
+                    "command": "rewrap.rewrapComment"
+                },
+                {
+                    "key": "l",
+                    "name": "LaTeX",
+                    "type": "command",
+                    "command": "unicode-latex.insertMathSymbol"
+                },
+                {
+                    "key": "_",
+                    "name": "snake_case",
+                    "type": "command",
+                    "command": "extension.changeCase.snake"
+                },
+                {
+                    "key": "S",
+                    "name": "SCREAMING_CASE",
+                    "type": "command",
+                    "command": "extension.changeCase.constant"
+                },
+                {
+                    "key": "c",
+                    "name": "camelCase",
+                    "type": "command",
+                    "command": "extension.changeCase.camel"
+                },
+                {
+                    "key": "C",
+                    "name": "CamelCase",
+                    "type": "command",
+                    "command": "extension.changeCase.pascal"
+                },
+                {
+                    "key": "r",
+                    "name": "Revert",
+                    "type": "command",
+                    "command": "git.revertSelectedRanges"
+                },
+                {
+                    "key": "s",
+                    "name": "Sort",
+                    "type": "command",
+                    "command": "editor.action.sortLinesAscending"
+                },
+                {
+                    "key": "a",
+                    "name": "Align",
+                    "type": "command",
+                    "command": "yo1dog.cursor-align.alignCursors"
+                },
+                {
+                    "key": "i",
+                    "name": "increment",
+                    "type": "command",
+                    "command": "editor.emmet.action.incrementNumberByOne"
+                },
+                {
+                    "key": "d",
+                    "name": "decrement",
+                    "type": "command",
+                    "command": "editor.emmet.action.decrementNumberByOne"
+                },
+                {
+                    "key": "p",
+                    "name": "pipe to shell",
+                    "type": "command",
+                    "command": "editWithShell.runCommand"
+                }
+            ]
+        },
+        {
+            "key": "o",
+            "name": "open",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "g",
+                    "name": "Magit",
+                    "type": "command",
+                    "command": "runCommands",
+                    "args": {
+                        "commands": [
+                            "workbench.action.closeSidebar",
+                            "workbench.action.closePanel",
+                            "magit.status"
+                        ]
+                    }
+                },
+                {
+                    "key": "t",
+                    "name": "Terminal",
+                    "type": "command",
+                    "command": "terminal.focus",
+                },
+                {
+                    "key": "e",
+                    "name": "Explorer",
+                    "type": "command",
+                    "command": "runCommands",
+                    "args": {
+                        "commands": [
+                            "workbench.action.closePanel",
+                            "workbench.files.action.focusFilesExplorer"
+                        ]
+                    }
+                },
+                {
+                    "key": "x",
+                    "name": "Extensions",
+                    "type": "command",
+                    "command": "workbench.extensions.action.installExtensions"
+                },
+                {
+                    "key": "s",
+                    "name": "Settings",
+                    "type": "command",
+                    "command": "workbench.action.openSettingsJson"
+                },
+                {
+                    "key": "S",
+                    "name": "Workspace Settings",
+                    "type": "command",
+                    "command": "workbench.action.openWorkspaceSettingsFile"
+                },
+                {
+                    "key": "k",
+                    "name": "Keybindings",
+                    "type": "command",
+                    "command": "workbench.action.openGlobalKeybindingsFile"
+                }
+            ]
+        },
+        {
+            "key": "m",
+            "name": "misc",
+            "type": "bindings",
+            "bindings": [
+                {
+                    "key": "h",
+                    "name": "Hover",
+                    "type": "command",
+                    "command": "editor.action.showHover"
+                },
+                {
+                    "key": "a",
+                    "name": "Argument Hints",
+                    "type": "command",
+                    "command": "editor.action.triggerParameterHints"
+                },
+                {
+                    "key": "d",
+                    "name": "Diff",
+                    "type": "command",
+                    "command": "editor.action.dirtydiff.next"
+                },
+            ]
+        },
+    ],
+    "window.enableMenuBarMnemonics": false,
+    "window.menuBarVisibility": "hidden",
+    "window.title": "${dirty}$${rootPath}",
     "workbench.colorTheme": "Catppuccin Frappé",
     "workbench.iconTheme": "catppuccin-frappe",
     "workbench.sideBar.location": "right",
