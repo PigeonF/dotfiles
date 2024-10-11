@@ -43,6 +43,7 @@ ds = ["diff", "--stat"]
 g = ["git"]
 l = ["log", "-T", "builtin_log_compact"]
 ll = ["log", "-T", "builtin_log_detailed"]
+ls = ["log", "-r", "mutable()::@"]
 s = ["status"]
 
 [templates]
