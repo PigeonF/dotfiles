@@ -30,7 +30,7 @@
     cm = commit -m
     d = diff --color
     ds = diff --color --cached
-    fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
+    fixup-signatures = rebase --exec 'git sign' -i
     ignore = update-index --skip-worktree
     l = lrm
     la = llast 1
@@ -51,6 +51,7 @@
     purge = clean -dx -e "*.gitignored.*" -e ".jj"
     root = rev-parse --show-toplevel
     s = status -s
+    sign = commit --amend --no-edit -n -S --allow-empty
     undo = reset --soft HEAD~1
     unignore = update-index --no-skip-worktree
 
