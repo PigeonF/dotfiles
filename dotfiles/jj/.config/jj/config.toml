@@ -45,6 +45,13 @@ l = ["log", "-T", "builtin_log_compact"]
 ll = ["log", "-T", "builtin_log_detailed"]
 ls = ["log", "-r", "mutable()::@"]
 s = ["status"]
+sign = [
+  "describe",
+  "--no-edit",
+  "--reset-author",
+  "--config-toml",
+  "signing.sign-all = true",
+]
 
 [templates]
 log = "builtin_log_comfortable"
