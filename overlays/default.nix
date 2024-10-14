@@ -25,7 +25,23 @@ let
     };
     markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
-    reuse = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) reuse; };
+    reuse = final: _: {
+      reuse = final.callPackage ./reuse {
+        inherit (final.python3Packages)
+          attrs
+          binaryornot
+          boolean-py
+          buildPythonPackage
+          debian
+          freezegun
+          jinja2
+          license-expression
+          poetry-core
+          pytestCheckHook
+          tomlkit
+          ;
+      };
+    };
     starship = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) starship; };
     cargo-cross = final: _: { cargo-cross = final.callPackage ./cargo-cross { }; };
   };
