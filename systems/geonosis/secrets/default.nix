@@ -2,6 +2,12 @@
   _file = ./default.nix;
 
   sops.secrets = {
+    "attic" = {
+      sopsFile = ./attic.env;
+      format = "dotenv";
+      restartUnits = [ "attic.internal.service" ];
+    };
+
     "network" = {
       sopsFile = ./network.env;
       format = "dotenv";

@@ -50,6 +50,11 @@
   ];
 
   pigeonf = {
+    attic = {
+      enable = true;
+      envFile = config.sops.secrets."attic".path;
+    };
+
     buildkit.enable = true;
     container-registry.enable = true;
     core.enable = true;
