@@ -5,6 +5,9 @@
 # email = "fnoegip@gmail.com"
 name = "Jonas Fierlings"
 
+[core]
+fsmonitor = "watchman"
+
 [ui]
 default-command = "log"
 diff-editor = "diffedit3-ssh"

@@ -59,6 +59,7 @@ in
           tealdeer
           typst-dev
           valgrind
+          watchman
           xdg-ninja
           yamllint
           ;

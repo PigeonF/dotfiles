@@ -38,6 +38,8 @@
 
           formatter = pkgs.nixfmt-rfc-style;
 
+          apps.secrix = inputs.secrix.secrix self.outputs;
+
           packages = {
             inherit (pkgs) gitlab-ci-local reprotest;
           };
@@ -89,6 +91,7 @@
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    secrix.url = "github:Platonic-Systems/secrix";
     home-manager = {
       url = "github:nix-community/home-manager/release-24.05";
       inputs.nixpkgs.follows = "nixpkgs";
