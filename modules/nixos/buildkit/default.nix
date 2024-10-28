@@ -37,16 +37,15 @@ in
     lib.mkIf cfg.enable {
       virtualisation = {
         quadlet.containers = {
-          "buildkit.internal".containerConfig =
-
-            {
-              image = "docker.io/moby/buildkit:master-rootless";
-              volumes = [ "${buildkitdConfig}:/etc/buildkit/buildkitd.toml:ro" ];
-              publishPorts = [ "3375" ];
-              exec = "--oci-worker-no-process-sandbox --config /etc/buildkit/buildkitd.toml --addr tcp://:3375";
-              addCapabilities = [ "CAP_SYS_ADMIN" ];
-              networks = lib.mkIf hasRegistry [ "internal.network" ];
-            };
+          "buildkit.internal".containerConfig = {
+            image = "docker.io/moby/buildkit:master-rootless";
+            runInit = true;
+            volumes = [ "${buildkitdConfig}:/etc/buildkit/buildkitd.toml:ro" ];
+            publishPorts = [ "3375" ];
+            exec = "--oci-worker-no-process-sandbox --config /etc/buildkit/buildkitd.toml --addr tcp://:3375";
+            addCapabilities = [ "CAP_SYS_ADMIN" ];
+            networks = lib.mkIf hasRegistry [ "internal.network" ];
+          };
         };
       };
 

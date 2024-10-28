@@ -57,6 +57,7 @@ in
           in
           {
             image = "ghcr.io/zhaofengli/attic:latest";
+            runInit = true;
             # Run unauthenticated and allow overwriting packages.
             exec = "-f /attic/server.toml --mode monolithic --listen [::]:80";
             environmentFiles = [ cfg.envFile ];

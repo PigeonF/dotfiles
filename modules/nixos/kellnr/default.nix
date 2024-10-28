@@ -40,11 +40,12 @@ in
           in
           {
             image = "ghcr.io/kellnr/kellnr:5";
+            runInit = true;
             environmentFiles = [ cfg.envFile ];
             environments = {
+              KELLNR_LOCAL__PORT = 80;
               KELLNR_ORIGIN__HOSTNAME = "kellnr.internal";
               KELLNR_ORIGIN__PORT = 80;
-              KELLNR_ORIGIN__PROTOCOL = "http";
             };
             volumes = [
               "kellner:/opt/kdata"

@@ -23,6 +23,7 @@ in
       quadlet.containers = {
         "registry.internal".containerConfig = {
           image = "docker.io/library/registry:2";
+          runInit = true;
           environments = {
             REGISTRY_HTTP_ADDR = ":80";
           };
@@ -37,6 +38,7 @@ in
           };
           containerConfig = {
             image = "docker.io/library/registry:2";
+            runInit = true;
             environments = {
               REGISTRY_HTTP_ADDR = ":80";
               REGISTRY_PROXY_REMOTEURL = "https://registry-1.docker.io";

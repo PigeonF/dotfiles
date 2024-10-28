@@ -23,6 +23,7 @@ in
       quadlet.containers = {
         "pypi.internal".containerConfig = {
           image = "docker.io/pypiserver/pypiserver:latest";
+          runInit = true;
           # Run unauthenticated and allow overwriting packages.
           exec = "run --authenticate . --passwords . --overwrite";
           volumes = [ "pypi-packages:/data/packages" ];
