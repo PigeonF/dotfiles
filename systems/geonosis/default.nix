@@ -55,6 +55,11 @@
       envFile = config.sops.secrets."attic".path;
     };
 
+    kellnr = {
+      enable = true;
+      envFile = config.sops.secrets."kellnr".path;
+    };
+
     buildkit.enable = true;
     container-registry.enable = true;
     core.enable = true;

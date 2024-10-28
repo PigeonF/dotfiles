@@ -8,6 +8,12 @@
       restartUnits = [ "attic.internal.service" ];
     };
 
+    "kellnr" = {
+      sopsFile = ./kellnr.env;
+      format = "dotenv";
+      restartUnits = [ "kellnr.internal.service" ];
+    };
+
     "network" = {
       sopsFile = ./network.env;
       format = "dotenv";
