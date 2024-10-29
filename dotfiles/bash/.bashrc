@@ -6,6 +6,8 @@ for file in "${XDG_CONFIG_HOME}/bashrc.d"/*.sh; do
   fi
 done
 
+set +o histexpand
+
 shopt -s histappend
 shopt -s checkwinsize
 shopt -s extglob
