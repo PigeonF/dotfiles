@@ -9,7 +9,6 @@ name = "Jonas Fierlings"
 fsmonitor = "watchman"
 
 [ui]
-editor = "codium -w"
 default-command = "log"
 diff-editor = "diffedit3-ssh"
 merge-editor = "vscodium"

@@ -16,5 +16,7 @@ in
     enable = mkEnableOption "PigeonF Helix Packages";
   };
 
-  config = mkIf cfg.enable { home.packages = builtins.attrValues { inherit (pkgs) helix; }; };
+  config = mkIf cfg.enable {
+    home.packages = builtins.attrValues { inherit (pkgs) helix harper typos-lsp; };
+  };
 }

@@ -24,6 +24,7 @@ let
       };
     };
     markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
+    harper = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) harper; };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
     reuse = final: _: {
       reuse = final.callPackage ./reuse {
