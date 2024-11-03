@@ -1,6 +1,1 @@
-history_filter = [
-  "^ls",
-  "^cd",
-  "^exit",
-  "glpat-[0-9a-zA-Z\\-]{20}",
-]
+history_filter = ["^ls", "^cd", "^exit", "glpat-[0-9a-zA-Z\\-_]{20}"]
