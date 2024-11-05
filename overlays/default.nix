@@ -10,6 +10,9 @@ let
 
   overlays = {
     buildah = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) buildah; };
+    cargo-nextest = final: _: {
+      inherit (nixos-unstable-small.legacyPackages.${final.system}) cargo-nextest;
+    };
     git-cliff = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) git-cliff; };
     go-task = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) go-task; };
     gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };

@@ -31,6 +31,7 @@ in
           cargo-dist
           cargo-geiger
           cargo-hack
+          cargo-hakari
           cargo-llvm-cov
           cargo-nextest
           cargo-show-asm
