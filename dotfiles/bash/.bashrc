@@ -20,6 +20,10 @@ if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
 fi
 {{/if}}
 
+{{#if (is_executable "direnv")}}
+eval "$(direnv hook bash)"
+{{/if}}
+
 {{#if (is_executable "starship")}}
 if [[ $TERM != "dumb" ]]; then
   eval "$(starship init bash --print-full-init)"
