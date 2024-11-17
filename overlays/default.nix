@@ -22,11 +22,7 @@ let
     neovim = final: _: {
       inherit (nixos-unstable-small.legacyPackages.${final.system}) neovim-unwrapped;
     };
-    nushell = final: _: {
-      nushell = final.callPackage ./nushell {
-        inherit (final.darwin.apple_sdk.frameworks) Security AppKit Libsystem;
-      };
-    };
+    nushell = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) nushell; };
     markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
     harper = final: _: { inherit (nixos-unstable-small.legacyPackages.${final.system}) harper; };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };

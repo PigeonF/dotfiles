@@ -72,6 +72,10 @@ in
             psk = "@${cfg.networks.obi-lan-kenobi.env.pass}@";
           };
 
+          "Lan Solo" = {
+            psk = "drumhead-beijing-saxon-stifle-aim";
+          };
+
           eduroam = lib.mkIf cfg.networks.eduroam.enable {
             auth = ''
               key_mgmt=WPA-EAP
