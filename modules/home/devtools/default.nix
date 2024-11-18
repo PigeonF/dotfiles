@@ -43,6 +43,7 @@ in
           grype
           jujutsu
           just
+          ltrace
           markdownlint-cli2
           mdbook
           meson
@@ -56,6 +57,7 @@ in
           pre-commit
           regctl
           reuse
+          strace
           tagref
           tealdeer
           typst-dev
