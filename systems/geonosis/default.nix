@@ -22,6 +22,8 @@
   networking.hostName = "geonosis";
 
   environment.systemPackages = [
+    pkgs.mako
+    pkgs.wl-clipboard
     # https://kokada.capivaras.dev/blog/quick-bits-realise-nix-symlinks/
     (pkgs.writeShellApplication {
       name = "realise-symlink";
@@ -48,6 +50,13 @@
       '';
     })
   ];
+
+  services.gnome.gnome-keyring.enable = true;
+  programs.sway = {
+    enable = true;
+    wrapperFeatures.gtk = true;
+  };
+  programs.firefox.enable = true;
 
   pigeonf = {
     attic = {

@@ -38,7 +38,7 @@ in
       virtualisation = {
         quadlet.containers = {
           "buildkit.internal".containerConfig = {
-            image = "docker.io/moby/buildkit:master-rootless";
+            image = "docker.io/moby/buildkit:buildx-stable-1-rootless";
             runInit = true;
             volumes = [ "${buildkitdConfig}:/etc/buildkit/buildkitd.toml:ro" ];
             publishPorts = [ "3375" ];
