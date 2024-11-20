@@ -51,12 +51,23 @@
     })
   ];
 
-  services.gnome.gnome-keyring.enable = true;
-  programs.sway = {
-    enable = true;
-    wrapperFeatures.gtk = true;
+  virtualisation.containerd.enable = true;
+  virtualisation.docker.daemon.settings = {
+    features = {
+      "containerd-snapshotter" = true;
+    };
+    "insecure-registries" = [
+      "registry.internal"
+      "registry.internal:80"
+    ];
   };
-  programs.firefox.enable = true;
+
+  # services.gnome.gnome-keyring.enable = true;
+  # programs.sway = {
+  #   enable = true;
+  #   wrapperFeatures.gtk = true;
+  # };
+  # programs.firefox.enable = true;
 
   pigeonf = {
     attic = {
