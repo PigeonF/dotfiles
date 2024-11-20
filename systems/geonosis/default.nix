@@ -21,6 +21,11 @@
   system.stateVersion = "24.05";
   networking.hostName = "geonosis";
 
+  networking.firewall.allowedTCPPorts = [
+    80
+    443
+  ];
+
   environment.systemPackages = [
     pkgs.mako
     pkgs.wl-clipboard
