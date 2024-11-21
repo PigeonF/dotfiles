@@ -46,6 +46,7 @@ in
                         "mount"
                         "pivot_root"
                         "sethostname"
+                        "setns"
                         "umount2"
                         "unshare"
                       ];

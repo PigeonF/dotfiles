@@ -76,6 +76,7 @@ in
                   names = [
                     "mount"
                     "umount2"
+                    "setns"
                   ];
                   action = "SCMP_ACT_ALLOW";
                 }
@@ -124,6 +125,7 @@ in
                     "mount"
                     "pivot_root"
                     "sethostname"
+                    "setns"
                     "umount2"
                     "unshare"
                   ];
