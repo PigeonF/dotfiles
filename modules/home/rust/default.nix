@@ -23,6 +23,7 @@ in
           bacon
           cargo-audit
           cargo-auditable
+          cargo-binstall
           cargo-binutils
           cargo-bloat
           cargo-cross
