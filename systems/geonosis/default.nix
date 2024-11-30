@@ -105,7 +105,7 @@
       envFile = config.sops.secrets."network".path;
 
       networks = {
-        obi-lan-kenobi.enable = true;
+        lan-solo.enable = true;
       };
     };
 

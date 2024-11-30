@@ -34,6 +34,17 @@ in
           };
         };
 
+        lan-solo = {
+          enable = lib.mkEnableOption "Lan Solo Network";
+          env = {
+            pass = lib.mkOption {
+              type = lib.types.str;
+              description = "Password variable in pigeonf.network.envFile";
+              default = "PASS_LAN_SOLO";
+            };
+          };
+        };
+
         eduroam = {
           enable = lib.mkEnableOption "Eduroam Network";
 
@@ -63,17 +74,17 @@ in
       wireless = {
         enable = mkDefault true;
         userControlled.enable = mkDefault true;
-        environmentFile = mkDefault cfg.envFile;
+        secretsFile = mkDefault cfg.envFile;
         scanOnLowSignal = mkDefault false;
         fallbackToWPA2 = mkDefault false;
 
         networks = {
           "Obi-Lan Kenobi" = lib.mkIf cfg.networks.obi-lan-kenobi.enable {
-            psk = "@${cfg.networks.obi-lan-kenobi.env.pass}@";
+            pskRaw = "ext:${cfg.networks.obi-lan-kenobi.env.pass}";
           };
 
-          "Lan Solo" = {
-            psk = "drumhead-beijing-saxon-stifle-aim";
+          "Lan Solo" = lib.mkIf cfg.networks.lan-solo.enable {
+            pskRaw = "ext:${cfg.networks.lan-solo.env.pass}";
           };
 
           eduroam = lib.mkIf cfg.networks.eduroam.enable {
@@ -82,8 +93,8 @@ in
               eap=TTLS
               anonymous_identity="eduroam@ruhr-uni-bochum.de"
 
-              identity="@${cfg.networks.eduroam.env.user}@@ruhr-uni-bochum.de"
-              password="@${cfg.networks.eduroam.env.pass}@"
+              identity="ext:${cfg.networks.eduroam.env.user}"
+              password="ext:${cfg.networks.eduroam.env.pass}"
 
               phase2="auth=PAP"
 

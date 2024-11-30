@@ -3,35 +3,59 @@
   buildPythonPackage,
   fetchFromGitHub,
   poetry-core,
+  sphinxHook,
+  furo,
+  myst-parser,
+  pbr,
+  sphinxcontrib-apidoc,
+
+  # dependencies
   attrs,
   binaryornot,
   boolean-py,
+  click,
   debian,
-  freezegun,
   jinja2,
   license-expression,
   tomlkit,
+
+  # test dependencies
+  freezegun,
   pytestCheckHook,
 }:
 
 buildPythonPackage rec {
   pname = "reuse";
-  version = "4.0.3";
+  version = "5.0.2";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "fsfe";
     repo = "reuse-tool";
-    rev = "fb847af27bdfb4197b15b005696ccef81b55de41"; # "refs/tags/v${version}";
-    hash = "sha256-DF9KTBvOZ6pkHFhRXyRury2n6/DhOJgMkmflZ31uRMM=";
+    rev = "refs/tags/v${version}";
+    hash = "sha256-MzI3AY5WLNyCLJZM7Q5wUH3ttx+FHPlSgAfngzOgzec=";
   };
 
-  build-system = [ poetry-core ];
+  outputs = [
+    "out"
+    "doc"
+    "man"
+  ];
+
+  build-system = [
+    poetry-core
+    sphinxHook
+    furo
+    myst-parser
+    pbr
+    sphinxcontrib-apidoc
+  ];
 
   dependencies = [
     attrs
     binaryornot
     boolean-py
+    click
     debian
     jinja2
     license-expression
@@ -39,8 +63,8 @@ buildPythonPackage rec {
   ];
 
   nativeCheckInputs = [
-    freezegun
     pytestCheckHook
+    freezegun
   ];
 
   disabledTestPaths = [
@@ -48,10 +72,16 @@ buildPythonPackage rec {
     "src/reuse"
   ];
 
+  sphinxBuilders = [
+    "html"
+    "man"
+  ];
+  sphinxRoot = "docs";
+
   pythonImportsCheck = [ "reuse" ];
 
   meta = with lib; {
-    description = "A tool for compliance with the REUSE Initiative recommendations";
+    description = "Tool for compliance with the REUSE Initiative recommendations";
     homepage = "https://github.com/fsfe/reuse-tool";
     changelog = "https://github.com/fsfe/reuse-tool/blob/v${version}/CHANGELOG.md";
     license = with licenses; [

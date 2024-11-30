@@ -27,7 +27,6 @@ in
           "auto-allocate-uids"
           "flakes"
           "nix-command"
-          "repl-flake"
         ];
 
         auto-optimise-store = mkDefault true;
