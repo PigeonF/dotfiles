@@ -60,7 +60,7 @@ in
           strace
           tagref
           tealdeer
-          typst-dev
+          typst
           valgrind
           watchman
           xdg-ninja

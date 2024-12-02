@@ -33,7 +33,6 @@
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.appendOverlays [
             inputs.self.overlays.default
-            inputs.typst.overlays.default
           ];
 
           formatter = pkgs.nixfmt-rfc-style;
@@ -113,13 +112,8 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    typst = {
-      url = "github:typst/typst";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.systems.follows = "systems";
-    };
-    jujutsu = {
-      url = "github:martinvonz/jj";
+    git-cliff = {
+      url = "github:orhun/git-cliff";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
