@@ -116,5 +116,8 @@
       url = "github:orhun/git-cliff";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-jujutsu = {
+      url = "github:junglerobba/nixpkgs/jujutsu-0.24.0";
+    };
   };
 }

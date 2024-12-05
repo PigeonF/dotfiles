@@ -1,6 +1,7 @@
 {
   nixpkgs,
   nixos-unstable-small,
+  nixpkgs-jujutsu,
   git-cliff,
   ...
 }:
@@ -11,10 +12,17 @@ let
   overlays = {
     gitlab-ci-local = final: _: { gitlab-ci-local = final.callPackage ./gitlab-ci-local { }; };
     markdownlint-cli2 = final: _: { markdownlint-cli2 = final.callPackage ./markdownlint-cli2 { }; };
-    nightlies = final: _: {
-      inherit (nixos-unstable-small.legacyPackages.${final.system}) just;
-      inherit (git-cliff.packages.${final.system}) git-cliff;
-    };
+    nightlies =
+      final: _:
+      let
+        unstablePkgs = nixos-unstable-small.legacyPackages.${final.system};
+        gitCliffPkgs = git-cliff.packages.${final.system};
+      in
+      {
+        inherit (unstablePkgs) just;
+        inherit (gitCliffPkgs) git-cliff;
+        inherit (nixpkgs-jujutsu.legacyPackages.${final.system}) jujutsu;
+      };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
     reuse = final: _: {
       reuse = final.callPackage ./reuse {

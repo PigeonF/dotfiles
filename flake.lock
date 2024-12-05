@@ -214,6 +214,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-jujutsu": {
+      "locked": {
+        "lastModified": 1733386631,
+        "narHash": "sha256-+reKF5BnuxBk+Y/bqq0TRwIvIT+XmnpJBMLC1dnRbxc=",
+        "owner": "junglerobba",
+        "repo": "nixpkgs",
+        "rev": "33e805a362d7160b46ab65f947371c2da1ecd679",
+        "type": "github"
+      },
+      "original": {
+        "owner": "junglerobba",
+        "ref": "jujutsu-0.24.0",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-python": {
       "inputs": {
         "flake-compat": "flake-compat_2",
@@ -298,6 +314,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixos-unstable-small": "nixos-unstable-small",
         "nixpkgs": "nixpkgs_2",
+        "nixpkgs-jujutsu": "nixpkgs-jujutsu",
         "nixpkgs-python": "nixpkgs-python",
         "quadlet-nix": "quadlet-nix",
         "secrix": "secrix",
