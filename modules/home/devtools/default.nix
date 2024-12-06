@@ -57,6 +57,7 @@ in
           pre-commit
           regctl
           reuse
+          scdoc
           strace
           tagref
           tealdeer
