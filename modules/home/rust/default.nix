@@ -38,7 +38,7 @@ in
           cargo-show-asm
           cargo-zigbuild
           rustup
-          zig
+          zig_0_10
           ;
       };
     };

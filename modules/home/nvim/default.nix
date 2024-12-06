@@ -33,7 +33,7 @@ in
         vale
         wget
         yaml-language-server
-        zig
+        zig_0_10
         ;
 
       inherit (pkgs.nodePackages) jsonlint typescript-language-server vscode-json-languageserver;
