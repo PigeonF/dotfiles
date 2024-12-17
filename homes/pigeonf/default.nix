@@ -15,7 +15,7 @@ inputs.home-manager.lib.homeManagerConfiguration {
 
         home = {
           username = "pigeonf";
-          homeDirectory = "/home/pigeonf";
+          homeDirectory = if pkgs.stdenv.isDarwin then "/Users/pigeonf" else "/home/pigeonf";
           stateVersion = "24.05";
           packages = [ pkgs.dotter ];
         };

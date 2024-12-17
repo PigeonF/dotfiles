@@ -28,4 +28,4 @@ switch-os:
   sudo {{ nixos }}-rebuild switch --verbose --print-build-logs --show-trace --flake .
 
 switch-hm TARGET="":
-  nix run nixpkgs#home-manager -- switch --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
+  nix run nixpkgs#home-manager -- switch -b bak --verbose --print-build-logs --show-trace --flake .{{ if TARGET == "" { "" } else { "#" + TARGET } }}
