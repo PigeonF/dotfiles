@@ -18,57 +18,64 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = builtins.attrValues {
-        inherit (pkgs)
-          bat
-          # bpftrace
-          buildah
-          committed
-          corepack
-          crane
-          d2
-          diffedit3
-          diffoci
-          diffoscopeMinimal
-          dive
-          docker-client
-          editorconfig-checker
-          ghq
-          git-cliff
-          gitlab-ci-local
-          gitleaks
-          gnumake
-          go
-          go-task
-          grype
-          jujutsu
-          just
-          # ltrace
-          markdownlint-cli2
-          mdbook
-          meson
-          miller
-          ninja
-          nodejs
-          openssl
-          # passt
-          pkg-config
-          podman
-          pre-commit
-          regctl
-          reuse
-          scdoc
-          # strace
-          tagref
-          tealdeer
-          typst
-          # valgrind
-          watchman
-          xdg-ninja
-          yamllint
-          zip
-          ;
-      };
+      packages =
+        builtins.attrValues {
+          inherit (pkgs)
+            bat
+            buildah
+            committed
+            corepack
+            crane
+            d2
+            diffedit3
+            diffoci
+            diffoscopeMinimal
+            dive
+            docker-client
+            editorconfig-checker
+            ghq
+            git-cliff
+            gitlab-ci-local
+            gitleaks
+            gnumake
+            go
+            go-task
+            grype
+            jujutsu
+            just
+            markdownlint-cli2
+            mdbook
+            meson
+            miller
+            ninja
+            nodejs
+            openssl
+            pkg-config
+            podman
+            pre-commit
+            regctl
+            reuse
+            scdoc
+            tagref
+            tealdeer
+            typst
+            watchman
+            xdg-ninja
+            yamllint
+            zip
+            ;
+        }
+        ++ (lib.lists.optionals pkgs.stdenv.isLinux (
+          builtins.attrValues {
+            inherit (pkgs)
+              bpftrace
+              ltrace
+              passt
+              strace
+              valgrind
+              ;
+          }
+        ));
     };
   };
 }

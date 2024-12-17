@@ -18,29 +18,32 @@ in
 
   config = mkIf cfg.enable {
     home = {
-      packages = builtins.attrValues {
-        inherit (pkgs)
-          bacon
-          cargo-audit
-          cargo-auditable
-          cargo-binstall
-          cargo-binutils
-          cargo-bloat
-          cargo-cross
-          cargo-cyclonedx
-          cargo-deny
-          cargo-dist
-          cargo-geiger
-          cargo-hack
-          cargo-hakari
-          # cargo-llvm-cov
-          cargo-nextest
-          cargo-show-asm
-          cargo-zigbuild
-          rustup
-          zig_0_10
-          ;
-      };
+      packages =
+        builtins.attrValues {
+          inherit (pkgs)
+            bacon
+            cargo-audit
+            cargo-auditable
+            cargo-binstall
+            cargo-binutils
+            cargo-bloat
+            cargo-cross
+            cargo-cyclonedx
+            cargo-deny
+            cargo-dist
+            cargo-geiger
+            cargo-hack
+            cargo-hakari
+            cargo-nextest
+            cargo-show-asm
+            rustup
+            ;
+        }
+        ++ (lib.lists.optionals pkgs.stdenv.isLinux (
+          builtins.attrValues {
+            inherit (pkgs) cargo-llvm-cov cargo-zigbuild zig_0_10;
+          }
+        ));
     };
   };
 }
