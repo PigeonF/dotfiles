@@ -33,7 +33,7 @@ in
           cargo-geiger
           cargo-hack
           cargo-hakari
-          cargo-llvm-cov
+          # cargo-llvm-cov
           cargo-nextest
           cargo-show-asm
           cargo-zigbuild

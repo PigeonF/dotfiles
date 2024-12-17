@@ -21,3 +21,7 @@ fi
 {{#if (is_executable "zoxide")}}
 eval "$(zoxide init zsh)"
 {{/if}}
+
+{{#if (is_executable "/opt/homebrew/bin/brew")}}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{/if}}

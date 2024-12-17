@@ -1,8 +1,6 @@
 {
   nixpkgs,
   nixos-unstable-small,
-  nixpkgs-jujutsu,
-  git-cliff,
   ...
 }:
 
@@ -16,12 +14,9 @@ let
       final: _:
       let
         unstablePkgs = nixos-unstable-small.legacyPackages.${final.system};
-        gitCliffPkgs = git-cliff.packages.${final.system};
       in
       {
-        inherit (unstablePkgs) just;
-        inherit (gitCliffPkgs) git-cliff;
-        inherit (nixpkgs-jujutsu.legacyPackages.${final.system}) jujutsu;
+        inherit (unstablePkgs) git-cliff just jujutsu;
       };
     reprotest = final: _: { reprotest = final.callPackage ./reprotest { }; };
     reuse = final: _: {

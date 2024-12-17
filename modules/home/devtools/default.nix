@@ -21,7 +21,7 @@ in
       packages = builtins.attrValues {
         inherit (pkgs)
           bat
-          bpftrace
+          # bpftrace
           buildah
           committed
           corepack
@@ -43,7 +43,7 @@ in
           grype
           jujutsu
           just
-          ltrace
+          # ltrace
           markdownlint-cli2
           mdbook
           meson
@@ -51,18 +51,18 @@ in
           ninja
           nodejs
           openssl
-          passt
+          # passt
           pkg-config
           podman
           pre-commit
           regctl
           reuse
           scdoc
-          strace
+          # strace
           tagref
           tealdeer
           typst
-          valgrind
+          # valgrind
           watchman
           xdg-ninja
           yamllint

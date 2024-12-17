@@ -62,6 +62,7 @@
                 inherit (pkgs)
                   age
                   deadnix
+                  dotter
                   just
                   nil
                   nixfmt-rfc-style
@@ -111,13 +112,6 @@
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    git-cliff = {
-      url = "github:orhun/git-cliff";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixpkgs-jujutsu = {
-      url = "github:junglerobba/nixpkgs/jujutsu-0.24.0";
     };
   };
 }
