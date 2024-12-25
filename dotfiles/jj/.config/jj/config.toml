@@ -55,6 +55,8 @@ sign = [
   "--config-toml",
   "signing.sign-all = true",
 ]
+sq = ["squash"]
+sqk = ["squash", "--keep-empty"]
 
 [templates]
 log = "builtin_log_comfortable"
