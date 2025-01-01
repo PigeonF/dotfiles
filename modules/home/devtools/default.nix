@@ -47,6 +47,7 @@ in
             mdbook
             meson
             miller
+            nh
             ninja
             nodejs
             openssl
