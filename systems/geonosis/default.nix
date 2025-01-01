@@ -14,6 +14,9 @@
     inputs.quadlet-nix.nixosModules.quadlet
     inputs.sops-nix.nixosModules.sops
 
+    ./acme.nix
+    ./paperless.nix
+    ./haproxy.nix
     ./hardware.nix
     ./secrets
   ];

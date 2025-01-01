@@ -11,7 +11,7 @@
 
     certs."${config.networking.domain}" = {
       dnsProvider = "cloudflare";
-      credentialsFile = config.sops.secrets."${config.networking.domain}/acme".path;
+      environmentFile = config.sops.secrets."${config.networking.domain}/acme".path;
       extraDomainNames = [ "*.${config.networking.domain}" ];
       group = "nginx";
       reloadServices = [ "nginx.service" ];

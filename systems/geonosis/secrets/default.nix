@@ -31,5 +31,10 @@
       format = "dotenv";
       restartUnits = [ "gitlab-runner.service" ];
     };
+
+    "acme/rc4.xyz" = {
+      sopsFile = ./acme/rc4.xyz.env;
+      format = "dotenv";
+    };
   };
 }
