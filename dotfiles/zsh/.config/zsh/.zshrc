@@ -9,13 +9,9 @@ if [ -d "${XDG_CONFIG_HOME}/zshrc.d" ]; then
 fi
 
 setopt GLOB_DOTS
-setopt GLOB_RECURSE
-setopt GLOBSTAR
 
 {{#if (is_executable "atuin")}}
-if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
-  eval "$(atuin init zsh --disable-up-arrow)"
-fi
+eval "$(atuin init zsh --disable-up-arrow)"
 {{/if}}
 
 {{#if (is_executable "starship")}}
@@ -35,3 +31,5 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 autoload -Uz compinit bashcompinit
 compinit
 bashcompinit
+
+bindkey -e
