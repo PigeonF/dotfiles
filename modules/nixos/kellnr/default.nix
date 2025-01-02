@@ -43,9 +43,9 @@ in
             runInit = true;
             environmentFiles = [ cfg.envFile ];
             environments = {
-              KELLNR_LOCAL__PORT = 80;
+              KELLNR_LOCAL__PORT = "80";
               KELLNR_ORIGIN__HOSTNAME = "kellnr.internal";
-              KELLNR_ORIGIN__PORT = 80;
+              KELLNR_ORIGIN__PORT = "80";
             };
             volumes = [
               "kellner:/opt/kdata"
