@@ -1,4 +1,9 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.pigeonf.user;
 in
@@ -12,6 +17,9 @@ in
   };
 
   config = lib.mkIf cfg.enable {
+    environment.shells = [ pkgs.zsh ];
+    programs.zsh.enable = true;
+
     users = {
       groups.pigeonf = {
         name = "pigeonf";
@@ -33,7 +41,7 @@ in
           ++ lib.lists.optional config.virtualisation.incus.enable "incus-admin";
         home = "/home/pigeonf";
         createHome = true;
-        useDefaultShell = true;
+        shell = pkgs.zsh;
         isNormalUser = true;
         initialPassword = "pigeonf";
         openssh.authorizedKeys.keys = lib.mkForce [
