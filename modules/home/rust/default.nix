@@ -31,6 +31,7 @@ in
             cargo-cyclonedx
             cargo-deny
             cargo-dist
+            cargo-fuzz
             cargo-geiger
             cargo-hack
             cargo-hakari
