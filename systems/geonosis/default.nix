@@ -29,6 +29,13 @@
     443
   ];
 
+  nix = {
+    settings = {
+      trusted-public-keys = [ "alice:R++4LTYSvoZ5PpnvzJ5FjiTaWHcnUoOndTt6gAu269w=" ];
+      substituters = [ "ssh-ng://alice" ];
+    };
+  };
+
   environment.systemPackages = [
     pkgs.mako
     pkgs.wl-clipboard
