@@ -7,5 +7,9 @@ in
 
   inherit home-modules;
 
-  default = _: { imports = [ home-modules ]; };
+  default = _: {
+    imports = [
+      home-modules
+    ];
+  };
 }
