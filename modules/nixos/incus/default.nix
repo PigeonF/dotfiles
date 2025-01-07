@@ -32,8 +32,13 @@ in
           profiles = [
             {
               devices = {
-                eth0 = {
-                  name = "eth0";
+                enp0s31f6 = {
+                  name = "enp0s31f6";
+                  network = "incusbr0";
+                  type = "nic";
+                };
+                wlp61s0 = {
+                  name = "wlp61s0";
                   network = "incusbr0";
                   type = "nic";
                 };

@@ -16,7 +16,7 @@
         system = {
           sshUser = "pigeonf";
           user = "root";
-          sudo = "sudo -u";
+          sudo = "doas -u";
           sshOpts = [ ];
           path = inputs.deploy-rs.lib.x86_64-linux.activate.nixos inputs.self.nixosConfigurations.foo;
         };

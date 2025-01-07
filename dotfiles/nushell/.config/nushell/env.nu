@@ -12,7 +12,7 @@ export-env {
     }
 }
 
-def with-env-defaults [defaults: record] nothing -> record {
+def with-env-defaults [defaults: record]: nothing -> record {
     $defaults
     | transpose key value
     | reduce -f [] {|it, acc|

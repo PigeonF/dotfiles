@@ -9,7 +9,7 @@ name = "Jonas Fierlings"
 fsmonitor = "watchman"
 
 [ui]
-default-command = "log"
+default-command = ["log", "-n", "5"]
 diff-editor = "diffedit3-ssh"
 merge-editor = "vscodium"
 paginate = "never"

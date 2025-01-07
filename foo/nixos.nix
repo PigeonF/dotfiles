@@ -41,9 +41,12 @@
 
   nix.settings.trusted-users = [ "@wheel" ];
 
-  security.sudo = {
-    wheelNeedsPassword = false;
-    execWheelOnly = true;
+  security = {
+    doas = {
+      enable = true;
+      wheelNeedsPassword = false;
+    };
+    sudo.enable = false;
   };
 
   users = {
