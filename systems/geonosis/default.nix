@@ -2,6 +2,7 @@
   config,
   inputs,
   pkgs,
+  lib,
   ...
 }:
 {
@@ -32,7 +33,7 @@
   nix = {
     settings = {
       trusted-public-keys = [ "alice:R++4LTYSvoZ5PpnvzJ5FjiTaWHcnUoOndTt6gAu269w=" ];
-      substituters = [ "ssh-ng://alice" ];
+      extra-substituters = [ "ssh-ng://alice" ];
     };
   };
 
@@ -84,6 +85,70 @@
   # };
   # programs.firefox.enable = true;
 
+  systemd.services.iwd = {
+    bindsTo = [ "systemd-networkd.service" ];
+    after = [ "systemd-networkd.service" ];
+  };
+
+  boot.initrd.systemd.enable = true;
+
+  networking = {
+    useDHCP = false;
+    networkmanager.enable = false;
+    dhcpcd.enable = false;
+    nftables.enable = true;
+    wireless = {
+      enable = false;
+
+      iwd = {
+        enable = true;
+        settings = {
+          Scan.DisablePeriodicScan = true;
+          General.UseDefaultInterface = true;
+          General.EnableNetworkConfiguration = false;
+          DriverQuirks = {
+            DefaultInterface = "*";
+          };
+        };
+      };
+    };
+  };
+
+  services = {
+    resolved.enable = true;
+  };
+
+  systemd = {
+    network.enable = true;
+  };
+
+  systemd.network.networks = {
+    "10-uplink" = {
+      matchConfig = {
+        Name = "en* eth0";
+        Type = "ether";
+      };
+      networkConfig = {
+        DHCP = "yes";
+      };
+      linkConfig = {
+        RequiredForOnline = "routable";
+      };
+    };
+    "10-wireless" = {
+      matchConfig = {
+        Name = "wl* wlan0";
+        Type = "wlan";
+      };
+      networkConfig = {
+        DHCP = "yes";
+      };
+      linkConfig = {
+        RequiredForOnline = "no";
+      };
+    };
+  };
+
   pigeonf = {
     attic = {
       enable = true;
@@ -109,15 +174,15 @@
     user.enable = true;
     virtualisation.containers.registries.enable = true;
 
-    network = {
-      enable = true;
-      avahi.enable = true;
-      envFile = config.sops.secrets."network".path;
+    # network = {
+    #   enable = true;
+    #   avahi.enable = true;
+    #   envFile = config.sops.secrets."network".path;
 
-      networks = {
-        lan-solo.enable = true;
-      };
-    };
+    #   networks = {
+    #     lan-solo.enable = true;
+    #   };
+    # };
 
     gitlab-runner = {
       enable = true;
