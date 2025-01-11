@@ -18,6 +18,7 @@ in
     lib.mkIf cfg.enable {
       virtualisation.incus = {
         enable = true;
+        ui.enable = true;
         preseed = {
           networks = [
             {
@@ -32,20 +33,15 @@ in
           profiles = [
             {
               devices = {
-                enp0s31f6 = {
-                  name = "enp0s31f6";
-                  network = "incusbr0";
-                  type = "nic";
-                };
-                wlp61s0 = {
-                  name = "wlp61s0";
+                eth0 = {
+                  name = "eth0";
                   network = "incusbr0";
                   type = "nic";
                 };
                 root = {
                   path = "/";
                   pool = "default";
-                  size = "35GiB";
+                  size = "64GiB";
                   type = "disk";
                 };
               };

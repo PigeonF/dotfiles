@@ -33,7 +33,7 @@
   nix = {
     settings = {
       trusted-public-keys = [ "alice:R++4LTYSvoZ5PpnvzJ5FjiTaWHcnUoOndTt6gAu269w=" ];
-      extra-substituters = [ "ssh-ng://alice" ];
+      # extra-substituters = [ "ssh-ng://alice" ];
     };
   };
 
