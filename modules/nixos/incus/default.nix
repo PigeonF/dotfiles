@@ -16,10 +16,15 @@ in
       ip = "10.109.165.1";
     in
     lib.mkIf cfg.enable {
+      networking.firewall.interfaces.enp0s31f6.allowedTCPPorts = [ 8443 ];
+
       virtualisation.incus = {
         enable = true;
         ui.enable = true;
         preseed = {
+          config = {
+            "core.https_address" = ":8443";
+          };
           networks = [
             {
               config = {
