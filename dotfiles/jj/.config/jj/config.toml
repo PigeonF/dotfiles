@@ -19,7 +19,7 @@ push-bookmark-prefix = "PigeonF/push-"
 private-commits = "description(glob:\"private:*\")"
 
 [signing]
-backend = "ssh"
+backend = "none"
 key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL"
 sign-all = false
 
@@ -54,6 +54,8 @@ sign = [
   "--reset-author",
   "--config-toml",
   "signing.sign-all = true",
+  "--config-toml",
+  "signing.backend = \"ssh\"",
 ]
 sq = ["squash"]
 sqk = ["squash", "--keep-empty"]
