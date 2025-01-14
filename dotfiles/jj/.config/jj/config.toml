@@ -9,13 +9,13 @@ name = "Jonas Fierlings"
 fsmonitor = "watchman"
 
 [ui]
-default-command = ["log", "-n", "5"]
+default-command = ["log", "-n", "10"]
 diff-editor = "diffedit3-ssh"
 merge-editor = "vscodium"
 paginate = "never"
 
 [git]
-push-bookmark-prefix = "PigeonF/push-"
+push-bookmark-prefix = "push-"
 private-commits = "description(glob:\"private:*\")"
 
 [signing]
