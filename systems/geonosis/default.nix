@@ -16,10 +16,11 @@
     inputs.sops-nix.nixosModules.sops
 
     ./acme.nix
-    ./paperless.nix
     ./haproxy.nix
     ./hardware.nix
+    ./paperless.nix
     ./secrets
+    ./incus.nix
   ];
 
   system.stateVersion = "24.05";
