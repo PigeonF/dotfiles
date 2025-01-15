@@ -105,7 +105,7 @@
         enable = true;
         settings = {
           Scan.DisablePeriodicScan = true;
-          General.UseDefaultInterface = true;
+          # General.UseDefaultInterface = true;
           General.EnableNetworkConfiguration = false;
           DriverQuirks = {
             DefaultInterface = "*";
@@ -121,6 +121,7 @@
 
   systemd = {
     network.enable = true;
+    network.links."80-iwd".linkConfig.NamePolicy = "keep kernel database onboard slot path";
   };
 
   systemd.network.networks = {
