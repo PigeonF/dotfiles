@@ -121,7 +121,7 @@
       enable = false;
 
       iwd = {
-        enable = true;
+        enable = false;
         settings = {
           Scan.DisablePeriodicScan = true;
           # General.UseDefaultInterface = true;
@@ -145,6 +145,22 @@
   };
 
   systemd.network.networks = {
+    "05-enp0s31f6" = {
+      matchConfig = {
+        Name = "enp0s31f6";
+        Type = "ether";
+      };
+      address = [
+        "192.168.178.123/24"
+        "fd21:5e04::/64"
+      ];
+      gateway = [ "192.168.178.1" ];
+      dns = [ "192.168.178.53" ];
+      linkConfig = {
+        RequiredForOnline = "routable";
+      };
+    };
+
     "10-uplink" = {
       matchConfig = {
         Name = "en* eth0";
@@ -166,6 +182,7 @@
         DHCP = "yes";
       };
       linkConfig = {
+        Unmanaged = "yes";
         RequiredForOnline = "no";
       };
     };
