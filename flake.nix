@@ -8,7 +8,6 @@
 
       imports = [
         (import ./flake-modules.nix).default
-        ./foo
         ./homes
         ./modules
         ./systems
