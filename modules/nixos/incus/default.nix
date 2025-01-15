@@ -30,6 +30,10 @@ in
               config = {
                 "ipv4.address" = "${ip}/24";
                 "ipv4.nat" = "true";
+                "ipv4.dhcp" = "true";
+                "ipv6.address" = "fd42:f42c:f62a:b633::1/64";
+                "ipv6.nat" = "true";
+                "ipv6.dhcp" = "false";
               };
               name = "incusbr0";
               type = "bridge";
