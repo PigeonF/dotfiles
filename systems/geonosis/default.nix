@@ -15,8 +15,8 @@
     inputs.quadlet-nix.nixosModules.quadlet
     inputs.sops-nix.nixosModules.sops
 
-    ./acme.nix
-    ./haproxy.nix
+    # ./acme.nix
+    # ./haproxy.nix
     ./hardware.nix
     # ./paperless.nix
     ./secrets
@@ -28,24 +28,12 @@
 
   networking = {
     nat = {
-      # enable = true;
-      # externalInterface = "enp0s31f6";
-      # forwardPorts = [
-      #   {
-      #     proto = "tcp";
-      #     sourcePort = 80;
-      #     destination = "serenno.incus";
-      #   }
-      #   {
-      #     proto = "tcp";
-      #     sourcePort = 443;
-      #     destination = "serenno.incus";
-      #   }
-      # ];
     };
     firewall.allowedTCPPorts = [
       80
+      8080
       443
+      4443
     ];
   };
 
@@ -54,6 +42,47 @@
       trusted-public-keys = [ "alice:R++4LTYSvoZ5PpnvzJ5FjiTaWHcnUoOndTt6gAu269w=" ];
       # extra-substituters = [ "ssh-ng://alice" ];
     };
+  };
+
+  services.haproxy = {
+    enable = true;
+    config = ''
+      global
+        # Process management and security
+        # fd-hard-limit 32768
+        log "/dev/log" len 65535 format "rfc3164" daemon info err
+        # Performance tuning
+        maxconn 16384
+
+      defaults
+        option dontlognull
+        log global
+        timeout client 30s
+        timeout server 30s
+        timeout connect 5s
+
+      frontend http-redirect
+        bind *:80,:::80 v6only
+        mode tcp
+        option tcplog
+        use_backend serenno-80
+
+      frontend https
+        bind *:443,:::443 v6only
+        mode tcp
+        option tcplog
+        tcp-request inspect-delay 10s
+        tcp-request content accept if { req_ssl_hello_type 1 }
+        use_backend serenno-443
+
+      backend serenno-80
+        mode tcp
+        server serenno serenno.incus:80
+
+      backend serenno-443
+        mode tcp
+        server serenno serenno.incus:443
+    '';
   };
 
   environment.systemPackages = [
