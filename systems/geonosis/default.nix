@@ -18,7 +18,7 @@
     ./acme.nix
     ./haproxy.nix
     ./hardware.nix
-    ./paperless.nix
+    # ./paperless.nix
     ./secrets
     ./incus.nix
   ];
@@ -26,10 +26,28 @@
   system.stateVersion = "24.05";
   networking.hostName = "geonosis";
 
-  networking.firewall.allowedTCPPorts = [
-    80
-    443
-  ];
+  networking = {
+    nat = {
+      # enable = true;
+      # externalInterface = "enp0s31f6";
+      # forwardPorts = [
+      #   {
+      #     proto = "tcp";
+      #     sourcePort = 80;
+      #     destination = "serenno.incus";
+      #   }
+      #   {
+      #     proto = "tcp";
+      #     sourcePort = 443;
+      #     destination = "serenno.incus";
+      #   }
+      # ];
+    };
+    firewall.allowedTCPPorts = [
+      80
+      443
+    ];
+  };
 
   nix = {
     settings = {
@@ -98,6 +116,7 @@
     networkmanager.enable = false;
     dhcpcd.enable = false;
     nftables.enable = true;
+
     wireless = {
       enable = false;
 
@@ -121,7 +140,8 @@
 
   systemd = {
     network.enable = true;
-    network.links."80-iwd".linkConfig.NamePolicy = "keep kernel database onboard slot path";
+    network.links."80-iwd".linkConfig.NamePolicy =
+      lib.mkOverride 999 "keep kernel database onboard slot path";
   };
 
   systemd.network.networks = {
@@ -139,7 +159,7 @@
     };
     "10-wireless" = {
       matchConfig = {
-        Name = "wl* wlan0";
+        Name = "wl*";
         Type = "wlan";
       };
       networkConfig = {
@@ -153,12 +173,12 @@
 
   pigeonf = {
     attic = {
-      enable = true;
+      enable = false;
       envFile = config.sops.secrets."attic".path;
     };
 
     kellnr = {
-      enable = true;
+      enable = false;
       envFile = config.sops.secrets."kellnr".path;
     };
 

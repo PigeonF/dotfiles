@@ -80,6 +80,10 @@
       frontend internal from http-defaults
         bind abns@internal accept-proxy ssl crt "@http/rc4.xyz"
         use_backend %[req.hdr(host),lower]
+        use_backend serenno
+
+      backend serenno from http-defaults
+        server serenno serenno.incus:80
 
       backend internal from http-defaults
         mode tcp
