@@ -219,7 +219,7 @@
 
   pigeonf = {
     attic = {
-      enable = false;
+      enable = true;
       envFile = config.sops.secrets."attic".path;
     };
 
