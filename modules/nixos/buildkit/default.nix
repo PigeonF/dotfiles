@@ -22,15 +22,6 @@ in
       buildkitdConfig = pkgs.writeText "buildkitd.toml" (
         lib.optionalString hasRegistry ''
           insecure-entitlements = [ "security.insecure" ]
-
-          [registry."docker.io"]
-            mirrors = ["cache.internal"]
-
-          [registry."registry.internal"]
-            http = true
-
-          [registry."cache.internal"]
-            http = true
         ''
       );
     in

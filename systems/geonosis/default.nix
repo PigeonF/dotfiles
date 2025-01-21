@@ -54,6 +54,7 @@
         '';
         proxied = pkgs.writeText "haproxy-local-proxies.map" ''
           attic.rc4.xyz attic.rc4.xyz
+          registry.rc4.xyz registry.rc4.xyz
         '';
       in
       ''
@@ -117,7 +118,31 @@
         backend attic.rc4.xyz
           mode http
           server attic 127.0.0.1:1234 check
+
+        backend registry.rc4.xyz
+          mode http
+          server registry 127.0.0.1:5000
       '';
+  };
+
+  services.dockerRegistry = {
+    enable = true;
+    enableGarbageCollect = true;
+    enableDelete = true;
+    extraConfig = {
+      http = {
+        headers = {
+          "X-Content-Type-Options" = [ "nosniff" ];
+        };
+        host = "https://registry.rc4.xyz";
+        secret = "LS0tLS1CRUdJTiBSU0EgUFJJVkFURSBLRVktLS0tLQpNSUlKS1FJQkFBS0NBZ0VBNW9";
+      };
+    };
+  };
+
+  systemd.services.docker-registry.environment = {
+    # https://github.com/distribution/distribution/issues/4270
+    OTEL_TRACES_EXPORTER = "none";
   };
 
   services.atticd = {
