@@ -14,6 +14,8 @@ shopt -s extglob
 shopt -s globstar
 shopt -s checkjobs
 
+[ -z "${NIX_BUILD_TOP:-}" ] || return
+
 {{#if (is_executable "atuin")}}
 if [[ :$SHELLOPTS: =~ :(vi|emacs): ]]; then
   eval "$(atuin init bash --disable-up-arrow)"
