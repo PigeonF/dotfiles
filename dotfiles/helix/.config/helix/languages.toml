@@ -13,13 +13,13 @@ language-servers = ["harper", "typos"]
 name = "jjdescription"
 source = { git = "https://github.com/PigeonF/tree-sitter-jjdescription", rev = "342d9730ee9dc2da2cdc1090a72064c587912a66" }
 
-[language-server.harper]
-environment = { NO_COLOR = "1" }
-command = "harper-ls"
-args = ["--stdio"]
+# [language-server.harper]
+# environment = { NO_COLOR = "1" }
+# command = "harper-ls"
+# args = ["--stdio"]
 
-[language-server.harper.config.harper-ls.linters]
-spaces = true
+# [language-server.harper.config.harper-ls.linters]
+# spaces = true
 
 [language-server.typos]
 command = "typos-lsp"
