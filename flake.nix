@@ -32,8 +32,9 @@
         in
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.appendOverlays [
-            inputs.self.overlays.default
+            inputs.jujutsu.overlays.default
             inputs.lix.overlays.default
+            inputs.self.overlays.default
           ];
 
           formatter = pkgs.nixfmt-rfc-style;
@@ -78,7 +79,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
     lix = {
       url = "git+https://git.lix.systems/lix-project/nixos-module?ref=2.92.0";
@@ -100,6 +100,11 @@
     deploy-rs = {
       url = "github:serokell/deploy-rs";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    jujutsu = {
+      url = "github:jj-vcs/jj?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
     secrix.url = "github:Platonic-Systems/secrix";
     home-manager = {

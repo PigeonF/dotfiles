@@ -163,6 +163,31 @@
         "type": "github"
       }
     },
+    "jujutsu": {
+      "inputs": {
+        "flake-utils": [
+          "flake-utils"
+        ],
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "rust-overlay": "rust-overlay"
+      },
+      "locked": {
+        "lastModified": 1737704959,
+        "narHash": "sha256-v4ZgWXGTSDbKkZay768wetIUvpyifPsaXepys5/N/y8=",
+        "owner": "jj-vcs",
+        "repo": "jj",
+        "rev": "f3bbc50453e5674805e505e372e07963a4fa08ed",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jj-vcs",
+        "ref": "main",
+        "repo": "jj",
+        "type": "github"
+      }
+    },
     "lix": {
       "inputs": {
         "flake-utils": [
@@ -215,22 +240,6 @@
       "original": {
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "type": "github"
-      }
-    },
-    "nixos-unstable-small": {
-      "locked": {
-        "lastModified": 1737706285,
-        "narHash": "sha256-k/f1rAyCjGkNu4BnlnUGEvQPSnYVG7UHoOeaQQcjQps=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "dcb7446a099fe1c95b3694fdb7a4dda8f19d6ba8",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "ref": "nixos-unstable-small",
-        "repo": "nixpkgs",
         "type": "github"
       }
     },
@@ -315,15 +324,36 @@
         "flake-parts": "flake-parts",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
+        "jujutsu": "jujutsu",
         "lix": "lix",
         "nixos-hardware": "nixos-hardware",
-        "nixos-unstable-small": "nixos-unstable-small",
         "nixpkgs": "nixpkgs",
         "nixpkgs-python": "nixpkgs-python",
         "quadlet-nix": "quadlet-nix",
         "secrix": "secrix",
         "sops-nix": "sops-nix",
         "systems": "systems_2"
+      }
+    },
+    "rust-overlay": {
+      "inputs": {
+        "nixpkgs": [
+          "jujutsu",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1735784864,
+        "narHash": "sha256-tIl5p3ueaPw7T5T1UXkLc8ISMk6Y8CI/D/rd0msf73I=",
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "rev": "04d5f1836721461b256ec452883362c5edc5288e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "oxalica",
+        "repo": "rust-overlay",
+        "type": "github"
       }
     },
     "secrix": {

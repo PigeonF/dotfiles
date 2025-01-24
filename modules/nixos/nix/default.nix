@@ -47,12 +47,10 @@ in
       # Make flake nixpkgs available
       nixPath = [
         "nixpkgs=${inputs.nixpkgs}"
-        "nixos-unstable-small=${inputs.nixos-unstable-small}"
       ];
 
       registry = {
         nixpkgs.flake = mkDefault inputs.nixpkgs;
-        nixos-unstable-small.flake = mkDefault inputs.nixos-unstable-small;
       };
     };
 
