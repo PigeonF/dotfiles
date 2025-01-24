@@ -33,6 +33,7 @@
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.appendOverlays [
             inputs.self.overlays.default
+            inputs.lix.overlays.default
           ];
 
           formatter = pkgs.nixfmt-rfc-style;
@@ -79,6 +80,15 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-unstable-small.url = "github:NixOS/nixpkgs/nixos-unstable-small";
     nixos-hardware.url = "github:NixOS/nixos-hardware";
+    lix = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module?ref=2.92.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
+    };
+    flake-utils = {
+      url = "github:numtide/flake-utils?ref=main";
+      inputs.systems.follows = "systems";
+    };
     cloudflare-ipv6s = {
       url = "https://www.cloudflare.com/ips-v6";
       flake = false;
@@ -93,7 +103,7 @@
     };
     secrix.url = "github:Platonic-Systems/secrix";
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager?ref=master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     quadlet-nix = {

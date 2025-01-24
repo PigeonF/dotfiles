@@ -42,7 +42,7 @@ in
         }
         ++ (lib.lists.optionals pkgs.stdenv.isLinux (
           builtins.attrValues {
-            inherit (pkgs) cargo-llvm-cov cargo-zigbuild zig_0_10;
+            inherit (pkgs) cargo-llvm-cov cargo-zigbuild;
           }
         ));
     };

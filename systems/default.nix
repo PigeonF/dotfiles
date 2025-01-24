@@ -11,7 +11,10 @@
           inherit inputs;
         };
 
-        modules = [ ./geonosis ];
+        modules = [
+          ./geonosis
+          inputs.lix.nixosModules.default
+        ];
       };
 
       tatooine = inputs.nixpkgs.lib.nixosSystem {
@@ -20,7 +23,10 @@
           inherit inputs;
         };
 
-        modules = [ ./tatooine ];
+        modules = [
+          ./tatooine
+          inputs.lix.nixosModules.default
+        ];
       };
     };
   };

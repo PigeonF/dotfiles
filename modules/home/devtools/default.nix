@@ -45,6 +45,7 @@ in
             just
             markdownlint-cli2
             mdbook
+            mdsh
             meson
             miller
             nh
