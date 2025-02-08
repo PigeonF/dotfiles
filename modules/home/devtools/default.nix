@@ -43,6 +43,7 @@ in
             grype
             jujutsu
             just
+            lurk
             markdownlint-cli2
             mdbook
             mdsh
