@@ -64,6 +64,7 @@ in
             watchman
             xdg-ninja
             yamllint
+            yazi
             zip
             ;
         }
