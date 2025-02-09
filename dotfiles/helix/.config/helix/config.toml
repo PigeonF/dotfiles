@@ -5,6 +5,13 @@ cursorline = true
 line-number = "relative"
 rulers = [100, 120]
 true-color = true
+end-of-line-diagnostics = "hint"
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+
+[editor.lsp]
+display-inlay-hints = true
 
 [editor.cursor-shape]
 insert = "bar"
