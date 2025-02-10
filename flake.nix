@@ -33,7 +33,6 @@
         {
           _module.args.pkgs = inputs'.nixpkgs.legacyPackages.appendOverlays [
             inputs.helix.overlays.default
-            inputs.jujutsu.overlays.default
             inputs.lix.overlays.default
             inputs.self.overlays.default
           ];
@@ -104,11 +103,6 @@
     };
     helix = {
       url = "github:helix-editor/helix?ref=master";
-      inputs.nixpkgs.follows = "nixpkgs";
-      inputs.flake-utils.follows = "flake-utils";
-    };
-    jujutsu = {
-      url = "github:jj-vcs/jj?ref=main";
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.flake-utils.follows = "flake-utils";
     };
