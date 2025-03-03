@@ -11,7 +11,7 @@ end-of-line-diagnostics = "hint"
 cursor-line = "warning"
 
 [editor.lsp]
-display-inlay-hints = true
+# display-inlay-hints = true
 
 [editor.cursor-shape]
 insert = "bar"

@@ -1,6 +1,3 @@
-# Downloaded in env.nu
-source default_config.nu
-
 let custom_config = {
     show_banner: false
 }

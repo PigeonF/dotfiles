@@ -92,14 +92,6 @@ if not ($env.NU_SCRIPTS_CACHE_FALLBACK | path exists) {
     mkdir $env.NU_SCRIPTS_CACHE_FALLBACK
 }
 
-let default_config = $env.NU_SCRIPTS_CACHE | path join "default_config.nu"
-if not ($default_config | path exists) {
-    let version = (nu --version)
-    let file = "crates/nu-utils/src/sample_config/default_config.nu"
-    let remote = $"https://raw.githubusercontent.com/nushell/nushell/($version)/($file)"
-    http get $remote | save --force $default_config
-}
-
 def has-binary? [binary: string]: nothing -> bool {
     not (which $binary | is-empty)
 }
