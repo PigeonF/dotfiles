@@ -20,7 +20,7 @@
     ./hardware.nix
     # ./paperless.nix
     ./secrets
-    ./incus.nix
+    # ./incus.nix
   ];
 
   system.stateVersion = "24.05";
@@ -45,7 +45,7 @@
   };
 
   services.haproxy = {
-    enable = true;
+    enable = false; # true;
     config =
       let
         locals = pkgs.writeText "haproxy-local-backends.map" ''
@@ -126,7 +126,7 @@
   };
 
   services.dockerRegistry = {
-    enable = true;
+    enable = false; # true;
     enableGarbageCollect = true;
     enableDelete = true;
     extraConfig = {
@@ -146,7 +146,7 @@
   };
 
   services.atticd = {
-    enable = true;
+    enable = false; # true;
     settings = {
       api-endpoint = "https://attic.rc4.xyz/";
       listen = "[::]:1234";
@@ -302,13 +302,13 @@
     };
 
     buildkit.enable = true;
-    container-registry.enable = true;
+    container-registry.enable = false; # true;
     core.enable = true;
     dns.enable = true;
     docker-rootless.enable = false;
     docker.enable = true;
     # guix.enable = true;
-    incus.enable = true;
+    incus.enable = false; # true;
     nix.enable = true;
     podman.enable = true;
     # pypiserver.enable = true;
@@ -326,7 +326,7 @@
     # };
 
     gitlab-runner = {
-      enable = true;
+      enable = false; # true;
       runners = {
         gitlab = {
           description = "gitlab.com Runner";
