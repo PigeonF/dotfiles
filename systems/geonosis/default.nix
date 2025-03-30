@@ -45,7 +45,7 @@
   };
 
   services.haproxy = {
-    enable = false; # true;
+    enable = true; # true;
     config =
       let
         locals = pkgs.writeText "haproxy-local-backends.map" ''
@@ -126,7 +126,7 @@
   };
 
   services.dockerRegistry = {
-    enable = false; # true;
+    enable = true; # true;
     enableGarbageCollect = true;
     enableDelete = true;
     extraConfig = {
@@ -146,7 +146,7 @@
   };
 
   services.atticd = {
-    enable = false; # true;
+    enable = true; # true;
     settings = {
       api-endpoint = "https://attic.rc4.xyz/";
       listen = "[::]:1234";
@@ -302,7 +302,7 @@
     };
 
     buildkit.enable = true;
-    container-registry.enable = false; # true;
+    container-registry.enable = true; # true;
     core.enable = true;
     dns.enable = true;
     docker-rootless.enable = false;
@@ -326,7 +326,7 @@
     # };
 
     gitlab-runner = {
-      enable = false; # true;
+      enable = true; # true;
       runners = {
         gitlab = {
           description = "gitlab.com Runner";
