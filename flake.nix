@@ -9,12 +9,17 @@
       url = "github:hercules-ci/flake-parts?ref=refs/heads/main";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager?ref=refs/heads/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
     inputs@{
       flake-parts,
       systems,
+      home-manager,
       ...
     }:
     flake-parts.lib.mkFlake
@@ -26,7 +31,10 @@
 
         systems = import systems;
 
-        imports = [ ];
+        imports = [
+          home-manager.flakeModules.home-manager
+          ./home-manager
+        ];
 
         flake = { };
 

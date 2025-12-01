@@ -1,6 +1,12 @@
 version = 1
 
 [[annotations]]
-path = [".editorconfig", ".gitignore", "flake.lock", "flake.nix"]
+path = [
+    ".editorconfig",
+    ".gitignore",
+    "flake.lock",
+    "flake.nix",
+    "home-manager/**/*",
+]
 SPDX-FileCopyrightText = "Jonas Fierlings <fnoegip@gmail.com>"
 SPDX-License-Identifier = "0BSD"
