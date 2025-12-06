@@ -20,6 +20,7 @@ in
     programs = {
       atuin.enable = true;
       bash.enable = true;
+      eza.enable = true;
       helix.enable = true;
       home-manager.enable = true;
       nix.enable = true;

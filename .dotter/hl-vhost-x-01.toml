@@ -2,6 +2,7 @@ includes = [".dotter/includes/linux.toml"]
 
 packages = [
   "atuin",
+  "eza",
   "helix",
   "starship",
 ]
