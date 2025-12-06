@@ -16,6 +16,7 @@
         };
         programs = {
           imports = [
+            ./programs/atuin.nix
             ./programs/bash.nix
             ./programs/helix.nix
             ./programs/home-manager.nix

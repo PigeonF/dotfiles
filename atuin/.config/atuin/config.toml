@@ -1,0 +1,13 @@
+dialect = "uk"
+update_check = false
+history_filter = [
+  "^[bc]at",
+  "^cd",
+  "^exit",
+  "^export [0-9a-zA-Z\\-_]+?[-_]TOKEN=",
+  "^l[las]?$",
+]
+prefers_reduced_motion = true
+
+[theme]
+name = "catppuccin-macchiato"

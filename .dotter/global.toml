@@ -2,3 +2,6 @@
 
 [settings]
 default_target_type = "symbolic"
+
+[atuin.files]
+"atuin/.config/" = "~/.config/"

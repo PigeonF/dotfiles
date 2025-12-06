@@ -1,3 +1,6 @@
 includes = [".dotter/includes/linux.toml"]
 
-packages = ["helix"]
+packages = [
+  "atuin",
+  "helix",
+]

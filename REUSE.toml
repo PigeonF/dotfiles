@@ -5,6 +5,7 @@ path = [
     ".dotter/**/*",
     ".editorconfig",
     ".gitignore",
+    "atuin/**/*",
     "flake.lock",
     "flake.nix",
     "helix/**/*",
@@ -12,3 +13,10 @@ path = [
 ]
 SPDX-FileCopyrightText = "Jonas Fierlings <fnoegip@gmail.com>"
 SPDX-License-Identifier = "0BSD"
+
+[[annotations]]
+path = [
+    "atuin/.config/atuin/themes/catppuccin-macchiato.toml"
+]
+SPDX-FileCopyrightText = "2021-present Catppuccin Org"
+SPDX-License-Identifier = "MIT"
