@@ -12,6 +12,11 @@ in
         enable = true;
       };
     };
+    presets = {
+      shell = {
+        enable = true;
+      };
+    };
     programs = {
       helix = {
         enable = true;
@@ -22,7 +27,6 @@ in
     inherit username;
     homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
     stateVersion = "25.11";
-    packages = [ pkgs.ncurses ];
   };
   news = {
     display = "silent";

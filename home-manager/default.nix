@@ -19,6 +19,11 @@
             ./programs/helix.nix
           ];
         };
+        presetsShell = {
+          imports = [
+            ./modules/presets/shell.nix
+          ];
+        };
       };
     in
     {
