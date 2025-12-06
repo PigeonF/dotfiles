@@ -30,6 +30,7 @@ in
       nix.enable = true;
       ripgrep.enable = true;
       starship.enable = true;
+      vivid.enable = true;
       zoxide.enable = true;
     };
   };
