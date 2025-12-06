@@ -18,6 +18,7 @@
           imports = [
             ./programs/atuin.nix
             ./programs/bash.nix
+            ./programs/bat.nix
             ./programs/eza.nix
             ./programs/helix.nix
             ./programs/home-manager.nix

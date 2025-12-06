@@ -6,6 +6,7 @@ path = [
     ".editorconfig",
     ".gitignore",
     "atuin/**/*",
+    "bat/**/*",
     "eza/**/*",
     "flake.lock",
     "flake.nix",
@@ -19,6 +20,7 @@ SPDX-License-Identifier = "0BSD"
 [[annotations]]
 path = [
     "atuin/.config/atuin/themes/catppuccin-macchiato.toml",
+    "bat/.config/bat/themes/Catppuccin Macchiato.tmTheme",
     "eza/.config/eza/theme.yml",
 ]
 SPDX-FileCopyrightText = "2021-present Catppuccin Org"
