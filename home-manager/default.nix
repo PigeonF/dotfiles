@@ -22,6 +22,7 @@
             ./programs/btop.nix
             ./programs/eza.nix
             ./programs/fd.nix
+            ./programs/fzf.nix
             ./programs/helix.nix
             ./programs/home-manager.nix
             ./programs/nix.nix
