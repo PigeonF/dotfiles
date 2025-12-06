@@ -31,6 +31,7 @@
             ./programs/ripgrep.nix
             ./programs/starship.nix
             ./programs/vivid.nix
+            ./programs/yazi.nix
             ./programs/zoxide.nix
           ];
         };

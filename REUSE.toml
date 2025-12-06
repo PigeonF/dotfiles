@@ -18,6 +18,7 @@ path = [
     "jujutsu/**/*",
     "ripgrep/**/*",
     "starship/**/*",
+    "yazi/**/*",
 ]
 SPDX-FileCopyrightText = "Jonas Fierlings <fnoegip@gmail.com>"
 SPDX-License-Identifier = "0BSD"
@@ -31,4 +32,11 @@ path = [
     "git/.config/git/catppuccin.delta.gitconfig",
 ]
 SPDX-FileCopyrightText = "2021-present Catppuccin Org"
+SPDX-License-Identifier = "MIT"
+
+[[annotations]]
+path = [
+    "yazi/.config/yazi/flavors/catppuccin-macchiato.yazi/flavor.toml",
+]
+SPDX-FileCopyrightText = "2023 yazi-rs"
 SPDX-License-Identifier = "MIT"

@@ -12,3 +12,6 @@
 
 [ripgrep.files]
 "ripgrep/.config/" = "~/AppData/Roaming/"
+
+[yazi.files]
+"yazi/.config/yazi/" = "~/AppData/Roaming/yazi/config/"

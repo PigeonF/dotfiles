@@ -15,3 +15,6 @@
 
 [ripgrep.files]
 "ripgrep/.config/" = "~/.config/"
+
+[yazi.files]
+"yazi/.config/" = "~/.config/"

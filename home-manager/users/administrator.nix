@@ -33,6 +33,7 @@ in
       ripgrep.enable = true;
       starship.enable = true;
       vivid.enable = true;
+      yazi.enable = true;
       zoxide.enable = true;
     };
   };
