@@ -4,5 +4,8 @@
 [fd.files]
 "fd/.config/" = "~/AppData/Roaming/"
 
+[helix.files]
+"helix/.config/" = "~/AppData/Roaming/"
+
 [ripgrep.files]
 "ripgrep/.config/" = "~/AppData/Roaming/"
