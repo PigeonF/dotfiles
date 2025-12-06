@@ -28,6 +28,7 @@ in
       git.enable = true;
       helix.enable = true;
       home-manager.enable = true;
+      jujutsu.enable = true;
       nix.enable = true;
       ripgrep.enable = true;
       starship.enable = true;

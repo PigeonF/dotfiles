@@ -1,0 +1,100 @@
+#:schema https://raw.githubusercontent.com/jj-vcs/jj/main/cli/src/config-schema.json
+
+[user]
+# Set with `jj config set --repo user.email "fnoegip@gmail.com"
+# Not set to default value so that projects always use the correct E-Mail by forcing me to choose
+# manually.
+# email = "fnoegip@gmail.com"
+name = "Jonas Fierlings"
+
+[fsmonitor]
+backend = "watchman"
+
+[ui]
+default-command = ["log", "-n", "10"]
+# TODO(PigeonF): Figure out something cross platform.
+diff-editor = ":builtin"
+# merge-editor = "vscodium"
+paginate = "never"
+
+[git]
+sign-on-push = true
+private-commits = "description(glob:\"private:*\")"
+
+[signing]
+behavior = "drop"
+backend = "ssh"
+key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL"
+
+[aliases]
+d = ["diff"]
+ds = ["diff", "--stat"]
+g = ["git"]
+gp = ["git", "push"]
+gpc = ["git", "push", "-c"]
+l = ["log", "-T", "builtin_log_compact"]
+ll = ["log", "-T", "builtin_log_detailed"]
+ls = ["log", "-r", "mutable()::@"]
+s = ["status"]
+sq = ["squash"]
+sqk = ["squash", "--keep-empty"]
+
+[templates]
+log = "builtin_log_comfortable"
+# Should be set on a per-repository basis
+# commit_trailers = '''
+# concat(
+#   if(!trailers.contains_key("Change-Id"), format_gerrit_change_id_trailer(self)),
+#   format_signed_off_by_trailer(self),
+# )
+# '''
+draft_commit_description = '''
+concat(
+    coalesce(description, default_commit_description, "\n"),
+    "\n",
+    "JJ: HEAD detached at ",
+    commit_id,
+    "\n",
+    "JJ: This commit contains the following changes:",
+    "\n",
+    indent("JJ:     ", diff.summary()),
+    "\n",
+    "JJ: ignore-rest",
+    "\n",
+    diff.git(),
+)
+'''
+git_push_bookmark = '"push-" ++ change_id.short()'
+log_node = '''
+if(self && !current_working_copy && !immutable && !conflict && in_branch(self),
+    "◇",
+    builtin_log_node
+)
+'''
+
+[template-aliases]
+"in_branch(commit)" = 'commit.contained_in("immutable_heads()..bookmarks()")'
+starship = '''
+separate(" ",
+    change_id.shortest(6),
+    bookmarks.map(|x| if(
+        x.name().substr(0, 20).starts_with(x.name()),
+        x.name().substr(0, 20),
+        x.name().substr(0, 19) ++ "…")
+    ).join(" "),
+    if(
+        description.first_line().substr(0, 24).starts_with(description.first_line()),
+        description.first_line().substr(0, 24),
+        description.first_line().substr(0, 23) ++ "…"
+    ),
+    if(conflict, "conflict"),
+    if(divergent, "divergent"),
+    if(hidden, "hidden"),
+)
+'''
+
+[[--scope]]
+--when.commands = ["diff", "show"]
+
+[--scope.ui]
+pager = "delta"

@@ -15,6 +15,7 @@ path = [
     "git/**/*",
     "helix/**/*",
     "home-manager/**/*",
+    "jujutsu/**/*",
     "ripgrep/**/*",
     "starship/**/*",
 ]

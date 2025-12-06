@@ -26,6 +26,7 @@
             ./programs/git.nix
             ./programs/helix.nix
             ./programs/home-manager.nix
+            ./programs/jujutsu.nix
             ./programs/nix.nix
             ./programs/ripgrep.nix
             ./programs/starship.nix

@@ -10,5 +10,8 @@
 [helix.files]
 "helix/.config/" = "~/.config/"
 
+[jujutsu.files]
+"jujutsu/.config/" = "~/.config/"
+
 [ripgrep.files]
 "ripgrep/.config/" = "~/.config/"
