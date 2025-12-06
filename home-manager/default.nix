@@ -6,7 +6,28 @@
     ./flake-module.nix
   ];
 
-  flake = { };
+  flake =
+    let
+      homeModules = {
+        dotter = {
+          imports = [
+            ./modules/dotter.nix
+          ];
+        };
+        programs = {
+          imports = [
+            ./programs/helix.nix
+          ];
+        };
+      };
+    in
+    {
+      homeModules = homeModules // {
+        default = {
+          imports = builtins.attrValues homeModules;
+        };
+      };
+    };
 
   perSystem =
     { pkgs, ... }:
@@ -16,6 +37,7 @@
           inherit pkgs;
 
           modules = [
+            inputs.self.homeModules.default
             ./users/administrator.nix
           ];
         };

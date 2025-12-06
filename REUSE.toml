@@ -2,10 +2,12 @@ version = 1
 
 [[annotations]]
 path = [
+    ".dotter/**/*",
     ".editorconfig",
     ".gitignore",
     "flake.lock",
     "flake.nix",
+    "helix/**/*",
     "home-manager/**/*",
 ]
 SPDX-FileCopyrightText = "Jonas Fierlings <fnoegip@gmail.com>"
