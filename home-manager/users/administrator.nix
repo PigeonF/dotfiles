@@ -18,6 +18,7 @@ in
       };
     };
     programs = {
+      bash.enable = true;
       helix.enable = true;
       home-manager.enable = true;
       nix.enable = true;
