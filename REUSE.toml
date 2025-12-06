@@ -14,6 +14,7 @@ path = [
     "flake.nix",
     "helix/**/*",
     "home-manager/**/*",
+    "ripgrep/**/*",
     "starship/**/*",
 ]
 SPDX-FileCopyrightText = "Jonas Fierlings <fnoegip@gmail.com>"

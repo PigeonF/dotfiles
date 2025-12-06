@@ -25,6 +25,7 @@
             ./programs/helix.nix
             ./programs/home-manager.nix
             ./programs/nix.nix
+            ./programs/ripgrep.nix
             ./programs/starship.nix
           ];
         };

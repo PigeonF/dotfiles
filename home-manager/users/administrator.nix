@@ -27,6 +27,7 @@ in
       helix.enable = true;
       home-manager.enable = true;
       nix.enable = true;
+      ripgrep.enable = true;
       starship.enable = true;
     };
   };

@@ -9,3 +9,6 @@
 
 [helix.files]
 "helix/.config/" = "~/.config/"
+
+[ripgrep.files]
+"ripgrep/.config/" = "~/.config/"

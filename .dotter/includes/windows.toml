@@ -3,3 +3,6 @@
 
 [fd.files]
 "fd/.config/" = "~/AppData/Roaming/"
+
+[ripgrep.files]
+"ripgrep/.config/" = "~/AppData/Roaming/"
