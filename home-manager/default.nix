@@ -17,6 +17,8 @@
         programs = {
           imports = [
             ./programs/helix.nix
+            ./programs/home-manager.nix
+            ./programs/nix.nix
           ];
         };
         presetsShell = {
