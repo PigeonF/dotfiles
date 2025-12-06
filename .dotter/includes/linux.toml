@@ -4,5 +4,8 @@
 [btop.files]
 "btop/.config/" = "~/.config/"
 
+[fd.files]
+"fd/.config/" = "~/.config/"
+
 [helix.files]
 "helix/.config/" = "~/.config/"

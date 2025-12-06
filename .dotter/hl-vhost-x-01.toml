@@ -5,6 +5,7 @@ packages = [
   "bat",
   "btop",
   "eza",
+  "fd",
   "helix",
   "starship",
 ]

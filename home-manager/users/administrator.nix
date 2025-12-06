@@ -23,6 +23,7 @@ in
       bat.enable = true;
       btop.enable = true;
       eza.enable = true;
+      fd.enable = true;
       helix.enable = true;
       home-manager.enable = true;
       nix.enable = true;

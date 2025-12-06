@@ -1,2 +1,5 @@
 [bat.files]
 "bat/.config/" = "~/AppData/Roaming/"
+
+[fd.files]
+"fd/.config/" = "~/AppData/Roaming/"

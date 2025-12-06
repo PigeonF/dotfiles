@@ -9,6 +9,7 @@ path = [
     "bat/**/*",
     "btop/**/*",
     "eza/**/*",
+    "fd/**/*",
     "flake.lock",
     "flake.nix",
     "helix/**/*",
