@@ -32,6 +32,7 @@
             ./programs/starship.nix
             ./programs/vivid.nix
             ./programs/yazi.nix
+            ./programs/zellij.nix
             ./programs/zoxide.nix
           ];
         };

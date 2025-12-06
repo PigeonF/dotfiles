@@ -34,6 +34,7 @@ in
       starship.enable = true;
       vivid.enable = true;
       yazi.enable = true;
+      zellij.enable = true;
       zoxide.enable = true;
     };
   };

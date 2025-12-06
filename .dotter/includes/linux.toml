@@ -18,3 +18,6 @@
 
 [yazi.files]
 "yazi/.config/" = "~/.config/"
+
+[zellij.files]
+"zellij/.config/" = "~/.config/"

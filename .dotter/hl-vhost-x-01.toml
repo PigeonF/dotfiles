@@ -11,4 +11,5 @@ packages = [
   "ripgrep",
   "starship",
   "yazi",
+  "zellij",
 ]
