@@ -27,6 +27,7 @@
             ./programs/nix.nix
             ./programs/ripgrep.nix
             ./programs/starship.nix
+            ./programs/zoxide.nix
           ];
         };
         presetsShell = {
