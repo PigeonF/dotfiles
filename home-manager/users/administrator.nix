@@ -23,6 +23,7 @@ in
       helix.enable = true;
       home-manager.enable = true;
       nix.enable = true;
+      starship.enable = true;
     };
   };
   home = {

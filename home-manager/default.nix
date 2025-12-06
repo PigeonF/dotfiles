@@ -21,6 +21,7 @@
             ./programs/helix.nix
             ./programs/home-manager.nix
             ./programs/nix.nix
+            ./programs/starship.nix
           ];
         };
         presetsShell = {

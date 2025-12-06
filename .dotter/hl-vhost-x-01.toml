@@ -3,4 +3,5 @@ includes = [".dotter/includes/linux.toml"]
 packages = [
   "atuin",
   "helix",
+  "starship",
 ]

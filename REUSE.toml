@@ -10,6 +10,7 @@ path = [
     "flake.nix",
     "helix/**/*",
     "home-manager/**/*",
+    "starship/**/*",
 ]
 SPDX-FileCopyrightText = "Jonas Fierlings <fnoegip@gmail.com>"
 SPDX-License-Identifier = "0BSD"
