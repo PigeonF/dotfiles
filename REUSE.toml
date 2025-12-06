@@ -12,6 +12,7 @@ path = [
     "fd/**/*",
     "flake.lock",
     "flake.nix",
+    "git/**/*",
     "helix/**/*",
     "home-manager/**/*",
     "ripgrep/**/*",
@@ -26,6 +27,7 @@ path = [
     "bat/.config/bat/themes/Catppuccin Macchiato.tmTheme",
     "btop/.config/btop/themes/catppuccin_macchiato.theme",
     "eza/.config/eza/theme.yml",
+    "git/.config/git/catppuccin.delta.gitconfig",
 ]
 SPDX-FileCopyrightText = "2021-present Catppuccin Org"
 SPDX-License-Identifier = "MIT"

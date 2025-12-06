@@ -1,0 +1,3 @@
+[core]
+# Ensure that git uses the 1Password agent
+sshCommand = "C:/Windows/System32/OpenSSH/ssh.exe"

@@ -25,6 +25,7 @@ in
       eza.enable = true;
       fd.enable = true;
       fzf.enable = true;
+      git.enable = true;
       helix.enable = true;
       home-manager.enable = true;
       nix.enable = true;

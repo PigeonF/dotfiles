@@ -6,6 +6,7 @@ packages = [
   "btop",
   "eza",
   "fd",
+  "git",
   "helix",
   "ripgrep",
   "starship",

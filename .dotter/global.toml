@@ -9,5 +9,18 @@ default_target_type = "symbolic"
 [eza.files]
 "eza/.config/" = "~/.config/"
 
+[git.files]
+"git/.config/" = "~/.config/"
+
+[git.files."git/.config/git/linux.gitconfig"]
+target = "~/.config/git/platform.gitconfig"
+type = "symbolic"
+if = "dotter.linux"
+
+[git.files."git/.config/git/windows.gitconfig"]
+target = "~/.config/git/platform.gitconfig"
+type = "symbolic"
+if = "dotter.windows"
+
 [starship.files]
 "starship/.config/" = "~/.config/"
