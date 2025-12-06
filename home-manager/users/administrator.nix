@@ -21,6 +21,7 @@ in
       atuin.enable = true;
       bash.enable = true;
       bat.enable = true;
+      btop.enable = true;
       eza.enable = true;
       helix.enable = true;
       home-manager.enable = true;

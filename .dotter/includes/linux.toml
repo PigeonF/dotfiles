@@ -1,5 +1,8 @@
 [bat.files]
 "bat/.config/" = "~/.config/"
 
+[btop.files]
+"btop/.config/" = "~/.config/"
+
 [helix.files]
 "helix/.config/" = "~/.config/"

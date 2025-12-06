@@ -7,6 +7,7 @@ path = [
     ".gitignore",
     "atuin/**/*",
     "bat/**/*",
+    "btop/**/*",
     "eza/**/*",
     "flake.lock",
     "flake.nix",
@@ -21,6 +22,7 @@ SPDX-License-Identifier = "0BSD"
 path = [
     "atuin/.config/atuin/themes/catppuccin-macchiato.toml",
     "bat/.config/bat/themes/Catppuccin Macchiato.tmTheme",
+    "btop/.config/btop/themes/catppuccin_macchiato.theme",
     "eza/.config/eza/theme.yml",
 ]
 SPDX-FileCopyrightText = "2021-present Catppuccin Org"
