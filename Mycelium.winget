@@ -68,6 +68,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install DEVCOM.JetBrainsMonoNerdFont
+      settings:
+        id: DEVCOM.JetBrainsMonoNerdFont
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install eza-community.eza
       settings:
         id: eza-community.eza

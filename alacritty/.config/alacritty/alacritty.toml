@@ -19,12 +19,11 @@ option_as_alt = "OnlyLeft"
 [scrolling]
 
 [font]
-normal = { family = "RecMonoDuotone Nerd Font", style = "Regular" }
-bold = { family = "VictorMono Nerd Font", style = "Bold" }
-italic = { family = "VictorMono Nerd Font", style = "Italic" }
-bold_italic = { family = "VictorMono Nerd Font", style = "Bold Italic" }
+normal = { family = "JetBrainsMono NFM", style = "Regular" }
+italic = { family = "JetBrainsMono NFM", style = "Italic" }
+bold = { family = "JetBrainsMono NFM", style = "Bold" }
+bold_italic = { family = "JetBrainsMono NFM", style = "Bold Italic" }
 size = 17
-builtin_box_drawing = false
 
 [bell]
 
