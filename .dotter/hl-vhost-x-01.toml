@@ -8,6 +8,7 @@ packages = [
   "fd",
   "git",
   "helix",
+  "jujutsu",
   "ripgrep",
   "starship",
   "yazi",
