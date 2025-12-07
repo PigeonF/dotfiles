@@ -33,6 +33,9 @@ type = "symbolic"
 [jujutsu.files]
 "jujutsu/.config/" = "~/.config/"
 
+[powershell.files]
+"powershell/.config/" = "~/.config/"
+
 [ripgrep.files]
 "ripgrep/.config/" = "~/.config/"
 

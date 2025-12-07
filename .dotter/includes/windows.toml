@@ -30,6 +30,9 @@ type = "symbolic"
 [jujutsu.files]
 "jujutsu/.config/" = "~/AppData/Roaming/"
 
+[powershell.files]
+"powershell/.config/powershell/" = "~/Documents/PowerShell/"
+
 [ripgrep.files]
 "ripgrep/.config/" = "~/AppData/Roaming/"
 

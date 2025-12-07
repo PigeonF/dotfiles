@@ -8,7 +8,11 @@ packages = [
   "git",
   "helix",
   "jujutsu",
+  "powershell",
   "ripgrep",
   "starship",
   "yazi",
 ]
+
+[files]
+"powershell/.config/powershell/" = "S:/Documents/PowerShell/"

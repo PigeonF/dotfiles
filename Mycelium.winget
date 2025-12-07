@@ -108,6 +108,13 @@ properties:
       settings:
         id: junegunn.fzf
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Microsoft.PowerShell
+      settings:
+        id: Microsoft.PowerShell
+        source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
         description: Install oschwartz10612.Poppler
