@@ -23,6 +23,7 @@
             ./programs/eza.nix
             ./programs/fd.nix
             ./programs/fzf.nix
+            ./programs/ghq.nix
             ./programs/git.nix
             ./programs/helix.nix
             ./programs/home-manager.nix

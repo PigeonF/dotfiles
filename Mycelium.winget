@@ -114,7 +114,6 @@ properties:
       settings:
         id: junegunn.fzf
         source: winget
-
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
         description: Install Microsoft.PowerShell
@@ -169,10 +168,25 @@ properties:
       settings:
         id: topgrade-rs.topgrade
         source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install x-motemen.ghq
+      settings:
+        id: x-motemen.ghq
+        source: winget
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
+        description: Set GHQ_ROOT environment variable
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: GHQ_ROOT
+        ValueData: D:\git
+        ValueType: ExpandString
+        Ensure: Present
+      id: Configure GHQ_ROOT
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
         description: Set YAZI_FILE_ONE environment variable
-        allowPrerelease: true
       settings:
         Key: 'HKCU:\Environment'
         ValueName: YAZI_FILE_ONE
@@ -183,7 +197,6 @@ properties:
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
         description: Set EDITOR environment variable
-        allowPrerelease: true
       settings:
         Key: 'HKCU:\Environment'
         ValueName: EDITOR
@@ -194,7 +207,6 @@ properties:
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
         description: Set environment variable for starship
-        allowPrerelease: true
       settings:
         Key: 'HKCU:\Environment'
         ValueName: STARSHIP_CONFIG
@@ -205,7 +217,6 @@ properties:
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
         description: Set XDG_CONFIG_HOME environment variable
-        allowPrerelease: true
       settings:
         Key: 'HKCU:\Environment'
         ValueName: XDG_CONFIG_HOME

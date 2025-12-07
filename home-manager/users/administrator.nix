@@ -26,6 +26,7 @@ in
       fd.enable = true;
       fzf.enable = true;
       git.enable = true;
+      ghq.enable = true;
       helix.enable = true;
       home-manager.enable = true;
       jujutsu.enable = true;
