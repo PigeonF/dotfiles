@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+properties:
+  configurationVersion: 0.2.0
+  assertions:
+    - resource: Microsoft.Windows.Developer/OsVersion
+      directives:
+        description: Verify minimum OS version
+      settings:
+        MinVersion: "10.0.26100"
+  resources:
+    - resource: Microsoft.Windows.Developer/DeveloperMode
+      directives:
+        description: Enable Developer Mode
+      settings:
+        Ensure: Present
+    - resource: Microsoft.Windows.Developer/WindowsExplorer
+      directives:
+        description: Configure Windows Explorer
+      settings:
+        FileExtensions: Show
+        HiddenFiles: Show
+        ItemCheckBoxes: Hide
+    - resource: Microsoft.Windows.Developer/EnableDarkMode
+      directives:
+        description: Enable Dark Mode
+      settings:
+        Ensure: Present
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
+        description: Enable long paths support
+      settings:
+        Key: 'HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem'
+        ValueName: LongPathsEnabled
+        ValueData: 1
+        ValueType: DWord
+        Force: true
+        Ensure: Present
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install 7zip.7zip
+      settings:
+        id: 7zip.7zip
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install ajeetdsouza.zoxide
+      settings:
+        id: ajeetdsouza.zoxide
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install BurntSushi.ripgrep.MSVC
+      settings:
+        id: BurntSushi.ripgrep.MSVC
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install eza-community.eza
+      settings:
+        id: eza-community.eza
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Git.Git
+      settings:
+        id: Git.Git
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Gyan.FFmpeg
+      settings:
+        id: Gyan.FFmpeg
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Helix.Helix
+      settings:
+        id: Helix.Helix
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install ImageMagick.ImageMagick
+      settings:
+        id: ImageMagick.ImageMagick
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install jj-vcs.jj
+      settings:
+        id: jj-vcs.jj
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install jqlang.jq
+      settings:
+        id: jqlang.jq
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install junegunn.fzf
+      settings:
+        id: junegunn.fzf
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install oschwartz10612.Poppler
+      settings:
+        id: oschwartz10612.Poppler
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install sharkdp.bat
+      settings:
+        id: sharkdp.bat
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install sharkdp.fd
+      settings:
+        id: sharkdp.fd
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install sharkdp.vivid
+      settings:
+        id: sharkdp.vivid
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install Starship.Starship
+      settings:
+        id: Starship.Starship
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install SuperCuber.Dotter
+      settings:
+        id: SuperCuber.Dotter
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install sxyazi.yazi
+      settings:
+        id: sxyazi.yazi
+        source: winget
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
+        description: Set EDITOR environment variable
+        allowPrerelease: true
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: EDITOR
+        ValueData: "hx"
+        ValueType: String
+        Ensure: Present
+      id: Configure EDITOR
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
+        description: Set environment variable for starship
+        allowPrerelease: true
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: STARSHIP_CONFIG
+        ValueData: "%APPDATA%\\starship.toml"
+        ValueType: ExpandString
+        Ensure: Present
+      id: Configure STARSHIP_CONFIG
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
+        description: Set XDG_CONFIG_HOME environment variable
+        allowPrerelease: true
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: XDG_CONFIG_HOME
+        ValueData: "%APPDATA%"
+        ValueType: ExpandString
+        Ensure: Present
+      id: Configure XDG_CONFIG_HOME

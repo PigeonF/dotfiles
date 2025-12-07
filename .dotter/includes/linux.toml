@@ -1,11 +1,24 @@
+[atuin.files]
+"atuin/.config/" = "~/.config/"
+
 [bat.files]
 "bat/.config/" = "~/.config/"
 
 [btop.files]
 "btop/.config/" = "~/.config/"
 
+[eza.files]
+"eza/.config/" = "~/.config/"
+
 [fd.files]
 "fd/.config/" = "~/.config/"
+
+[git.files]
+"git/.config/" = "~/.config/"
+
+[git.files."git/.config/git/linux.gitconfig"]
+target = "~/.config/git/platform.gitconfig"
+type = "symbolic"
 
 [helix.files]
 "helix/.config/" = "~/.config/"
@@ -15,6 +28,9 @@
 
 [ripgrep.files]
 "ripgrep/.config/" = "~/.config/"
+
+[starship.files]
+"starship/.config/" = "~/.config/"
 
 [yazi.files]
 "yazi/.config/" = "~/.config/"

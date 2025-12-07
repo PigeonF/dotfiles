@@ -5,6 +5,7 @@ path = [
     ".dotter/**/*",
     ".editorconfig",
     ".gitignore",
+    "Mycelium.winget",
     "atuin/**/*",
     "bat/**/*",
     "btop/**/*",

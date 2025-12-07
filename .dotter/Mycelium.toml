@@ -1,0 +1,13 @@
+includes = [".dotter/includes/windows.toml"]
+
+packages = [
+  "bat",
+  "eza",
+  "fd",
+  "git",
+  "helix",
+  "jujutsu",
+  "ripgrep",
+  "starship",
+  "yazi",
+]

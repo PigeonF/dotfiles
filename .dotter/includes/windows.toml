@@ -1,8 +1,21 @@
+[atuin.files]
+"atuin/.config/" = "~/AppData/Roaming/"
+
 [bat.files]
 "bat/.config/" = "~/AppData/Roaming/"
 
+[eza.files]
+"eza/.config/" = "~/AppData/Roaming/"
+
 [fd.files]
 "fd/.config/" = "~/AppData/Roaming/"
+
+[git.files]
+"git/.config/" = "~/AppData/Roaming/"
+
+[git.files."git/.config/git/windows.gitconfig"]
+target = "~/AppData/Roaming/git/platform.gitconfig"
+type = "symbolic"
 
 [helix.files]
 "helix/.config/" = "~/AppData/Roaming/"
@@ -12,6 +25,9 @@
 
 [ripgrep.files]
 "ripgrep/.config/" = "~/AppData/Roaming/"
+
+[starship.files]
+"starship/.config/" = "~/AppData/Roaming/"
 
 [yazi.files]
 "yazi/.config/yazi/" = "~/AppData/Roaming/yazi/config/"

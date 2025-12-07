@@ -25,14 +25,14 @@ $container\
 $shell\
 $character"""
 
-[custom.jj]
 # TODO(PigeonF): Still quite slow on windows
-# command = "jj --ignore-working-copy log -r@ -n1  --no-graph --color always -T starship"
-description = "jj repository info"
-detect_folders = [".jj"]
-format = '[$symbol ($output )]($style)'
-style = "bold purple"
-symbol = "jj"
+# [custom.jj]
+# # command = "jj --ignore-working-copy log -r@ -n1 --no-graph --color always -T starship"
+# description = "jj repository info"
+# detect_folders = [".jj"]
+# format = '[$symbol ($output )]($style)'
+# style = "bold purple"
+# symbol = "jj"
 
 [character]
 success_symbol = '[λ](bold green)'
@@ -91,4 +91,3 @@ surface0 = "#363a4f"
 base = "#24273a"
 mantle = "#1e2030"
 crust = "#181926"
-

@@ -1,3 +1,21 @@
 [[language]]
 name = "nix"
 formatter = { command = "nixfmt" }
+
+[[language]]
+name = "yaml"
+# https://github.com/helix-editor/helix/issues/6896
+file-types = [
+  "yml",
+  "yaml",
+  { glob = ".prettierrc" },
+  { glob = ".clangd" },
+  { glob = ".clang-format" },
+  { glob = ".clang-tidy" },
+  { glob = ".gem/credentials" },
+  { glob = ".kube/config" },
+  { glob = ".kube/kuberc" },
+  { glob = "yarn.lock" },
+  "winget",
+  "sublime-syntax",
+]
