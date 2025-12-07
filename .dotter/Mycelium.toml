@@ -1,6 +1,7 @@
 includes = [".dotter/includes/windows.toml"]
 
 packages = [
+  "alacritty",
   "bat",
   "eza",
   "fd",

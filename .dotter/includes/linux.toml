@@ -1,3 +1,10 @@
+[alacritty.files]
+"alacritty/.config/" = "~/.config/"
+
+[alacritty.files."alacritty/.config/alacritty/linux.toml"]
+target = "~/AppData/Roaming/alacritty/platform.toml"
+type = "symbolic"
+
 [atuin.files]
 "atuin/.config/" = "~/.config/"
 

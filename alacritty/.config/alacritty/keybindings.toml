@@ -1,0 +1,8 @@
+# [Alacritty Configuration](https://alacritty.org/config-alacritty.html).
+
+[mouse]
+
+[keyboard]
+bindings = [
+    { key = "Return", mods = "Control|Shift", action = "SpawnNewInstance" },
+]

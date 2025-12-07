@@ -6,6 +6,7 @@ path = [
     ".editorconfig",
     ".gitignore",
     "Mycelium.winget",
+    "alacritty/**/*",
     "atuin/**/*",
     "bat/**/*",
     "btop/**/*",
@@ -27,6 +28,7 @@ SPDX-License-Identifier = "0BSD"
 
 [[annotations]]
 path = [
+    "alacritty/.config/alacritty/themes/catppuccin-macchiato.toml"
     "atuin/.config/atuin/themes/catppuccin-macchiato.toml",
     "bat/.config/bat/themes/Catppuccin Macchiato.tmTheme",
     "btop/.config/btop/themes/catppuccin_macchiato.theme",

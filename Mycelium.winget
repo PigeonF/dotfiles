@@ -50,6 +50,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install Alacritty.Alacritty
+      settings:
+        id: Alacritty.Alacritty
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install BurntSushi.ripgrep.MSVC
       settings:
         id: BurntSushi.ripgrep.MSVC

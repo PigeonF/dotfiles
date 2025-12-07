@@ -1,3 +1,10 @@
+[alacritty.files]
+"alacritty/.config/" = "~/AppData/Roaming/"
+
+[alacritty.files."alacritty/.config/alacritty/windows.toml"]
+target = "~/AppData/Roaming/alacritty/platform.toml"
+type = "symbolic"
+
 [atuin.files]
 "atuin/.config/" = "~/AppData/Roaming/"
 
