@@ -159,6 +159,17 @@ properties:
         source: winget
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
+        description: Set YAZI_FILE_ONE environment variable
+        allowPrerelease: true
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: YAZI_FILE_ONE
+        ValueData: C:\Program Files\Git\usr\bin\file.exe
+        ValueType: ExpandString
+        Ensure: Present
+      id: Configure YAZI_FILE_ONE
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
         description: Set EDITOR environment variable
         allowPrerelease: true
       settings:
