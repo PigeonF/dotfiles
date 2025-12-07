@@ -13,6 +13,10 @@
       url = "github:nix-community/home-manager?ref=refs/heads/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    treefmt-nix = {
+      url = "github:numtide/treefmt-nix?ref=refs/heads/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -20,6 +24,7 @@
       flake-parts,
       systems,
       home-manager,
+      treefmt-nix,
       ...
     }:
     flake-parts.lib.mkFlake
@@ -33,11 +38,26 @@
 
         imports = [
           home-manager.flakeModules.home-manager
+          treefmt-nix.flakeModule
           ./home-manager
         ];
 
         flake = { };
 
-        perSystem = { };
+        perSystem =
+          { pkgs, ... }:
+          {
+            treefmt = import ./treefmt.nix;
+
+            checks = {
+              reuse =
+                let
+                  files = pkgs.nix-gitignore.gitignoreSourcePure [ ] (pkgs.lib.cleanSource ./.);
+                in
+                pkgs.runCommandLocal "reuse" { } ''
+                  ${pkgs.lib.getExe pkgs.reuse} --root ${files} lint | tee $out
+                '';
+            };
+          };
       });
 }

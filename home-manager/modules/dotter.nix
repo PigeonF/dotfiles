@@ -51,7 +51,7 @@ in
   config = lib.mkIf cfg.enable {
     home = {
       activation = {
-        dotterCloneRepository = lib.mkIf (cfg.clone.enable) (
+        dotterCloneRepository = lib.mkIf cfg.clone.enable (
           lib.hm.dag.entryBetween [ "dotter" ] [ "writeBoundary" ] ''
             if [ ! -d ${lib.escapeShellArg cfg.location} ]; then
               run mkdir -p "$(dirname "${lib.escapeShellArg cfg.location}")"
