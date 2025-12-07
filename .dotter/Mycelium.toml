@@ -11,6 +11,7 @@ packages = [
   "powershell",
   "ripgrep",
   "starship",
+  "topgrade",
   "yazi",
 ]
 

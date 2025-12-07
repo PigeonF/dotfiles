@@ -163,6 +163,12 @@ properties:
       settings:
         id: sxyazi.yazi
         source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install topgrade-rs.topgrade
+      settings:
+        id: topgrade-rs.topgrade
+        source: winget
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
         description: Set YAZI_FILE_ONE environment variable

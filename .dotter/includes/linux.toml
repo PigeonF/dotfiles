@@ -42,6 +42,9 @@ type = "symbolic"
 [starship.files]
 "starship/.config/" = "~/.config/"
 
+[topgrade.files]
+"topgrade/.config/" = "~/.config/"
+
 [yazi.files]
 "yazi/.config/" = "~/.config/"
 
