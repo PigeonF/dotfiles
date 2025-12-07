@@ -21,10 +21,12 @@ in
 
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
-      home.packages = [ pkgs.ghq ];
+      home = {
+        packages = [ pkgs.ghq ];
         sessionVariables = {
           GHQ_ROOT = "$HOME/git";
         };
+      };
     })
   ];
 }
