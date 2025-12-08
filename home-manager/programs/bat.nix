@@ -25,7 +25,7 @@ in
     (lib.mkIf cfg.enable {
       home = {
         shellAliases = {
-          cat = "bat --paging=never";
+          cat = "bat --paging=never --plain";
         };
       };
     })

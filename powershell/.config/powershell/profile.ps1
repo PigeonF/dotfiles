@@ -11,7 +11,7 @@ function rgA { rg --hidden --no-ignore @args }
 function rga { rg --hidden @args }
 # Override builtin aliases
 Set-Alias -Name cat -Value _cat
-function _cat { bat --paging=never @args }
+function _cat { bat --paging=never --plain @args }
 Set-Alias -Name ls -Value _ls
 function _ls { eza @args }
 
