@@ -20,6 +20,7 @@ path = [
     "jujutsu/**/*",
     "powershell/**/*",
     "ripgrep/**/*",
+    "spicetify/**/*",
     "starship/**/*",
     "topgrade/**/*",
     "treefmt.nix",
@@ -37,6 +38,7 @@ path = [
     "btop/.config/btop/themes/catppuccin_macchiato.theme",
     "eza/.config/eza/theme.yml",
     "git/.config/git/catppuccin.delta.gitconfig",
+    "spicetify/.config/spicetify/Themes/catppuccin/**/*",
 ]
 SPDX-FileCopyrightText = "2021-present Catppuccin Org"
 SPDX-License-Identifier = "MIT"

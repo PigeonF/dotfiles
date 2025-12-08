@@ -39,6 +39,10 @@ type = "symbolic"
 [ripgrep.files]
 "ripgrep/.config/" = "~/.config/"
 
+[spicetify.files]
+"spicetify/.config/" = "~/.config/"
+"spicetify/.config/spicetify/config-xpui.ini" = { target = "~/.config/spicetify/config-xpui.ini", type = "template" }
+
 [starship.files]
 "starship/.config/" = "~/.config/"
 

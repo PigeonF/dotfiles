@@ -152,6 +152,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install Spicetify.Spicetify
+      settings:
+        id: Spicetify.Spicetify
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install Starship.Starship
       settings:
         id: Starship.Starship

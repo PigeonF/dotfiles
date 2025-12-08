@@ -10,6 +10,7 @@ packages = [
   "jujutsu",
   "powershell",
   "ripgrep",
+  "spicetify",
   "starship",
   "topgrade",
   "yazi",
@@ -17,3 +18,15 @@ packages = [
 
 [files]
 "powershell/.config/powershell/" = "S:/Documents/PowerShell/"
+
+[files."spicetify/.config/spicetify/config-xpui.ini"]
+target = "~/AppData/Roaming/spicetify/config-xpui.ini"
+type = "template"
+append = """
+version = 1.2.78.418.gaeeb5ebd
+with    = 2.42.5
+"""
+
+[variables]
+spotify_path = "C:\\Users\\pigeonf\\AppData\\Roaming\\Spotify"
+spotify_prefs = "C:\\Users\\pigeonf\\AppData\\Roaming\\Spotify\\prefs"

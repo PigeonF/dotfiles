@@ -36,6 +36,10 @@ type = "symbolic"
 [ripgrep.files]
 "ripgrep/.config/" = "~/AppData/Roaming/"
 
+[spicetify.files]
+"spicetify/.config/" = "~/AppData/Roaming/"
+"spicetify/.config/spicetify/config-xpui.ini" = { target = "~/AppData/Roaming/spicetify/config-xpui.ini", type = "template" }
+
 [starship.files]
 "starship/.config/" = "~/AppData/Roaming/"
 
