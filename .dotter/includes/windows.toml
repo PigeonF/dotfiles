@@ -46,5 +46,8 @@ type = "symbolic"
 [topgrade.files]
 "topgrade/.config/" = "~/AppData/Roaming/"
 
+[wezterm.files]
+"wezterm/.config/" = "~/AppData/Roaming/"
+
 [yazi.files]
 "yazi/.config/yazi/" = "~/AppData/Roaming/yazi/config/"

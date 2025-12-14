@@ -13,6 +13,7 @@ packages = [
   "spicetify",
   "starship",
   "topgrade",
+  "wezterm",
   "yazi",
 ]
 

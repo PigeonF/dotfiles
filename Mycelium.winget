@@ -122,6 +122,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install LuaLS.lua-language-server
+      settings:
+        id: LuaLS.lua-language-server
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install Microsoft.PowerShell
       settings:
         id: Microsoft.PowerShell
@@ -179,6 +185,12 @@ properties:
         description: Install topgrade-rs.topgrade
       settings:
         id: topgrade-rs.topgrade
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install wez.wezterm
+      settings:
+        id: wez.wezterm
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:

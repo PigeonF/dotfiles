@@ -49,6 +49,9 @@ type = "symbolic"
 [topgrade.files]
 "topgrade/.config/" = "~/.config/"
 
+[wezterm.files]
+"wezterm/.config/" = "~/.config/"
+
 [yazi.files]
 "yazi/.config/" = "~/.config/"
 

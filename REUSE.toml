@@ -24,6 +24,7 @@ path = [
     "starship/**/*",
     "topgrade/**/*",
     "treefmt.nix",
+    "wezterm/**/*",
     "yazi/**/*",
     "zellij/**/*",
 ]
