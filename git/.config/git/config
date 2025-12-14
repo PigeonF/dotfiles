@@ -1,68 +1,68 @@
 [alias]
-    a = add
-    aliases = config --get-regexp ^alias.
-    ap = add -p
-    bD = branch -D
-    bd = branch -d
-    branches = branch -vv
-    c = commit
-    ca = commit --amend
-    can = commit --amend --no-edit
-    cc = "!f() { git commit -e -F \"$(git rev-parse --show-toplevel)/.git/COMMIT_EDITMSG\" $@; }; f"
-    cf = commit --fixup
-    cl = clone --recurse-submodules
-    cleanup = clean -dix -e "*.gitignored.*" -e ".jj"
-    cm = commit -m
-    d = diff --color
-    ds = diff --color --cached
-    fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
-    ignore = update-index --skip-worktree
-    l = lrm
-    la = llast 1
-    lg = lrgm
-    lg = lrgm
-    ll = log --pretty=pretty --abbrev-commit --date=local
-    llast = "!f() { git l HEAD...HEAD~$1; }; f"
-    llg = ll --graph
-    lls = log --pretty=pretty-sig --abbrev-commit --date=local
-    lr = log --pretty=pretty --abbrev-commit --date=relative
-    lrg = lr --pretty=pretty --abbrev-commit --date=relative --graph
-    lrgm = lr --pretty=pretty --abbrev-commit --date=relative --graph main...@
-    lrm = log --pretty=pretty --abbrev-commit --date=relative main...@
-    lrs = log --pretty=pretty-sig --abbrev-commit --date=relative
-    lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
-    ls = lrsm
-    purge = clean -dx -e "*.gitignored.*" -e ".jj"
-    rep = restore -p
-    root = rev-parse --show-toplevel
-    s = status -s
-    undo = reset --soft HEAD~1
-    unignore = update-index --no-skip-worktree
+	a = add
+	aliases = config --get-regexp ^alias.
+	ap = add -p
+	bD = branch -D
+	bd = branch -d
+	branches = branch -vv
+	c = commit
+	ca = commit --amend
+	can = commit --amend --no-edit
+	cc = "!f() { git commit -e -F \"$(git rev-parse --show-toplevel)/.git/COMMIT_EDITMSG\" $@; }; f"
+	cf = commit --fixup
+	cl = clone --recurse-submodules
+	cleanup = clean -dix -e "*.gitignored.*" -e ".jj"
+	cm = commit -m
+	d = diff --color
+	ds = diff --color --cached
+	fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
+	ignore = update-index --skip-worktree
+	l = lrm
+	la = llast 1
+	lg = lrgm
+	lg = lrgm
+	ll = log --pretty=pretty --abbrev-commit --date=local
+	llast = "!f() { git l HEAD...HEAD~$1; }; f"
+	llg = ll --graph
+	lls = log --pretty=pretty-sig --abbrev-commit --date=local
+	lr = log --pretty=pretty --abbrev-commit --date=relative
+	lrg = lr --pretty=pretty --abbrev-commit --date=relative --graph
+	lrgm = lr --pretty=pretty --abbrev-commit --date=relative --graph main...@
+	lrm = log --pretty=pretty --abbrev-commit --date=relative main...@
+	lrs = log --pretty=pretty-sig --abbrev-commit --date=relative
+	lrsm = log --pretty=pretty-sig --abbrev-commit --date=relative main...@
+	ls = lrsm
+	purge = clean -dx -e "*.gitignored.*" -e ".jj"
+	rep = restore -p
+	root = rev-parse --show-toplevel
+	s = status -s
+	undo = reset --soft HEAD~1
+	unignore = update-index --no-skip-worktree
 
 [branchless "core"]
 	mainBranch = "main"
 
 [branchless "revsets.alias"]
-    branched = difference(descendants(exactly(children($1), 1)), only(HEAD, $1))
+	branched = difference(descendants(exactly(children($1), 1)), only(HEAD, $1))
 
 [branchless "test"]
-    strategy = worktree
-    jobs = 0
+	strategy = worktree
+	jobs = 0
 
 [branchless "next"]
-    interactive = true
+	interactive = true
 
 [commit]
 	gpgsign = true
 	verbose = true
 
 [core]
-    autocrlf = false
-    abbrev = 16
-    symlinks = true
-    compression = 9
-    packedGitLimit = 512m
-    packedGitWindowSize = 512m
+	autocrlf = false
+	abbrev = 16
+	symlinks = true
+	compression = 9
+	packedGitLimit = 512m
+	packedGitWindowSize = 512m
 	pager = delta
 
 [delta]
@@ -73,19 +73,19 @@
 	features = decorations catppuccin-macchiato
 
 [delta "decorations"]
-    commit-style = raw
-    file-style = omit
-    hunk-header-style = file line-number syntax
+	commit-style = raw
+	file-style = omit
+	hunk-header-style = file line-number syntax
 
 [diff]
-    colorMoved = default
-    colorMovedWS = "allow-indentation-change"
+	colorMoved = default
+	colorMovedWS = "allow-indentation-change"
 
 [filter "lfs"]
-    clean = git-lfs clean -- %f
-    smudge = git-lfs smudge -- %f
-    process = git-lfs filter-process
-    required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
 
 [gpg]
 	format = ssh
@@ -94,63 +94,63 @@
 	allowedSignersFile = ~/.ssh/allowed_signers
 
 [init]
-    defaultBranch = main
+	defaultBranch = main
 
 [interactive]
 	diffFilter = delta --color-only
 
 [merge]
-    conflictstyle = diff3
-    ff = no
-    guitool = meld
-    tool = meld
+	conflictstyle = diff3
+	ff = no
+	guitool = meld
+	tool = meld
 
 [pack]
-    deltaCacheSize = 2047m
-    packSizeLimit = 2047m
-    windowMemory = 2047m
+	deltaCacheSize = 2047m
+	packSizeLimit = 2047m
+	windowMemory = 2047m
 
 [pretty]
-    pretty = format:%C(yellow)%h%C(reset) %C(bold white)?%C(reset) %C(bold blue)%an%C(reset) %s %C(green)(%ad)%C(reset) %C(magenta)%d%C(reset)
-    pretty-sig = format:%C(yellow)%h%C(reset) %C(bold white)%G?%C(reset) %C(bold blue)%an%C(reset) %s %C(green)(%ad)%C(reset) %C(magenta)%d%C(reset)
+	pretty = format:%C(yellow)%h%C(reset) %C(bold white)?%C(reset) %C(bold blue)%an%C(reset) %s %C(green)(%ad)%C(reset) %C(magenta)%d%C(reset)
+	pretty-sig = format:%C(yellow)%h%C(reset) %C(bold white)%G?%C(reset) %C(bold blue)%an%C(reset) %s %C(green)(%ad)%C(reset) %C(magenta)%d%C(reset)
 
 [pull]
-    ff = only
-    rebase = true
+	ff = only
+	rebase = true
 
 [push]
-    default = current
+	default = current
 
 [rebase]
-    autosquash = true
-    missingCommitsCheck = error
+	autosquash = true
+	missingCommitsCheck = error
 
 [sendemail]
-    smtpserver = smtp.gmail.com
-    smtpuser = fnoegip@gmail.com
-    smtpencryption = tls
-    smtpserverport = 587
+	smtpserver = smtp.gmail.com
+	smtpuser = fnoegip@gmail.com
+	smtpencryption = tls
+	smtpserverport = 587
 
 [status]
-    short = true
-    branch = true
+	short = true
+	branch = true
 
 [submodule]
-    recurse = true
+	recurse = true
 
 [tag]
 	gpgsign = true
 	sort = -version:refname
 
 [user]
-    email = fnoegip@gmail.com
-    name = Jonas Fierlings
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL
-    useConfigOnly = true
+	email = fnoegip@gmail.com
+	name = Jonas Fierlings
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL
+	useConfigOnly = true
 
 [versionsort]
-    suffix = -init
-    suffix = -rc
+	suffix = -init
+	suffix = -rc
 
 # Use include last so that the includes can override
 [include]
