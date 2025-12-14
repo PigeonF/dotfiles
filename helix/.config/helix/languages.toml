@@ -3,6 +3,16 @@ name = "nix"
 formatter = { command = "nixfmt" }
 
 [[language]]
+name = "sshclientconfig"
+# https://github.com/helix-editor/helix/issues/6896
+file-types = [
+  { glob = ".ssh/config" },
+  { glob = "/etc/ssh/ssh_config" },
+  { glob = "ssh_config.d/*.conf" },
+  { glob = ".ssh/*.d/*.conf" },
+]
+
+[[language]]
 name = "yaml"
 # https://github.com/helix-editor/helix/issues/6896
 file-types = [

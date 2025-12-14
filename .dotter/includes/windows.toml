@@ -40,6 +40,9 @@ type = "symbolic"
 "spicetify/.config/" = "~/AppData/Roaming/"
 "spicetify/.config/spicetify/config-xpui.ini" = { target = "~/AppData/Roaming/spicetify/config-xpui.ini", type = "template" }
 
+[ssh.files]
+"ssh/.ssh/" = "~/.ssh/"
+
 [starship.files]
 "starship/.config/" = "~/AppData/Roaming/"
 

@@ -10,6 +10,7 @@ packages = [
   "helix",
   "jujutsu",
   "ripgrep",
+  "ssh",
   "starship",
   "yazi",
   "zellij",

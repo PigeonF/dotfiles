@@ -43,6 +43,9 @@ type = "symbolic"
 "spicetify/.config/" = "~/.config/"
 "spicetify/.config/spicetify/config-xpui.ini" = { target = "~/.config/spicetify/config-xpui.ini", type = "template" }
 
+[ssh.files]
+"ssh/.ssh/" = "~/.ssh/"
+
 [starship.files]
 "starship/.config/" = "~/.config/"
 

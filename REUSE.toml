@@ -21,6 +21,7 @@ path = [
     "powershell/**/*",
     "ripgrep/**/*",
     "spicetify/**/*",
+    "ssh/**/*",
     "starship/**/*",
     "topgrade/**/*",
     "treefmt.nix",
