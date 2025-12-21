@@ -42,6 +42,7 @@ in
   home = {
     inherit username;
     homeDirectory = if pkgs.stdenv.isDarwin then "/Users/${username}" else "/home/${username}";
+    packages = [ pkgs.deploy-rs ];
     stateVersion = "25.11";
   };
   news = {
