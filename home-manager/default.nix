@@ -64,6 +64,14 @@
             ./users/administrator.nix
           ];
         };
+        developer = inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          modules = [
+            inputs.self.homeModules.default
+            ./users/developer.nix
+          ];
+        };
         root = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
