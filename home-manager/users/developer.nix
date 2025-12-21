@@ -1,10 +1,18 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 let
   username = "developer";
 in
 {
   _file = ./developer.nix;
 
+  config = {
+    nix = {
+      settings = {
+        # TODO(PigeonF): Figure out how to make this work in nspawn container
+        sandbox = lib.mkForce false;
+      };
+    };
+  };
   dotfiles = {
     dotter = {
       enable = true;
