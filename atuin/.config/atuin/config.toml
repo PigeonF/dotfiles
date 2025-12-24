@@ -1,7 +1,7 @@
 dialect = "uk"
 update_check = false
 history_filter = [
-  "^[bc]at",
+  "^cat",
   "^cd",
   "^exit",
   "^export [0-9a-zA-Z\\-_]+?[-_]TOKEN=",
