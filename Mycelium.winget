@@ -56,6 +56,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install albertony.npiperelay
+      settings:
+        id: albertony.npiperelay
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install BurntSushi.ripgrep.MSVC
       settings:
         id: BurntSushi.ripgrep.MSVC
