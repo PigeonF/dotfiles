@@ -29,6 +29,10 @@ in
           pkgs = pkgs-x86_64-linux;
           modules = [ homeModules.root ];
         };
+        "user@Spore" = homeManagerConfiguration {
+          pkgs = pkgs-x86_64-linux;
+          modules = [ homeModules.user ];
+        };
       };
   };
 }
