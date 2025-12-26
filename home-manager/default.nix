@@ -72,6 +72,14 @@
             ./users/developer.nix
           ];
         };
+        reviewer = inputs.home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+
+          modules = [
+            inputs.self.homeModules.default
+            ./users/reviewer.nix
+          ];
+        };
         root = inputs.home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
 
