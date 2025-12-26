@@ -7,6 +7,6 @@ packages = [
   "eza",
   "fd",
   "ripgrep",
-  "ssh"
+  "ssh",
   "starship",
 ]
