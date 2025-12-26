@@ -38,6 +38,7 @@
           developer = mkUserModule ./users/developer.nix;
           reviewer = mkUserModule ./users/reviewer.nix;
           root = mkUserModule ./users/root.nix;
+          user = mkUserModule ./users/user.nix;
         };
     in
     {

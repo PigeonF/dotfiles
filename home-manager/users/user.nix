@@ -1,8 +1,8 @@
 let
-  username = "root";
+  username = "user";
 in
 {
-  _file = ./root.nix;
+  _file = ./user.nix;
 
   dotfiles = {
     presets = {
@@ -12,21 +12,21 @@ in
       atuin.enable = true;
       bash.enable = true;
       bat.enable = true;
-      btop.enable = true;
       eza.enable = true;
       fd.enable = true;
-      fzf.enable = true;
       home-manager.enable = true;
       nix.enable = true;
+      npiperelay.enable = true;
       ripgrep.enable = true;
       starship.enable = true;
       vivid.enable = true;
       zoxide.enable = true;
+      zellij.enable = true;
     };
   };
   home = {
     inherit username;
-    homeDirectory = "/root";
+    homeDirectory = "/home/${username}";
     stateVersion = "25.11";
   };
   news = {
