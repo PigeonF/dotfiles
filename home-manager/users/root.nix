@@ -7,9 +7,7 @@ in
 
   dotfiles = {
     presets = {
-      shell = {
-        enable = true;
-      };
+      shell.enable = true;
     };
     programs = {
       atuin.enable = true;

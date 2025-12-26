@@ -1,93 +1,9 @@
-{ inputs, ... }:
 {
   _file = ./default.nix;
 
   imports = [
-    ./flake-module.nix
+    ./home-modules.nix
+    ./home-configurations.nix
+    ./checks.nix
   ];
-
-  flake =
-    let
-      homeModules = {
-        dotter = {
-          imports = [
-            ./modules/dotter.nix
-          ];
-        };
-        programs = {
-          imports = [
-            ./programs/atuin.nix
-            ./programs/bash.nix
-            ./programs/bat.nix
-            ./programs/btop.nix
-            ./programs/eza.nix
-            ./programs/fd.nix
-            ./programs/fzf.nix
-            ./programs/ghq.nix
-            ./programs/git.nix
-            ./programs/helix.nix
-            ./programs/home-manager.nix
-            ./programs/jujutsu.nix
-            ./programs/nix.nix
-            ./programs/ripgrep.nix
-            ./programs/starship.nix
-            ./programs/vivid.nix
-            ./programs/yazi.nix
-            ./programs/zellij.nix
-            ./programs/zoxide.nix
-          ];
-        };
-        presetsShell = {
-          imports = [
-            ./modules/presets/shell.nix
-          ];
-        };
-      };
-    in
-    {
-      homeModules = homeModules // {
-        default = {
-          imports = builtins.attrValues homeModules;
-        };
-      };
-    };
-
-  perSystem =
-    { pkgs, ... }:
-    {
-      homeConfigurations = {
-        administrator = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          modules = [
-            inputs.self.homeModules.default
-            ./users/administrator.nix
-          ];
-        };
-        developer = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          modules = [
-            inputs.self.homeModules.default
-            ./users/developer.nix
-          ];
-        };
-        reviewer = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          modules = [
-            inputs.self.homeModules.default
-            ./users/reviewer.nix
-          ];
-        };
-        root = inputs.home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-
-          modules = [
-            inputs.self.homeModules.default
-            ./users/root.nix
-          ];
-        };
-      };
-    };
 }
