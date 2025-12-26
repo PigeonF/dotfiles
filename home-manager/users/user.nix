@@ -5,6 +5,12 @@ in
   _file = ./user.nix;
 
   dotfiles = {
+    dotter = {
+      enable = true;
+      clone = {
+        enable = true;
+      };
+    };
     presets = {
       shell.enable = true;
     };
