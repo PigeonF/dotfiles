@@ -3,6 +3,11 @@ local config = wezterm.config_builder()
 config:set_strict_mode(true)
 
 config.color_scheme = "Catppuccin Macchiato"
+local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
+-- Bright green is unreadable with white text
+scheme.ansi[3] = "#8FBA84"
+config.colors = scheme
+
 config.font = wezterm.font("JetBrainsMono NFM")
 config.font_size = 17
 
