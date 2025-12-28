@@ -7,7 +7,7 @@
     {
       checks = {
         import-home-manager-modules-root = pkgs.testers.runNixOSTest {
-          name = "can-import-home-manager-root-module";
+          name = "hm-root";
           nodes = {
             machine = {
               imports = [ inputs.home-manager.nixosModules.home-manager ];
@@ -25,7 +25,7 @@
           '';
         };
         dotter = pkgs.testers.runNixOSTest {
-          name = "dotter-module";
+          name = "module-dotter";
           nodes = {
             machine = {
               imports = [ inputs.home-manager.nixosModules.home-manager ];
