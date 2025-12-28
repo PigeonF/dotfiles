@@ -56,6 +56,7 @@ in
           pkgs.cargo-xwin
           pkgs.cargo-zigbuild
           pkgs.clippy-sarif
+          pkgs.git-cliff
           pkgs.just
           pkgs.lldb
           pkgs.sarif-fmt
