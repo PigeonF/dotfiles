@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=refs/heads/release-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=refs/heads/master";
     systems.url = "github:nix-systems/default?ref=refs/heads/main";
 
     flake-parts = {
@@ -22,8 +23,11 @@
   outputs =
     inputs@{
       flake-parts,
-      systems,
       home-manager,
+      nixpkgs,
+      nixpkgs-unstable,
+      self,
+      systems,
       treefmt-nix,
       ...
     }:
@@ -42,11 +46,27 @@
           ./home-manager
         ];
 
-        flake = { };
+        flake = {
+          overlays =
+            let
+              overlays = {
+                unstablePackages = final: _: {
+                  unstablePackages = nixpkgs-unstable.legacyPackages.${final.system};
+                };
+              };
+            in
+            overlays
+            // {
+              default = nixpkgs.lib.composeManyExtensions (builtins.attrValues overlays);
+            };
+        };
 
         perSystem =
-          { pkgs, ... }:
+          { inputs', pkgs, ... }:
           {
+            _module.args.pkgs = inputs'.nixpkgs.legacyPackages.appendOverlays [
+              self.overlays.default
+            ];
             treefmt = import ./treefmt.nix;
 
             checks = {
