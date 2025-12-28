@@ -40,11 +40,11 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       home = {
-        packages = [ pkgs.cargo ];
+        packages = lib.optional (!config.dotfiles.programs.rustup.enable) [ pkgs.cargo ];
       };
     })
     (lib.mkIf cfg.enable {
-      assertions = [
+      assertions = lib.optional (config.programs ? cargo) [
         {
           assertion = !config.programs.cargo.enable;
           # Builtin home manager options do not follow XDG_DATA_HOME

@@ -101,7 +101,7 @@ in
           cargo = {
             settings = {
               target = {
-                "${systemToRustPlatform pkgs.system}" = {
+                "${systemToRustPlatform pkgs.stdenv.hostPlatform.system}" = {
                   linker = "${lib.getExe pkgs.clang}";
                   rustflags = [
                     "-C"
