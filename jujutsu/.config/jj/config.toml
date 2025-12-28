@@ -13,6 +13,7 @@ default-command = ["log", "-n", "10"]
 diff-editor = ":builtin"
 # merge-editor = "vscodium"
 paginate = "never"
+show-cryptographic-signatures = true
 
 [git]
 sign-on-push = true
@@ -22,6 +23,18 @@ private-commits = "description(glob:\"private:*\")"
 behavior = "drop"
 backend = "ssh"
 key = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID+2wAQrbFDe18oFY2Mv6qsUcYWJZPAcsV+Xr4ZHzncL"
+
+[[--scope]]
+--when.platforms = ["linux"]
+
+[--scope.signing]
+backends.ssh.allowed-signers = "~/.config/jj/allowed_signers"
+
+[[--scope]]
+--when.platforms = ["windows"]
+
+[--scope.signing]
+backends.ssh.allowed-signers = "~/AppData/Roaming/jj/allowed_signers"
 
 [aliases]
 d = ["diff"]
