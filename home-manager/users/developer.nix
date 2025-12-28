@@ -16,6 +16,9 @@ in
       shell = {
         enable = true;
       };
+      rust = {
+        enable = true;
+      };
     };
     programs = {
       atuin.enable = true;
