@@ -53,6 +53,11 @@
                 unstablePackages = final: _: {
                   unstablePackages = nixpkgs-unstable.legacyPackages.${final.system};
                 };
+                cargo-deduplicate-warnings = final: _: {
+                  cargo-deduplicate-warnings =
+                    final.callPackage ./home-manager/packages/cargo-deduplicate-warnings.nix
+                      { };
+                };
               };
             in
             overlays

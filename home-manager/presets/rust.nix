@@ -40,6 +40,7 @@ in
           pkgs.cargo-crev
           pkgs.cargo-criterion
           pkgs.cargo-cyclonedx
+          pkgs.cargo-deduplicate-warnings
           pkgs.cargo-deny
           pkgs.cargo-dist
           pkgs.cargo-flamegraph
@@ -54,7 +55,9 @@ in
           pkgs.cargo-vet
           pkgs.cargo-xwin
           pkgs.cargo-zigbuild
+          pkgs.clippy-sarif
           pkgs.lldb
+          pkgs.sarif-fmt
         ]
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.rr;
         example = lib.literalExpression ''

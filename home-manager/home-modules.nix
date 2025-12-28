@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ lib, inputs, ... }:
 {
   _file = ./home-modules.nix;
 
@@ -13,6 +13,11 @@
           (lib.mapAttrsToList (path: _kind: lib.path.append dir path))
         ];
       homeModules = {
+        overlays = {
+          nixpkgs = {
+            overlays = [ inputs.self.overlays.default ];
+          };
+        };
         dotter = ./modules/dotter.nix;
         programs = {
           imports = readDir ./programs;
