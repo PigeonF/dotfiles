@@ -62,7 +62,9 @@ keybinds clear-defaults=true {
         bind "Alt Shift t" { SwitchToMode "Normal"; }
         bind "r" { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "h" "k" { GoToPreviousTab; }
+        bind "H" { MoveTab "Left"; }
         bind "l" "j" { GoToNextTab; }
+        bind "L" { MoveTab "Right"; }
         bind "n" { NewTab; SwitchToMode "Normal"; }
         bind "x" { CloseTab; SwitchToMode "Normal"; }
         bind "b" { BreakPane; SwitchToMode "Normal"; }
