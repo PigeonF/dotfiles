@@ -7,8 +7,6 @@
 let
   inherit (lib)
     mkEnableOption
-    mkOption
-    types
     ;
   cfg = config.dotfiles.presets.rust;
   systemToRustPlatform =
@@ -31,8 +29,31 @@ in
     rust = {
       enable = mkEnableOption "set up rust development";
 
-      extraPackages = mkOption {
-        default = [
+      fastLinker = mkEnableOption "use a faster linker by default" // {
+        default = pkgs.stdenv.hostPlatform.isLinux;
+      };
+    };
+  };
+
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      dotfiles = {
+        programs = {
+          cargo = {
+            enable = true;
+            settings = {
+              alias = {
+                t = "nextest run";
+              };
+            };
+          };
+          rustup = {
+            enable = true;
+          };
+        };
+      };
+      home = {
+        packages = [
           pkgs.cargo-audit
           pkgs.cargo-auditable
           pkgs.cargo-binstall
@@ -62,42 +83,6 @@ in
           pkgs.sarif-fmt
         ]
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.rr;
-        example = lib.literalExpression ''
-          [
-            pkgs.cargo-hack
-          ]
-        '';
-        type = types.listOf types.package;
-        description = ''
-          Extra packages that should be installed to the home profile.
-        '';
-      };
-
-      fastLinker = mkEnableOption "use a faster linker by default" // {
-        default = pkgs.stdenv.hostPlatform.isLinux;
-      };
-    };
-  };
-
-  config = lib.mkMerge [
-    (lib.mkIf cfg.enable {
-      dotfiles = {
-        programs = {
-          cargo = {
-            enable = true;
-            settings = {
-              alias = {
-                t = "nextest run";
-              };
-            };
-          };
-          rustup = {
-            enable = true;
-          };
-        };
-      };
-      home = {
-        packages = cfg.extraPackages;
       };
     })
     (lib.mkIf (cfg.enable && cfg.fastLinker) {

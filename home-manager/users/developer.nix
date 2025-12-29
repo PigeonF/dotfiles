@@ -16,6 +16,9 @@ in
       shell = {
         enable = true;
       };
+      programming = {
+        enable = true;
+      };
       rust = {
         enable = true;
       };

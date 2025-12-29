@@ -1,0 +1,34 @@
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
+let
+  inherit (lib)
+    mkEnableOption
+    ;
+  cfg = config.dotfiles.presets.programming;
+in
+{
+  _file = ./programming.nix;
+
+  options.dotfiles.presets = {
+    programming = {
+      enable = mkEnableOption "set up general purpose programming tools";
+    };
+  };
+
+  config = lib.mkMerge [
+    (lib.mkIf cfg.enable {
+      home = {
+        packages = [
+          pkgs.just
+          pkgs.ltrace
+          pkgs.reuse
+          pkgs.strace
+        ];
+      };
+    })
+  ];
+}
