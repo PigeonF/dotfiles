@@ -23,6 +23,8 @@ in
     (lib.mkIf cfg.enable {
       home = {
         packages = [
+          pkgs.gh
+          pkgs.glab
           pkgs.just
           pkgs.ltrace
           pkgs.reuse
