@@ -27,6 +27,7 @@ in
           pkgs.ltrace
           pkgs.reuse
           pkgs.strace
+          pkgs.typos
         ];
       };
     })
