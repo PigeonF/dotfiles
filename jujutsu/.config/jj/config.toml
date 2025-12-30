@@ -13,10 +13,10 @@ default-command = ["log", "-n", "10"]
 diff-editor = ":builtin"
 # merge-editor = "vscodium"
 paginate = "never"
-show-cryptographic-signatures = true
+show-cryptographic-signatures = false
 
 [git]
-sign-on-push = true
+sign-on-push = false
 private-commits = "description(glob:\"private:*\")"
 
 [signing]
@@ -51,13 +51,11 @@ sqk = ["squash", "--keep-empty"]
 
 [templates]
 log = "builtin_log_comfortable"
-# Should be set on a per-repository basis
-# commit_trailers = '''
-# concat(
-#   if(!trailers.contains_key("Change-Id"), format_gerrit_change_id_trailer(self)),
-#   format_signed_off_by_trailer(self),
-# )
-# '''
+commit_trailers = '''
+concat(
+  format_signed_off_by_trailer(self),
+)
+'''
 draft_commit_description = '''
 concat(
     coalesce(description, default_commit_description, "\n"),
