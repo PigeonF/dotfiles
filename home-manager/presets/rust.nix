@@ -81,6 +81,7 @@ in
           pkgs.just
           pkgs.lldb
           pkgs.sarif-fmt
+          pkgs.tombi
         ]
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.rr;
       };

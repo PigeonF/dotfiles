@@ -29,7 +29,9 @@ in
           pkgs.ltrace
           pkgs.reuse
           pkgs.strace
+          pkgs.tombi
           pkgs.typos
+          pkgs.yaml-language-server
         ];
       };
     })
