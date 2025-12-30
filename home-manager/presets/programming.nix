@@ -31,6 +31,7 @@ in
           pkgs.strace
           pkgs.tombi
           pkgs.typos
+          pkgs.vscode-json-languageserver
           pkgs.yaml-language-server
         ];
       };
