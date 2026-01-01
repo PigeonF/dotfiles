@@ -6,9 +6,18 @@
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=refs/heads/master";
     systems.url = "github:nix-systems/default?ref=refs/heads/main";
 
+    deploy-rs = {
+      url = "github:serokell/deploy-rs?ref=refs/heads/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.utils.follows = "flake-utils";
+    };
     flake-parts = {
       url = "github:hercules-ci/flake-parts?ref=refs/heads/main";
       inputs.nixpkgs-lib.follows = "nixpkgs";
+    };
+    flake-utils = {
+      url = "github:numtide/flake-utils?ref=refs/heads/main";
+      inputs.systems.follows = "systems";
     };
     home-manager = {
       url = "github:nix-community/home-manager?ref=refs/heads/release-25.11";

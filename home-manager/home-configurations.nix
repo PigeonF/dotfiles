@@ -6,6 +6,81 @@ in
 {
   _file = ./home-configurations.nix;
 
+  deploy-rs = {
+    nodes =
+      let
+        inherit (inputs.self) homeConfigurations;
+        home-manager-x86_64 = inputs.deploy-rs.lib.x86_64-linux.activate.home-manager;
+      in
+      {
+        hl-vhost-x-01 = {
+          hostname = "hl-vhost-x-01";
+          profilesOrder = [
+            "root"
+            "administrator"
+          ];
+          profiles = {
+            root = {
+              user = "root";
+              sshUser = "administrator";
+              path = home-manager-x86_64 homeConfigurations."root@x86_64-linux";
+            };
+            administrator = {
+              user = "administrator";
+              sshUser = "administrator";
+              path = home-manager-x86_64 homeConfigurations."administrator@hl-vhost-x-01";
+            };
+          };
+        };
+        hl-dev-x-01 = {
+          hostname = "hl-dev-x-01";
+          profilesOrder = [
+            "root"
+            "developer"
+          ];
+          profiles = {
+            root = {
+              user = "root";
+              sshUser = "developer";
+              path = home-manager-x86_64 homeConfigurations."root@x86_64-linux";
+            };
+            developer = {
+              user = "developer";
+              sshUser = "developer";
+              path = home-manager-x86_64 homeConfigurations."developer@hl-dev-x-01";
+            };
+          };
+        };
+        hl-ci-x-01 = {
+          hostname = "hl-ci-x-01";
+          profilesOrder = [
+            "root"
+          ];
+          profiles = {
+            root = {
+              user = "root";
+              sshUser = "root";
+              path = home-manager-x86_64 homeConfigurations."root@x86_64-linux";
+            };
+          };
+        };
+        hl-ci-x-02 = {
+          hostname = "hl-ci-x-02";
+          profilesOrder = [
+            "root"
+          ];
+          profiles = {
+            root = {
+              user = "root";
+              sshUser = "root";
+              path = home-manager-x86_64 homeConfigurations."root@x86_64-linux";
+            };
+          };
+        };
+      };
+
+  };
+
   flake = {
     homeConfigurations =
       let
