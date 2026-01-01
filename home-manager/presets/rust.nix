@@ -80,6 +80,7 @@ in
           pkgs.cargo-fuzz
           pkgs.cargo-hack
           pkgs.cargo-insta
+          pkgs.cargo-llvm-cov
           pkgs.cargo-mutants
           pkgs.cargo-nextest
           pkgs.cargo-release
