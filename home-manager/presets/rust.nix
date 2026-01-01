@@ -7,6 +7,7 @@
 let
   inherit (lib)
     mkEnableOption
+    mkOption
     ;
   cfg = config.dotfiles.presets.rust;
   systemToRustPlatform =
@@ -29,7 +30,18 @@ in
     rust = {
       enable = mkEnableOption "set up rust development";
 
-      fastLinker = mkEnableOption "use a faster linker by default" // {
+      sccache = {
+        enable = mkEnableOption "integrate cargo with sccache" // {
+          default = true;
+        };
+        cacheSize = mkOption {
+          type = lib.types.ints.positive;
+          default = 1024 * 1024 * 1024 * 64;
+          description = "Size of the local disk cache";
+        };
+      };
+
+      fastLinker = mkEnableOption "use a faster linker" // {
         default = pkgs.stdenv.hostPlatform.isLinux;
       };
     };
@@ -90,6 +102,7 @@ in
       dotfiles = {
         programs = {
           cargo = {
+            enable = true;
             settings = {
               target = {
                 "${systemToRustPlatform pkgs.stdenv.hostPlatform.system}" = {
@@ -110,6 +123,30 @@ in
           pkgs.clang
           pkgs.mold
         ];
+      };
+    })
+    (lib.mkIf (cfg.enable && cfg.sccache.enable) {
+      dotfiles = {
+        programs = {
+          cargo = {
+            enable = true;
+            settings = {
+              build = {
+                rustc-wrapper = lib.getExe config.dotfiles.programs.sccache.package;
+              };
+            };
+          };
+          sccache = {
+            enable = true;
+            settings = {
+              cache = {
+                disk = {
+                  size = cfg.sccache.cacheSize;
+                };
+              };
+            };
+          };
+        };
       };
     })
   ];

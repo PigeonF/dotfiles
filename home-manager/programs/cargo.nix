@@ -8,6 +8,7 @@ let
   inherit (lib)
     literalExpression
     mkEnableOption
+    mkPackageOption
     mkOption
     ;
   cfg = config.dotfiles.programs.cargo;
@@ -19,6 +20,7 @@ in
   options.dotfiles.programs = {
     cargo = {
       enable = mkEnableOption "set up cargo";
+      package = mkPackageOption pkgs "cargo" { };
       settings = mkOption {
         inherit (tomlFormat) type;
         default = { };
@@ -40,7 +42,7 @@ in
   config = lib.mkMerge [
     (lib.mkIf cfg.enable {
       home = {
-        packages = lib.optional (!config.dotfiles.programs.rustup.enable) [ pkgs.cargo ];
+        packages = lib.optional (!config.dotfiles.programs.rustup.enable) [ cfg.package ];
       };
     })
     (lib.mkIf cfg.enable {
