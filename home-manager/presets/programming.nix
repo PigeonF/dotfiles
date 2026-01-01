@@ -23,6 +23,7 @@ in
     (lib.mkIf cfg.enable {
       home = {
         packages = [
+          pkgs.editorconfig-checker
           pkgs.gh
           pkgs.glab
           pkgs.just
