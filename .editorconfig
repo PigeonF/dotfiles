@@ -11,3 +11,6 @@ trim_trailing_whitespace = true
 
 [ssh/.ssh/keys.d/*.pub]
 insert_final_newline = false
+
+[spicetify/.config/spicetify/config-xpui.ini]
+trim_trailing_whitespace = false
