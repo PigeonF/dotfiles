@@ -1,0 +1,16 @@
+layout {
+    tab name="project (hx)" {
+        pane borderless=true edit="./todo.gitignored.md"
+
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+    tab name="project (sh)" {
+        pane name="terminal"
+
+        pane size=1 borderless=true {
+            plugin location="zellij:compact-bar"
+        }
+    }
+}

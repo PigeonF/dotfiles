@@ -1,4 +1,8 @@
 [[language]]
+name = "kdl"
+indent = { tab-width = 4, unit = "    " }
+
+[[language]]
 name = "nix"
 formatter = { command = "nixfmt" }
 

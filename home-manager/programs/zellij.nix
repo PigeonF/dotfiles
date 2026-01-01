@@ -30,6 +30,11 @@ in
       };
     }
     (lib.mkIf cfg.enable {
+      home = {
+        shellAliases = {
+          "zl" = "zellij --layout";
+        };
+      };
       programs = {
         bash = {
           initExtra = ''
