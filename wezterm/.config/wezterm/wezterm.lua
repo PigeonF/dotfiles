@@ -19,5 +19,7 @@ if wezterm.target_triple == "x86_64-pc-windows-msvc" then
 end
 
 config.use_fancy_tab_bar = false
+config.tab_max_width = 21
+config.hide_tab_bar_if_only_one_tab = true
 
 return config
