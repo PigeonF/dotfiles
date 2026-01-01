@@ -26,6 +26,7 @@ in
           pkgs.editorconfig-checker
           pkgs.gh
           pkgs.glab
+          pkgs.jq
           pkgs.just
           pkgs.ltrace
           pkgs.reuse
