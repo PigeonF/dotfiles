@@ -32,4 +32,6 @@ file-types = [
   { glob = "yarn.lock" },
   "winget",
   "sublime-syntax",
+  { glob = "templates/*.yml" },
+  { glob = "templates/*/template.yml" },
 ]
