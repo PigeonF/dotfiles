@@ -56,7 +56,7 @@ in
       home = {
         sessionPath = [ "$CARGO_HOME/bin" ];
         sessionVariables = {
-          CARGO_HOME = "$XDG_DATA_HOME/cargo";
+          CARGO_HOME = "${config.xdg.dataHome}/cargo";
         };
         shellAliases = {
           "c" = "cargo";

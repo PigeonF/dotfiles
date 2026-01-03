@@ -28,7 +28,7 @@ in
     (lib.mkIf cfg.enable {
       home = {
         sessionVariables = {
-          RUSTUP_HOME = "$XDG_DATA_HOME/rustup";
+          RUSTUP_HOME = "${config.xdg.dataHome}/rustup";
         };
       };
     })
