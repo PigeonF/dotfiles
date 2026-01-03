@@ -14,3 +14,8 @@ export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship.toml"
 
 export PATH="$CARGO_HOME/bin${PATH:+:}$PATH"
+
+export HISTFILE="$XDG_STATE_HOME/ash/ash_history"
+export HISTFILESIZE=100000
+export HISTSIZE=10000
+mkdir -p "$(dirname "$HISTFILE")"
