@@ -5,6 +5,10 @@
 target = "~/.config/alacritty/platform.toml"
 type = "symbolic"
 
+[ash.files]
+"ash/profile" = "~/.profile"
+"ash/.config/" = "~/.config/"
+
 [atuin.files]
 "atuin/.config/" = "~/.config/"
 

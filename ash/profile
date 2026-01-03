@@ -1,0 +1,12 @@
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+if [ -d "$XDG_CONFIG_HOME/ashrc.d" ]; then
+    for file in "$XDG_CONFIG_HOME/ashrc.d"/*.sh; do
+        if [ -r "$file" ]; then
+            . "$file"
+        fi
+    done
+fi

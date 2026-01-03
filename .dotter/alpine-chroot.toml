@@ -1,0 +1,14 @@
+includes = [".dotter/includes/linux.toml"]
+
+packages = [
+  "ash",
+  "bat",
+  "eza",
+  "fd",
+  "git",
+  "helix",
+  "jujutsu",
+  "ripgrep",
+  "ssh",
+  "starship",
+]

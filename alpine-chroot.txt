@@ -1,0 +1,15 @@
+# sed -n '/^[^#]/p' alpine-chroot.txt | xargs doas apk add
+alpine-sdk
+bat
+cargo
+# dotter
+eza
+fd
+git
+helix
+helix-tree-sitter-vendor
+jujutsu
+openssh
+ripgrep
+starship
+vivid
