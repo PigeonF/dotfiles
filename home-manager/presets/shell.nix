@@ -46,7 +46,7 @@ in
         configFile = {
           wgetrc = {
             text = ''
-              hosts-file = "${config.xdg.stateHome}/wget-hsts"
+              hsts-file = "${config.xdg.stateHome}/wget-hsts"
             '';
           };
         };
