@@ -35,3 +35,6 @@ file-types = [
   { glob = "templates/*.yml" },
   { glob = "templates/*/template.yml" },
 ]
+
+[language-server.yaml-language-server]
+config = { yaml = { customTags = ["!reference sequence"] } }
