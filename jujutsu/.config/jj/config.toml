@@ -49,6 +49,7 @@ ls = ["log", "-r", "mutable()::@"]
 s = ["status"]
 sq = ["squash"]
 sqk = ["squash", "--keep-empty"]
+tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
 
 [templates]
 log = "builtin_log_comfortable"
