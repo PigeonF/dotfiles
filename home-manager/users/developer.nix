@@ -13,6 +13,9 @@ in
       };
     };
     presets = {
+      containers = {
+        enable = true;
+      };
       shell = {
         enable = true;
       };
