@@ -29,6 +29,7 @@ in
           pkgs.jq
           pkgs.just
           pkgs.ltrace
+          (lib.hiPrio pkgs.mandoc)
           pkgs.reuse
           pkgs.strace
           pkgs.tombi
