@@ -11,7 +11,7 @@ config.colors = scheme
 
 -- Font
 config.font = wezterm.font("JetBrainsMono NFM")
-config.font_size = 12
+config.font_size = 13
 
 -- Launch Menu
 config.launch_menu = {}
