@@ -26,6 +26,7 @@ in
           pkgs.editorconfig-checker
           pkgs.gh
           pkgs.glab
+          pkgs.gnumake
           pkgs.jq
           pkgs.just
           pkgs.ltrace
