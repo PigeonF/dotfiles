@@ -31,6 +31,7 @@ in
       bash.enable = true;
       bat.enable = true;
       btop.enable = true;
+      docker.enable = true;
       eza.enable = true;
       fd.enable = true;
       fzf.enable = true;

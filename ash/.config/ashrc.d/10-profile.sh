@@ -9,6 +9,9 @@ fi
 # XDG directories
 export CALCHISTFILE="$XDG_STATE_HOME/calc_history"
 export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
+export MACHINE_STORAGE_PATH="$XDG_DATA_HOME/docker-machine"
 export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME/ripgrep/ripgreprc"
 export STARSHIP_CONFIG="$XDG_CONFIG_HOME/starship.toml"
