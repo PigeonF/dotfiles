@@ -50,7 +50,7 @@ in
         {
           assertion = !config.programs.cargo.enable;
           # Builtin home manager options do not follow XDG_DATA_HOME
-          message = ''Do not use the builtin cargo program options'';
+          message = "Do not use the builtin cargo program options";
         }
       ];
       home = {
