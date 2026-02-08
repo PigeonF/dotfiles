@@ -62,6 +62,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install Atuinsh.Atuin
+      settings:
+        id: Atuinsh.Atuin
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install BurntSushi.ripgrep.MSVC
       settings:
         id: BurntSushi.ripgrep.MSVC

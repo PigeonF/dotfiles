@@ -25,6 +25,10 @@ function yy {
     Remove-Item -Path $tmp
 }
 
+if (Get-Command atuin -errorAction SilentlyContinue) {
+     Invoke-Expression (& { (atuin init powershell | Out-String) })
+}
+
 if (Get-Command rg -errorAction SilentlyContinue) {
     Invoke-Expression (& { (rg --generate complete-powershell | Out-String) })
 }
