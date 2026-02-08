@@ -25,8 +25,8 @@ packages = [
 target = "~/AppData/Roaming/spicetify/config-xpui.ini"
 type = "template"
 append = """
-version = 1.2.79.427.g80eb4a07
-with    = 2.42.7
+version = 1.2.82.428.g0ac8be2b
+with    = 2.42.8
 """
 
 [variables]
