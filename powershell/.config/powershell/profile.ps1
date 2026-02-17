@@ -26,7 +26,7 @@ function yy {
 }
 
 if (Get-Command atuin -errorAction SilentlyContinue) {
-     Invoke-Expression (& { (atuin init powershell | Out-String) })
+     Invoke-Expression (& { (atuin init powershell --disable-up-arrow | Out-String) })
 }
 
 if (Get-Command rg -errorAction SilentlyContinue) {
