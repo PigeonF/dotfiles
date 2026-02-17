@@ -58,6 +58,7 @@ in
               run ${lib.getExe pkgs.gitMinimal} clone ${lib.escapeShellArg cfg.clone.repository} ${lib.escapeShellArg cfg.location}
             else
               verboseEcho 'Refusing to clone' ${lib.escapeShellArg cfg.clone.repository} 'because destination' ${lib.escapeShellArg cfg.location} 'exists already.'
+              run git --git-dir=${lib.escapeShellArg cfg.location} pull origin main || true
             fi
           ''
         );
