@@ -25,6 +25,9 @@ in
       rust = {
         enable = true;
       };
+      c = {
+        enable = true;
+      };
     };
     programs = {
       atuin.enable = true;
