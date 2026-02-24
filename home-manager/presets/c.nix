@@ -25,11 +25,12 @@ in
         packages = [
           pkgs.clang
           pkgs.cmake
-          pkgs.gcc
+          pkgs.gdb
           pkgs.gnumake
+          pkgs.lldb
           pkgs.meson
-          pkgs.pkg-config
           pkgs.ninja
+          pkgs.pkg-config
         ]
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.rr;
       };
