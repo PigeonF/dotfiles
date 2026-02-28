@@ -27,6 +27,8 @@ in
           pkgs.cmake
           pkgs.gdb
           pkgs.gnumake
+          # pkgs.pkgsCross.aarch64-multiplatform.gcc
+          # pkgs.pkgsCross.s390x.gcc
           pkgs.lldb
           pkgs.meson
           pkgs.ninja
