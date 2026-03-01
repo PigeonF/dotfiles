@@ -60,6 +60,8 @@ concat(
 '''
 # TODO: Use builtin_draft_commit_description_with_diff after next jj release
 draft_commit_description = "draft_commit_description_with_diff"
+
+[template-aliases]
 draft_commit_description_with_diff = '''
 concat(
   builtin_draft_commit_description,
@@ -68,7 +70,6 @@ concat(
 )
 '''
 
-[template-aliases]
 starship = '''
 separate(" ",
     change_id.shortest(6),
