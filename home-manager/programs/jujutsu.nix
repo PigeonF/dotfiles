@@ -8,6 +8,7 @@ let
   inherit (lib)
     mkEnableOption
     mkOption
+    mkPackageOption
     types
     ;
   cfg = config.dotfiles.programs.jujutsu;
@@ -18,6 +19,7 @@ in
   options.dotfiles.programs = {
     jujutsu = {
       enable = mkEnableOption "set up jujutsu";
+      package = mkPackageOption pkgs.unstablePackages "jujutsu" { };
 
       extraPackages = mkOption {
         default = [
@@ -41,7 +43,7 @@ in
   config = lib.mkMerge [
     {
       programs.jujutsu = {
-        inherit (cfg) enable;
+        inherit (cfg) enable package;
       };
     }
     (lib.mkIf cfg.enable {

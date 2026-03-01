@@ -13,10 +13,10 @@ default-command = ["log", "-n", "10"]
 diff-editor = ":builtin"
 # merge-editor = "vscodium"
 paginate = "never"
-show-cryptographic-signatures = false
+show-cryptographic-signatures = true
 
 [git]
-sign-on-push = false
+sign-on-push = true
 private-commits = "description(glob:\"private:*\")"
 
 [signing]
@@ -58,32 +58,9 @@ concat(
   format_signed_off_by_trailer(self),
 )
 '''
-draft_commit_description = '''
-concat(
-    coalesce(description, default_commit_description, "\n"),
-    "\n",
-    "JJ: HEAD detached at ",
-    commit_id,
-    "\n",
-    "JJ: This commit contains the following changes:",
-    "\n",
-    indent("JJ:     ", diff.summary()),
-    "\n",
-    "JJ: ignore-rest",
-    "\n",
-    diff.git(),
-)
-'''
-git_push_bookmark = '"push-" ++ change_id.short()'
-log_node = '''
-if(self && !current_working_copy && !immutable && !conflict && in_branch(self),
-    "◇",
-    builtin_log_node
-)
-'''
+draft_commit_description = "builtin_draft_commit_description_with_diff "
 
 [template-aliases]
-"in_branch(commit)" = 'commit.contained_in("immutable_heads()..bookmarks()")'
 starship = '''
 separate(" ",
     change_id.shortest(6),
