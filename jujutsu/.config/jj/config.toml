@@ -58,7 +58,15 @@ concat(
   format_signed_off_by_trailer(self),
 )
 '''
-draft_commit_description = "builtin_draft_commit_description_with_diff "
+# TODO: Use builtin_draft_commit_description_with_diff after next jj release
+draft_commit_description = "draft_commit_description_with_diff"
+draft_commit_description_with_diff = '''
+concat(
+  builtin_draft_commit_description,
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
 
 [template-aliases]
 starship = '''
