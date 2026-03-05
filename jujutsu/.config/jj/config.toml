@@ -49,7 +49,10 @@ ls = ["log", "-r", "mutable()::@"]
 s = ["status"]
 sq = ["squash"]
 sqk = ["squash", "--keep-empty"]
-tug = ["bookmark", "move", "--from", "heads(::@- & bookmarks())", "--to", "@-"]
+tug = ["bookmark", "advance"]
+
+[revsets]
+bookmark-advance-to = "@-"
 
 [templates]
 log = "builtin_log_comfortable"
@@ -58,18 +61,9 @@ concat(
   format_signed_off_by_trailer(self),
 )
 '''
-# TODO: Use builtin_draft_commit_description_with_diff after next jj release
-draft_commit_description = "draft_commit_description_with_diff"
+draft_commit_description = "builtin_draft_commit_description_with_diff"
 
 [template-aliases]
-draft_commit_description_with_diff = '''
-concat(
-  builtin_draft_commit_description,
-  "\nJJ: ignore-rest\n",
-  diff.git(),
-)
-'''
-
 starship = '''
 separate(" ",
     change_id.shortest(6),
