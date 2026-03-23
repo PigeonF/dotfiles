@@ -17,6 +17,7 @@ packages = [
   "topgrade",
   "wezterm",
   "yazi",
+  "zellij",
 ]
 
 [files]
@@ -26,8 +27,8 @@ packages = [
 target = "~/AppData/Roaming/spicetify/config-xpui.ini"
 type = "template"
 append = """
-version = 1.2.84.476.ga1ff6607
-with    = 2.42.12
+version = 1.2.85.519.g549a528b
+with    = 2.42.14
 """
 
 [variables]

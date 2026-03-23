@@ -54,3 +54,6 @@ type = "symbolic"
 
 [yazi.files]
 "yazi/.config/yazi/" = "~/AppData/Roaming/yazi/config/"
+
+[zellij.files]
+"zellij/.config/zellij" = "~/AppData/Roaming/Zellij/config"
