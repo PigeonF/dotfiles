@@ -140,6 +140,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install Mergiraf.Mergiraf
+      settings:
+        id: Mergiraf.Mergiraf
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install Microsoft.PowerShell
       settings:
         id: Microsoft.PowerShell

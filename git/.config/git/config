@@ -108,6 +108,10 @@
 	guitool = meld
 	tool = meld
 
+[merge "mergiraf"]
+	name = mergiraf
+	driver = mergiraf merge --git %O %A %B -s %S -x %X -y %Y -p %P -l %L
+
 [pack]
 	deltaCacheSize = 2047m
 	packSizeLimit = 2047m

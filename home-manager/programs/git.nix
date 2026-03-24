@@ -24,6 +24,7 @@ in
           pkgs.delta
           pkgs.difftastic
           pkgs.git-branchless
+          pkgs.mergiraf
         ];
         example = lib.literalExpression ''
           [
