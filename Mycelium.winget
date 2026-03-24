@@ -206,6 +206,12 @@ properties:
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
+        description: Install Wilfred.difftastic
+      settings:
+        id: Wilfred.difftastic
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
         description: Install x-motemen.ghq
       settings:
         id: x-motemen.ghq

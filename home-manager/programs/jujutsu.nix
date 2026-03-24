@@ -23,9 +23,11 @@ in
 
       extraPackages = mkOption {
         default = [
-          pkgs.git
-          pkgs.watchman
           pkgs.delta
+          pkgs.difftastic
+          pkgs.git
+          pkgs.mergiraf
+          pkgs.watchman
         ];
         example = lib.literalExpression ''
           [

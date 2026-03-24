@@ -22,6 +22,7 @@ in
       extraPackages = mkOption {
         default = [
           pkgs.delta
+          pkgs.difftastic
           pkgs.git-branchless
         ];
         example = lib.literalExpression ''

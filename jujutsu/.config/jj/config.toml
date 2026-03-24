@@ -11,6 +11,7 @@ backend = "watchman"
 default-command = ["log", "-n", "10"]
 # TODO(PigeonF): Figure out something cross platform.
 diff-editor = ":builtin"
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
 # merge-editor = "vscodium"
 paginate = "never"
 show-cryptographic-signatures = true

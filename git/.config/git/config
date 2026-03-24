@@ -14,7 +14,13 @@
 	cleanup = clean -dix -e "*.gitignored.*" -e ".jj"
 	cm = commit -m
 	d = diff --color
+	dlog = -c diff.external=difft log --ext-diff
+	dl = dlog
 	ds = diff --color --cached
+    ddiff = -c diff.external=difft diff
+	dft = ddiff
+    dshow = -c diff.external=difft show --ext-diff
+	dsh = dshow
 	fixup-signatures = rebase --exec 'git commit --amend --no-edit -n -S --allow-empty' -i
 	ignore = update-index --skip-worktree
 	l = lrm
