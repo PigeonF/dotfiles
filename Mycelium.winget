@@ -254,6 +254,16 @@ properties:
       id: Configure EDITOR
     - resource: xPSDesiredStateConfiguration/xRegistry
       directives:
+        description: Set SHELL environment variable
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: SHELL
+        ValueData: pwsh
+        ValueType: ExpandString
+        Ensure: Present
+      id: Configure SHELL
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
         description: Set environment variable for starship
       settings:
         Key: 'HKCU:\Environment'
