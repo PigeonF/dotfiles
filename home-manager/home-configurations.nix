@@ -114,8 +114,10 @@ in
   perSystem =
     { lib, system, ... }:
     {
-      checks = lib.mapAttrs' (
-        name: v: lib.nameValuePair ("homeManagerConfiguration." + name) v.activationPackage
-      ) (lib.filterAttrs (_: v: v.pkgs.stdenv.system == system) inputs.self.homeConfigurations);
+      checks =
+        lib.mapAttrs' (name: v: lib.nameValuePair ("homeManagerConfiguration." + name) v.activationPackage)
+          (
+            lib.filterAttrs (_: v: v.pkgs.stdenv.hostPlatform.system == system) inputs.self.homeConfigurations
+          );
     };
 }
