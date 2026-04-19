@@ -24,6 +24,7 @@ in
       home = {
         packages = [
           pkgs.clang
+          pkgs.clang-tools
           pkgs.cmake
           pkgs.gdb
           pkgs.gnumake
