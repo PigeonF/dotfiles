@@ -67,6 +67,9 @@
                     final.callPackage ./home-manager/packages/cargo-deduplicate-warnings.nix
                       { };
                 };
+                scrut = final: _: {
+                  scrut = final.callPackage ./home-manager/packages/scrut.nix { };
+                };
               };
             in
             overlays

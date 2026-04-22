@@ -32,6 +32,7 @@ in
           pkgs.ltrace
           (lib.hiPrio pkgs.mandoc)
           pkgs.reuse
+          pkgs.scrut
           pkgs.sd
           pkgs.strace
           pkgs.tombi
