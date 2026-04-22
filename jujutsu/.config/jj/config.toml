@@ -42,18 +42,24 @@ d = ["diff"]
 ds = ["diff", "--stat"]
 g = ["git"]
 gp = ["git", "push"]
-gpt = ["git", "push", "--tracked"]
 gpc = ["git", "push", "-c"]
+gpt = ["git", "push", "--tracked"]
 l = ["log", "-T", "builtin_log_compact"]
 ll = ["log", "-T", "builtin_log_detailed"]
 ls = ["log", "-r", "mutable()::@"]
+restack = ["rebase", "--onto", "trunk()", "--source", "roots(trunk()..) & mutable()", "--simplify-parents"]
 s = ["status"]
 sq = ["squash"]
 sqk = ["squash", "--keep-empty"]
+stack = ["rebase", "--after", "trunk()", "--before", "closest_merge(@)", "--revision"]
+stage = ["stack", "closest_merge(@)+:: ~ empty()"]
 tug = ["bookmark", "advance"]
 
 [revsets]
 bookmark-advance-to = "@-"
+
+[revset-aliases]
+"closest_merge(to)" = "heads(::to & merges())"
 
 [templates]
 log = "builtin_log_comfortable"
