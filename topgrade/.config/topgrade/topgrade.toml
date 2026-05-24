@@ -2,3 +2,4 @@
 assume_yes = true
 cleanup = true
 no_self_update = true
+ignore_failures = ["vcpkg"]
