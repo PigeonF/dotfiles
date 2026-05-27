@@ -26,4 +26,12 @@ config.use_fancy_tab_bar = false
 config.tab_max_width = 21
 config.hide_tab_bar_if_only_one_tab = true
 
+-- Other
+config.audible_bell = "Disabled"
+config.visual_bell = {
+    fade_in_duration_ms = 75,
+    fade_out_duration_ms = 75,
+    target = 'CursorColor',
+}
+
 return config
