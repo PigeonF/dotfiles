@@ -26,6 +26,15 @@ in
           pkgs.editorconfig-checker
           pkgs.gh
           pkgs.glab
+          (pkgs.writeShellApplication {
+            name = "docker-credential-glab";
+            runtimeInputs = [
+              pkgs.glab
+            ];
+            text = ''
+              exec glab auth docker-helper "$@"
+            '';
+          })
           pkgs.gnumake
           pkgs.jq
           pkgs.just
