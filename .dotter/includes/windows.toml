@@ -8,6 +8,14 @@ type = "symbolic"
 [atuin.files]
 "atuin/.config/" = "~/AppData/Roaming/"
 
+[atuin.files."atuin/.config/atuin/config.toml"]
+target = "~/AppData/Roaming/atuin/config.toml"
+type = "template"
+append = """
+[log]
+dir = "~/AppData/Local/atuin/logs"
+"""
+
 [bat.files]
 "bat/.config/" = "~/AppData/Roaming/"
 

@@ -23,6 +23,7 @@ in
       programs.atuin = {
         inherit (cfg) enable;
         flags = [ "--disable-up-arrow" ];
+        settings = lib.mkForce { };
       };
     }
   ];

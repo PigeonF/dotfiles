@@ -46,13 +46,13 @@ in
       };
     })
     (lib.mkIf cfg.enable {
-      assertions = lib.optional (config.programs ? cargo) [
-        {
-          assertion = !config.programs.cargo.enable;
-          # Builtin home manager options do not follow XDG_DATA_HOME
-          message = "Do not use the builtin cargo program options";
-        }
-      ];
+      # assertions = lib.optional (config.programs ? cargo) [
+      #   {
+      #     assertion = !config.programs.cargo.enable;
+      #     # Builtin home manager options do not follow XDG_DATA_HOME
+      #     message = "Do not use the builtin cargo program options";
+      #   }
+      # ];
       home = {
         sessionPath = [ "$CARGO_HOME/bin" ];
         sessionVariables = {

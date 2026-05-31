@@ -24,7 +24,8 @@ in
       nix = {
         package = lib.mkDefault pkgs.nix;
         settings = {
-          extra-experimental-features = "flakes nix-command no-url-literals";
+          extra-experimental-features = "flakes nix-command";
+          lint-url-literals = "fatal";
           sandbox = true;
           use-xdg-base-directories = true;
         };

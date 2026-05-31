@@ -47,7 +47,7 @@ in
       pkgs.sops
       pkgs.ssh-to-age
     ];
-    stateVersion = "25.11";
+    stateVersion = "26.05";
   };
   news = {
     display = "silent";

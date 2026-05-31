@@ -2,7 +2,7 @@
   description = "Nix configurations for my dotfiles";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=refs/heads/release-25.11";
+    nixpkgs.url = "github:nixos/nixpkgs?ref=refs/heads/release-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs?ref=refs/heads/master";
     systems.url = "github:nix-systems/default?ref=refs/heads/main";
 
@@ -20,7 +20,7 @@
       inputs.systems.follows = "systems";
     };
     home-manager = {
-      url = "github:nix-community/home-manager?ref=refs/heads/release-25.11";
+      url = "github:nix-community/home-manager?ref=refs/heads/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     treefmt-nix = {
