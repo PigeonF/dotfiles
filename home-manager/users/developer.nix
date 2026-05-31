@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 let
   username = "developer";
 in
@@ -59,11 +59,5 @@ in
   };
   news = {
     display = "silent";
-  };
-  nix = {
-    settings = {
-      # TODO(PigeonF): Figure out how to make this work in nspawn container
-      sandbox = lib.mkForce false;
-    };
   };
 }
