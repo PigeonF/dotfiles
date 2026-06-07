@@ -33,6 +33,7 @@ in
               exec glab auth docker-helper "$@"
             '';
           })
+          pkgs.file
           pkgs.gh
           pkgs.glab
           pkgs.gnumake
@@ -48,11 +49,14 @@ in
           pkgs.semgrep
           pkgs.strace
           pkgs.syft
-          pkgs.tldr
+          pkgs.tealdeer
           pkgs.tombi
           pkgs.typos
           pkgs.vscode-json-languageserver
           pkgs.yaml-language-server
+          pkgs.xxd
+          pkgs.xz
+          pkgs.zip
         ];
       };
     })
