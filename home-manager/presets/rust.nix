@@ -94,7 +94,10 @@ in
           pkgs.just
           pkgs.lldb
           pkgs.sarif-fmt
+          pkgs.semgrep
+          pkgs.syft
           pkgs.tombi
+          pkgs.xwin
         ]
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.rr;
       };

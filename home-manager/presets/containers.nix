@@ -24,6 +24,7 @@ in
       home = {
         packages = [
           pkgs.crane
+          pkgs.dive
           pkgs.skopeo
         ];
       };

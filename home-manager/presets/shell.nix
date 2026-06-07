@@ -26,6 +26,7 @@ in
 
         packages = [
           pkgs.ncurses # Ensures that there are no missing DB files for any curses based programs
+          pkgs.wget
         ];
 
         preferXdgDirectories = true;

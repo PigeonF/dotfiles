@@ -24,8 +24,6 @@ in
       home = {
         packages = [
           pkgs.editorconfig-checker
-          pkgs.gh
-          pkgs.glab
           (pkgs.writeShellApplication {
             name = "docker-credential-glab";
             runtimeInputs = [
@@ -35,15 +33,22 @@ in
               exec glab auth docker-helper "$@"
             '';
           })
+          pkgs.gh
+          pkgs.glab
           pkgs.gnumake
+          pkgs.gnupg
           pkgs.jq
           pkgs.just
           pkgs.ltrace
           (lib.hiPrio pkgs.mandoc)
           pkgs.reuse
+          pkgs.sequoia-sq
           pkgs.scrut
           pkgs.sd
+          pkgs.semgrep
           pkgs.strace
+          pkgs.syft
+          pkgs.tldr
           pkgs.tombi
           pkgs.typos
           pkgs.vscode-json-languageserver
