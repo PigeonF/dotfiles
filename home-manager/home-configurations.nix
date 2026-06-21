@@ -51,34 +51,7 @@ in
             };
           };
         };
-        hl-ci-x-01 = {
-          hostname = "hl-ci-x-01";
-          profilesOrder = [
-            "root"
-          ];
-          profiles = {
-            root = {
-              user = "root";
-              sshUser = "root";
-              path = home-manager-x86_64 homeConfigurations."root@x86_64-linux";
-            };
-          };
-        };
-        hl-ci-x-02 = {
-          hostname = "hl-ci-x-02";
-          profilesOrder = [
-            "root"
-          ];
-          profiles = {
-            root = {
-              user = "root";
-              sshUser = "root";
-              path = home-manager-x86_64 homeConfigurations."root@x86_64-linux";
-            };
-          };
-        };
       };
-
   };
 
   flake = {
@@ -96,10 +69,10 @@ in
           pkgs = pkgs-x86_64-linux;
           modules = [ homeModules.developer ];
         };
-        "reviewer@hl-dev-x-02" = homeManagerConfiguration {
-          pkgs = pkgs-x86_64-linux;
-          modules = [ homeModules.reviewer ];
-        };
+        # "reviewer@hl-dev-x-02" = homeManagerConfiguration {
+        #   pkgs = pkgs-x86_64-linux;
+        #   modules = [ homeModules.reviewer ];
+        # };
         "root@x86_64-linux" = homeManagerConfiguration {
           pkgs = pkgs-x86_64-linux;
           modules = [ homeModules.root ];
