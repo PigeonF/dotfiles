@@ -103,7 +103,7 @@ in
         ++ lib.optional pkgs.stdenv.hostPlatform.isLinux pkgs.rr;
       };
     })
-    (lib.mkIf (cfg.enable && cfg.fastLinker) {
+    (lib.mkIf (cfg.enable && cfg.fastLinker && !cfg.cross) {
       dotfiles = {
         programs = {
           cargo = {
@@ -238,6 +238,18 @@ in
                   "x86_64-apple-darwin" = {
                     linker = lib.getExe (apple-darwin-clang "x86_64");
                   };
+                  "aarch64-unknown-linux-gnu" = {
+                    linker = lib.getExe pkgs.pkgsCross.aarch64-multiplatform.stdenv.cc;
+                  };
+                  "x86_64-unknown-linux-gnu" = {
+                    linker = lib.getExe pkgs.pkgsCross.gnu64.stdenv.cc;
+                  };
+                  "aarch64-unknown-linux-musl" = {
+                    linker = lib.getExe pkgs.pkgsCross.aarch64-multiplatform.pkgsStatic.stdenv.cc;
+                  };
+                  "x86_64-unknown-linux-musl" = {
+                    linker = lib.getExe pkgs.pkgsCross.gnu64.pkgsStatic.stdenv.cc;
+                  };
                   "aarch64-pc-windows-msvc" = {
                     linker = lib.getExe lld-link;
                   };
@@ -254,6 +266,7 @@ in
         };
         home = {
           packages = [
+            pkgs.llvmPackages.bintools-unwrapped
             (pkgs.writeShellApplication {
               name = "xcrun";
               text = ''
@@ -298,6 +311,14 @@ in
               config.dotfiles.programs.cargo.settings.target."aarch64-apple-darwin".linker;
             CC_x86_64_apple_darwin =
               config.dotfiles.programs.cargo.settings.target."x86_64-apple-darwin".linker;
+            CC_aarch64_unknown_linux_gnu =
+              config.dotfiles.programs.cargo.settings.target."aarch64-unknown-linux-gnu".linker;
+            CC_x86_64_unknown_linux_gnu =
+              config.dotfiles.programs.cargo.settings.target."x86_64-unknown-linux-gnu".linker;
+            CC_aarch64_unknown_linux_musl =
+              config.dotfiles.programs.cargo.settings.target."aarch64-unknown-linux-musl".linker;
+            CC_x86_64_unknown_linux_musl =
+              config.dotfiles.programs.cargo.settings.target."x86_64-unknown-linux-musl".linker;
             CC_aarch64_pc_windows_msvc = (lib.getExe clang-cl);
             CC_x86_64_pc_windows_msvc = (lib.getExe clang-cl);
             CC_i686_pc_windows_msvc = (lib.getExe clang-cl);

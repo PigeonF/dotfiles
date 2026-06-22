@@ -25,6 +25,9 @@ in
       rust = {
         enable = true;
         cross = true;
+        sccache = {
+          enable = false;
+        };
       };
       c = {
         enable = true;
