@@ -175,6 +175,55 @@ in
               exec -a clang ${lib.escapeShellArg (lib.getExe pkgs.llvmPackages.clang-unwrapped)} -fuse-ld=lld --ld-path=${lib.escapeShellArg (lib.getExe' pkgs.llvmPackages.lld "ld64.lld")} -target "${arch}-apple-darwin" --sysroot ${lib.escapeShellArg macosxsdk} "$@"
             '';
           };
+        wincrt_version = "14.44.17.14";
+        winsdk_version = "10.0.26100";
+        winsysroot = pkgs.stdenv.mkDerivation {
+          name = "winsysroot";
+          version = "crt-${wincrt_version}-sdk-${winsdk_version}";
+          doCheck = false;
+          dontUnpack = true;
+          dontFixup = true;
+          nativeBuildInputs = [ pkgs.xwin ];
+          buildCommand = ''
+            runHook preBuild
+
+            xwin --timeout=120 --http-retry=3 --accept-license --arch=x86 --arch=x86_64 --arch=aarch64 --sdk-version="${winsdk_version}" --crt-version="${wincrt_version}" splat --copy --include-debug-libs --preserve-ms-arch-notation --use-winsysroot-style --output="$out"
+
+            runHook postBuild
+          '';
+          outputHashAlgo = "sha256";
+          outputHashMode = "recursive";
+          outputHash = "sha256-Xq0kGxDwR6ileE6HFHaKtj7P8eDLoYtDnCvlK/Ew0/s=";
+        };
+        lld-link = pkgs.writeShellApplication {
+          name = "lld-link";
+          runtimeInputs = [
+            pkgs.llvmPackages.lld
+          ];
+          text = ''
+            # NOTE(PigeonF): Invoke lld, not lld-link, because rust passes -flavor
+            exec lld "$@" "/winsysroot:${winsysroot}"
+          '';
+        };
+        clang-cl = pkgs.writeShellApplication {
+          name = "clang-cl";
+          runtimeInputs = [
+            pkgs.llvmPackages.clang-unwrapped
+            pkgs.llvmPackages.bintools-unwrapped
+          ];
+          text = ''
+            exec clang-cl -fuse-ld=lld-link /winsysroot ${lib.escapeShellArg winsysroot} "$@"
+          '';
+        };
+        llvm-lib = pkgs.writeShellApplication {
+          name = "llvm-lib";
+          runtimeInputs = [
+            pkgs.llvmPackages.bintools-unwrapped
+          ];
+          text = ''
+            exec llvm-lib "$@"
+          '';
+        };
       in
       lib.mkIf (cfg.enable && cfg.cross) {
         dotfiles = {
@@ -188,6 +237,15 @@ in
                   };
                   "x86_64-apple-darwin" = {
                     linker = lib.getExe (apple-darwin-clang "x86_64");
+                  };
+                  "aarch64-pc-windows-msvc" = {
+                    linker = lib.getExe lld-link;
+                  };
+                  "i686-pc-windows-msvc" = {
+                    linker = lib.getExe lld-link;
+                  };
+                  "x86_64-pc-windows-msvc" = {
+                    linker = lib.getExe lld-link;
                   };
                 };
               };
@@ -240,6 +298,12 @@ in
               config.dotfiles.programs.cargo.settings.target."aarch64-apple-darwin".linker;
             CC_x86_64_apple_darwin =
               config.dotfiles.programs.cargo.settings.target."x86_64-apple-darwin".linker;
+            CC_aarch64_pc_windows_msvc = (lib.getExe clang-cl);
+            CC_x86_64_pc_windows_msvc = (lib.getExe clang-cl);
+            CC_i686_pc_windows_msvc = (lib.getExe clang-cl);
+            AR_aarch64_pc_windows_msvc = (lib.getExe llvm-lib);
+            AR_x86_64_pc_windows_msvc = (lib.getExe llvm-lib);
+            AR_i686_pc_windows_msvc = (lib.getExe llvm-lib);
           };
         };
       }
