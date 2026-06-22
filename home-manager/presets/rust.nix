@@ -29,6 +29,7 @@ in
   options.dotfiles.presets = {
     rust = {
       enable = mkEnableOption "set up rust development";
+      cross = mkEnableOption "enable cross compilers";
 
       sccache = {
         enable = mkEnableOption "integrate cargo with sccache" // {
@@ -153,5 +154,95 @@ in
         };
       };
     })
+    (
+      let
+        macosxsdkversion = "11.3";
+        macosxsdk = pkgs.fetchzip {
+          url = "https://github.com/phracker/MacOSX-SDKs/releases/download/${macosxsdkversion}/MacOSX${macosxsdkversion}.sdk.tar.xz";
+          hash = "sha256-BoFWhRSHaD0j3dzDOFtGJ6DiRrdzMJhkjxztxCluFKo=";
+        };
+        xcrun-sdks = pkgs.linkFarm "xcrun-sdks" [
+          {
+            name = "macosxsdk";
+            path = macosxsdk;
+          }
+        ];
+        apple-darwin-clang =
+          arch:
+          pkgs.writeShellApplication {
+            name = "${arch}-apple-darwin-clang";
+            text = ''
+              exec -a clang ${lib.escapeShellArg (lib.getExe pkgs.llvmPackages.clang-unwrapped)} -fuse-ld=lld --ld-path=${lib.escapeShellArg (lib.getExe' pkgs.llvmPackages.lld "ld64.lld")} -target "${arch}-apple-darwin" --sysroot ${lib.escapeShellArg macosxsdk} "$@"
+            '';
+          };
+      in
+      lib.mkIf (cfg.enable && cfg.cross) {
+        dotfiles = {
+          programs = {
+            cargo = {
+              enable = true;
+              settings = {
+                target = {
+                  "aarch64-apple-darwin" = {
+                    linker = lib.getExe (apple-darwin-clang "aarch64");
+                  };
+                  "x86_64-apple-darwin" = {
+                    linker = lib.getExe (apple-darwin-clang "x86_64");
+                  };
+                };
+              };
+            };
+          };
+        };
+        home = {
+          packages = [
+            (pkgs.writeShellApplication {
+              name = "xcrun";
+              text = ''
+                sdk=""
+                show=0
+
+                while test -n "''${1:-}"; do
+                    case "$1" in
+                        '--sdk')
+                            sdk="''${2:?Missing required value for argument 'sdk'}"
+                            shift
+                            ;;
+                        '--show-sdk-path')
+                            show=1
+                            ;;
+                        *)
+                            printf 'Unknown argument: "%s"\n' "''${1}" >&2
+                            exit 1
+                            ;;
+                    esac
+
+                    shift
+                done
+
+
+                if [ "$show" -eq 1 ]; then
+                    if [ -z "$sdk" ]; then
+                        printf 'Missing required argument "--sdk"\n' >&2
+                        exit 1
+                    fi
+
+                    printf '${xcrun-sdks}/%ssdk/\n' "$sdk"
+                else
+                    printf 'No action specified\n' >&2
+                    exit 2
+                fi
+              '';
+            })
+          ];
+          sessionVariables = {
+            CC_aarch64_apple_darwin =
+              config.dotfiles.programs.cargo.settings.target."aarch64-apple-darwin".linker;
+            CC_x86_64_apple_darwin =
+              config.dotfiles.programs.cargo.settings.target."x86_64-apple-darwin".linker;
+          };
+        };
+      }
+    )
   ];
 }

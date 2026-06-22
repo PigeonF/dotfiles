@@ -24,6 +24,7 @@ in
       };
       rust = {
         enable = true;
+        cross = true;
       };
       c = {
         enable = true;
