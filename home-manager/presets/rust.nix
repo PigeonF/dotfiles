@@ -287,12 +287,12 @@ in
               config.dotfiles.programs.cargo.settings.target."aarch64-unknown-linux-musl".linker;
             CC_x86_64_unknown_linux_musl =
               config.dotfiles.programs.cargo.settings.target."x86_64-unknown-linux-musl".linker;
-            CC_aarch64_pc_windows_msvc = (lib.getExe pc-windows-msvc-clang-cl);
-            CC_x86_64_pc_windows_msvc = (lib.getExe pc-windows-msvc-clang-cl);
-            CC_i686_pc_windows_msvc = (lib.getExe pc-windows-msvc-clang-cl);
-            AR_aarch64_pc_windows_msvc = (lib.getExe llvm-lib);
-            AR_x86_64_pc_windows_msvc = (lib.getExe llvm-lib);
-            AR_i686_pc_windows_msvc = (lib.getExe llvm-lib);
+            CC_aarch64_pc_windows_msvc = lib.getExe pc-windows-msvc-clang-cl;
+            CC_x86_64_pc_windows_msvc = lib.getExe pc-windows-msvc-clang-cl;
+            CC_i686_pc_windows_msvc = lib.getExe pc-windows-msvc-clang-cl;
+            AR_aarch64_pc_windows_msvc = lib.getExe llvm-lib;
+            AR_x86_64_pc_windows_msvc = lib.getExe llvm-lib;
+            AR_i686_pc_windows_msvc = lib.getExe llvm-lib;
           };
         };
       }
