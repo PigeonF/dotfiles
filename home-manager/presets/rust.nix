@@ -208,7 +208,7 @@ in
           name = "pc-windows-msvc-clang-cl";
           runtimeInputs = [ pkgs.llvmPackages.lld ];
           text = ''
-            exec -a ${name} ${lib.escapeShellArg (lib.getExe pkgs.llvmPackages.clang-unwrapped)} -fuse-ld=lld /vctoolsdir:${lib.escapeShellArg "${pkgs.sdk-pc-windows-msvc}/crt"} /winsdkdir:${lib.escapeShellArg "${pkgs.sdk-pc-windows-msvc}/sdk"} "$@"
+            exec -a ${name} ${lib.escapeShellArg (lib.getExe pkgs.llvmPackages.clang-unwrapped)} -fuse-ld=lld /vctoolsdir ${lib.escapeShellArg "${pkgs.sdk-pc-windows-msvc}/crt"} /winsdkdir ${lib.escapeShellArg "${pkgs.sdk-pc-windows-msvc}/sdk"} "$@"
           '';
         };
         lld-link = pkgs.writeShellApplication {
