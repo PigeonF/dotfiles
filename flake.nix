@@ -70,6 +70,12 @@
                 scrut = final: _: {
                   scrut = final.callPackage ./home-manager/packages/scrut.nix { };
                 };
+                sdk-apple-darwin = final: _: {
+                  sdk-apple-darwin = final.callPackage ./home-manager/packages/sdks/macosx { };
+                };
+                sdk-pc-windows-msvc = final: _: {
+                  sdk-pc-windows-msvc = final.callPackage ./home-manager/packages/sdks/msvc { };
+                };
               };
             in
             overlays
@@ -94,6 +100,15 @@
                 pkgs.runCommandLocal "reuse" { } ''
                   ${pkgs.lib.getExe pkgs.reuse} --root ${files} lint | tee $out
                 '';
+            };
+
+            packages = {
+              inherit (pkgs)
+                cargo-deduplicate-warnings
+                scrut
+                sdk-apple-darwin
+                sdk-pc-windows-msvc
+                ;
             };
           };
       });
