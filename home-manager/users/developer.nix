@@ -13,13 +13,16 @@ in
       };
     };
     presets = {
+      c = {
+        enable = true;
+      };
       containers = {
         enable = true;
       };
-      shell = {
+      programming = {
         enable = true;
       };
-      programming = {
+      python = {
         enable = true;
       };
       rust = {
@@ -29,7 +32,7 @@ in
           enable = false;
         };
       };
-      c = {
+      shell = {
         enable = true;
       };
     };
