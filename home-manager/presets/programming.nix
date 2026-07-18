@@ -24,6 +24,7 @@ in
       home = {
         packages = [
           pkgs.editorconfig-checker
+          pkgs.debian-devscripts
           (pkgs.writeShellApplication {
             name = "docker-credential-glab";
             runtimeInputs = [
