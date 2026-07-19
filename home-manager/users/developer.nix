@@ -19,6 +19,9 @@ in
       containers = {
         enable = true;
       };
+      go = {
+        enable = true;
+      };
       programming = {
         enable = true;
       };
