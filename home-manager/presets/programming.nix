@@ -57,6 +57,7 @@ in
           pkgs.yaml-language-server
           pkgs.xxd
           pkgs.xz
+          pkgs.zig
           pkgs.zip
         ];
       };
