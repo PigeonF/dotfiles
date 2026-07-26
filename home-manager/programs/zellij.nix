@@ -42,7 +42,7 @@ in
             # See <https://github.com/zellij-org/zellij/issues/1637>
             function zellij-refresh-ssh-sock() {
               if [ -n "$ZELLIJ" ]; then
-                if SSH_AUTH_SOCK=$(find "$HOME/.ssh/agent" -type s -exec ls -1rt "{}" + | head -n 1); then
+                if SSH_AUTH_SOCK=$(find "$HOME/.ssh/agent" -type s -exec ls -1t "{}" + | head -n 1); then
                   export SSH_AUTH_SOCK
                 fi
               fi
