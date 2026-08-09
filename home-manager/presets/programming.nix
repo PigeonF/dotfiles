@@ -28,7 +28,7 @@ in
           (pkgs.writeShellApplication {
             name = "docker-credential-glab";
             runtimeInputs = [
-              pkgs.glab
+              pkgs.unstablePackages.glab
             ];
             text = ''
               exec glab auth docker-helper "$@"
@@ -36,7 +36,7 @@ in
           })
           pkgs.file
           pkgs.gh
-          pkgs.glab
+          pkgs.unstablePackages.glab
           pkgs.gnumake
           pkgs.gnupg
           pkgs.jq
