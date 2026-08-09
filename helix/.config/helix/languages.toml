@@ -36,5 +36,17 @@ file-types = [
   { glob = "templates/*/template.yml" },
 ]
 
+[[language]]
+name = "ninja"
+scope = "source.ninja"
+injection-regex = "ninja"
+file-types = ["ninja"]
+indent = { tab-width = 4, unit = "    " }
+comment-token = "#"
+
 [language-server.yaml-language-server]
 config = { yaml = { customTags = ["!reference sequence"] } }
+
+[[grammar]]
+name = "ninja"
+source = { git = "https://github.com/alemuller/tree-sitter-ninja", rev = "0a95cfdc0745b6ae82f60d3a339b37f19b7b9267" }
