@@ -1,4 +1,4 @@
-#:schema https://raw.githubusercontent.com/jj-vcs/jj/main/cli/src/config-schema.json
+#:schema https://docs.jj-vcs.dev/latest/config-schema.json
 
 [user]
 email = "fnoegip@gmail.com"
@@ -8,8 +8,7 @@ name = "Jonas Fierlings"
 backend = "watchman"
 
 [ui]
-default-command = ["log", "-n", "10"]
-# TODO(PigeonF): Figure out something cross platform.
+default-command = ["log", "-T", "log_oneline"]
 diff-editor = ":builtin"
 diff-formatter = ["difft", "--color=always", "$left", "$right"]
 # merge-editor = "vscodium"
@@ -18,7 +17,7 @@ show-cryptographic-signatures = true
 
 [git]
 sign-on-push = true
-private-commits = "description(glob:\"private:*\")"
+private-commits = "private_commits()"
 
 [signing]
 behavior = "drop"
@@ -40,17 +39,24 @@ backends.ssh.allowed-signers = "~/AppData/Roaming/jj/allowed_signers"
 [aliases]
 d = ["diff"]
 ds = ["diff", "--stat"]
+dd = ["diff", "-r", "stack()"]
 g = ["git"]
 gp = ["git", "push"]
-gpc = ["git", "push", "-c"]
 gpt = ["git", "push", "--tracked"]
-l = ["log", "-T", "builtin_log_compact"]
-ll = ["log", "-T", "builtin_log_detailed"]
+gpc = ["git", "push", "-c"]
+l = ["log", "-T", "builtin_log_oneline",  "-r", "stack(@)"]
+ln = ["log", "-T", "builtin_log_oneline", "-r", "::@", "--limit"]
+lall = ["log", "-T", "builtin_log_oneline", "-r", "::@"]
+ll = ["log", "-T", "builtin_log_compact"]
+ld = ["log", "-T", "builtin_log_detailed"]
+lo = ["log", "-T", "builtin_log_oneline"]
 ls = ["log", "-r", "mutable()::@"]
-restack = ["rebase", "--onto", "trunk()", "--source", "roots(trunk()..) & mutable()", "--simplify-parents"]
+n = ["new", "trunk()"]
 s = ["status"]
 sq = ["squash"]
 sqk = ["squash", "--keep-empty"]
+restack = ["rebase", "--onto", "trunk()", "--source", "(roots(trunk()..) & mutable()) ~ (::bookmarks())", "--simplify-parents"]
+prestack = ["rebase", "--onto", "trunk()", "--source", "roots(private_commits())", "--simplify-parents"]
 stack = ["rebase", "--after", "trunk()", "--before", "closest_merge(@)", "--revision"]
 stage = ["stack", "closest_merge(@)+:: ~ empty()"]
 tug = ["bookmark", "advance"]
@@ -59,7 +65,12 @@ tug = ["bookmark", "advance"]
 bookmark-advance-to = "@-"
 
 [revset-aliases]
+'at' = '@'
+'stack()' = 'stack(@)'
+'stack(x)' = '::x ~ ::trunk()'
 "closest_merge(to)" = "heads(::to & merges())"
+"private_commits()" = "description('wip:*') | description('private:*')"
+"in_merge(x)" = "::x ~ ::first_parent(x)"
 
 [templates]
 log = "builtin_log_comfortable"
@@ -87,6 +98,37 @@ separate(" ",
     if(conflict, "conflict"),
     if(divergent, "divergent"),
     if(hidden, "hidden"),
+)
+'''
+log_oneline = 'log_oneline(self)'
+'log_oneline(commit)' = '''
+if(commit.root(),
+  format_root_commit(commit),
+  label(
+    separate(" ",
+      if(commit.current_working_copy(), "working_copy"),
+      if(commit.immutable(), "immutable", "mutable"),
+      if(commit.conflict(), "conflicted"),
+    ),
+    separate(" ",
+      format_short_change_id_with_change_offset(commit),
+      format_short_signature_oneline(commit.author()),
+      format_timestamp(commit_timestamp(commit)),
+      commit.bookmarks(),
+      commit.tags(),
+      commit.working_copies(),
+      format_short_commit_id(commit.commit_id()),
+      format_commit_labels(commit),
+      if(config("ui.show-cryptographic-signatures").as_boolean(),
+        format_short_cryptographic_signature(commit.signature())
+      ),
+      if(commit.empty(), empty_commit_marker),
+      if(commit.description(),
+        commit.description().first_line(),
+        label(if(commit.empty(), "empty"), description_placeholder),
+      ),
+    ) ++ "\n",
+  )
 )
 '''
 
