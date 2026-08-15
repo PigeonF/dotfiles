@@ -67,6 +67,9 @@
                     final.callPackage ./home-manager/packages/cargo-deduplicate-warnings.nix
                       { };
                 };
+                cmakeLatest = final: _: {
+                  cmakeLatest = final.callPackage ./home-manager/packages/cmake { };
+                };
                 scrut = final: _: {
                   scrut = final.callPackage ./home-manager/packages/scrut.nix { };
                 };

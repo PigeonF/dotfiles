@@ -25,7 +25,7 @@ in
         packages = [
           pkgs.clang
           pkgs.clang-tools
-          pkgs.unstablePackages.cmake
+          pkgs.cmakeLatest
           pkgs.gdb
           pkgs.gnumake
           # pkgs.pkgsCross.aarch64-multiplatform.gcc
