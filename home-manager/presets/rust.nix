@@ -10,18 +10,6 @@ let
     mkOption
     ;
   cfg = config.dotfiles.presets.rust;
-  systemToRustPlatform =
-    system:
-    if system == "aarch64-darwin" then
-      "aarch64-apple-darwin"
-    else if system == "aarch64-linux" then
-      "aarch64-unknown-linux-gnu"
-    else if system == "x86_64-darwin" then
-      "x86_64-apple-darwin"
-    else if system == "x86_64-linux" then
-      "x86_64-unknown-linux-gnu"
-    else
-      abort "Cannot convert ${system} to rust platform";
 in
 {
   _file = ./rust.nix;
@@ -110,7 +98,7 @@ in
             enable = true;
             settings = {
               target = {
-                "${systemToRustPlatform pkgs.stdenv.hostPlatform.system}" = {
+                "${pkgs.stdenv.hostPlatform.rust.cargoShortTarget}" = {
                   linker = "${lib.getExe pkgs.clang}";
                   rustflags = [
                     "-C"
