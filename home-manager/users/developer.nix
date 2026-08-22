@@ -38,6 +38,9 @@ in
       shell = {
         enable = true;
       };
+      zig = {
+        enable = true;
+      };
     };
     programs = {
       atuin.enable = true;
