@@ -41,6 +41,8 @@ in
           pkgs.gnupg
           pkgs.jq
           pkgs.just
+          pkgs.llvmPackages.llvm
+          pkgs.llvmPackages.lit
           pkgs.ltrace
           (lib.hiPrio pkgs.mandoc)
           pkgs.reuse

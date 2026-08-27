@@ -70,6 +70,20 @@
                 cmakeLatest = final: _: {
                   cmakeLatest = final.callPackage ./home-manager/packages/cmake { };
                 };
+                llvm-lit =
+                  let
+                    lit-overlay = final: prev: {
+                      lit = final.callPackage ./home-manager/packages/llvmPackages/lit { };
+                    };
+                  in
+                  final: prev: {
+                    llvmPackages_18 = prev.llvmPackages_18.overrideScope lit-overlay;
+                    llvmPackages_19 = prev.llvmPackages_19.overrideScope lit-overlay;
+                    llvmPackages_20 = prev.llvmPackages_20.overrideScope lit-overlay;
+                    llvmPackages_21 = prev.llvmPackages_21.overrideScope lit-overlay;
+                    llvmPackages_22 = prev.llvmPackages_22.overrideScope lit-overlay;
+                    llvmPackages_23 = prev.llvmPackages_23.overrideScope lit-overlay;
+                  };
                 scrut = final: _: {
                   scrut = final.callPackage ./home-manager/packages/scrut.nix { };
                 };
