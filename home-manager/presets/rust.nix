@@ -80,7 +80,7 @@ in
           pkgs.cargo-zigbuild
           pkgs.clippy-sarif
           pkgs.git-cliff
-          pkgs.just
+          pkgs.unstablePackages.just
           pkgs.lldb
           pkgs.sarif-fmt
           pkgs.semgrep

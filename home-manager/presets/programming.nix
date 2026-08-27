@@ -40,7 +40,7 @@ in
           pkgs.gnumake
           pkgs.gnupg
           pkgs.jq
-          pkgs.just
+          pkgs.unstablePackages.just
           pkgs.llvmPackages.llvm
           pkgs.llvmPackages.lit
           pkgs.ltrace
