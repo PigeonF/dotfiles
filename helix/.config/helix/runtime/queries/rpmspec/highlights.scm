@@ -1,0 +1,218 @@
+; Specific parametric macro expansion rules (must come first)
+(macro_expansion_call
+  (builtin) @function.macro)
+
+(macro_expansion_call
+  (identifier) @function.macro)
+
+(macro_expansion_call
+  option: (macro_option) @variable.parameter
+  argument: [
+    (word) @variable.parameter
+    (concatenation
+      (word) @variable.parameter)
+    (macro_expansion) @function.call
+    (macro_simple_expansion) @function.call
+  ])
+
+; Highlight macro options in parametric expansions
+(macro_option) @variable.parameter
+
+; Macro expansion rules
+(macro_expansion
+  (builtin) @variable.builtin
+  argument: (_) @variable.parameter)
+
+(macro_expansion
+  (identifier) @variable
+  argument: [
+    (word) @variable.parameter
+    (concatenation
+      (word) @variable.parameter)
+  ])
+
+; Macro expansion without arguments
+(macro_expansion
+  (builtin) @variable.builtin)
+(macro_expansion
+  (identifier) @variable)
+
+; Macro definition and undefinition
+(macro_definition
+  "%" @punctuation.special
+  (builtin) @keyword.directive.define
+  (identifier) @keyword.macro)
+(macro_undefinition
+  (builtin) @keyword.directive.define
+  (identifier) @keyword.macro)
+
+; General punctuation for macros
+(macro_simple_expansion
+  "%" @punctuation.special) @none
+(macro_expansion
+  "%{" @punctuation.special
+  "}" @punctuation.special) @none
+
+; Highlight simple macro names (e.g. %_bindir, %SOURCE4)
+(macro_simple_expansion
+  (identifier) @variable)
+
+; General identifier and builtin rules (must come after specific rules)
+(special_variable_name) @constant
+(builtin) @variable.builtin
+
+(setup_macro
+  argument: [
+    (setup_flag) @variable.parameter
+    (setup_source_option) @variable.parameter
+    ((setup_name_option
+      directory: (_) @string) @variable.parameter)
+  ])
+
+(patch_macro
+  [
+    (patch_flag) @variable.parameter
+    (patch_number_option) @variable.parameter
+    (patch_string_option) @variable.parameter
+    (patch_long_option) @variable.parameter
+  ])
+
+[
+  (tag)
+  (dependency_tag)
+] @type.definition
+
+(integer) @number
+(float) @number.float
+(version) @number.float
+
+(comment) @comment
+;(string) @string
+(quoted_string) @string
+
+(description
+  (section_name) @function.builtin)
+(package
+  (section_name) @function.builtin)
+(files
+  (section_name) @function.builtin)
+(changelog
+  (section_name) @function.builtin)
+
+(changelog_version) @constant
+(changelog_cve) @constant
+(changelog_bdu) @constant
+(changelog_mfsa) @constant
+(changelog_ove) @constant
+(changelog_bugid) @constant
+(changelog_email) @string.special
+(changelog_url) @string.special
+(changelog_date) @constant
+(changelog_bullet) @constant
+
+(prep_scriptlet
+  (section_name) @function.builtin)
+(generate_buildrequires
+  (section_name) @function.builtin)
+(conf_scriptlet
+  (section_name) @function.builtin)
+(build_scriptlet
+  (section_name) @function.builtin)
+(install_scriptlet
+  (section_name) @function.builtin)
+(check_scriptlet
+  (section_name) @function.builtin)
+(clean_scriptlet
+  (section_name) @function.builtin)
+
+[
+  "%pre"
+  "%post"
+  "%preun"
+  "%postun"
+  "%pretrans"
+  "%posttrans"
+  "%preuntrans"
+  "%postuntrans"
+  "%verify"
+] @function.builtin
+
+[
+  "%triggerprein"
+  "%triggerin"
+  "%triggerun"
+  "%triggerpostun"
+] @function.builtin
+
+[
+  "%filetriggerin"
+  "%filetriggerun"
+  "%filetriggerpostun"
+  "%transfiletriggerin"
+  "%transfiletriggerun"
+  "%transfiletriggerpostun"
+] @function.builtin
+
+[
+  "%artifact"
+  "%attr"
+  "%config"
+  "%defattr"
+  "%dir"
+  "%doc"
+  "%docdir"
+  "%exclude"
+  "%ghost"
+  "%license"
+  "%missingok"
+  "%readme"
+  "%verify"
+] @keyword.type
+
+[
+  "!="
+  "<"
+  "<="
+  "=="
+  ">"
+  ">="
+  "and"
+  "&&"
+  "or"
+  "||"
+] @operator
+
+[
+  "with"
+  "without"
+  "defined"
+  "undefined"
+] @keyword.operator
+
+[
+  "%if"
+  "%ifarch"
+  "%ifos"
+  "%ifnarch"
+  "%ifnos"
+  "%elif"
+  "%elifarch"
+  "%elifos"
+  "%else"
+  "%endif"
+] @keyword.conditional
+
+(if_statement
+  "%if"
+  condition: (word) @keyword.conditional
+  (#match? @keyword.conditional "^_(disabled|enabled|with|without)$"))
+
+(if_statement
+  "%if"
+  condition: (concatenation
+    (word) @keyword.conditional
+    (word))
+  (#match? @keyword.conditional "^_(disabled|enabled|with|without)$"))
+
+; Fallback rule for identifiers (commented out due to conflicts with parametric macros)
+; (identifier) @variable

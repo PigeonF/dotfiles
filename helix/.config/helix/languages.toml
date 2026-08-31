@@ -44,9 +44,21 @@ file-types = ["ninja"]
 indent = { tab-width = 4, unit = "    " }
 comment-token = "#"
 
+[[language]]
+name = "rpmspec"
+scope = "source.rpmspec"
+injection-regex = "spec"
+file-types = ["spec"]
+indent = { tab-width = 4, unit = "    " }
+comment-token = "#"
+
 [language-server.yaml-language-server]
 config = { yaml = { customTags = ["!reference sequence"] } }
 
 [[grammar]]
 name = "ninja"
 source = { git = "https://github.com/alemuller/tree-sitter-ninja", rev = "0a95cfdc0745b6ae82f60d3a339b37f19b7b9267" }
+
+[[grammar]]
+name = "rpmspec"
+source = { git = "https://github.com/shaba/tree-sitter-rpmspec", rev = "aa0a45a93caef9a1aeb47ab72502cd223ae0aecb" }
