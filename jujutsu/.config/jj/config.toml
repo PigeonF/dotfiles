@@ -60,6 +60,22 @@ prestack = ["rebase", "--onto", "trunk()", "--source", "roots(private_commits())
 stack = ["rebase", "--after", "trunk()", "--before", "closest_merge(@)", "--revision"]
 stage = ["stack", "closest_merge(@)+:: ~ empty()"]
 tug = ["bookmark", "advance"]
+test = ["run", "--quiet", "--ignore-changes"]
+scrut = ["util", "exec", "--", "bash", "-c", """
+set -o errexit
+set -o nounset
+set -o pipefail
+
+if [ -z "${JJ_WORKSPACE_ROOT:-}" ]; then
+  JJ_WORKSPACE_ROOT=$(jj root)
+fi
+
+scrut test \
+  --verbose \
+  --work-directory=${JJ_WORKSPACE_ROOT} \
+  --match-markdown='*' \
+  <(jj show -r "${JJ_COMMIT_ID:-@}" --no-patch -T 'description')
+""", ""]
 
 [revsets]
 bookmark-advance-to = "@-"
