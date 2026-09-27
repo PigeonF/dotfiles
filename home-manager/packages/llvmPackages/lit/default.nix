@@ -14,10 +14,10 @@ stdenv.mkDerivation (finalAttrs: {
 
   src =
     if monorepoSrc != null then
-      runCommand "lit-src-${version}" { inherit (monorepoSrc) passthru; } (''
+      runCommand "lit-src-${version}" { inherit (monorepoSrc) passthru; } ''
         mkdir -p "$out"
         cp -r ${monorepoSrc}/llvm/utils/lit "$out"
-      '')
+      ''
     else
       src;
 

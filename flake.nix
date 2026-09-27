@@ -72,11 +72,11 @@
                 };
                 llvm-lit =
                   let
-                    lit-overlay = final: prev: {
+                    lit-overlay = final: _prev: {
                       lit = final.callPackage ./home-manager/packages/llvmPackages/lit { };
                     };
                   in
-                  final: prev: {
+                  _final: prev: {
                     llvmPackages_18 = prev.llvmPackages_18.overrideScope lit-overlay;
                     llvmPackages_19 = prev.llvmPackages_19.overrideScope lit-overlay;
                     llvmPackages_20 = prev.llvmPackages_20.overrideScope lit-overlay;
