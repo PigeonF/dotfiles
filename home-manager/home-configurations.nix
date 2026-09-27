@@ -13,8 +13,8 @@ in
         home-manager-x86_64 = inputs.deploy-rs.lib.x86_64-linux.activate.home-manager;
       in
       {
-        hl-vhost-x-01 = {
-          hostname = "hl-vhost-x-01";
+        hl-vhost-01 = {
+          hostname = "hl-vhost-01";
           profilesOrder = [
             "root"
             "administrator"
@@ -28,12 +28,12 @@ in
             administrator = {
               user = "administrator";
               sshUser = "administrator";
-              path = home-manager-x86_64 homeConfigurations."administrator@hl-vhost-x-01";
+              path = home-manager-x86_64 homeConfigurations."administrator@hl-vhost-01";
             };
           };
         };
-        hl-dev-x-01 = {
-          hostname = "hl-dev-x-01";
+        hl-dev-01 = {
+          hostname = "hl-dev-01";
           profilesOrder = [
             "root"
             "developer"
@@ -47,7 +47,7 @@ in
             developer = {
               user = "developer";
               sshUser = "developer";
-              path = home-manager-x86_64 homeConfigurations."developer@hl-dev-x-01";
+              path = home-manager-x86_64 homeConfigurations."developer@hl-dev-01";
             };
           };
         };
@@ -61,15 +61,15 @@ in
         pkgs-x86_64-linux = makePkgs "x86_64-linux";
       in
       {
-        "administrator@hl-vhost-x-01" = homeManagerConfiguration {
+        "administrator@hl-vhost-01" = homeManagerConfiguration {
           pkgs = pkgs-x86_64-linux;
           modules = [ homeModules.administrator ];
         };
-        "developer@hl-dev-x-01" = homeManagerConfiguration {
+        "developer@hl-dev-01" = homeManagerConfiguration {
           pkgs = pkgs-x86_64-linux;
           modules = [ homeModules.developer ];
         };
-        # "reviewer@hl-dev-x-02" = homeManagerConfiguration {
+        # "reviewer@hl-dev-02" = homeManagerConfiguration {
         #   pkgs = pkgs-x86_64-linux;
         #   modules = [ homeModules.reviewer ];
         # };
