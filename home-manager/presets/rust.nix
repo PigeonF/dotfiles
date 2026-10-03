@@ -18,6 +18,7 @@ in
     rust = {
       enable = mkEnableOption "set up rust development";
       cross = mkEnableOption "enable cross compilers";
+      crossMinimal = mkEnableOption "enable cross compilers";
 
       sccache = {
         enable = mkEnableOption "integrate cargo with sccache" // {
@@ -285,5 +286,50 @@ in
         };
       }
     )
+    (lib.mkIf (cfg.enable && cfg.crossMinimal) {
+      dotfiles = {
+        programs = {
+          cargo = {
+            enable = true;
+            settings = {
+              target = {
+                "aarch64-unknown-linux-musl" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-maarch64linux" ];
+                };
+                "arm-unknown-linux-musleabi" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-marmelf_linux_eabi" ];
+                };
+                "armv7-unknown-linux-musleabihf" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-marmelf_linux_eabi" ];
+                };
+                "i686-unknown-linux-musl" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-elf_i386" ];
+                };
+                "powerpc64le-unknown-linux-musl" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-melf64lppc" ];
+                };
+                "riscv64gc-unknown-linux-musl" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-melf64lriscv" ];
+                };
+                "s390x-unknown-linux-musl" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-melf64_s390" ];
+                };
+                "x86_64-unknown-linux-musl" = {
+                  linker = lib.getExe' pkgs.mold "ld.mold";
+                  rustflags = [ "-Clink-arg=-melf_x86_64" ];
+                };
+              };
+            };
+          };
+        };
+      };
+    })
   ];
 }

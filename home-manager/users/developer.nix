@@ -30,7 +30,7 @@ in
       };
       rust = {
         enable = true;
-        cross = false;
+        crossMinimal = true;
         sccache = {
           enable = false;
         };
