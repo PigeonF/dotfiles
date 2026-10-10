@@ -4,6 +4,7 @@ packages = [
   "alacritty",
   "atuin",
   "bat",
+  "bin",
   "eza",
   "fd",
   "git",

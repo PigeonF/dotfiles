@@ -1,5 +1,7 @@
 # yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
 
+# winget confiure --disable-interactivity Mycelium.winget
+
 properties:
   configurationVersion: 0.2.0
   assertions:
@@ -89,6 +91,12 @@ properties:
         description: Install eza-community.eza
       settings:
         id: eza-community.eza
+        source: winget
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      directives:
+        description: Install frippery.busybox-w32
+      settings:
+        id: frippery.busybox-w32
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
@@ -282,3 +290,13 @@ properties:
         ValueType: ExpandString
         Ensure: Present
       id: Configure XDG_CONFIG_HOME
+    - resource: xPSDesiredStateConfiguration/xRegistry
+      directives:
+        description: Set XDG_BIN_HOME environment variable
+      settings:
+        Key: 'HKCU:\Environment'
+        ValueName: XDG_BIN_HOME
+        ValueData: "%LOCALAPPDATA%\\bin"
+        ValueType: ExpandString
+        Ensure: Present
+      id: Configure XDG_BIN_HOME

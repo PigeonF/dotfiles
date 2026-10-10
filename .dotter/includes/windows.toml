@@ -19,6 +19,9 @@ dir = "~/AppData/Local/atuin/logs"
 [bat.files]
 "bat/.config/" = "~/AppData/Roaming/"
 
+[bin.files]
+"bin/sh.cmd" = "~/AppData/Local/bin/sh.cmd"
+
 [eza.files]
 "eza/.config/" = "~/AppData/Roaming/"
 
