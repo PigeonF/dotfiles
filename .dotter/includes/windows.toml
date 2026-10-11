@@ -21,6 +21,7 @@ dir = "~/AppData/Local/atuin/logs"
 
 [bin.files]
 "bin/sh.cmd" = "~/AppData/Local/bin/sh.cmd"
+"bin/make.cmd" = "~/AppData/Local/bin/make.cmd"
 
 [eza.files]
 "eza/.config/" = "~/AppData/Roaming/"
