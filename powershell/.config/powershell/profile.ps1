@@ -44,3 +44,5 @@ if (Get-Command zoxide -errorAction SilentlyContinue) {
 if (Get-Command vivid -errorAction SilentlyContinue) {
     $env:LS_COLORS = vivid generate catppuccin-macchiato
 }
+
+Set-PSReadLineOption -EditMode Emacs
