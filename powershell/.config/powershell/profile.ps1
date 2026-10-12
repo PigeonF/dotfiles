@@ -46,5 +46,5 @@ if (Get-Command vivid -errorAction SilentlyContinue) {
 }
 
 Set-PSReadLineOption -EditMode Emacs
-Set-PSReadLineKeyHandler -Key Ctrl+Left -Function BackwardWord
-Set-PSReadLineKeyHandler -Key Ctrl+Right -Function ForwardWord
+Set-PSReadLineKeyHandler -Chord 'Ctrl+LeftArrow' -Function BackwardWord
+Set-PSReadLineKeyHandler -Chord 'Ctrl+RightArrow' -Function ForwardWord
